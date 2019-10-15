@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts> 
+    <constant name="struts.multipart.maxSize" value="299999999" />
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+    
+    <package name="reportes" namespace="/" extends="struts-default">
+
+        
+        <action name="TableroSec" class="action.estadisticos_Action" method="TableroSec">
+            <result name="SUCCESS">tableroSec.jsp</result>			              
+            <result name="ERROR">tableroSec.jsp</result>
+            <result name="input">tableroSec.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+          <action name="TableroSubDir" class="action.estadisticos_Action" method="TableroSubDir">
+            <result name="SUCCESS">tableroSubDir.jsp</result>			              
+            <result name="ERROR">tableroSubDir.jsp</result>
+            <result name="input">tableroSubDir.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+       
+        <action name="TableroEsc" class="action.estadisticos_Action" method="TableroEsc">
+            <result name="SUCCESS">tableroEsc.jsp</result>			              
+            <result name="ERROR">tableroEsc.jsp</result>
+            <result name="input">tableroEsc.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="ConsulUsu" class="action.estadisticos_Action" method="ConsulUsu">
+            <result name="SUCCESS">ConsulUsu.jsp</result>			              
+            <result name="ERROR">ConsulUsu.jsp</result>
+            <result name="input">ConsulUsu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+                                
+    </package>
+	
+</struts>

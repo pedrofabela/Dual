@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts> 
+    <constant name="struts.multipart.maxSize" value="299999999" />
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+    
+    <package name="unidadeconomica" namespace="/" extends="struts-default">
+
+        
+        <action name="RegUE" class="action.UnidadEconomica_Action" method="IniReg">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+		
+	 <action name="ConsultaRFC" class="action.UnidadEconomica_Action" method="ConsultaRFC">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="ConsultaSubsector" class="action.UnidadEconomica_Action" method="ConsultaSubsector">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        <action name="agregarUE" class="action.UnidadEconomica_Action" method="agregarUE">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>    
+        
+        <action name="ActualizarEstatusGeneral" class="action.EvaluacionUE_Action" method="ActualizarEstatusGeneral">
+            <result name="SUCCESS">EvaluaUE.jsp</result>			              
+            <result name="ERROR">EvaluaUE.jsp</result>
+            <result name="input">EvaluaUE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>    
+        <action name="eliminarUE" class="action.UnidadEconomica_Action" method="eliminarUE">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+         <action name="ConsultaCP" class="action.UnidadEconomica_Action" method="ConsultaCP">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>    
+        <action name="GuardaUE" class="action.UnidadEconomica_Action" method="GuardaUE">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>               	
+       <action name="MuestraForm" class="action.UnidadEconomica_Action" method="MuestraForm">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        <action name="muestraFormSucPlan" class="action.UnidadEconomica_Action" method="muestraFormSucPlan">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        <action name="MuestraFormSelc" class="action.UnidadEconomica_Action" method="MuestraFormSelc">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        
+         <action name="ConsultaCP_PLA" class="action.UnidadEconomica_Action" method="ConsultaCP_PLA">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        <action name="ConsultaCP_SUC" class="action.UnidadEconomica_Action" method="ConsultaCP_SUC">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+         
+        <action name="GuardaPlantel" class="action.UnidadEconomica_Action" method="GuardaPlantel">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+         
+        <action name="GuardaSucursal" class="action.UnidadEconomica_Action" method="GuardaSucursal">
+            <result name="SUCCESS">UnidadEconomica.jsp</result>			              
+            <result name="ERROR">UnidadEconomica.jsp</result>
+            <result name="input">UnidadEconomica.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        <!--*******************************Inicio de valida de UE ************************************************-->
+        <action name="ValidaUE" class="action.EvaluacionUE_Action" method="ValidaUE">
+            <result name="SUCCESS">ValidarUE.jsp</result>			              
+            <result name="ERROR">ValidarUE.jsp</result>
+            <result name="input">ValidarUE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        
+        <action name="ActualizarEstatusUE" class="action.EvaluacionUE_Action" method="ActualizarEstatusUE">
+            <result name="SUCCESS">ValidarUE.jsp</result>			              
+            <result name="ERROR">ValidarUE.jsp</result>
+            <result name="input">ValidarUE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        
+        <!--*******************************Fin de Valida de UE ************************************************-->
+        
+        <!--******************************* Evaluación de UE ************************************************-->
+        
+         <action name="EvaluaUE" class="action.EvaluacionUE_Action" method="InicioEvaluacion">
+            <result name="SUCCESS">EvaluaUE.jsp</result>			              
+            <result name="ERROR">EvaluaUE.jsp</result>
+            <result name="input">EvaluaUE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+              
+        <action name="MuestraFormEvaluaion" class="action.EvaluacionUE_Action" method="MuestraFormEvaluaion">
+            <result name="SUCCESS">EvaluaUE.jsp</result>			              
+            <result name="ERROR">EvaluaUE.jsp</result>
+            <result name="input">EvaluaUE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        
+         <action name="ActualizarFormEvalucion" class="action.EvaluacionUE_Action" method="ActualizarFormEvalucion">
+            <result name="SUCCESS">EvaluaUE.jsp</result>			              
+            <result name="ERROR">EvaluaUE.jsp</result>
+            <result name="input">EvaluaUE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+		
+        <action name="GuardaEvaluacion" class="action.EvaluacionUE_Action" method="GuardaEvaluacion">
+            <result name="SUCCESS">EvaluaUE.jsp</result>			              
+            <result name="ERROR">EvaluaUE.jsp</result>
+            <result name="input">EvaluaUE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>     
+        
+        <action name="ActualizaEvaluacion" class="action.EvaluacionUE_Action" method="ActualizaEvaluacion">
+            <result name="SUCCESS">EvaluaUE.jsp</result>			              
+            <result name="ERROR">EvaluaUE.jsp</result>
+            <result name="input">EvaluaUE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>          
+    </package>
+	
+</struts>

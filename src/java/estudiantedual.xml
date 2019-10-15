@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts> 
+    <constant name="struts.multipart.maxSize" value="299999999" />
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+    
+    <package name="estudiantedual" namespace="/" extends="struts-default">
+
+        
+        <action name="RegAlumno" class="action.EstudianteDual_Action" method="IniReg">
+            <result name="SUCCESS">Registro_Aspirante.jsp</result>			              
+            <result name="ERROR">Registro_Aspirante.jsp</result>
+            <result name="input">Registro_Aspirante.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        <action name="consultaCurpA" class="action.EstudianteDual_Action" method="consultaCurpA">
+            <result name="SUCCESS">Registro_Aspirante.jsp</result>			              
+            <result name="ERROR">Registro_Aspirante.jsp</result>
+            <result name="input">Registro_Aspirante.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="GuardaInteresado" class="action.EstudianteDual_Action" method="GuardaInteresado">
+            <result name="SUCCESS">Registro_Aspirante.jsp</result>			              
+            <result name="ERROR">Registro_Aspirante.jsp</result>
+            <result name="input">Registro_Aspirante.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="ActualizaInteresado" class="action.EstudianteDual_Action" method="ActualizaInteresado">
+            <result name="SUCCESS">Registro_Aspirante.jsp</result>			              
+            <result name="ERROR">Registro_Aspirante.jsp</result>
+            <result name="input">Registro_Aspirante.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="EliminaInteresado" class="action.EstudianteDual_Action" method="EliminaInteresado">
+            <result name="SUCCESS">Registro_Aspirante.jsp</result>			              
+            <result name="ERROR">Registro_Aspirante.jsp</result>
+            <result name="input">Registro_Aspirante.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        <!--********************************************PRESELECCION DE ASPIRANTES******************************************************* -->
+        
+         <action name="selectPre" class="action.EstudianteDual_Action" method="selectPre">
+            <result name="SUCCESS">Preseleccionar_Aspirante.jsp</result>			              
+            <result name="ERROR">Preseleccionar_Aspirante.jsp</result>
+            <result name="input">Preseleccionar_Aspirante.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="RegDatos" class="action.EstudianteDual_Action" method="RegDatos">
+            <result name="SUCCESS">Preseleccionar_Aspirante.jsp</result>			              
+            <result name="ERROR">Preseleccionar_Aspirante.jsp</result>
+            <result name="input">Preseleccionar_Aspirante.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="ActualizaDatos1" class="action.EstudianteDual_Action" method="ActualizaDatos1">
+            <result name="SUCCESS">Preseleccionar_Aspirante.jsp</result>			              
+            <result name="ERROR">Preseleccionar_Aspirante.jsp</result>
+            <result name="input">Preseleccionar_Aspirante.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="ActualizaStatusI" class="action.EstudianteDual_Action" method="ActualizaStatusI">
+            <result name="SUCCESS">Preseleccionar_Aspirante.jsp</result>			              
+            <result name="ERROR">Preseleccionar_Aspirante.jsp</result>
+            <result name="input">Preseleccionar_Aspirante.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+	
+       <!--********************************************VALIDA PRESELECCION DE ASPIRANTES******************************************************* -->	
+	   
+        <action name="ValidaPre" class="action.EstudianteDual_Action" method="ValidaPre">
+            <result name="SUCCESS">ValidaPre.jsp</result>			              
+            <result name="ERROR">ValidaPre.jsp</result>
+            <result name="input">ValidaPre.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="actualizarEstatus" class="action.EstudianteDual_Action" method="actualizarEstatus">
+            <result name="SUCCESS">ValidaPre.jsp</result>			              
+            <result name="ERROR">ValidaPre.jsp</result>
+            <result name="input">ValidaPre.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <!--********************************************SELECCION DE ESTUDIANTES******************************************************* -->
+          <action name="SelectEstUE" class="action.EstudianteDual_Action" method="MuestraListaPE">
+            <result name="SUCCESS">SeleccionaEst_UE.jsp</result>			              
+            <result name="ERROR">SeleccionaEst_UE.jsp</result>
+            <result name="input">SeleccionaEst_UE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+          </action> 
+           <action name="consultaAlumnosValidos" class="action.EstudianteDual_Action" method="consultaAlumnosValidos">
+            <result name="SUCCESS">SeleccionaEst_UE.jsp</result>			              
+            <result name="ERROR">SeleccionaEst_UE.jsp</result>
+            <result name="input">SeleccionaEst_UE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        <action name="AprobarAlumno" class="action.EstudianteDual_Action" method="AprobarAlumno">
+            <result name="SUCCESS">SeleccionaEst_UE.jsp</result>			              
+            <result name="ERROR">SeleccionaEst_UE.jsp</result>
+            <result name="input">SeleccionaEst_UE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>   
+        <action name="DesAprobarAlumno" class="action.EstudianteDual_Action" method="DesAprobarAlumno">
+            <result name="SUCCESS">SeleccionaEst_UE.jsp</result>			              
+            <result name="ERROR">SeleccionaEst_UE.jsp</result>
+            <result name="input">SeleccionaEst_UE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>   
+         <action name="RechazarAlumno" class="action.EstudianteDual_Action" method="RechazarAlumno">
+            <result name="SUCCESS">SeleccionaEst_UE.jsp</result>			              
+            <result name="ERROR">SeleccionaEst_UE.jsp</result>
+            <result name="input">SeleccionaEst_UE.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>         
+         <!--********************************************REGISTRO DE ESTUDIANTES DUAL******************************************************* -->     
+        <action name="RegEstDu" class="action.EstudianteDual_Action" method="ConsultaAlumnosAceptados">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        <action name="MuestraFormE" class="action.EstudianteDual_Action" method="MuestraForm">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        <action name="ConsultaCPE" class="action.EstudianteDual_Action" method="ConsultaCP">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        <action name="consultaCurpP" class="action.EstudianteDual_Action" method="consultaCurpP">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        <action name="ConsultaCPP" class="action.EstudianteDual_Action" method="ConsultaCPP">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        <action name="RegistraDual" class="action.EstudianteDual_Action" method="RegistraDual">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>   
+        <action name="ActualizaStatusA" class="action.EstudianteDual_Action" method="ActualizaStatusA">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>                            
+    </package>
+	
+</struts>

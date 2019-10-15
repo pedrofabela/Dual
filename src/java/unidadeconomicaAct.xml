@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts> 
+    <constant name="struts.multipart.maxSize" value="299999999" />
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+    
+    <package name="unidadeconomicaA" namespace="/" extends="struts-default">
+
+        
+        <action name="ActUE" class="action.UnidadEconomicaAct_Action" method="IniReg">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+		
+	 <action name="ConsultaRFCA" class="action.UnidadEconomicaAct_Action" method="ConsultaRFC">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="ConsultaSubsectorA" class="action.UnidadEconomicaAct_Action" method="ConsultaSubsector">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+  
+        
+        <action name="ActualizarUE" class="action.UnidadEconomicaAct_Action" method="actualizarUE">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+               
+        <action name="ActualizarSucPlan" class="action.UnidadEconomicaAct_Action" method="actualizarSucPlan">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        <action name="actualizarSP" class="action.UnidadEconomicaAct_Action" method="actualizarSucPlantel">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        
+         <action name="ConsultaCPA" class="action.UnidadEconomicaAct_Action" method="ConsultaCP">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>    
+              	 
+        <action name="MuestraFormSel" class="action.UnidadEconomicaAct_Action" method="MuestraFormSel">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        
+         <action name="ConsultaCP_PLAA" class="action.UnidadEconomicaAct_Action" method="ConsultaCP_PLA">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        <action name="ConsultaCP_SUCA" class="action.UnidadEconomicaAct_Action" method="ConsultaCP_SUC">
+            <result name="SUCCESS">UnidadEconomicaAct.jsp</result>			              
+            <result name="ERROR">UnidadEconomicaAct.jsp</result>
+            <result name="input">UnidadEconomicaAct.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+         
+                     
+    </package>
+	
+</struts>

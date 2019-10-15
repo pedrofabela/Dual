@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts> 
+    <constant name="struts.multipart.maxSize" value="299999999" />
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+    
+    <package name="planformacion" namespace="/" extends="struts-default">
+
+        
+        <action name="ElaborPlanForma" class="action.PlanFormacion_Action" method="FormPlan">
+            <result name="SUCCESS">Elabora_Plan.jsp</result>			              
+            <result name="ERROR">Elabora_Plan.jsp</result>
+            <result name="input">Elabora_Plan.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+         <action name="AgregarPF" class="action.PlanFormacion_Action" method="FormPlan">
+            <result name="SUCCESS">Elabora_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Elabora_Plan_Alu.jsp</result>
+            <result name="input">Elabora_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="ConsultaPlanAlumUE" class="action.PlanFormacion_Action" method="ConsultaPlanAlumUE">
+            <result name="SUCCESS">Elabora_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Elabora_Plan_Alu.jsp</result>
+            <result name="input">Elabora_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        
+        
+        
+         <action name="planConsulta" class="action.PlanFormacion_Action" method="planConsulta">
+            <result name="SUCCESS">Elabora_Plan.jsp</result>			              
+            <result name="ERROR">Elabora_Plan.jsp</result>
+            <result name="input">Elabora_Plan.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="guardaPlanForm" class="action.PlanFormacion_Action" method="guardaPlanForm">
+            <result name="SUCCESS">Elabora_Plan.jsp</result>			              
+            <result name="ERROR">Elabora_Plan.jsp</result>
+            <result name="input">Elabora_Plan.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+                             
+    </package>
+	
+</struts>

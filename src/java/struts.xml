@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts> 
+    <constant name="struts.multipart.maxSize" value="299999999" />
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+    
+    <package name="default" namespace="/" extends="struts-default">
+
+        <!-- ACCESO  A MENUS-->
+        <action name="acceso" class="action.Acceso_Action" method="verMevu">
+            <result name="SUCCESS">login.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESION" type="chain">CerrarSesion</result>
+        </action>
+		
+		
+        <action name="verAcceso" class="action.Acceso_Action" method="MuestraMenuPrincipalUsuario">
+            <result name="SUCCESS">PantallaPrincipal.jsp</result>           				              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+        </action>
+        
+        
+          <!--PROGRAMAS EDUCATIVOS DE PLANTEL EDUCATIVO -->
+          <action name="RegPlanEstudioCct" class="action.Catalogos_Action" method="RegPlanEstudioCct">
+            <result name="SUCCESS">PlanCCT.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+          <action name="consultaProgramas" class="action.Catalogos_Action" method="consultaProgramas">
+            <result name="SUCCESS">PlanCCT.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+          <action name="agregarProgramaCct" class="action.Catalogos_Action" method="agregarProgramaCct">
+            <result name="SUCCESS">PlanCCT.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="actualizarEstatusplaCct" class="action.Catalogos_Action" method="actualizarEstatusplaCct">
+            <result name="SUCCESS">PlanCCT.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+          <action name="eliminarProgramaCct" class="action.Catalogos_Action" method="eliminarProgramaCct">
+            <result name="SUCCESS">PlanCCT.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="DescargaManual" class="action.Catalogos_Action" method="DescargaManual">
+            <result name="SUCCESS">Manuales.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        
+        
+        
+        <!--Plan Materia CCT -->
+        
+        
+        <action name="RegMateriaPlan" class="action.Catalogos_Action" method="RegMateriaPlan">
+            <result name="SUCCESS">PlanCCTMateria.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+        </action>
+        <action name="AgregarMateriaPlan" class="action.Catalogos_Action" method="AgregarMateriaPlan">
+            <result name="SUCCESS">PlanCCTMateria.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+         <action name="GuardaMateriaPlan" class="action.Catalogos_Action" method="GuardaMateriaPlan">
+            <result name="SUCCESS">PlanCCTMateria.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+         <action name="EliminaMateriaPlan" class="action.Catalogos_Action" method="EliminaMateriaPlan">
+            <result name="SUCCESS">PlanCCTMateria.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+         <!--Plan Materia CCT -->
+         
+          <action name="Nodo1" class="action.Nodos_Action" method="Nodo1">
+            <result name="SUCCESS">nodo1.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+          <action name="Nodo2" class="action.Nodos_Action" method="Nodo2">
+            <result name="SUCCESS">nodo2.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <!--Plan Materia Competencia CCT -->
+         
+          <action name="RegMateriaPlanCompetencia" class="action.Catalogos_Action" method="RegMateriaPlanCompetencia">
+            <result name="SUCCESS">PlanCCTMateriaCompetencia.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="AgregarMateriaPlanCompetencia" class="action.Catalogos_Action" method="AgregarMateriaPlanCompetencia">
+            <result name="SUCCESS">PlanCCTMateriaCompetencia.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+          <action name="agregarPlanMateriaCom" class="action.Catalogos_Action" method="agregarPlanMateriaCom">
+            <result name="SUCCESS">PlanCCTMateriaCompetencia.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+           <action name="guardaCompetenciaCct" class="action.Catalogos_Action" method="guardaCompetenciaCct">
+            <result name="SUCCESS">PlanCCTMateriaCompetencia.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="actualizaCompetenciaCct" class="action.Catalogos_Action" method="actualizaCompetenciaCct">
+            <result name="SUCCESS">PlanCCTMateriaCompetencia.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+            <action name="eliminarCompetenciaCct" class="action.Catalogos_Action" method="eliminarCompetenciaCct">
+            <result name="SUCCESS">PlanCCTMateriaCompetencia.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        <!--Plan Materia Competencia actividadCCT -->
+        
+         <action name="RegMateriaPlanCompetenciaActividad" class="action.Catalogos_Action" method="RegMateriaPlanCompetencia">
+            <result name="SUCCESS">PlanCCTMateriaCompetenciaActividad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="ExportarPrograma" class="action.Catalogos_Action" method="RegMateriaPlanCompetencia">
+            <result name="SUCCESS">exportaPlan.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="RegProgramaDescarga" class="action.Catalogos_Action" method="RegProgramaDescarga">
+            <result name="SUCCESS">exportaPlan.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        <action name="AgregarMateriaPlanCompetenciaActividad" class="action.Catalogos_Action" method="AgregarMateriaPlanCompetencia">
+            <result name="SUCCESS">PlanCCTMateriaCompetenciaActividad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="agregarPlanMateriaComActividad" class="action.Catalogos_Action" method="agregarPlanMateriaCom">
+            <result name="SUCCESS">PlanCCTMateriaCompetenciaActividad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="agregarActividad" class="action.Catalogos_Action" method="agregarActividad">
+            <result name="SUCCESS">PlanCCTMateriaCompetenciaActividad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+          <action name="guardaActividad" class="action.Catalogos_Action" method="guardaActividad">
+            <result name="SUCCESS">PlanCCTMateriaCompetenciaActividad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+         <action name="actualizaActividad" class="action.Catalogos_Action" method="actualizaActividad">
+            <result name="SUCCESS">PlanCCTMateriaCompetenciaActividad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="eliminaActividad" class="action.Catalogos_Action" method="eliminaActividad">
+            <result name="SUCCESS">PlanCCTMateriaCompetenciaActividad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <!--Módulo de Administración-->
+         
+          <action name="AdminProgEst" class="action.Admin_Actiion" method="AdminProgEst">
+            <result name="SUCCESS">AdminProgEst.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="consultaProgEstAdmin" class="action.Admin_Actiion" method="consultaProgEstAdmin">
+            <result name="SUCCESS">AdminProgEst.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+         <action name="actualizaStatusProg" class="action.Admin_Actiion" method="actualizaStatusProg">
+            <result name="SUCCESS">AdminProgEst.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="activaRegProg" class="action.Admin_Actiion" method="activaRegProg">
+            <result name="SUCCESS">AdminProgEst.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="guardaPrograma" class="action.Admin_Actiion" method="guardaPrograma">
+            <result name="SUCCESS">AdminProgEst.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="actualizaPrograma" class="action.Admin_Actiion" method="actualizaPrograma">
+            <result name="SUCCESS">AdminProgEst.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="actualizaProgramaGuarda" class="action.Admin_Actiion" method="actualizaProgramaGuarda">
+            <result name="SUCCESS">AdminProgEst.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="eliminarPrograma" class="action.Admin_Actiion" method="eliminarPrograma">
+            <result name="SUCCESS">AdminProgEst.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        
+          <!--Módulo de Responsable de Programa Educativo-->
+          
+          
+           <action name="RegResProgEdu" class="action.ResProgEducativo_Action" method="RegResProgEdu">
+            <result name="SUCCESS">RegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+          
+              <action name="consultaCurp" class="action.ResProgEducativo_Action" method="consultaCurp">
+            <result name="SUCCESS">RegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+            <action name="guardaResPe" class="action.ResProgEducativo_Action" method="guardaResPe">
+            <result name="SUCCESS">RegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="actualizaResPe" class="action.ResProgEducativo_Action" method="actualizaResPe">
+            <result name="SUCCESS">RegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+           <action name="actualizarEstatusUsuario" class="action.ResProgEducativo_Action" method="actualizarEstatusUsuario">
+            <result name="SUCCESS">RegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+          <action name="VinRegResProgEdu" class="action.ResProgEducativo_Action" method="VinRegResProgEdu">
+            <result name="SUCCESS">VinRegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="conRPE" class="action.ResProgEducativo_Action" method="conRPE">
+            <result name="SUCCESS">VinRegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="guardaResProgInst" class="action.ResProgEducativo_Action" method="guardaResProgInst">
+            <result name="SUCCESS">VinRegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+           <action name="actualizaResProgInst" class="action.ResProgEducativo_Action" method="actualizaResProgInst">
+            <result name="SUCCESS">VinRegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="generaUsuarioResProgEdu" class="action.ResProgEducativo_Action" method="generaUsuarioResProgEdu">
+            <result name="SUCCESS">RegResProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         				
+        
+         <action name="RegMentorAcad" class="action.ResMentorAcad_Action" method="RegMentorAcad">
+            <result name="SUCCESS">RegMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+          <action name="consultaCurpMentor" class="action.ResMentorAcad_Action" method="consultaCurp">
+            <result name="SUCCESS">RegMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="guardaMentor" class="action.ResMentorAcad_Action" method="guardaMentor">
+            <result name="SUCCESS">RegMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+       
+          <action name="actualizarEstatusUsuarioMentor" class="action.ResMentorAcad_Action" method="actualizarEstatusUsuario">
+            <result name="SUCCESS">RegMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+         <action name="actualizaMentor" class="action.ResMentorAcad_Action" method="actualizaMentor">
+            <result name="SUCCESS">RegMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="generaUsuarioMentor" class="action.ResMentorAcad_Action" method="generaUsuarioMentor">
+            <result name="SUCCESS">RegMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="VinMentorAcad" class="action.ResMentorAcad_Action" method="VinMentorAcad">
+            <result name="SUCCESS">VinMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+         <action name="SelectVinMentorAcad" class="action.ResMentorAcad_Action" method="SelectVinMentorAcad">
+            <result name="SUCCESS">VinMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+         <action name="guardaMentorResProgInst" class="action.ResMentorAcad_Action" method="guardaMentorResProgInst">
+            <result name="SUCCESS">VinMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="actualizaMentorResProgInst" class="action.ResMentorAcad_Action" method="actualizaMentorResProgInst">
+            <result name="SUCCESS">VinMentorProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <action name="RegResAcad" class="action.ResAcademico_Action" method="RegResAcad">
+            <result name="SUCCESS">RegResAcad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="muestraEcualasNivel" class="action.ResAcademico_Action" method="muestraEcualasNivel">
+            <result name="SUCCESS">RegResAcad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="seleccionaEcualasNivel" class="action.ResAcademico_Action" method="seleccionaEcualasNivel">
+            <result name="SUCCESS">RegResAcad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="consultaCurpResAcad" class="action.ResAcademico_Action" method="consultaCurpResAcad">
+            <result name="SUCCESS">RegResAcad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="actualizaResAcad" class="action.ResAcademico_Action" method="actualizaResAcad">
+            <result name="SUCCESS">RegResAcad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="generaUsuarioResAcad" class="action.ResAcademico_Action" method="generaUsuarioResAcad">
+            <result name="SUCCESS">RegResAcad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="guardaResAcad" class="action.ResAcademico_Action" method="guardaResAcad">
+            <result name="SUCCESS">RegResAcad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+            <action name="actualizarEstatusResAcad" class="action.ResAcademico_Action" method="actualizarEstatusResAcad">
+            <result name="SUCCESS">RegResAcad.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        
+        
+        
+         <action name="RegResDifusionInicio" class="action.ResDifusion_Action" method="RegResDifusionInicio">
+            <result name="SUCCESS">RegResDifusion.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        <action name="consultaCurpDifusion" class="action.ResDifusion_Action" method="consultaCurpDifusion">
+            <result name="SUCCESS">RegResDifusion.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="actualizaDifusion" class="action.ResDifusion_Action" method="actualizaDifusion">
+            <result name="SUCCESS">RegResDifusion.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="generaUsuarioDifusion" class="action.ResDifusion_Action" method="generaUsuarioDifusion">
+            <result name="SUCCESS">RegResDifusion.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+         <action name="guardaDifusion" class="action.ResDifusion_Action" method="guardaDifusion">
+            <result name="SUCCESS">RegResDifusion.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+         <action name="actualizarEstatusUsuarioDifusion" class="action.ResDifusion_Action" method="actualizarEstatusUsuarioDifusion">
+            <result name="SUCCESS">RegResDifusion.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        
+        
+        
+        
+          <action name="RegResUE" class="action.ResUe_Action" method="RegResUE">
+            <result name="SUCCESS">RegResUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="consultaCuprResUE" class="action.ResUe_Action" method="consultaCuprResUE">
+            <result name="SUCCESS">RegResUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="actualizaResUE" class="action.ResUe_Action" method="actualizaResUE">
+            <result name="SUCCESS">RegResUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="consultaResUEIE" class="action.ResUe_Action" method="consultaResUEIE">
+            <result name="SUCCESS">RegResUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="generaUsuarioResUe" class="action.ResUe_Action" method="generaUsuarioResUe">
+            <result name="SUCCESS">RegResUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="guardaResUE" class="action.ResUe_Action" method="guardaResUE">
+            <result name="SUCCESS">RegResUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="guardaResUE" class="action.ResUe_Action" method="guardaResUE">
+            <result name="SUCCESS">RegResUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="actualizarEstatusUsuarioUE" class="action.ResUe_Action" method="actualizarEstatusUsuarioUE">
+            <result name="SUCCESS">RegResUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="VinResUEProg" class="action.ResUe_Action" method="VinResUEProg">
+            <result name="SUCCESS">VinResUeProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="consultaResUEIEVin" class="action.ResUe_Action" method="consultaResUEIE">
+            <result name="SUCCESS">VinResUeProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="conRUE" class="action.ResUe_Action" method="conRUE">
+            <result name="SUCCESS">VinResUeProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+           <action name="guardaResUEProgInst" class="action.ResUe_Action" method="guardaResUEProgInst">
+            <result name="SUCCESS">VinResUeProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+         <action name="actualizaResUEProgInst" class="action.ResUe_Action" method="actualizaResUEProgInst">
+            <result name="SUCCESS">VinResUeProgEdu.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="RegMentorUE" class="action.ResMentorUE_Action" method="RegMentorUE">
+            <result name="SUCCESS">RegMentorUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="consultaCurpMentorUE" class="action.ResMentorUE_Action" method="consultaCurpMentorUE">
+            <result name="SUCCESS">RegMentorUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+         <action name="actualizaMentorUE" class="action.ResMentorUE_Action" method="actualizaMentorUE">
+            <result name="SUCCESS">RegMentorUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="generaUsuarioMentorUE" class="action.ResMentorUE_Action" method="generaUsuarioMentorUE">
+            <result name="SUCCESS">RegMentorUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+         <action name="guardaMentorUE" class="action.ResMentorUE_Action" method="guardaMentorUE">
+            <result name="SUCCESS">RegMentorUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="actualizarEstatusUsuarioMUE" class="action.ResMentorUE_Action" method="actualizarEstatusUsuarioMUE">
+            <result name="SUCCESS">RegMentorUE.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+          <action name="VinMentUePe" class="action.ResMentorUE_Action" method="VinMentUePe">
+            <result name="SUCCESS">VinMentorUEProg.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+         <action name="SelectVinMentorUE" class="action.ResMentorUE_Action" method="SelectVinMentorUE">
+            <result name="SUCCESS">VinMentorUEProg.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="guardaMentorResMentoUEProgInst" class="action.ResMentorUE_Action" method="guardaMentorResMentoUEProgInst">
+            <result name="SUCCESS">VinMentorUEProg.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="actualizaMentorUEResProgInst" class="action.ResMentorUE_Action" method="actualizaMentorUEResProgInst">
+            <result name="SUCCESS">VinMentorUEProg.jsp</result>			              
+            <result name="ERROR">login.jsp</result>
+            <result name="input">login.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
+        
+        
+          <!--REGISTRO  -->				
+      
+        <!-- CERRAR SESION -->
+        <action name="CerrarSesion" class="action.CerrarSesion" method="cerrar">  
+            <result name="SUCCESS" type="chain">acceso</result>
+            <result name="input" type="chain">acceso</result>
+        </action>	
+        		
+    </package>
+    
+    
+    <include file="unidadeconomica.xml"></include>
+    <include file="unidadeconomicaAct.xml"></include>
+    <include file="estudiantedual.xml"></include>
+    <include file="reportes.xml"></include>
+    <include file="planformacion.xml"></include>
+</struts>

@@ -1,0 +1,23 @@
+stages:
+- name: build_war
+  steps:
+  - runScriptConfig:
+      image: reg.edu-edomex.gob.mx/java/ant-jdk8
+      shellScript: "sed '/war.name=/d' nbproject/project.properties \nsed -i '$a war.name=ROOT.war'
+        nbproject/project.properties\nsed -i 's/javadoc.additionalparam}\\\"/javadoc.additionalparam}
+        -Xdoclint:none\\\" /' nbproject/build-impl.xml\nant -Dj2ee.server.home=\"dist/\"
+        -buildfile build.xml default"
+- name: container_image
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: ${CICD_GIT_REPO_NAME}/${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}
+      pushRemote: true
+      registry: reg.edu-edomex.gob.mx
+- name: publish
+  steps:
+  - applyYamlConfig:
+      path: ./publicar.yaml
+timeout: 60
+

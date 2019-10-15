@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.8 svn-revision#13980. --><xs:schema xmlns:tns="http://ws.dgsei.edomex.gob.mx/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.dgsei.edomex.gob.mx/">
+
+<xs:element name="consultaPorCurp" type="tns:consultaPorCurp" />
+
+<xs:element name="consultaPorCurpResponse" type="tns:consultaPorCurpResponse" />
+
+<xs:element name="consultaPorDetalle" type="tns:consultaPorDetalle" />
+
+<xs:element name="consultaPorDetalleResponse" type="tns:consultaPorDetalleResponse" />
+
+<xs:complexType name="consultaPorDetalle">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" />
+<xs:element name="primerApellido" type="xs:string" />
+<xs:element name="segundoApellido" type="xs:string" minOccurs="0" />
+<xs:element name="fechaNacimiento" type="xs:string" />
+<xs:element name="sexo" type="xs:string" minOccurs="0" />
+<xs:element name="entidadFederativa" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultaPorDetalleResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:personasDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="personasDTO">
+<xs:sequence>
+<xs:element name="apellidoMaterno" type="xs:string" minOccurs="0" />
+<xs:element name="apellidoPaterno" type="xs:string" minOccurs="0" />
+<xs:element name="codigoError" type="xs:string" minOccurs="0" />
+<xs:element name="curp" type="xs:string" minOccurs="0" />
+<xs:element name="cveEntidadEmisora" type="xs:string" minOccurs="0" />
+<xs:element name="cveEntidadNacimiento" type="xs:string" minOccurs="0" />
+<xs:element name="descripcionError" type="xs:string" minOccurs="0" />
+<xs:element name="fechaNacimiento" type="xs:dateTime" minOccurs="0" />
+<xs:element name="fechaNacimientoAxu" type="xs:string" minOccurs="0" />
+<xs:element name="nacionalidad" type="xs:string" minOccurs="0" />
+<xs:element name="nombre" type="xs:string" minOccurs="0" />
+<xs:element name="resultado" type="xs:string" minOccurs="0" />
+<xs:element name="sexo" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultaPorCurp">
+<xs:sequence>
+<xs:element name="curp" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultaPorCurpResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:personasDTO" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
