@@ -68,7 +68,23 @@ public class consultaAluRegMapper implements Mapper{
         } else {
             dat.setID_UE(rs.getString("ID_UE"));
         }
-        
+         if (rs.getString("MATRICULA") != null) {
+            dat.setMATRICULA(rs.getString("MATRICULA").trim());
+        } else {
+            dat.setMATRICULA(rs.getString("MATRICULA"));
+        }
+         if (rs.getString("GRADO") != null) {
+            dat.setGRADO(rs.getString("GRADO").trim());
+        } else {
+            dat.setGRADO(rs.getString("GRADO"));
+        }
+         
+           if (rs.getString("STATUS_PROCESO") != null) {
+            dat.setSTATUS_PROCESO(rs.getString("STATUS_PROCESO").trim());
+        } else {
+            dat.setSTATUS_PROCESO(rs.getString("STATUS_PROCESO"));
+        }
+         
          
 
         return dat;

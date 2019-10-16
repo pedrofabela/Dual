@@ -38,13 +38,16 @@ import mappers.UEIEMapper;
 import mappers.UEMapper;
 import mappers.ValidadosMapper;
 import mappers.consultaAluRegMapper;
+import mappers.consultaUEMapper;
 import mappers.descargaProgramasMapper;
 import mappers.descargaProgramasMapper2;
 import mappers.escalaMapper;
 import mappers.horaMapper;
+import mappers.listaPlanUEMapper;
 import mappers.lugarMapper;
 import mappers.periodoMapper;
 import mappers.planCttResMapper;
+import mappers.responsablePerfilMapper;
 import mappers.sectordosMapper;
 import mappers.ueIeactivasMapper;
 import utilidades.Constantes;
@@ -201,15 +204,69 @@ public class PlanFDAOImpl {
       
       
       public List consultaAlumPlan(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela) throws Exception {
-       String query ="SELECT * FROM(SELECT ID_HIST_ALUM, ID_ALUMNO, ID_ESCUELA, ID_PLAN, ID_CCT_PLAN, CURP, NOMBRE||' '||APELLIDOP||' '||APELLIDOM AS NOMBRE, ID_UE  FROM VISTA_META_ALUMNO WHERE STATUS_PROCESO=5 AND STATUS_UE=1) WHERE ID_ESCUELA='"+usuario.getID_ESCUELA()+"' AND ID_CCT_PLAN='"+escuela.getAUXIDCCTPLAN()+"'";
+       String query ="SELECT * FROM(SELECT ID_HIST_ALUM, ID_ALUMNO, ID_ESCUELA, ID_PLAN, ID_CCT_PLAN, CURP, NOMBRE||' '||APELLIDOP||' '||APELLIDOM AS NOMBRE, ID_UE, MATRICULA, GRADO, STATUS_PROCESO  FROM VISTA_META_ALUMNO WHERE STATUS_PROCESO>=5 AND STATUS_UE=1) WHERE ID_ESCUELA='"+usuario.getID_ESCUELA()+"' AND ID_CCT_PLAN='"+escuela.getAUXIDCCTPLAN()+"' ORDER BY GRADO, NOMBRE ASC";
         
         Constantes.enviaMensajeConsola("Consulta cct----->" + query);
         List list = null;
         list = oraDaoFac.queryForList(query, new consultaAluRegMapper());
         return list;
     }
-      
+        public List consultaAlumPlanHit(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela) throws Exception {
+       String query ="SELECT * FROM(SELECT ID_HIST_ALUM, ID_ALUMNO, ID_ESCUELA, ID_PLAN, ID_CCT_PLAN, CURP, NOMBRE||' '||APELLIDOP||' '||APELLIDOM AS NOMBRE, ID_UE, MATRICULA, GRADO, STATUS_PROCESO  FROM VISTA_META_ALUMNO WHERE STATUS_PROCESO>=5 AND STATUS_UE=1) WHERE ID_HIST_ALUM='"+alumno.getAUXIDHISTALUM()+"' ORDER BY GRADO, NOMBRE ASC";
+        
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new consultaAluRegMapper());
+        return list;
+    }
+        
+        public List consultaUE(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela) throws Exception {
+       String query ="SELECT UE.RFC, UE.RAZON_SOCIAL||' / NOMBRE COMERCIAL:'|| NVL(UE.NOM_COMERCIAL,'SIN NOMBRE COMERCIAL')||'/SUCURSAL:'||NVL(SUC.NOMBRE,'SIN SUCURSAL') AS RAZON_SOCIAL FROM (SELECT * FROM CAT_UNIDAD_ECONOMICA WHERE ID_UE= '"+alumno.getID_UE()+"' AND STATUS=1) UE LEFT OUTER JOIN (SELECT * FROM TBL_SUCURSALES)SUC ON UE.ID_UE=SUC.ID_UE";
+        
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new consultaUEMapper());
+        return list;
+    } 
+        
+          public List listaResUE(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela,int perfil) throws Exception {
+       String query ="SELECT ID_RESPROG_INST, ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA || ' ' || APATERNO_PERSONA||' '||AMATERNO_PERSONA AS NOMBRE_PERSONA  FROM(SELECT RESINST.*, PLANRES.ID_PLAN, USR.ESTATUS AS ESTATUS_RESPONSABLE, PERS.CURP_PERSONA, PERS.NOMBRE_PERSONA, PERS.APATERNO_PERSONA, PERS.AMATERNO_PERSONA, INUE.ID_UE  FROM (SELECT ID_RESPROG_INST,  ID_PERSONA,  ID_ESCUELA,  PERFIL,  FECHA_REG,  ID_IE_UE FROM TBL_RESPE_INST WHERE PERFIL='"+perfil+"' AND ID_ESCUELA='"+usuario.getID_ESCUELA()+"') RESINST JOIN (SELECT * FROM TBL_PLAN_RESPONSABLE WHERE  PERFIL='"+perfil+"' AND ID_ESCUELA='"+usuario.getID_ESCUELA()+"' AND ESTATUS=1)PLANRES ON RESINST.ID_PERSONA=PLANRES.ID_PERSONA JOIN (SELECT * FROM TBL_USUARIOS)USR ON RESINST.ID_ESCUELA=USR.ID_ESCUELA AND RESINST.ID_PERSONA=USR.ID_PERSONA AND RESINST.PERFIL=USR.PERFIL AND RESINST.ID_IE_UE=USR.ID_IE_UE JOIN(SELECT ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA, APATERNO_PERSONA, AMATERNO_PERSONA FROM CAT_PERSONA)  PERS ON RESINST.ID_PERSONA=PERS.ID_PERSONA JOIN (SELECT * FROM TBL_INS_UE) INUE ON RESINST.ID_IE_UE=INUE.ID_IE_UE ) WHERE ID_UE='"+alumno.getID_UE()+"' AND ID_PLAN='2320'  ";
+        
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new responsablePerfilMapper());
+        return list;
+    } 
+          
+           public List listaResAcad(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela,int perfil) throws Exception {
+       String query =" SELECT '01' AS ID_RESPROG_INST , ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA || ' ' || APATERNO_PERSONA||' '||AMATERNO_PERSONA AS NOMBRE_PERSONA FROM(SELECT TBL_USUARIOS.NAMEUSUARIO,  TBL_USUARIOS.PERFIL,  TBL_USUARIOS.ID_PERSONA,  TBL_USUARIOS.ESTATUS,  TBL_USUARIOS.ID_USUARIO,  TBL_USUARIOS.ID_ESCUELA,  TBL_USUARIOS.ID_IE_UE,  CAT_PERSONA.CURP_PERSONA,  CAT_PERSONA.NOMBRE_PERSONA,  CAT_PERSONA.APATERNO_PERSONA,  CAT_PERSONA.AMATERNO_PERSONA FROM TBL_USUARIOS INNER JOIN CAT_PERSONA ON TBL_USUARIOS.ID_PERSONA = CAT_PERSONA.ID_PERSONA) WHERE ID_ESCUELA='"+usuario.getID_ESCUELA()+"' AND PERFIL='24' ";
+        
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new responsablePerfilMapper());
+        return list;
+    } 
     
+             public List listaMentorAcad(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela,int perfil) throws Exception {
+       String query =" SELECT ID_RESPROG_INST, ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA || ' ' || APATERNO_PERSONA||' '||AMATERNO_PERSONA AS NOMBRE_PERSONA  FROM(SELECT RESINST.*, PLANRES.ID_PLAN, USR.ESTATUS AS ESTATUS_RESPONSABLE, PERS.CURP_PERSONA, PERS.NOMBRE_PERSONA, PERS.APATERNO_PERSONA, PERS.AMATERNO_PERSONA  FROM (SELECT ID_RESPROG_INST,  ID_PERSONA,  ID_ESCUELA,  PERFIL,  FECHA_REG FROM TBL_RESPE_INST WHERE PERFIL='27' AND ID_ESCUELA='411') RESINST JOIN (SELECT * FROM TBL_PLAN_RESPONSABLE WHERE  PERFIL='27' AND ID_ESCUELA='411' AND ESTATUS=1)PLANRES ON RESINST.ID_PERSONA=PLANRES.ID_PERSONA JOIN (SELECT * FROM TBL_USUARIOS)USR ON RESINST.ID_ESCUELA=USR.ID_ESCUELA AND RESINST.ID_PERSONA=USR.ID_PERSONA AND RESINST.PERFIL=USR.PERFIL  JOIN(SELECT ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA, APATERNO_PERSONA, AMATERNO_PERSONA FROM CAT_PERSONA)  PERS ON RESINST.ID_PERSONA=PERS.ID_PERSONA  ) where ID_PLAN='"+alumno.getID_PLAN()+"' ";
+        
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new responsablePerfilMapper());
+        return list;
+    } 
+             
+         public List listaPlanUE(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela,int perfil) throws Exception {
+       String query =" SELECT ID_PLAN_FORMA, NOMBREPLAN_FORM, DURACION FROM (SELECT TBL_CCT_PLAN.ID_PLAN,  TBL_INS_UE.ID_ESCUELA,  TBL_INS_UE.ID_UE,  TBL_INS_UE.STATUS_GENERAL,  TBL_PLAN_FORM.ID_PLAN_FORMA,  TBL_PLAN_FORM.NOMBREPLAN_FORM,  TBL_PLAN_FORM.DURACION,  TBL_PLAN_FORM.ID_CCT_PLAN,  TBL_PLAN_FORM.ESTATUS,  TBL_PLAN_FORM.ID_IE_UE,  TBL_PLAN_FORM.DESCRIPCION FROM TBL_PLAN_FORM INNER JOIN TBL_CCT_PLAN ON TBL_PLAN_FORM.ID_CCT_PLAN = TBL_CCT_PLAN.ID_CCT_PLAN INNER JOIN TBL_INS_UE ON TBL_PLAN_FORM.ID_IE_UE = TBL_INS_UE.ID_IE_UE)WHERE ID_PLAN='"+alumno.getID_PLAN()+"' AND ID_ESCUELA='"+usuario.getID_ESCUELA()+"' AND ID_UE='"+alumno.getID_UE()+"' AND STATUS_GENERAL=1 ORDER BY ID_PLAN_FORMA ASC";
+        
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new listaPlanUEMapper());
+        return list;
+    }      
+             
+             
+             
     public List listaEscala(escuelaBean escuela, usuarioBean usuario) throws Exception {
        String query ="SELECT ID_ESCALA, ESCALA FROM CAT_ESCALA ORDER BY ID_ESCALA ASC";
         

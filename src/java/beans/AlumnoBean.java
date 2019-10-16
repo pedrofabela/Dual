@@ -85,6 +85,15 @@ private String EDAD;
 private String ID_HIST_ALUM;
 private String ID_PLAN;
 private String I_UE;
+private String AUXIDHISTALUM;
+
+    public String getAUXIDHISTALUM() {
+        return AUXIDHISTALUM;
+    }
+
+    public void setAUXIDHISTALUM(String AUXIDHISTALUM) {
+        this.AUXIDHISTALUM = AUXIDHISTALUM;
+    }
 
 
     public String getID_HIST_ALUM() {

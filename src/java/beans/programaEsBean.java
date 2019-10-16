@@ -62,6 +62,77 @@ public class programaEsBean {
     private String HORA;
      private String PLAN_ROTACION;
     private String NO_PASA;
+    
+ private String ID_RESUE;
+ private String ID_MENTORUE;
+ private String ID_RESACAD;
+ private String ID_MENTORACAD;
+ 
+ private String ID_PLAN_FORMA;
+ private String NOMBREPLAN_FORM;
+ private String DURACION;
+
+    public String getID_PLAN_FORMA() {
+        return ID_PLAN_FORMA;
+    }
+
+    public void setID_PLAN_FORMA(String ID_PLAN_FORMA) {
+        this.ID_PLAN_FORMA = ID_PLAN_FORMA;
+    }
+
+    public String getNOMBREPLAN_FORM() {
+        return NOMBREPLAN_FORM;
+    }
+
+    public void setNOMBREPLAN_FORM(String NOMBREPLAN_FORM) {
+        this.NOMBREPLAN_FORM = NOMBREPLAN_FORM;
+    }
+
+    public String getDURACION() {
+        return DURACION;
+    }
+
+    public void setDURACION(String DURACION) {
+        this.DURACION = DURACION;
+    }
+ 
+ 
+
+    public String getID_RESACAD() {
+        return ID_RESACAD;
+    }
+
+    public void setID_RESACAD(String ID_RESACAD) {
+        this.ID_RESACAD = ID_RESACAD;
+    }
+
+    public String getID_MENTORACAD() {
+        return ID_MENTORACAD;
+    }
+
+    public void setID_MENTORACAD(String ID_MENTORACAD) {
+        this.ID_MENTORACAD = ID_MENTORACAD;
+    }
+ 
+
+    public String getID_RESUE() {
+        return ID_RESUE;
+    }
+
+    public void setID_RESUE(String ID_RESUE) {
+        this.ID_RESUE = ID_RESUE;
+    }
+
+    public String getID_MENTORUE() {
+        return ID_MENTORUE;
+    }
+
+    public void setID_MENTORUE(String ID_MENTORUE) {
+        this.ID_MENTORUE = ID_MENTORUE;
+    }
+ 
+ 
+ 
 
     public String getNO_PASA() {
         return NO_PASA;

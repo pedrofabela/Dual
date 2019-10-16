@@ -283,6 +283,17 @@
         document.formularioPrincipal.submit();
     }
 
+function elige(accion, id_hist_alum) {
+    
+     document.formularioPrincipal.alumnoAux.value = id_hist_alum;
+    
+   
+
+        document.formularioPrincipal.action = accion;
+        document.formularioPrincipal.submit();
+    }
+
+
     function validarInput(input) {
         var curp = input.value.toUpperCase(),
                 resultado = document.getElementById("resultado"),
@@ -509,21 +520,206 @@
                                                                         </s:iterator>
 
                                                                         <s:fielderror  fieldName="ERRORCCTPLA" cssClass="col-lg-12 alert alert-danger" id="quitamen"></s:fielderror>
+                                                                        
+                                                                         <s:fielderror  fieldName="ERRORNOALUMNO" cssClass="col-lg-12 alert alert-danger" ></s:fielderror>
+                                                                        
+                                                                      
+                                                                        
+                                                                        
+                                                                        
                                                                         </div>
+                                                                        
+                                                                     <s:if test="ListaEstudiantes.size()>0">  
+                                                                        
+                                                                         <s:if test="banListaAlu">
+                                                                <div style="width: 90%; margin: auto;  color:#302f2f; text-align: center; margin-top: 20px;" >
+                                                                    <h3> Alumnos registrados al programa educativo</h3>
+                                                                </div>                                                                                                                                   
+                                                                <div class="card-body">                                                          
+                                                                    <div class="material-datatables">                                                                                                                                                              
+                                                                        <div style="height: 250px; overflow-y: scroll;">
+                                                                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                                                                <thead style="background: #302f2f; color:white;">
+                                                                                    <tr>
+                                                                                        <th>Curp</th>
+                                                                                        <th>Nombre</th>
+                                                                                        <th>Matrícula</th>
+                                                                                                                                                                                      
+                                                                                        <th>Periodo que cursa</th>
+                                                                                        <th>Estatus</th>
+                                                                                        <th>Registrar Estudiante DUAL</th>
+                                                                                    </tr>
+                                                                                </thead>
 
-                                                                           <s:if test="ListaProgramasRegistro.size()>0"> 
-                                                                               
-                                                                               <div class="col-lg-12" style="margin-top: 30px;">
-                                                                            <label for="exampleEmail" class="bmd-label-floating">Unidad Económica </label>
-                                                                            <s:select  data-style="select-with-transition"   name="escuela.ID_IE_UE" id="escuela.ID_IE_UE" list="ListaUE"  listKey="ID_IE_UE"  listValue="RAZON_SOCIAL" headerKey="" headerValue="Seleccione Unidad Económica"  cssClass="selectpicker col-lg-12" onchange="telquita1();"  />
-                                                                        <s:iterator value="ListaPE" id="ListaPE" status="stat">  
-                                                                            <s:hidden  name = "ListaUE[%{#stat.index}].ID_IE_UE" id="ID_IE_UE"></s:hidden>
-                                                                            <s:hidden  name = "ListaUE[%{#stat.index}].RFC" id="RFC"></s:hidden>
-                                                                            <s:hidden  name = "ListaUE[%{#stat.index}].RAZON_SOCIAL" id="RAZON_SOCIAL"></s:hidden>
+                                                                                <tbody>
+                                                                                <s:iterator value="ListaEstudiantes" id="ListaEstudiantes" status="stat"> 
+                                                                                 
+                                                                                    <tr>
+                                                                                        <td><s:property value="CURP"/></td>
+                                                                                        <td><s:property value="NOMBRE"/></td>
+                                                                                        <td><s:property value="MATRICULA"/></td>
+                                                                                       
+                                                                                        <td><s:property value="GRADO"/></td>
+                                                                                       
+                                                                                        <s:if test="STATUS_PROCESO==5">
+                                                                                       
+                                                                                            <td class="text-danger text-center font-weight-bold" >Sin plan de formación </td>
+                                                                                    </s:if>
+                                                                                              <s:if test="STATUS_PROCESO==6">
+                                                                                       
+                                                                                            <td class="text-success text-center font-weight-bold">Plan de formación Registrado </td>
+                                                                                    </s:if>
+                                                                                            
+                                                                                            
+                                                                                            
+                                                                                    <s:if test="STATUS_PROCESO==5">
+                                                                                        <td align="center">
+                                                                                            <a href="Javascript:elige('eligeAlumno','<s:property value="ID_HIST_ALUM"/>')" ><i class="material-icons">check_box_outline_blank</i>
+                                                                                                </a></td>
+                                                                                    </s:if>
+                                                                                              <s:if test="STATUS_PROCESO==6">
+                                                                                       
+                                                                                                  <td class="text-success text-center font-weight-bold" align="center">Plan de formación Registrado </td>
+                                                                                    </s:if>
+
+
+
+                                                                                    </tr>
+                                                                                       
+                                                                                    <s:hidden  name = "ListaEstudiantes[%{#stat.index}].CURP" id="CURP"></s:hidden>    
+                                                                                    <s:hidden  name = "ListaEstudiantes[%{#stat.index}].NOMBRE" id="NOMBRE"></s:hidden>
+                                                                                    <s:hidden  name = "ListaEstudiantes[%{#stat.index}].MATRICULA" id="MATRICULA"></s:hidden>
+                                                                                    <s:hidden  name = "ListaEstudiantes[%{#stat.index}].GRADO" id="GRADO"></s:hidden>
+                                                                                    <s:hidden  name = "ListaEstudiantes[%{#stat.index}].STATUS_PROCESO" id="STATUS_PROCESO"></s:hidden>
+                                                                                    <s:hidden  name = "ListaEstudiantes[%{#stat.index}].ID_HIST_ALUM" id="ID_HIST_ALUM"></s:hidden>
+                                                                                    <s:hidden name =  "ListaEstudiantes[%{#stat.index}].ID_ALUMNO" id="ID_ALUMNO"></s:hidden>
+                                                                                    <s:hidden name =  "ListaEstudiantes[%{#stat.index}].ID_ESCUELA" id="ID_ESCUELA"></s:hidden>
+                                                                                    <s:hidden name =  "ListaEstudiantes[%{#stat.index}].ID_PLAN" id="ID_PLAN"></s:hidden>
+                                                                                    <s:hidden name =  "ListaEstudiantes[%{#stat.index}].ID_CCT_PLAN" id="ID_CCT_PLAN"></s:hidden>
+                                                                                    <s:hidden name =  "ListaEstudiantes[%{#stat.index}].ID_UE" id="ID_UE"></s:hidden>
+                                                                                </s:iterator>  
+
+
+
+                                                                            </tbody>
+                                                                        </table>                                              
+                                                                    </div> 
+                                                                </div>
+                                                            </div>
+                                                                        
+                                                                        
+                                                                        </s:if>
+                                                                         
+                                                                         <s:if test="banCampAlumno">
+                                                                                    <div class="col-lg-3" style="margin-top: 20px;">
+                                                                                     <label   for="RAZON">CURP del Estudiante:</label>
+                                                                                 <s:textfield  cssClass="form-control" name="alumno.CURP" id="CURP_EST"  readonly="true"  ></s:textfield> 
+
+                                                                                 </div>
+                                                                                 
+                                                                                  <div class="col-lg-6" style="margin-top: 20px;">
+                                                                                     <label   for="RAZON">Nombre del Estudiante:</label>
+                                                                                 <s:textfield  cssClass="form-control" name="alumno.NOMBRE" id="NOMBRE_ESTUDIANTTE"  readonly="true"  ></s:textfield> 
+
+                                                                                 </div>
+                                                                                 
+                                                                                  <div class="col-lg-3" style="margin-top: 20px;">
+                                                                                     <label   for="RAZON">Matrícula del Estudiante:</label>
+                                                                                 <s:textfield  cssClass="form-control" name="alumno.MATRICULA" id="MATRICULA_ESTUDIANTE"  readonly="true"  ></s:textfield> 
+
+                                                                                 </div>
+                                                                                 
+                                                                                 <div class="col-lg-3" style="margin-top: 20px;">
+                                                                                     <label   for="RAZON">RFC:</label>
+                                                                                 <s:textfield  cssClass="form-control" name="unidad.RFC" id="RFC_UE"  readonly="true"  ></s:textfield> 
+
+                                                                                 </div>
+                                                                                 <div class="col-lg-9" style="margin-top: 20px;">
+                                                                                     <label   for="RAZON">Razón Social:</label>
+                                                                                 <s:textfield  cssClass="form-control" name="unidad.RAZON_SOCIAL" id="RAZON_UE"  readonly="true"  ></s:textfield> 
+
+                                                                                 </div>
+                                                                                 
+                                                                                    <div class="col-lg-6" style="margin-top: 20px;">
+                                                                            <label for="exampleEmail" class="bmd-label-floating">Responsable de Unidad Económica </label>
+                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_RESUE" id="ID_RESUE" list="ListaResUE"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Selecciones Responsable de Unidad Económica"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
+                                                                        <s:iterator value="ListaResUE" id="ListaResUE" status="stat">  
+                                                                            <s:hidden  name = "ListaResUE[%{#stat.index}].ID_RESPROG_INST" id="ID_RESPROG_INST"></s:hidden>
+                                                                            <s:hidden  name = "ListaResUE[%{#stat.index}].ID_PERSONA" id="ID_PERSONA"></s:hidden>
+                                                                            <s:hidden name = "ListaResUE[%{#stat.index}].CURP_PERSONA" id="CURP_PERSONA"></s:hidden>
+                                                                            <s:hidden name = "ListaResUE[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
                                                                         </s:iterator>
+                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
 
-                                                                        <s:fielderror  fieldName="ERROREUE" cssClass="col-lg-12 alert alert-danger" id="quitamen1"></s:fielderror>
-                                                                        </div>   
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                         <div class="col-lg-6" style="margin-top: 20px;">
+                                                                            <label for="exampleEmail" class="bmd-label-floating">Mentor de Unidad Económica </label>
+                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_MENTORUE" id="ID_MENTORUE" list="ListaResMentorUE"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Seleccione Mentor de Unidad Económica"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
+                                                                        <s:iterator value="ListaResMentorUE" id="ListaResMentorUE" status="stat">  
+                                                                            <s:hidden  name = "ListaResMentorUE[%{#stat.index}].ID_RESPROG_INST" id="ID_RESPROG_INST"></s:hidden>
+                                                                            <s:hidden  name = "ListaResMentorUE[%{#stat.index}].ID_PERSONA" id="ID_PERSONA"></s:hidden>
+                                                                            <s:hidden name = "ListaResMentorUE[%{#stat.index}].CURP_PERSONA" id="CURP_PERSONA"></s:hidden>
+                                                                            <s:hidden name = "ListaResMentorUE[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
+                                                                        </s:iterator>
+                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+
+                                                                        </div>
+                                                                        
+                                                                         <div class="col-lg-6" style="margin-top: 20px;">
+                                                                            <label for="exampleEmail" class="bmd-label-floating">Responsable Académico </label>
+                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_RESACAD" id="ID_RESACAD" list="ListaResAcad"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Seleccione responsable Académico"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
+                                                                        <s:iterator value="ListaResAcad" id="ListaResAcad" status="stat">  
+                                                                            <s:hidden  name = "ListaResAcad[%{#stat.index}].ID_RESPROG_INST" id="ID_RESPROG_INST"></s:hidden>
+                                                                            <s:hidden  name = "ListaResAcad[%{#stat.index}].ID_PERSONA" id="ID_PERSONA"></s:hidden>
+                                                                            <s:hidden name = "ListaResAcad[%{#stat.index}].CURP_PERSONA" id="CURP_PERSONA"></s:hidden>
+                                                                            <s:hidden name = "ListaResAcad[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
+                                                                        </s:iterator>
+                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+
+                                                                        </div>
+                                                                        
+                                                                         <div class="col-lg-6" style="margin-top: 20px;">
+                                                                            <label for="exampleEmail" class="bmd-label-floating">Mentor Académico </label>
+                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_MENTORACAD" id="ID_MENTORACAD" list="ListaMentorAcad"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Seleccione Mentor Académico"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
+                                                                        <s:iterator value="ListaMentorAcad" id="ListaMentorAcad" status="stat">  
+                                                                            <s:hidden  name = "ListaMentorAcad[%{#stat.index}].ID_RESPROG_INST" id="ID_RESPROG_INST"></s:hidden>
+                                                                            <s:hidden  name = "ListaMentorAcad[%{#stat.index}].ID_PERSONA" id="ID_PERSONA"></s:hidden>
+                                                                            <s:hidden name = "ListaMentorAcad[%{#stat.index}].CURP_PERSONA" id="CURP_PERSONA"></s:hidden>
+                                                                            <s:hidden name = "ListaMentorAcad[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
+                                                                        </s:iterator>
+                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+
+                                                                        </div>
+                                                                        
+                                                                          <div class="col-lg-12" style="margin-top: 20px;">
+                                                                            <label for="exampleEmail" class="bmd-label-floating">Plan de formación del Programa y Unidad Económica </label>
+                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_PLAN_FORMA" id="ID_PLAN_FORMA" list="ListaPlanUE"  listKey="ID_PLAN_FORMA"  listValue="ID_PLAN_FORMA+'/'+NOMBREPLAN_FORM+' /DURACIÓN: '+DURACION+' PERIODOS'" headerKey="" headerValue="Seleccione Plan de Formación"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
+                                                                        <s:iterator value="ListaPlanUE" id="ListaPlanUE" status="stat">  
+                                                                            <s:hidden  name = "ListaPlanUE[%{#stat.index}].ID_PLAN_FORMA" id="ID_PLAN_FORMA"></s:hidden>
+                                                                            <s:hidden  name = "ListaPlanUE[%{#stat.index}].NOMBREPLAN_FORM" id="NOMBREPLAN_FORM"></s:hidden>
+                                                                            <s:hidden name = "ListaPlanUE[%{#stat.index}].DURACION" id="DURACION"></s:hidden>
+                                                                           
+                                                                        </s:iterator>
+                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+
+                                                                        </div>
+                                                                                 
+                                                                                 
+                                                                             
+                                                                         </s:if>
+                                                                        
+                                                                        
+                                                                         </s:if>
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+
+                                                                           <s:if test="ListaEstudiantes.size()>0"> 
+                                                                               
+                                                                             
                                                                                
                                                                                
                                                                                
@@ -726,6 +922,14 @@
                                                                         
 
                                                                 </div>
+                                                                          
+                                                                          
+                                                                          
+                                                                          
+                                                                          
+                                                                          
+                                                                          
+                                                                          
                                                             </div>
                                                         </div>
                                                     </div>
@@ -755,6 +959,15 @@
 
                                             <s:hidden name="bnprog" value="%{bnprog}"></s:hidden>
                                              <s:hidden name="programa.ID_NIVEL" value="%{programa.ID_NIVEL}"></s:hidden>
+                                             
+                                             
+                                              <s:textfield name="banListaAlu" value="%{banListaAlu}" ></s:textfield>
+                                              <s:textfield name="banCampAlumno" value="%{banCampAlumno}" ></s:textfield>
+                                              
+                                              <s:textfield name="alumno.AUXIDHISTALUM" id="alumnoAux"></s:textfield>
+                                              
+                                             
+                                               
 
                                             </div>
                                         </div>
