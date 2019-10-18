@@ -101,7 +101,7 @@ public class PlanFDAOImpl {
     }
     
     public List programasPlanForm(AlumnoBean alumno, escuelaBean escuela, usuarioBean usuario, programaEsBean programa) throws Exception {
-        String query = "SELECT ID_PLAN_FORMA, NUMERO_PERIODO, ID_MATERIA, ID_COMPETENCIA, ID_ESCALA, ID_LUGAR, PLAN_ROTACION, DES_ACTIVIDAD, FECHA_REG, ID_ACTIVIDAD, ID_ACT_EVALUA, NOMBRE_MATERIA, COMPETENCIA, ACTIVIDAD, HORA, LUGAR FROM (\n" +
+        String query = "SELECT ID_PLAN_FORMA, NUMERO_PERIODO, ID_MATERIA, ID_COMPETENCIA, ID_ESCALA, ID_LUGAR, PLAN_ROTACION, DES_ACTIVIDAD, FECHA_REG, ID_ACTIVIDAD, ID_ACT_EVALUA, NOMBRE_MATERIA, COMPETENCIA, ACTIVIDAD, HORA, LUGAR, ID_HORA FROM (\n" +
 "\n" +
 "SELECT TBL_PLAN_MATERIA.NOMBRE_MATERIA, TBL_PLAN_MATERIA.NUMERO_PERIODO ,  TBL_MATERIA_COMPETENCIA.COMPETENCIA,  CAT_LUGARES.LUGAR,  CAT_HORAS.HORA,  TBL_PLANFORM_ACT.ID_PLAN_FORMA,  TBL_PLANFORM_ACT.ID_MATERIA,  TBL_PLANFORM_ACT.ID_COMPETENCIA, TBL_PLANFORM_ACT.ID_ESCALA, TBL_PLANFORM_ACT.ID_LUGAR, TBL_PLANFORM_ACT.ID_HORA, TBL_PLANFORM_ACT.PLAN_ROTACION, TBL_PLANFORM_ACT.DES_ACTIVIDAD, TBL_PLANFORM_ACT.FECHA_REG, TBL_PLANFORM_ACT.ID_ACTIVIDAD, TBL_PLANFORM_ACT.ID_ACT_EVALUA, TBL_COMPETENCIA_ACTIVIDAD.ACTIVIDAD FROM TBL_PLANFORM_ACT\n" +
 "INNER JOIN TBL_PLAN_MATERIA\n" +
@@ -188,6 +188,50 @@ public class PlanFDAOImpl {
         return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_PLAN_FORM", arregloCampos);
     }
      
+     
+     
+     
+     
+     
+     public boolean GuardaPlanFormEst(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, programaEsBean programa, AlumnoBean alumno) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_HIST_ALU", "STRING", alumno.getAUXIDHISTALUM());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_PLAN_FORM", "STRING", programa.getID_PLAN_FORMA());
+        arregloCampos.add(temporal);
+           temporal = new ObjPrepareStatement("FECHA_INICIOPF", "STRING", programa.getFECHA_REG_PLAN());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("FECHA_TERMINOPF", "STRING", programa.getFECHA_TERMINO_PLAN());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_MENTOR_UE", "STRING", programa.getID_MENTORUE());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_MENTOR_ACAD", "STRING", programa.getID_MENTORACAD());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_RES_UE", "STRING", programa.getID_RESUE());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_RES_ACAD", "STRING", programa.getID_RESACAD());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ESTATUS_PF", "STRING", "1");
+        arregloCampos.add(temporal);
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_HISTALU_PF", arregloCampos);
+    }
+     
+     
+     
+     
+     
+     
       public boolean GuardaPlanFormaActividades(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, String claveConstruida, programaEsBean programa) throws Exception {
 
 //Crear un ArrayList para agregar los campos a insertar
@@ -221,6 +265,50 @@ public class PlanFDAOImpl {
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_PLANFORM_ACT", arregloCampos);
     }
+      
+        public boolean GuardaPlanFormaActividadesAlu(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, programaEsBean programa, AlumnoBean alumno) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_PLAN_FORMA", "STRING", programa.getID_PLAN_FORMA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_MATERIA", "STRING", programa.getID_MATERIA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_COMPETENCIA", "STRING", programa.getID_COMPETENCIA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_ACTIVIDAD", "STRING", programa.getID_ACTIVIDAD());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_ESCALA", "STRING", programa.getID_ESCALA());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("ID_HORA", "STRING", programa.getHORAS_PLAN());
+        arregloCampos.add(temporal);
+       temporal = new ObjPrepareStatement("ID_LUGAR", "STRING", programa.getLUGAR_PLAN());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("PLAN_ROTACION", "STRING", programa.getPLAN_ROTACION());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("DES_ACTIVIDAD", "STRING", programa.getDES_ACTIVIDAD());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_HIST_ALU", "STRING", alumno.getAUXIDHISTALUM());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_LUGAR", "STRING", programa.getID_LUGAR());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_HORA", "STRING", programa.getID_HORA());
+        arregloCampos.add(temporal);
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_PLANFORM_ACT_ALU", arregloCampos);
+    }
+      
+      
+      
+      
     
       public List periodo(escuelaBean escuela) throws Exception {
         String query = "SELECT ID_PERIODO, PERIODO FROM CAT_PERIODO";
@@ -276,7 +364,7 @@ public class PlanFDAOImpl {
     } 
         
           public List listaResUE(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela,int perfil) throws Exception {
-       String query ="SELECT ID_RESPROG_INST, ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA || ' ' || APATERNO_PERSONA||' '||AMATERNO_PERSONA AS NOMBRE_PERSONA  FROM(SELECT RESINST.*, PLANRES.ID_PLAN, USR.ESTATUS AS ESTATUS_RESPONSABLE, PERS.CURP_PERSONA, PERS.NOMBRE_PERSONA, PERS.APATERNO_PERSONA, PERS.AMATERNO_PERSONA, INUE.ID_UE  FROM (SELECT ID_RESPROG_INST,  ID_PERSONA,  ID_ESCUELA,  PERFIL,  FECHA_REG,  ID_IE_UE FROM TBL_RESPE_INST WHERE PERFIL='"+perfil+"' AND ID_ESCUELA='"+usuario.getID_ESCUELA()+"') RESINST JOIN (SELECT * FROM TBL_PLAN_RESPONSABLE WHERE  PERFIL='"+perfil+"' AND ID_ESCUELA='"+usuario.getID_ESCUELA()+"' AND ESTATUS=1)PLANRES ON RESINST.ID_PERSONA=PLANRES.ID_PERSONA JOIN (SELECT * FROM TBL_USUARIOS)USR ON RESINST.ID_ESCUELA=USR.ID_ESCUELA AND RESINST.ID_PERSONA=USR.ID_PERSONA AND RESINST.PERFIL=USR.PERFIL AND RESINST.ID_IE_UE=USR.ID_IE_UE JOIN(SELECT ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA, APATERNO_PERSONA, AMATERNO_PERSONA FROM CAT_PERSONA)  PERS ON RESINST.ID_PERSONA=PERS.ID_PERSONA JOIN (SELECT * FROM TBL_INS_UE) INUE ON RESINST.ID_IE_UE=INUE.ID_IE_UE ) WHERE ID_UE='"+alumno.getID_UE()+"' AND ID_PLAN='2320'  ";
+       String query ="SELECT ID_RESPROG_INST, ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA || ' ' || APATERNO_PERSONA||' '||AMATERNO_PERSONA AS NOMBRE_PERSONA  FROM(SELECT RESINST.*, PLANRES.ID_PLAN, USR.ESTATUS AS ESTATUS_RESPONSABLE, PERS.CURP_PERSONA, PERS.NOMBRE_PERSONA, PERS.APATERNO_PERSONA, PERS.AMATERNO_PERSONA, INUE.ID_UE  FROM (SELECT ID_RESPROG_INST,  ID_PERSONA,  ID_ESCUELA,  PERFIL,  FECHA_REG,  ID_IE_UE FROM TBL_RESPE_INST WHERE PERFIL='"+perfil+"' AND ID_ESCUELA='"+usuario.getID_ESCUELA()+"') RESINST JOIN (SELECT * FROM TBL_PLAN_RESPONSABLE WHERE  PERFIL='"+perfil+"' AND ID_ESCUELA='"+usuario.getID_ESCUELA()+"' AND ESTATUS=1)PLANRES ON RESINST.ID_PERSONA=PLANRES.ID_PERSONA JOIN (SELECT * FROM TBL_USUARIOS)USR ON RESINST.ID_ESCUELA=USR.ID_ESCUELA AND RESINST.ID_PERSONA=USR.ID_PERSONA AND RESINST.PERFIL=USR.PERFIL AND RESINST.ID_IE_UE=USR.ID_IE_UE JOIN(SELECT ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA, APATERNO_PERSONA, AMATERNO_PERSONA FROM CAT_PERSONA)  PERS ON RESINST.ID_PERSONA=PERS.ID_PERSONA JOIN (SELECT * FROM TBL_INS_UE) INUE ON RESINST.ID_IE_UE=INUE.ID_IE_UE ) WHERE ID_UE='"+alumno.getID_UE()+"' AND ID_PLAN='"+alumno.getID_PLAN()+"'  ";
         
         Constantes.enviaMensajeConsola("Consulta cct----->" + query);
         List list = null;
@@ -294,7 +382,7 @@ public class PlanFDAOImpl {
     } 
     
              public List listaMentorAcad(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela,int perfil) throws Exception {
-       String query =" SELECT ID_RESPROG_INST, ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA || ' ' || APATERNO_PERSONA||' '||AMATERNO_PERSONA AS NOMBRE_PERSONA  FROM(SELECT RESINST.*, PLANRES.ID_PLAN, USR.ESTATUS AS ESTATUS_RESPONSABLE, PERS.CURP_PERSONA, PERS.NOMBRE_PERSONA, PERS.APATERNO_PERSONA, PERS.AMATERNO_PERSONA  FROM (SELECT ID_RESPROG_INST,  ID_PERSONA,  ID_ESCUELA,  PERFIL,  FECHA_REG FROM TBL_RESPE_INST WHERE PERFIL='27' AND ID_ESCUELA='411') RESINST JOIN (SELECT * FROM TBL_PLAN_RESPONSABLE WHERE  PERFIL='27' AND ID_ESCUELA='411' AND ESTATUS=1)PLANRES ON RESINST.ID_PERSONA=PLANRES.ID_PERSONA JOIN (SELECT * FROM TBL_USUARIOS)USR ON RESINST.ID_ESCUELA=USR.ID_ESCUELA AND RESINST.ID_PERSONA=USR.ID_PERSONA AND RESINST.PERFIL=USR.PERFIL  JOIN(SELECT ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA, APATERNO_PERSONA, AMATERNO_PERSONA FROM CAT_PERSONA)  PERS ON RESINST.ID_PERSONA=PERS.ID_PERSONA  ) where ID_PLAN='"+alumno.getID_PLAN()+"' ";
+       String query =" SELECT ID_RESPROG_INST, ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA || ' ' || APATERNO_PERSONA||' '||AMATERNO_PERSONA AS NOMBRE_PERSONA  FROM(SELECT RESINST.*, PLANRES.ID_PLAN, USR.ESTATUS AS ESTATUS_RESPONSABLE, PERS.CURP_PERSONA, PERS.NOMBRE_PERSONA, PERS.APATERNO_PERSONA, PERS.AMATERNO_PERSONA  FROM (SELECT ID_RESPROG_INST,  ID_PERSONA,  ID_ESCUELA,  PERFIL,  FECHA_REG FROM TBL_RESPE_INST WHERE PERFIL='27' AND ID_ESCUELA='"+usuario.getID_ESCUELA()+"') RESINST JOIN (SELECT * FROM TBL_PLAN_RESPONSABLE WHERE  PERFIL='27' AND ID_ESCUELA='"+usuario.getID_ESCUELA()+"' AND ESTATUS=1)PLANRES ON RESINST.ID_PERSONA=PLANRES.ID_PERSONA JOIN (SELECT * FROM TBL_USUARIOS)USR ON RESINST.ID_ESCUELA=USR.ID_ESCUELA AND RESINST.ID_PERSONA=USR.ID_PERSONA AND RESINST.PERFIL=USR.PERFIL  JOIN(SELECT ID_PERSONA, CURP_PERSONA, NOMBRE_PERSONA, APATERNO_PERSONA, AMATERNO_PERSONA FROM CAT_PERSONA)  PERS ON RESINST.ID_PERSONA=PERS.ID_PERSONA  ) where ID_PLAN='"+alumno.getID_PLAN()+"' ";
         
         Constantes.enviaMensajeConsola("Consulta cct----->" + query);
         List list = null;
@@ -512,6 +600,32 @@ public class PlanFDAOImpl {
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryUpdate("CAT_ALUMNO", arregloCampos, Condicion);
+    }
+    
+    
+    public boolean ActualizaEstatusAlumno(Connection conn, PreparedStatement stat, programaEsBean programa, AlumnoBean alumno) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("STATUS_GENERAL", "STRING", "1");
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("STATUS_PROCESO", "STRING", "6");
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("FECHA_INICIO_PF", "STRING", programa.getFECHA_REG_PLAN());
+        arregloCampos.add(temporal);
+        
+
+        String Condicion = "where ID_HIST_ALUM='" + alumno.getAUXIDHISTALUM()+ "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdate("TBL_HIST_ALUM", arregloCampos, Condicion);
     }
 
     public String ConsultaID_ALUMNO(String curp) throws Exception {

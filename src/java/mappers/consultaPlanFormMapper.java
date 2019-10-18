@@ -151,7 +151,13 @@ public class consultaPlanFormMapper implements Mapper{
             
             
         }        
-                    
+          if  (rs.getString("ID_HORA") != null) {
+            dat.setID_HORA(rs.getString("ID_HORA").trim());
+        } else {
+            dat.setID_HORA(rs.getString("ID_HORA"));
+            
+            
+        }               
                    
           
         return dat;

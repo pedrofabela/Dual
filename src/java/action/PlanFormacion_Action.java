@@ -38,6 +38,7 @@ import daos.PlanFDAOImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import mx.gob.edomex.dgsei.ws.ConsultaRenapoPorCurp;
@@ -105,6 +106,10 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
      boolean banListaAlu = false;
      boolean banCampAlumno = false;
 
+     
+     
+     
+     
     //conexiones................................PARA LAS LISTAS
     Statement objConexion;
     PreparedStatement objPreConexion;
@@ -526,9 +531,232 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
 
     }         
               
+    public static boolean validarFecha(String fecha) {
+
+        try {
+
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+
+            formatoFecha.setLenient(false);
+
+            formatoFecha.parse(fecha);
+
+        } catch (ParseException e) {
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+       
               
+    public String guardaPlanFormEst() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            PlanFDAOImpl con2 = new PlanFDAOImpl();
+
+           
+             boolean banResUE=false;
+             boolean banMentorUE=false;
+             boolean banResAcad=false;
+             boolean banMetorAcad=false;
+             boolean planForm=false;
+             boolean fechaInicio=false;
+             boolean fechaTermino=false;
+             String fecha;
+                  boolean res=false;
+                     boolean res2=false;
+                          
+             if(programa.getID_RESUE().length()>0){
+                 banResUE=true;
+                 
+             }
+             else{
+                 
+                 banResUE=false;
+                   addFieldError("ERRORRESUE", "Favor de seleccionar a un Responsble");
+             }
+             
+             
+            
+               if(programa.getID_MENTORUE().length()>0){
+                 banMentorUE=true;
+                 
+             }
+             else{
+                 
+                 banMentorUE=false;
+                   addFieldError("ERRORMENTORUE", "Favor de seleccionar a un Mentor");
+             }
+               
+            
+              if(programa.getID_RESACAD().length()>0){
+                 banResAcad=true;
+                 
+             }
+             else{
+                 
+                 banResAcad=false;
+                   addFieldError("ERRORRESACAD", "Favor de seleccionar a un Responsable");
+             }
               
+                if(programa.getID_MENTORACAD().length()>0){
+                 banMetorAcad=true;
+                 
+             }
+             else{
+                 
+                 banMetorAcad=false;
+                   addFieldError("ERRORMENTORACAD", "Favor de seleccionar a un Mentor");
+             }
+                
+                 
+              res=validarFecha(programa.getFECHA_REG_PLAN());
+            
+              if(res==true){
+                
+                  
+                  
+                  
+                  fechaInicio=true;
+                 
+             }
+             else{
+                 
+                 fechaInicio=false;
+                   addFieldError("ERRORFECHAINICIO", "Favor de seleccionar una fecha valida");
+             }
               
+                if(programa.getID_PLAN_FORMA().length()>0){
+                 
+                    
+                    planForm=true;
+                 
+             }
+             else{
+                 
+                 planForm=false;
+                   addFieldError("ERRORPLANFORM", "Favor de seleccionar un plan de Formación");
+             }
+                   res2=validarFecha(programa.getFECHA_TERMINO_PLAN());
+                
+                  if(res2==true){
+                 
+                    
+                    fechaTermino=true;
+                 
+             }
+             else{
+                 
+                 fechaTermino=false;
+                   addFieldError("ERRORFECHATERMINO", "Favor de seleccionar una fecha valida");
+             }
+                
+               
+                  
+                  
+                  
+                  
+                   if (banResUE && banMentorUE && banResAcad && banMetorAcad && planForm && fechaInicio && fechaTermino) {
+
+                conecta = con2.crearConexion();
+                //statement
+                objConexion = con2.crearStatement(conecta);
+                
+                
+                        con2.GuardaPlanFormEst(conecta, objPreConexion, escuela, objRenapo, programa, alumno);
+                       
+                       
+                        
+                        
+                        
+                        
+                        
+                       
+                       
+               
+
+             
+
+            
+
+                Iterator LPR = ListaProgramasRegistro.iterator();
+                programaEsBean obj3;
+                while (LPR.hasNext()) {
+                    obj3 = (programaEsBean) LPR.next();
+                    programa.setID_MATERIA(obj3.getID_MATERIA());
+                    programa.setID_COMPETENCIA(obj3.getID_COMPETENCIA());
+                    programa.setID_ACTIVIDAD(obj3.getID_ACTIVIDAD());
+                    programa.setHORAS_PLAN(obj3.getHORAS_PLAN());
+                    programa.setLUGAR_PLAN(obj3.getLUGAR_PLAN());
+                    programa.setESCALA_PLAN(obj3.getESCALA_PLAN());
+                    programa.setDES_ACTIVIDAD(obj3.getDES_ACTIVIDAD());
+                    programa.setPLAN_ROTACION(obj3.getPLAN_ROTACION());
+                    programa.setID_ESCALA(obj3.getID_ESCALA());
+                     programa.setID_LUGAR(obj3.getID_LUGAR());
+                      programa.setID_HORA(obj3.getID_HORA());
+
+                        con2.GuardaPlanFormaActividadesAlu(conecta, objPreConexion, escuela, objRenapo,  programa, alumno);
+                   
+
+                }
+                
+                con2.ActualizaEstatusAlumno(conecta, objPreConexion, programa, alumno);
+
+                cierraConexiones();
+
+                addFieldError("SEGUARDO", "El Plan de Formación se guardo con éxito");
+
+               
+
+            } 
+                  
+                  
+                  
+                  
+                
+                
+                
+                
+              
+               Constantes.enviaMensajeConsola(alumno.getAUXIDHISTALUM());
+              
+            
+        //  Constantes.enviaMensajeConsola("sali de la consulta de programa educativo con:"+ListaProgramasRegistro.size());
+            
+            
+           
+          return "SUCCESS";
+
+        } catch (Exception sqle) {
+
+            TipoException = sqle.getMessage();
+            
+            System.out.println("action.PlanFormacion_Action.guardaPlanFormEst()"+TipoException
+            );
+            return "ERROR";
+        }
+
+    }         
+       
               
      
      

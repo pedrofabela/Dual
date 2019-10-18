@@ -47,6 +47,13 @@
             <result name="SESSION" type="chain">CerrarSesion</result>
         </action>
         
+          <action name="guardaPlanFormEst" class="action.PlanFormacion_Action" method="guardaPlanFormEst">
+            <result name="SUCCESS">Elabora_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Elabora_Plan_Alu.jsp</result>
+            <result name="input">Elabora_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
          <action name="planConsulta" class="action.PlanFormacion_Action" method="planConsulta">
             <result name="SUCCESS">Elabora_Plan.jsp</result>			              
             <result name="ERROR">Elabora_Plan.jsp</result>

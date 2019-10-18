@@ -642,41 +642,41 @@ function elige(accion, id_hist_alum) {
                                                                                  
                                                                                     <div class="col-lg-6" style="margin-top: 20px;">
                                                                             <label for="exampleEmail" class="bmd-label-floating">Responsable de Unidad Económica </label>
-                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_RESUE" id="ID_RESUE" list="ListaResUE"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Selecciones Responsable de Unidad Económica"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
+                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_RESUE" id="ID_RESUE" list="ListaResUE"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Selecciones Responsable de Unidad Económica"  cssClass="selectpicker col-lg-12" onchange="telquita1()"  />
                                                                         <s:iterator value="ListaResUE" id="ListaResUE" status="stat">  
                                                                             <s:hidden  name = "ListaResUE[%{#stat.index}].ID_RESPROG_INST" id="ID_RESPROG_INST"></s:hidden>
                                                                             <s:hidden  name = "ListaResUE[%{#stat.index}].ID_PERSONA" id="ID_PERSONA"></s:hidden>
                                                                             <s:hidden name = "ListaResUE[%{#stat.index}].CURP_PERSONA" id="CURP_PERSONA"></s:hidden>
                                                                             <s:hidden name = "ListaResUE[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
                                                                         </s:iterator>
-                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+                                                                        <s:fielderror  fieldName="ERRORRESUE" cssClass="col-lg-12 alert alert-danger" id="quitamen1"></s:fielderror>
 
                                                                         </div>
                                                                         
                                                                         
                                                                          <div class="col-lg-6" style="margin-top: 20px;">
                                                                             <label for="exampleEmail" class="bmd-label-floating">Mentor de Unidad Económica </label>
-                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_MENTORUE" id="ID_MENTORUE" list="ListaResMentorUE"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Seleccione Mentor de Unidad Económica"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
+                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_MENTORUE" id="ID_MENTORUE" list="ListaResMentorUE"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Seleccione Mentor de Unidad Económica"  cssClass="selectpicker col-lg-12" onchange="telquita2()"  />
                                                                         <s:iterator value="ListaResMentorUE" id="ListaResMentorUE" status="stat">  
                                                                             <s:hidden  name = "ListaResMentorUE[%{#stat.index}].ID_RESPROG_INST" id="ID_RESPROG_INST"></s:hidden>
                                                                             <s:hidden  name = "ListaResMentorUE[%{#stat.index}].ID_PERSONA" id="ID_PERSONA"></s:hidden>
                                                                             <s:hidden name = "ListaResMentorUE[%{#stat.index}].CURP_PERSONA" id="CURP_PERSONA"></s:hidden>
                                                                             <s:hidden name = "ListaResMentorUE[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
                                                                         </s:iterator>
-                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+                                                                        <s:fielderror  fieldName="ERRORMENTORUE" cssClass="col-lg-12 alert alert-danger" id="quitamen2"></s:fielderror>
 
                                                                         </div>
                                                                         
                                                                          <div class="col-lg-6" style="margin-top: 20px;">
                                                                             <label for="exampleEmail" class="bmd-label-floating">Responsable Académico </label>
-                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_RESACAD" id="ID_RESACAD" list="ListaResAcad"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Seleccione responsable Académico"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
+                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_RESACAD" id="ID_RESACAD" list="ListaResAcad"  listKey="ID_PERSONA"  listValue="NOMBRE_PERSONA" headerKey="" headerValue="Seleccione responsable Académico"  cssClass="selectpicker col-lg-12" onchange="telquita3()"  />
                                                                         <s:iterator value="ListaResAcad" id="ListaResAcad" status="stat">  
                                                                             <s:hidden  name = "ListaResAcad[%{#stat.index}].ID_RESPROG_INST" id="ID_RESPROG_INST"></s:hidden>
                                                                             <s:hidden  name = "ListaResAcad[%{#stat.index}].ID_PERSONA" id="ID_PERSONA"></s:hidden>
                                                                             <s:hidden name = "ListaResAcad[%{#stat.index}].CURP_PERSONA" id="CURP_PERSONA"></s:hidden>
                                                                             <s:hidden name = "ListaResAcad[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
                                                                         </s:iterator>
-                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+                                                                        <s:fielderror  fieldName="ERRORRESACAD" cssClass="col-lg-12 alert alert-danger" id="quitamen3"></s:fielderror>
 
                                                                         </div>
                                                                         
@@ -689,10 +689,37 @@ function elige(accion, id_hist_alum) {
                                                                             <s:hidden name = "ListaMentorAcad[%{#stat.index}].CURP_PERSONA" id="CURP_PERSONA"></s:hidden>
                                                                             <s:hidden name = "ListaMentorAcad[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
                                                                         </s:iterator>
-                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+                                                                        <s:fielderror  fieldName="ERRORMENTORACAD" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
 
                                                                         </div>
-                                                                        
+                                                                         <div class="col-lg-6" style="margin-top: 20px;">
+                                                                                    <label for="exampleEmail" class="bmd-label-floating">Inicio Plan de Formación:</label>
+                                                                         <s:textfield  cssClass="form-control datepicker" name="programa.FECHA_REG_PLAN" id="FECHA_REG_PLAN" onchange="telquita5()" ></s:textfield>
+                                                                                <s:fielderror  fieldName="ERRORFECHAINICIO" cssClass="col-lg-12 alert alert-danger" id="quitamen5"></s:fielderror>
+
+                                                                                
+                                                                                
+                                                                                
+                                                                                <s:fielderror fieldName="ErrorFecha" cssClass="alert alert-danger"/>
+                                                                                
+                                                                                
+                                                                                <s:fielderror fieldName="ErrorFechaNoPermitida" cssClass="alert alert-danger"/>
+                                                                            </div> 
+                                                                            
+                                                                            
+                                                                             <div class="col-lg-6" style="margin-top: 20px;">
+                                                                                    <label for="exampleEmail" class="bmd-label-floating">Termino Plan de Formación:</label>
+                                                                                <s:textfield  cssClass="form-control datepicker" name="programa.FECHA_TERMINO_PLAN" id="FECHA_TERMINO_PLAN" onchange="telquita6()" ></s:textfield>
+                                                                                <s:fielderror  fieldName="ERRORFECHATERMINO" cssClass="col-lg-12 alert alert-danger" id="quitamen6"></s:fielderror>
+
+                                                                                
+                                                                                
+                                                                                
+                                                                                <s:fielderror fieldName="ErrorFecha" cssClass="alert alert-danger"/>
+                                                                                
+                                                                                
+                                                                                <s:fielderror fieldName="ErrorFechaNoPermitida" cssClass="alert alert-danger"/>
+                                                                            </div> 
                                                                           <div class="col-lg-12" style="margin-top: 20px;">
                                                                             <label for="exampleEmail" class="bmd-label-floating">Plan de formación del Programa y Unidad Económica </label>
                                                                         <s:select  data-style="select-with-transition"   name="programa.ID_PLAN_FORMA" id="ID_PLAN_FORMA" list="ListaPlanUE"  listKey="ID_PLAN_FORMA"  listValue="ID_PLAN_FORMA+'/'+NOMBREPLAN_FORM+' /DURACIÓN: '+DURACION+' PERIODOS'" headerKey="" headerValue="Seleccione Plan de Formación"  cssClass="selectpicker col-lg-12" onchange="Javascript:consulta3('consultaPlanEstudiante2')"  />
@@ -702,9 +729,13 @@ function elige(accion, id_hist_alum) {
                                                                             <s:hidden name = "ListaPlanUE[%{#stat.index}].DURACION" id="DURACION"></s:hidden>
                                                                            
                                                                         </s:iterator>
-                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+                                                                        <s:fielderror  fieldName="ERRORPLANFORM" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
 
                                                                         </div>
+                                                                        
+                                                                        
+                                                                            
+                                                                            
                                                                                  
                                                                                  
                                                                              
@@ -761,8 +792,9 @@ function elige(accion, id_hist_alum) {
                                                                         <s:fielderror  fieldName="ERRORNOMENACAD" cssClass="col-lg-12 alert alert-danger" id="quitamen7"></s:fielderror>
                                                                         </div>
 
-
-                                                                        <div class="col-lg-12 " style="margin-top: 20px; margin-bottom: 30px;">
+                                                                        
+                                                                        
+                                                                        <div class="col-lg-12" style="margin-top: 20px; margin-bottom: 30px;">
                                                                             <label   for="RAZON">Descripción del Plan de Formación</label>
                                                                         <s:textarea  cssClass="form-control" name="programa.DESCRIPCION" id="DESCRIPCION"  onkeyup="telquita8();" readonly="true" ></s:textarea>  
                                                                         <s:fielderror  fieldName="ERRORDESPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen8"></s:fielderror>
@@ -850,25 +882,25 @@ function elige(accion, id_hist_alum) {
                                                                                                 <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_ACTIVIDAD" id="ID_ACTIVIDAD"></s:hidden>
                                                                                              <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NO_PASSA" id="NO_PASA"></s:hidden>
 
-                                                                                                
-                                                                                                
+                                                                                                  <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].HORA" id="HORA"></s:hidden>
+                                                                                                <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].LUGAR" id="LUGAR"></s:hidden>
+                                                                                             <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].DES_ACTIVIDAD" id="DES_ACTIVIDAD"></s:hidden>
+                                                                                             <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].PLAN_ROTACION" id="PLAN_ROTACION"></s:hidden>
+                                                                                             <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_ESCALA" id="ID_ESCALA"></s:hidden>
 
+                                                                                             
+                                                                                             
+                                                                                              <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_HORA" id="ID_HORA"></s:hidden>
+                                                                                                <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_LUGAR" id="ID_LUGAR"></s:hidden>
+                                                                                            
+                                                                                             
+                                                                                             
+                                                                                             
                                                                                             </s:iterator>  
                                                                                             
                                                                                             
                                                                                             
-                                                                                              <s:iterator value="ListaEscala" id="ListaEscala" status="stat">         
-                                                                                                   <s:hidden  name = "ListaEscala[%{#stat.index}].ID_ESCALA" id="ID_ESCALA"></s:hidden>
-                                                                                                <s:hidden  name = "ListaEscala[%{#stat.index}].ESCALA" id="ESCALA"></s:hidden>
-                                                                                              </s:iterator>
-                                                                                                   <s:iterator value="ListaLugar" id="ListaLugar" status="stat">         
-                                                                                                   <s:hidden  name = "ListaLugar[%{#stat.index}].ID_LUGAR" id="ID_LUGAR"></s:hidden>
-                                                                                                <s:hidden  name = "ListaLugar[%{#stat.index}].LUGAR" id="LUGAR"></s:hidden>
-                                                                                              </s:iterator> 
-                                                                                              <s:iterator value="ListaHora" id="ListaHora" status="stat">         
-                                                                                                   <s:hidden  name = "ListaHora[%{#stat.index}].ID_HORA" id="ID_HORA"></s:hidden>
-                                                                                                <s:hidden  name = "ListaHora[%{#stat.index}].HORA" id="HORA"></s:hidden>
-                                                                                              </s:iterator>
+                                                                                            
                                                                                             
                                                                                             
                                                                                             
@@ -899,7 +931,7 @@ function elige(accion, id_hist_alum) {
 
 
                                                                                        <div class="form-group col-md-12 text-center" >
-                                                                            <a href="Javascript:consulta('guardaPlanForm')"  class="btn btn-round btn-primary">Guardar</a>
+                                                                            <a href="Javascript:consulta('guardaPlanFormEst')"  class="btn btn-round btn-primary">Guardar</a>
                                                                         </div>
 
                                                                         

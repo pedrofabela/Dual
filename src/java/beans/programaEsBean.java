@@ -75,7 +75,27 @@ public class programaEsBean {
  
  private String ID_ACT_EVALUA;
  private String DESCRIPCION;
+private String FECHA_REG_PLAN;
+private String FECHA_TERMINO_PLAN;
 
+    public String getFECHA_TERMINO_PLAN() {
+        return FECHA_TERMINO_PLAN;
+    }
+
+    public void setFECHA_TERMINO_PLAN(String FECHA_TERMINO_PLAN) {
+        this.FECHA_TERMINO_PLAN = FECHA_TERMINO_PLAN;
+    }
+
+
+
+
+    public String getFECHA_REG_PLAN() {
+        return FECHA_REG_PLAN;
+    }
+
+    public void setFECHA_REG_PLAN(String FECHA_REG_PLAN) {
+        this.FECHA_REG_PLAN = FECHA_REG_PLAN;
+    }
  
  
  
