@@ -71,6 +71,44 @@ public class programaEsBean {
  private String ID_PLAN_FORMA;
  private String NOMBREPLAN_FORM;
  private String DURACION;
+ private String FECHA_REG;
+ 
+ private String ID_ACT_EVALUA;
+ private String DESCRIPCION;
+
+ 
+ 
+ 
+ 
+ 
+    public String getDESCRIPCION() {
+        return DESCRIPCION;
+    }
+
+    public void setDESCRIPCION(String DESCRIPCION) {
+        this.DESCRIPCION = DESCRIPCION;
+    }
+ 
+    public String getID_ACT_EVALUA() {
+        return ID_ACT_EVALUA;
+    }
+
+    public void setID_ACT_EVALUA(String ID_ACT_EVALUA) {
+        this.ID_ACT_EVALUA = ID_ACT_EVALUA;
+    }
+ 
+ 
+ 
+
+    public String getFECHA_REG() {
+        return FECHA_REG;
+    }
+
+    public void setFECHA_REG(String FECHA_REG) {
+        this.FECHA_REG = FECHA_REG;
+    }
+ 
+
 
     public String getID_PLAN_FORMA() {
         return ID_PLAN_FORMA;

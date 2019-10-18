@@ -38,6 +38,8 @@ import mappers.UEIEMapper;
 import mappers.UEMapper;
 import mappers.ValidadosMapper;
 import mappers.consultaAluRegMapper;
+import mappers.consultaPlanFormDatosMapper;
+import mappers.consultaPlanFormMapper;
 import mappers.consultaUEMapper;
 import mappers.descargaProgramasMapper;
 import mappers.descargaProgramasMapper2;
@@ -97,6 +99,50 @@ public class PlanFDAOImpl {
         list = oraDaoFac.queryForList(query, new descargaProgramasMapper2());
         return list;
     }
+    
+    public List programasPlanForm(AlumnoBean alumno, escuelaBean escuela, usuarioBean usuario, programaEsBean programa) throws Exception {
+        String query = "SELECT ID_PLAN_FORMA, NUMERO_PERIODO, ID_MATERIA, ID_COMPETENCIA, ID_ESCALA, ID_LUGAR, PLAN_ROTACION, DES_ACTIVIDAD, FECHA_REG, ID_ACTIVIDAD, ID_ACT_EVALUA, NOMBRE_MATERIA, COMPETENCIA, ACTIVIDAD, HORA, LUGAR FROM (\n" +
+"\n" +
+"SELECT TBL_PLAN_MATERIA.NOMBRE_MATERIA, TBL_PLAN_MATERIA.NUMERO_PERIODO ,  TBL_MATERIA_COMPETENCIA.COMPETENCIA,  CAT_LUGARES.LUGAR,  CAT_HORAS.HORA,  TBL_PLANFORM_ACT.ID_PLAN_FORMA,  TBL_PLANFORM_ACT.ID_MATERIA,  TBL_PLANFORM_ACT.ID_COMPETENCIA, TBL_PLANFORM_ACT.ID_ESCALA, TBL_PLANFORM_ACT.ID_LUGAR, TBL_PLANFORM_ACT.ID_HORA, TBL_PLANFORM_ACT.PLAN_ROTACION, TBL_PLANFORM_ACT.DES_ACTIVIDAD, TBL_PLANFORM_ACT.FECHA_REG, TBL_PLANFORM_ACT.ID_ACTIVIDAD, TBL_PLANFORM_ACT.ID_ACT_EVALUA, TBL_COMPETENCIA_ACTIVIDAD.ACTIVIDAD FROM TBL_PLANFORM_ACT\n" +
+"INNER JOIN TBL_PLAN_MATERIA\n" +
+"ON TBL_PLANFORM_ACT.ID_MATERIA = TBL_PLAN_MATERIA.ID_MATERIA\n" +
+"INNER JOIN TBL_MATERIA_COMPETENCIA\n" +
+"ON TBL_PLANFORM_ACT.ID_COMPETENCIA = TBL_MATERIA_COMPETENCIA.ID_COMPETENCIA\n" +
+"INNER JOIN TBL_COMPETENCIA_ACTIVIDAD\n" +
+"ON TBL_PLANFORM_ACT.ID_ACTIVIDAD = TBL_COMPETENCIA_ACTIVIDAD.ID_ACTIVIDAD\n" +
+"INNER JOIN CAT_LUGARES\n" +
+"ON TBL_PLANFORM_ACT.ID_LUGAR = CAT_LUGARES.ID_LUGAR\n" +
+"INNER JOIN CAT_HORAS\n" +
+"ON TBL_PLANFORM_ACT.ID_HORA = CAT_HORAS.ID_HORA)  WHERE ID_PLAN_FORMA='"+programa.getID_PLAN_FORMA()+"' ORDER BY NUMERO_PERIODO, ID_COMPETENCIA ASC  ";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new consultaPlanFormMapper());
+        return list;
+    }
+    
+    
+    public List programasPlanFormDatos(AlumnoBean alumno, escuelaBean escuela, usuarioBean usuario, programaEsBean programa) throws Exception {
+        String query = " SELECT ID_PLAN_FORMA,\n" +
+"  NOMBREPLAN_FORM,\n" +
+"  DESCRIPCION,\n" +
+"  DURACION,\n" +
+"  NO_ESTUDIANTES,\n" +
+"  NO_MENTORES_UE,\n" +
+"  NO_MENTORES_ACAD\n" +
+"  \n" +
+"FROM TBL_PLAN_FORM WHERE ID_PLAN_FORMA='"+programa.getID_PLAN_FORMA()+"' ";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new consultaPlanFormDatosMapper());
+        return list;
+    }
+    
+    
+    
+    
+    
+    
+    
     
     public String totalcctplan(escuelaBean escuela, renapoBean renapo) throws Exception {
         String query = "SELECT COUNT (ID_PLAN_FORMA) FROM TBL_PLAN_FORM WHERE ID_CCT_PLAN='"+escuela.getAUXIDCCTPLAN2()+"'  ";

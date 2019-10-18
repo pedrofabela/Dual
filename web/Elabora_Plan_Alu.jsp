@@ -529,7 +529,7 @@ function elige(accion, id_hist_alum) {
                                                                         
                                                                         </div>
                                                                         
-                                                                     <s:if test="ListaEstudiantes.size()>0">  
+                                                                    
                                                                         
                                                                          <s:if test="banListaAlu">
                                                                 <div style="width: 90%; margin: auto;  color:#302f2f; text-align: center; margin-top: 20px;" >
@@ -695,7 +695,7 @@ function elige(accion, id_hist_alum) {
                                                                         
                                                                           <div class="col-lg-12" style="margin-top: 20px;">
                                                                             <label for="exampleEmail" class="bmd-label-floating">Plan de formación del Programa y Unidad Económica </label>
-                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_PLAN_FORMA" id="ID_PLAN_FORMA" list="ListaPlanUE"  listKey="ID_PLAN_FORMA"  listValue="ID_PLAN_FORMA+'/'+NOMBREPLAN_FORM+' /DURACIÓN: '+DURACION+' PERIODOS'" headerKey="" headerValue="Seleccione Plan de Formación"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
+                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_PLAN_FORMA" id="ID_PLAN_FORMA" list="ListaPlanUE"  listKey="ID_PLAN_FORMA"  listValue="ID_PLAN_FORMA+'/'+NOMBREPLAN_FORM+' /DURACIÓN: '+DURACION+' PERIODOS'" headerKey="" headerValue="Seleccione Plan de Formación"  cssClass="selectpicker col-lg-12" onchange="Javascript:consulta3('consultaPlanEstudiante2')"  />
                                                                         <s:iterator value="ListaPlanUE" id="ListaPlanUE" status="stat">  
                                                                             <s:hidden  name = "ListaPlanUE[%{#stat.index}].ID_PLAN_FORMA" id="ID_PLAN_FORMA"></s:hidden>
                                                                             <s:hidden  name = "ListaPlanUE[%{#stat.index}].NOMBREPLAN_FORM" id="NOMBREPLAN_FORM"></s:hidden>
@@ -711,23 +711,23 @@ function elige(accion, id_hist_alum) {
                                                                          </s:if>
                                                                         
                                                                         
-                                                                         </s:if>
+                                                                        
                                                                         
                                                                         
                                                                         
                                                                         
 
-                                                                           <s:if test="ListaEstudiantes.size()>0"> 
+                                                                          
                                                                                
                                                                              
                                                                                
-                                                                               
-                                                                               
+                                                                         <s:if test="ListaProgramasRegistro.size()>0">   
+                                                                              
                                                                                
 
                                                                         <div class="col-lg-8 " style="margin-top: 20px;">
                                                                             <label   for="RAZON">Nombre del plan de formación:</label>
-                                                                        <s:textfield  cssClass="form-control" name="programa.NOM_PLAN_FORM" id="nom_planf" onkeyup="telquita2();"  ></s:textfield> 
+                                                                        <s:textfield  cssClass="form-control" name="programa.NOMBREPLAN_FORM" id="NOMBREPLAN_FORM" onkeyup="telquita2();" readonly="true"  ></s:textfield> 
                                                                         <s:fielderror  fieldName="ERRORNOMPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen2"></s:fielderror>
                                                                         </div>
 
@@ -738,40 +738,38 @@ function elige(accion, id_hist_alum) {
 
                                                                         <div class="col-lg-4" style="margin-top: 20px;">
                                                                             <label for="exampleEmail" class="bmd-label-floating">Duración en Periodos </label>
-                                                                        <s:select  data-style="select-with-transition"   name="programa.PERIODO" id="PERIODO" list="ListaPeriodo"  listKey="ID_PERIODO"  listValue="PERIODO" headerKey="" headerValue="Seleccione un periodo"  cssClass="selectpicker col-lg-12" onchange="telquita4()"  />
-                                                                        <s:iterator value="ListaPeriodo" id="ListaPeriodo" status="stat">  
-                                                                            <s:hidden  name = "ListaPeriodo[%{#stat.index}].ID_PERIODO" id="ID_PERIODO"></s:hidden>
-                                                                            <s:hidden  name = "ListaPeriodo[%{#stat.index}].PERIODO" id="PERIODO"></s:hidden>
-                                                                        </s:iterator>
-                                                                        <s:fielderror  fieldName="ERRORPERPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
-
+                                                                        <s:textfield  cssClass="form-control"  name="programa.DURACION" id="DURACION"  headerValue="Seleccione un periodo"  readonly="true"  />
+                                                                       
                                                                         </div>
 
                                                                         
                                                                         <div class="col-lg-4" style="margin-top: 20px;">
                                                                             <label   for="RAZON">Número de Estudiantes:</label>
-                                                                        <s:textfield  cssClass="form-control" name="programa.NO_ESTUDIANTES" id="NO_ESTUDIANTES2" onkeyup="validarSiNumero(this.value); telquita5(); "    ></s:textfield> 
+                                                                        <s:textfield  cssClass="form-control" name="programa.NO_ESTUDIANTES" id="NO_ESTUDIANTES2" onkeyup="validarSiNumero(this.value); telquita5(); " readonly="true"    ></s:textfield> 
                                                                         <s:fielderror  fieldName="ERRORNOEST" cssClass="col-lg-12 alert alert-danger" id="quitamen5"></s:fielderror>
                                                                         </div>
                                                              
                                                                         <div class="col-lg-4" style="margin-top: 20px;">
                                                                             <label   for="RAZON">Número de Mentores de UE:</label>
-                                                                        <s:textfield  cssClass="form-control" name="programa.NO_MENTORES_UE" id="NO_MENTORES_UE2" onkeyup="validarSiNumero2(this.value); telquita6(); "  ></s:textfield> 
+                                                                        <s:textfield  cssClass="form-control" name="programa.NO_MENTORES_UE" id="NO_MENTORES_UE2" onkeyup="validarSiNumero2(this.value); telquita6(); " readonly="true"  ></s:textfield> 
                                                                         <s:fielderror  fieldName="ERRORNOMENUE" cssClass="col-lg-12 alert alert-danger" id="quitamen6"></s:fielderror>
                                                                         </div>
                                                                       
                                                                         <div class="col-lg-4" style="margin-top: 20px;">
                                                                             <label   for="RAZON">Número de Mentores Académcios:</label>
-                                                                        <s:textfield  cssClass="form-control" name="programa.NO_MENTORES_ACAD" id="NO_MENTORES_ACAD2" onkeyup="validarSiNumero3(this.value); telquita7(); "  ></s:textfield> 
+                                                                        <s:textfield  cssClass="form-control" name="programa.NO_MENTORES_ACAD" id="NO_MENTORES_ACAD2" onkeyup="validarSiNumero3(this.value); telquita7(); "  readonly="true" ></s:textfield> 
                                                                         <s:fielderror  fieldName="ERRORNOMENACAD" cssClass="col-lg-12 alert alert-danger" id="quitamen7"></s:fielderror>
                                                                         </div>
 
 
                                                                         <div class="col-lg-12 " style="margin-top: 20px; margin-bottom: 30px;">
                                                                             <label   for="RAZON">Descripción del Plan de Formación</label>
-                                                                        <s:textarea  cssClass="form-control" name="programa.DESCRIPCION_FORM" id="descripcion"  onkeyup="telquita8();" ></s:textarea>  
+                                                                        <s:textarea  cssClass="form-control" name="programa.DESCRIPCION" id="DESCRIPCION"  onkeyup="telquita8();" readonly="true" ></s:textarea>  
                                                                         <s:fielderror  fieldName="ERRORDESPLAN" cssClass="col-lg-12 alert alert-danger" id="quitamen8"></s:fielderror>
                                                                         </div>  
+                                                                        
+                                                                        
+                                                                        
 
                                                                         <div class="col-md-12">
 
@@ -797,7 +795,7 @@ function elige(accion, id_hist_alum) {
                                                                                                 <th style="width: 5%;" >Periodo</th>
                                                                                                 <th style="width: 15%;" >Competencia</th>
                                                                                                 <th style="width: 15%;" >Actividad</th>
-                                                                                                <th style="width: 5%;">Seleccionar</th>
+                                                                                                
                                                                                                 <th style="width: 10%;" >Horas</th>
                                                                                                 <th style="width: 10%;" >Lugar</th>
                                                                                                 <th style="width: 10%;" >Escala</th>
@@ -812,7 +810,7 @@ function elige(accion, id_hist_alum) {
                                                                                             <s:iterator value="ListaProgramasRegistro" id="ListaProgramasRegistro" status="stat">                                                                                                                                      
 
 
-                                                                            <s:if test="ACTIVIDAD.length()>0">
+                                                                            
 
 
                                                                                 <tr style="color: #666666;    <s:if test="ID_ACTIVIDAD==NO_PASA && NO_PASA!=null">background: #ffcccc ; </s:if>"  >
@@ -821,19 +819,17 @@ function elige(accion, id_hist_alum) {
                                                                                                     
 
                                                                                                         <th><s:property value="NOMBRE_MATERIA" /></th>
-                                                                                                        <th style="text-align: center;" ><s:property value="NUMERO_PERIODO" /></th>
+                                                                                    <th align="center" style="text-align: center;"><s:property value="NUMERO_PERIODO" /></th>
                                                                                                         <th ><s:property value="COMPETENCIA" /></th>
                                                                                                         <th ><s:property value="ACTIVIDAD" /></th>  
-                                                                                                        <th align="center" style="align-content: center; text-align: center;"> <s:checkbox cssClass="form-check-sign"   name="ListaProgramasRegistro[%{#stat.index}].VALIDAR"  type="checkbox" id="VALIDAR" >  </s:checkbox>    </th>  
-                                                                                                        <th align="center" style="align-content: center;"> <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaProgramasRegistro[%{#stat.index}].HORAS_PLAN"   id="HORAS_PLAN" list="ListaHora"  listKey="ID_HORA"  listValue="HORA+'hrs'" cssClass="selectpicker col-lg-12" headerValue="No.Horas" headerKey=""  >  </s:select>   </th>  
-                                                                                                        <th align="center" style="align-content: center;"> <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaProgramasRegistro[%{#stat.index}].LUGAR_PLAN"   id="LUGAR_PLAN" list="ListaLugar"  listKey="ID_LUGAR"  listValue="LUGAR" cssClass="selectpicker col-lg-12" headerValue="Lugar" headerKey="" >  </s:select>   </th>  
-                                                                                                        <th align="center" style="align-content: center;"> <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaProgramasRegistro[%{#stat.index}].ESCALA_PLAN"   id="ESCALA_PLAN" list="ListaEscala"  listKey="ID_ESCALA"  listValue="ESCALA+'%'" cssClass="selectpicker col-lg-12" headerValue="Escala" headerKey="" >  </s:select>   </th>  
-                                                                                                        
+                                                                                                         
+                                                                                                        <th  align="center" style="text-align: center;" > <s:property value="HORA"></s:property> Hrs.  </th>  
+                                                                                                        <th align="center" style="text-align: center;" > <s:property value="LUGAR"></s:property> </th>  
+                                                                                                         <th align="center"style="text-align: center;"  > <s:property value="ID_ESCALA"></s:property>% </th>                                                                                                          
                                                                                                         <s:if test="programa.ID_NIVEL==1">
-                                                                                                            <th align="center" style="align-content: center;"> <s:textfield cssClass="form-check-sign"   name="ListaProgramasRegistro[%{#stat.index}].PLAN_ROTACION"    id="PLAN_ROTACION" >  </s:textfield>    </th> 
-                                                                                                            </s:if>
-                                                                                                            <th align="center" style="align-content: center;"> <s:textarea cssClass="form-check-sign"   name="ListaProgramasRegistro[%{#stat.index}].DES_ACTIVIDAD"    id="DES_ACTIVIDAD" >  </s:textarea>    </th>  
-                                                                                                        </s:if>
+                                                                                                            <th > <s:property value="PLAN_ROTACION"></s:property> </th>                                                                                                           
+                                                                                                         </s:if>
+                                                                                                        <th > <s:property value="DES_ACTIVIDAD"></s:property> </th>                                                                                                          
                                                                                                     
 
 
@@ -906,17 +902,15 @@ function elige(accion, id_hist_alum) {
                                                                             <a href="Javascript:consulta('guardaPlanForm')"  class="btn btn-round btn-primary">Guardar</a>
                                                                         </div>
 
-                                                                        </s:if>   
+                                                                        
                                                                             
-                                                                         <s:if test="mensajeSnAct"> 
-                                                                            
-                                                                             <div class="col-lg-12 alert alert-danger" style="margin-top: 30px;">El programa educativo no cuenta con actividades validas </div>
-                                                                            
-                                                                        </s:if>
+                                                                         
 
                                                                           <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success"></s:fielderror>
 
                                                                     </div>
+                                                                          
+                                                                           </s:if> 
                                                                         
                                                                        
                                                                         

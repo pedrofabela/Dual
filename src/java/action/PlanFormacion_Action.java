@@ -80,6 +80,8 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
       public List<responsablesBean> ListaMentorAcad = new ArrayList<responsablesBean>();
      
       private List<programaEsBean> ListaPlanUE = new ArrayList<programaEsBean>();
+      
+      public List<programaEsBean> ListaProgramasRegistroDatos = new ArrayList<programaEsBean>();
 
     private String TipoError;
     private String TipoException;
@@ -109,7 +111,8 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
     Connection conecta;
     //******************** PARA OBJETO DE NAVEGACIoN ***********************************************
     private Map session;
-
+    
+    
     public void setSession(Map session) {
         this.session = session;
     }
@@ -180,6 +183,14 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
 
     public void setListaPlanUE(List<programaEsBean> ListaPlanUE) {
         this.ListaPlanUE = ListaPlanUE;
+    }
+
+    public List<programaEsBean> getListaProgramasRegistroDatos() {
+        return ListaProgramasRegistroDatos;
+    }
+
+    public void setListaProgramasRegistroDatos(List<programaEsBean> ListaProgramasRegistroDatos) {
+        this.ListaProgramasRegistroDatos = ListaProgramasRegistroDatos;
     }
 
     
@@ -442,6 +453,83 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
         }
 
     }
+      
+      
+              
+       public String consultaPlanEstudiante2() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            PlanFDAOImpl con2 = new PlanFDAOImpl();
+
+           
+              String nivel = "";
+
+            nivel = "";
+            nivel = con2.nivel(escuela, usuariocons);
+             
+           //   Constantes.enviaMensajeConsola("sentre a la consulta de programa educativo");
+             
+            ListaProgramasRegistro=con2.programasPlanForm(alumno, escuela,  usuariocons, programa );
+            
+            banCampAlumno=true;
+            
+            ListaProgramasRegistroDatos=con2.programasPlanFormDatos(alumno, escuela,  usuariocons, programa );
+            
+            Constantes.enviaMensajeConsola("sali de registro datos");
+            
+            for (int i = 0; i < ListaProgramasRegistroDatos.size(); i++) {
+                
+                programa.setNOMBREPLAN_FORM(ListaProgramasRegistroDatos.get(i).getNOMBREPLAN_FORM());
+                  programa.setNO_ESTUDIANTES(ListaProgramasRegistroDatos.get(i).getNO_ESTUDIANTES());
+                  programa.setNO_MENTORES_UE(ListaProgramasRegistroDatos.get(i).getNO_MENTORES_UE());
+                   programa.setNO_MENTORES_ACAD(ListaProgramasRegistroDatos.get(i).getNO_MENTORES_ACAD());
+                    programa.setDURACION(ListaProgramasRegistroDatos.get(i).getDURACION());
+                     programa.setDESCRIPCION(ListaProgramasRegistroDatos.get(i).getDESCRIPCION());
+                
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+            
+            
+        //  Constantes.enviaMensajeConsola("sali de la consulta de programa educativo con:"+ListaProgramasRegistro.size());
+            
+            
+           
+          return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }         
+              
+              
+              
+              
+              
      
      
     public String guardaPlanForm() {
