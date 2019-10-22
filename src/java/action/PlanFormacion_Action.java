@@ -242,6 +242,8 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
             ListaPeriodo = con2.periodo(escuela);
 
             ListaProgramasRegistro.clear();
+            ListaEstudiantes.size();
+            
 
             return "SUCCESS";
 
@@ -724,6 +726,11 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
                 cierraConexiones();
 
                 addFieldError("SEGUARDO", "El Plan de Formación se guardo con éxito");
+                
+            ListaProgramasRegistro.clear();
+            ListaEstudiantes.size();
+                                                                                banCampAlumno=false;
+                                                                                banCampAlumno=false;
 
                
 

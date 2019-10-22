@@ -539,7 +539,7 @@ function elige(accion, id_hist_alum) {
                                                                     <div class="material-datatables">                                                                                                                                                              
                                                                         <div style="height: 250px; overflow-y: scroll;">
                                                                             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                                                                                <thead style="background: #302f2f; color:white;">
+                                                                                <thead style="background: #302f2f; color:white; text-align: center;">
                                                                                     <tr>
                                                                                         <th>Curp</th>
                                                                                         <th>Nombre</th>
@@ -547,14 +547,14 @@ function elige(accion, id_hist_alum) {
                                                                                                                                                                                       
                                                                                         <th>Periodo que cursa</th>
                                                                                         <th>Estatus</th>
-                                                                                        <th>Registrar Estudiante DUAL</th>
+                                                                                        <th>Seleccionar Estudiante</th>
                                                                                     </tr>
                                                                                 </thead>
 
                                                                                 <tbody>
                                                                                 <s:iterator value="ListaEstudiantes" id="ListaEstudiantes" status="stat"> 
                                                                                  
-                                                                                    <tr>
+                                                                                    <tr style="text-align: center;">
                                                                                         <td><s:property value="CURP"/></td>
                                                                                         <td><s:property value="NOMBRE"/></td>
                                                                                         <td><s:property value="MATRICULA"/></td>
@@ -567,7 +567,7 @@ function elige(accion, id_hist_alum) {
                                                                                     </s:if>
                                                                                               <s:if test="STATUS_PROCESO==6">
                                                                                        
-                                                                                            <td class="text-success text-center font-weight-bold">Plan de formación Registrado </td>
+                                                                                            <td class="text-success text-center font-weight-bold">Plan de Formación registrado </td>
                                                                                     </s:if>
                                                                                             
                                                                                             
@@ -579,7 +579,7 @@ function elige(accion, id_hist_alum) {
                                                                                     </s:if>
                                                                                               <s:if test="STATUS_PROCESO==6">
                                                                                        
-                                                                                                  <td class="text-success text-center font-weight-bold" align="center">Plan de formación Registrado </td>
+                                                                                                  <td class="text-success text-center font-weight-bold" align="center"> </td>
                                                                                     </s:if>
 
 
@@ -650,7 +650,11 @@ function elige(accion, id_hist_alum) {
                                                                             <s:hidden name = "ListaResUE[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
                                                                         </s:iterator>
                                                                         <s:fielderror  fieldName="ERRORRESUE" cssClass="col-lg-12 alert alert-danger" id="quitamen1"></s:fielderror>
-
+                                                                       
+                                                                        <s:if test="ListaResUE.size()==0">
+                                                                            <div cssClass="col-lg-12 alert alert-success" style="color:red;">No hay responsable de Unidad Económica registrado</div>
+                                                                        </s:if>
+                                                                        
                                                                         </div>
                                                                         
                                                                         
@@ -664,7 +668,9 @@ function elige(accion, id_hist_alum) {
                                                                             <s:hidden name = "ListaResMentorUE[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
                                                                         </s:iterator>
                                                                         <s:fielderror  fieldName="ERRORMENTORUE" cssClass="col-lg-12 alert alert-danger" id="quitamen2"></s:fielderror>
-
+                                                                          <s:if test="ListaResMentorUE.size()==0">
+                                                                        <div cssClass="col-lg-12 alert alert-success" style="color:red;">No hay Mentor de Unidad Económica registrado</div>
+                                                                        </s:if>
                                                                         </div>
                                                                         
                                                                          <div class="col-lg-6" style="margin-top: 20px;">
@@ -677,7 +683,12 @@ function elige(accion, id_hist_alum) {
                                                                             <s:hidden name = "ListaResAcad[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
                                                                         </s:iterator>
                                                                         <s:fielderror  fieldName="ERRORRESACAD" cssClass="col-lg-12 alert alert-danger" id="quitamen3"></s:fielderror>
-
+                                                                        
+                                                                         <s:if test="ListaResAcad.size()==0">
+                                                                        <div cssClass="col-lg-12 alert alert-success" style="color:red;">No hay responsable Unidad Económica registrado</div>
+                                                                        </s:if>
+                                                                        
+                                                                        
                                                                         </div>
                                                                         
                                                                          <div class="col-lg-6" style="margin-top: 20px;">
@@ -690,7 +701,11 @@ function elige(accion, id_hist_alum) {
                                                                             <s:hidden name = "ListaMentorAcad[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
                                                                         </s:iterator>
                                                                         <s:fielderror  fieldName="ERRORMENTORACAD" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
-
+                                                                         <s:if test="ListaMentorAcad.size()==0">
+                                                                        <div cssClass="col-lg-12 alert alert-success" style="color:red;">No hay Mentor de Unidad Económica registrado</div>
+                                                                        </s:if>
+                                                                        
+                                                                        
                                                                         </div>
                                                                          <div class="col-lg-6" style="margin-top: 20px;">
                                                                                     <label for="exampleEmail" class="bmd-label-floating">Inicio Plan de Formación:</label>
@@ -938,13 +953,13 @@ function elige(accion, id_hist_alum) {
                                                                             
                                                                          
 
-                                                                          <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success"></s:fielderror>
+                                                                   
 
                                                                     </div>
                                                                           
                                                                            </s:if> 
                                                                         
-                                                                       
+                                                                              <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success"></s:fielderror>
                                                                         
 
                                                                 </div>
