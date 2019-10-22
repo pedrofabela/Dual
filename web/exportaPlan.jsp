@@ -673,7 +673,7 @@
                                                                                                         <s:param name="programa" value="nombrePrograma"/>
                                                                                                         <s:param name="id_programa" value="escuela.AUXIDCCTPLAN"/>
                                                                                                     </s:url> 
-                                                                                                            <a class="botn" href="<s:property value="#myUrl" />" id="enlacebloqueado"  target="blank" style="visibility:visible"  onclick="return funcionboton();">IMPRIMIR COMPROBANTE</a> 
+                                                                                                            <a class="botn" href="<s:property value="#myUrl" />" id="enlacebloqueado"  target="blank" style="visibility:visible"  onclick="return funcionboton();">IMPRIMIR REPORTE</a> 
 
 
                                                                                                 </center>
