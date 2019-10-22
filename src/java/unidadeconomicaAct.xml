@@ -4,11 +4,9 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts> 
-    <constant name="struts.multipart.maxSize" value="299999999" />
-    <constant name="struts.ui.theme" value="simple"></constant>
-    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    <constant name="struts.devMode" value="false" />
-    <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+        <!-- PARA USAR EN EL SERVLET Y LLAMAR A REPORTES JASPER -->
+    <constant name="struts.action.excludePattern" value="/ejecutaServlet.action"></constant> 
+
     
     <package name="unidadeconomicaA" namespace="/" extends="struts-default">
 

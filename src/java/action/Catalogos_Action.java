@@ -18,83 +18,74 @@ import beans.renapoBean;
 import beans.usuarioBean;
 import business.ConsultasBusiness;
 import com.opensymphony.xwork2.ActionSupport;
+import daos.UnidadEDAOImpl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 import utilidades.Constantes;
+
 /**
  *
  * @author pedro
  */
 public class Catalogos_Action extends ActionSupport implements SessionAware {
-    
-     private usuarioBean usuariocons;
+
+    private usuarioBean usuariocons;
     private String cveusuario;
     private String pasusuario;
     private String nomModulo;
     private String modulo;
     private String nombreUsuario;
     private String tabSelect;
-    
-    
+
+    private String nombreEsc;
+    private String nombrePrograma;
+
     public List<moduloBean> modulosAUX = new ArrayList<moduloBean>();
     public List<moduloAuxBean> modulosAUXP = new ArrayList<moduloAuxBean>();
-    
-    
-    
+
     // LISTAS DE LA APLICACIÓN
-    
-    
-     public List<programaEsBean> ListaProgramasEdu = new ArrayList<programaEsBean>();
-    
-      public List<programaEsBean> ListaProgramasEscuela = new ArrayList<programaEsBean>();
-      
-     public List<escuelaBean> ListaIdEs = new ArrayList<escuelaBean>();
-    
-     public List<cctPlanBean> ValidacctPlan = new ArrayList<cctPlanBean>();
-     
-     public List<cctPlanBean> ValidaPlanCctMateria = new ArrayList<cctPlanBean>();
-     
-     public List<materiaBean> ListaPlanMateria = new ArrayList<materiaBean>();
-     
-     public List<competenciaBean> ValidaMateriaCompetencia = new ArrayList<competenciaBean>();
-     
-     public List<actividadesBean> ListaActividadCct = new ArrayList<actividadesBean>();
-     
-     public List<periodoBean> ListaPeriodo = new ArrayList<periodoBean>();
-     
-      public List<programaEsBean> ListaProgramasRegistro = new ArrayList<programaEsBean>();
-     
-     //BANDERAS
-     
+    public List<programaEsBean> ListaProgramasEdu = new ArrayList<programaEsBean>();
+
+    public List<programaEsBean> ListaProgramasEscuela = new ArrayList<programaEsBean>();
+
+    public List<escuelaBean> ListaIdEs = new ArrayList<escuelaBean>();
+
+    public List<cctPlanBean> ValidacctPlan = new ArrayList<cctPlanBean>();
+
+    public List<cctPlanBean> ValidaPlanCctMateria = new ArrayList<cctPlanBean>();
+
+    public List<materiaBean> ListaPlanMateria = new ArrayList<materiaBean>();
+
+    public List<competenciaBean> ValidaMateriaCompetencia = new ArrayList<competenciaBean>();
+
+    public List<actividadesBean> ListaActividadCct = new ArrayList<actividadesBean>();
+
+    public List<periodoBean> ListaPeriodo = new ArrayList<periodoBean>();
+
+    public List<programaEsBean> ListaProgramasRegistro = new ArrayList<programaEsBean>();
+
+    //BANDERAS
     public boolean bnprog = false;
     public boolean bnprogno = false;
     public boolean bnmateria = false;
     public boolean bncompetencia = false;
-     public boolean bnactividad = false;
-     
-     
-     
-     
-     
-     
-    programaEsBean programa=new programaEsBean();
-    escuelaBean escuela=new escuelaBean();
-    Constantes mensaje=new Constantes();
-    cctPlanBean cctplan=new cctPlanBean();
-    materiaBean materia=new materiaBean();
-    competenciaBean competencia=new competenciaBean();
-    actividadesBean actividad= new actividadesBean();
-    renapoBean objRenapo=new renapoBean();
-    
-    
-    
-    
-     private String TipoError;
+    public boolean bnactividad = false;
+
+    programaEsBean programa = new programaEsBean();
+    escuelaBean escuela = new escuelaBean();
+    Constantes mensaje = new Constantes();
+    cctPlanBean cctplan = new cctPlanBean();
+    materiaBean materia = new materiaBean();
+    competenciaBean competencia = new competenciaBean();
+    actividadesBean actividad = new actividadesBean();
+    renapoBean objRenapo = new renapoBean();
+
+    private String TipoError;
     private String TipoException;
-     //******************** PARA OBJETO DE NAVEGACIoN ***********************************************
+    //******************** PARA OBJETO DE NAVEGACIoN ***********************************************
     private Map session;
 
     public void setSession(Map session) {
@@ -105,40 +96,36 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         return session;
     }
     //******************** TERMINA OBJETO DE NAVEGACIoN **********************************************
-    
-    public String idEsc() throws Exception{
-         
-         ConsultasBusiness con = new ConsultasBusiness();
-        
-        escuela.setCCT(usuariocons.getUSUARIO());  
-           
-            ListaIdEs=con.programasIdEs(escuela);
-            
-            Iterator LPE=ListaIdEs.iterator();
-            
-            escuelaBean obj;
-            
-            while (LPE.hasNext()) {
-               obj = (escuelaBean) LPE.next();
-               
-               escuela.setID_ESCUELA(obj.getID_ESCUELA());
-                
-            }
-        
+
+    public String idEsc() throws Exception {
+
+        ConsultasBusiness con = new ConsultasBusiness();
+
+        escuela.setCCT(usuariocons.getUSUARIO());
+
+        ListaIdEs = con.programasIdEs(escuela);
+
+        Iterator LPE = ListaIdEs.iterator();
+
+        escuelaBean obj;
+
+        while (LPE.hasNext()) {
+            obj = (escuelaBean) LPE.next();
+
+            escuela.setID_ESCUELA(obj.getID_ESCUELA());
+
+        }
+
         return escuela.getID_ESCUELA();
     }
-    
-     public String idSubSis() throws Exception{
-         
-       
-        
-       programa.setID_SUBSISTEMA_CONSULTA(usuariocons.getFILTRO());  
-           
-                
-        
+
+    public String idSubSis() throws Exception {
+
+        programa.setID_SUBSISTEMA_CONSULTA(usuariocons.getFILTRO());
+
         return programa.getID_SUBSISTEMA_CONSULTA();
     }
-      
+
     public String RegPlanEstudioCct() {
 
         //validando session***********************************************************************
@@ -156,22 +143,19 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-           escuela.setID_ESCUELA(idEsc());
-            
-            
-            ListaProgramasEscuela=con.programasEscuela(escuela);
-            
-            escuela.setAUXPLAN("");
-              escuela.setAUXSTATUS("");
-            
-            programa.setCONSULTA_CVE_PLAN("");
-            
-                 bnprog=false;
 
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
+            ListaProgramasEscuela = con.programasEscuela(escuela);
+
+            escuela.setAUXPLAN("");
+            escuela.setAUXSTATUS("");
+
+            programa.setCONSULTA_CVE_PLAN("");
+
+            bnprog = false;
 
             return "SUCCESS";
 
@@ -180,10 +164,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-         
+
     public String RegMateriaPlan() {
 
         //validando session***********************************************************************
@@ -201,26 +184,24 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-           escuela.setID_ESCUELA(idEsc());
-            
-           objRenapo.setAUXESCUELA(escuela.getID_ESCUELA());
-           objRenapo.setID_PERSONA(usuariocons.getID_PERSONA());
-           objRenapo.setAUXPERFIL(String.valueOf(usuariocons.getPERFIL()));
-           
-            
-               ListaProgramasEscuela=con.programasEscuelaRes(escuela, objRenapo);
-            
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
+            objRenapo.setAUXESCUELA(escuela.getID_ESCUELA());
+            objRenapo.setID_PERSONA(usuariocons.getID_PERSONA());
+            objRenapo.setAUXPERFIL(String.valueOf(usuariocons.getPERFIL()));
+
+            ListaProgramasEscuela = con.programasEscuelaRes(escuela, objRenapo);
+
             escuela.setAUXPLAN("");
-              escuela.setAUXSTATUS("");
+            escuela.setAUXSTATUS("");
             escuela.setAUXIDCCTPLAN("");
             programa.setCONSULTA_CVE_PLAN("");
             programa.setCVE_PLAN("");
-             programa.setNOM_CARRERA("");
-            bnmateria=false;
+            programa.setNOM_CARRERA("");
+            bnmateria = false;
             ListaPlanMateria.clear();
 
             return "SUCCESS";
@@ -230,11 +211,10 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
-     public String GuardaMateriaPlan() {
+
+    public String GuardaMateriaPlan() {
 
         //validando session***********************************************************************
         if (session.get("cveUsuario") != null) {
@@ -251,73 +231,52 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-          
-             
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
             mensaje.enviaMensajeConsola("ID DEL PLAN" + escuela.getAUXIDCCTPLAN());
 
             mensaje.enviaMensajeConsola("CVE MATERIA" + materia.getCVE_MATERIA());
 
             mensaje.enviaMensajeConsola("NOMBRE MATERRIA" + materia.getNOMBRE_MATERIA());
-              
-            ListaPlanMateria=con.cctPlanMateria(escuela); 
-            
-            
-            Iterator LPM =ListaPlanMateria.iterator();
-            
+
+            ListaPlanMateria = con.cctPlanMateria(escuela);
+
+            Iterator LPM = ListaPlanMateria.iterator();
+
             materiaBean obj;
-            
-            boolean cvemat=false;
-            boolean cvenommat=false;
-            
+
+            boolean cvemat = false;
+            boolean cvenommat = false;
+
             while (LPM.hasNext()) {
-                obj= (materiaBean) LPM.next();
-                
-                
-                if(obj.getCVE_MATERIA().equals(materia.getCVE_MATERIA())){
-                    
-                    cvemat=true;
-                    
+                obj = (materiaBean) LPM.next();
+
+                if (obj.getCVE_MATERIA().equals(materia.getCVE_MATERIA())) {
+
+                    cvemat = true;
+
                 }
-                
-                
-                
-                
-                
+
             }
-              
-              if(!cvemat){
-                  
-                    con.guardaPlanCctMateria(escuela, materia);
-                  
-                  ListaPlanMateria=con.cctPlanMateria(escuela); 
-                  
-                  materia.setCVE_MATERIA("");
-                  materia.setNOMBRE_MATERIA("");
-                  materia.setNUMERO_PERIODO("");
-                  
-              }
-              
-              else{
-                  
-                  System.out.println("entre al mensaje de error");
-                  
-                  addFieldError("ya", "Ya se encuentra registrada la Materia");
-                  
-              }
-              
-              
-         
-              
-              
-              
-              
-          
-            
-            
+
+            if (!cvemat) {
+
+                con.guardaPlanCctMateria(escuela, materia);
+
+                ListaPlanMateria = con.cctPlanMateria(escuela);
+
+                materia.setCVE_MATERIA("");
+                materia.setNOMBRE_MATERIA("");
+                materia.setNUMERO_PERIODO("");
+
+            } else {
+
+                System.out.println("entre al mensaje de error");
+
+                addFieldError("ya", "Ya se encuentra registrada la Materia");
+
+            }
 
             return "SUCCESS";
 
@@ -326,10 +285,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-     
+
     public String AgregarMateriaPlan() {
 
         //validando session***********************************************************************
@@ -347,18 +305,15 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-           escuela.setID_ESCUELA(idEsc());
-           
-            
-            ListaPlanMateria=con.cctPlanMateria(escuela);
-            ListaPeriodo=con.periodo(escuela);
-            
-            bnmateria=true;
-            
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
+            ListaPlanMateria = con.cctPlanMateria(escuela);
+            ListaPeriodo = con.periodo(escuela);
+
+            bnmateria = true;
 
             return "SUCCESS";
 
@@ -367,10 +322,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-     
+
     public String consultaProgramas() {
 
         //validando session***********************************************************************
@@ -388,36 +342,23 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-             escuela.setID_ESCUELA(idEsc());
-             programa.setID_SUBSISTEMA_CONSULTA(idSubSis());
-            
-            
-           ListaProgramasEdu=con.programasEdu(programa);
-            
-           if(ListaProgramasEdu.size()>0){
-               
-               bnprog=true;
-                  bnprogno=false;
-           }
-           else{
-                 bnprog=false;
-                bnprogno=true;
-               
-               
-           }
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+            programa.setID_SUBSISTEMA_CONSULTA(idSubSis());
+
+            ListaProgramasEdu = con.programasEdu(programa);
+
+            if (ListaProgramasEdu.size() > 0) {
+
+                bnprog = true;
+                bnprogno = false;
+            } else {
+                bnprog = false;
+                bnprogno = true;
+
+            }
 
             return "SUCCESS";
 
@@ -426,10 +367,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
+
     public String agregarProgramaCct() {
 
         //validando session***********************************************************************
@@ -447,37 +387,27 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-             escuela.setID_ESCUELA(idEsc());
-             
-            mensaje.enviaMensajeConsola("ID DEL PLAN"+escuela.getAUXPLAN());
-            mensaje.enviaMensajeConsola("ID DE LA ESCUELA"+escuela.getAUXESCUELA());
-            
-            
-           ValidacctPlan=con.validaCctPlan(escuela);
-           
-           if(ValidacctPlan.size()>0){
-             
-               
-               
-               
-           }
-           else{
-               
-            escuela.setESTATUS("1");
-            
-            con.guardaPlanCct(escuela);
-               
-              RegPlanEstudioCct();
-               
-               
-           }
-                 
-            
-            
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
+            mensaje.enviaMensajeConsola("ID DEL PLAN" + escuela.getAUXPLAN());
+            mensaje.enviaMensajeConsola("ID DE LA ESCUELA" + escuela.getAUXESCUELA());
+
+            ValidacctPlan = con.validaCctPlan(escuela);
+
+            if (ValidacctPlan.size() > 0) {
+
+            } else {
+
+                escuela.setESTATUS("1");
+
+                con.guardaPlanCct(escuela);
+
+                RegPlanEstudioCct();
+
+            }
 
             return "SUCCESS";
 
@@ -486,10 +416,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
+
     public String eliminarProgramaCct() {
 
         //validando session***********************************************************************
@@ -507,32 +436,23 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-             escuela.setID_ESCUELA(idEsc());
-             
-          
-            
-            
-           ValidacctPlan=con.validaCctPlanMateria(escuela);
-           
-          if(ValidacctPlan.size()>0){
-             
-               addFieldError("ErrorBorrar", "No se puede borrar el Programa de Estudio, borre las Materias vinculadas");
-              System.out.println("no se puede borrar");
-          }
-          else{
-              
-              
-             con.eliminarPlanCct(escuela);  
-              
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
+            ValidacctPlan = con.validaCctPlanMateria(escuela);
+
+            if (ValidacctPlan.size() > 0) {
+
+                addFieldError("ErrorBorrar", "No se puede borrar el Programa de Estudio, borre las Materias vinculadas");
+                System.out.println("no se puede borrar");
+            } else {
+
+                con.eliminarPlanCct(escuela);
+
                 RegPlanEstudioCct();
-          }
-                 
-            
-            
+            }
 
             return "SUCCESS";
 
@@ -541,10 +461,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
+
     public String EliminaMateriaPlan() {
 
         //validando session***********************************************************************
@@ -562,34 +481,19 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-             
-             ValidaMateriaCompetencia=con.validaMateriaComp(materia);
-           
-              
-             if(ValidaMateriaCompetencia.size()>0){
-                 
-                  addFieldError("ErrorBorrarMateria", "No se puede borrar la materia, borre las competencias vinculadas");
-             }
-             
-             else{
-                 con.eliminarMateria(materia);  
-                
-                   ListaPlanMateria=con.cctPlanMateria(escuela); 
-             }
-             
-             
-             
-              
-           
-              
-             
-                 
-            
-            
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            ValidaMateriaCompetencia = con.validaMateriaComp(materia);
+
+            if (ValidaMateriaCompetencia.size() > 0) {
+
+                addFieldError("ErrorBorrarMateria", "No se puede borrar la materia, borre las competencias vinculadas");
+            } else {
+                con.eliminarMateria(materia);
+
+                ListaPlanMateria = con.cctPlanMateria(escuela);
+            }
 
             return "SUCCESS";
 
@@ -598,10 +502,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-        
+
     public String actualizarEstatusplaCct() {
 
         //validando session***********************************************************************
@@ -619,37 +522,35 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-             escuela.setID_ESCUELA(idEsc());
-             
-            mensaje.enviaMensajeConsola("ID DEL PLAN"+escuela.getAUXPLAN());
-            mensaje.enviaMensajeConsola("ID DE LA ESCUELA"+escuela.getAUXESCUELA());
-            
-           String status= escuela.getAUXSTATUS();
-            
-            if(status.equals("1")){
-                
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
+            mensaje.enviaMensajeConsola("ID DEL PLAN" + escuela.getAUXPLAN());
+            mensaje.enviaMensajeConsola("ID DE LA ESCUELA" + escuela.getAUXESCUELA());
+
+            String status = escuela.getAUXSTATUS();
+
+            if (status.equals("1")) {
+
                 escuela.setAUXSTATUS("0");
-                
+
             }
-             if(status.equals("0")){
-                
+            if (status.equals("0")) {
+
                 escuela.setAUXSTATUS("1");
-                
+
             }
-            
-             con.actualizaEstatusPlanCct(escuela);
-         
+
+            con.actualizaEstatusPlanCct(escuela);
+
             System.out.println("SALI DE LA ACTUALIZACIÓN DE ESTATUS");
-             
-            ListaProgramasEscuela=con.programasEscuela(escuela);
-            
-            
-             escuela.setAUXPLAN("");
-              escuela.setAUXSTATUS("");
+
+            ListaProgramasEscuela = con.programasEscuela(escuela);
+
+            escuela.setAUXPLAN("");
+            escuela.setAUXSTATUS("");
 
             return "SUCCESS";
 
@@ -658,10 +559,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
+
     public String RegMateriaPlanCompetencia() {
 
         //validando session***********************************************************************
@@ -679,35 +579,32 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-           escuela.setID_ESCUELA(idEsc());
-            
-            
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
             objRenapo.setAUXESCUELA(escuela.getID_ESCUELA());
-           objRenapo.setID_PERSONA(usuariocons.getID_PERSONA());
-           objRenapo.setAUXPERFIL(String.valueOf(usuariocons.getPERFIL()));
-            
-               ListaProgramasEscuela=con.programasEscuelaRes(escuela, objRenapo);
-            
+            objRenapo.setID_PERSONA(usuariocons.getID_PERSONA());
+            objRenapo.setAUXPERFIL(String.valueOf(usuariocons.getPERFIL()));
+
+            ListaProgramasEscuela = con.programasEscuelaRes(escuela, objRenapo);
+
             escuela.setAUXPLAN("");
-              escuela.setAUXSTATUS("");
+            escuela.setAUXSTATUS("");
             escuela.setAUXIDCCTPLAN("");
             programa.setCONSULTA_CVE_PLAN("");
             programa.setCVE_PLAN("");
-             programa.setNOM_CARRERA("");
-            bnmateria=false;
+            programa.setNOM_CARRERA("");
+            bnmateria = false;
             ListaPlanMateria.clear();
             ListaPlanMateria.clear();
             materia.setAUXMATERIA("");
             ValidaMateriaCompetencia.clear();
-            bncompetencia=false;
+            bncompetencia = false;
             competencia.setAUXCOMPETENCIA("");
-             ListaActividadCct.clear();
-             bnactividad=false;
-             
+            ListaActividadCct.clear();
+            bnactividad = false;
 
             return "SUCCESS";
 
@@ -716,11 +613,11 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
+
     public String RegProgramaDescarga() {
+        UnidadEDAOImpl unidadD=new UnidadEDAOImpl();
 
         //validando session***********************************************************************
         if (session.get("cveUsuario") != null) {
@@ -737,23 +634,19 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-           escuela.setID_ESCUELA(idEsc());
-            
-            
-            objRenapo.setAUXESCUELA(escuela.getID_ESCUELA());
-           objRenapo.setID_PERSONA(usuariocons.getID_PERSONA());
-           objRenapo.setAUXPERFIL(String.valueOf(usuariocons.getPERFIL()));
+
+            nombreEsc=unidadD.ConsultaNombreCct(usuariocons.getID_ESCUELA());
            
-           ListaProgramasRegistro=con.programasEscuelaDescarga(escuela, objRenapo);
-            
-            
-            
-          
-             
+            Constantes.enviaMensajeConsola("nombreEsc"+nombreEsc);
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
+            objRenapo.setAUXESCUELA(escuela.getID_ESCUELA());
+            objRenapo.setID_PERSONA(usuariocons.getID_PERSONA());
+            objRenapo.setAUXPERFIL(String.valueOf(usuariocons.getPERFIL()));
+
+            ListaProgramasRegistro = con.programasEscuelaDescarga(escuela, objRenapo);
 
             return "SUCCESS";
 
@@ -762,10 +655,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
+
     public String AgregarMateriaPlanCompetencia() {
 
         //validando session***********************************************************************
@@ -783,17 +675,15 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-           escuela.setID_ESCUELA(idEsc());
-           
-            
-            ListaPlanMateria=con.cctPlanMateria(escuela);
-            
-            bnmateria=true;
-            bncompetencia=false;
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
+            ListaPlanMateria = con.cctPlanMateria(escuela);
+
+            bnmateria = true;
+            bncompetencia = false;
 
             return "SUCCESS";
 
@@ -802,10 +692,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
+
     public String agregarPlanMateriaCom() {
 
         //validando session***********************************************************************
@@ -823,26 +712,15 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           bncompetencia=true;
-              ValidaMateriaCompetencia.clear();
-             
-             ValidaMateriaCompetencia=con.validaMateriaComp(materia);
-           
-              competencia.setAUXCOMPETENCIA("");
-            
-             
-             
-             
-              
-           
-              
-             
-                 
-            
-            
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            bncompetencia = true;
+            ValidaMateriaCompetencia.clear();
+
+            ValidaMateriaCompetencia = con.validaMateriaComp(materia);
+
+            competencia.setAUXCOMPETENCIA("");
 
             return "SUCCESS";
 
@@ -851,10 +729,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-     
+
     public String guardaCompetenciaCct() {
 
         //validando session***********************************************************************
@@ -872,16 +749,15 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-           escuela.setID_ESCUELA(idEsc());
-            
-              con.guardaCompetenciaCct(competencia, materia);
-            
-              ValidaMateriaCompetencia=con.validaMateriaComp(materia);
-              competencia.setCOMPETENCIA("");
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            escuela.setID_ESCUELA(idEsc());
+
+            con.guardaCompetenciaCct(competencia, materia);
+
+            ValidaMateriaCompetencia = con.validaMateriaComp(materia);
+            competencia.setCOMPETENCIA("");
 
             return "SUCCESS";
 
@@ -890,10 +766,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-     
+
     public String actualizaCompetenciaCct() {
 
         //validando session***********************************************************************
@@ -911,20 +786,18 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-            System.out.println("COMPETENCIA ID:"+competencia.getAUXCOMPETENCIA());
-            
-             con.actualizaCompetenciaCct(competencia);
-             
-             competencia.setAUXCOMPETENCIA("");
-             competencia.setCOMPETENCIA("");
-             
-             
-             ValidaMateriaCompetencia=con.validaMateriaComp(materia);
-             
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            System.out.println("COMPETENCIA ID:" + competencia.getAUXCOMPETENCIA());
+
+            con.actualizaCompetenciaCct(competencia);
+
+            competencia.setAUXCOMPETENCIA("");
+            competencia.setCOMPETENCIA("");
+
+            ValidaMateriaCompetencia = con.validaMateriaComp(materia);
+
             return "SUCCESS";
 
         } catch (Exception e) {
@@ -932,10 +805,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
+
     public String eliminarCompetenciaCct() {
 
         //validando session***********************************************************************
@@ -953,16 +825,10 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-            
-             
-          
-            
-            
-         /*  ValidacctPlan=con.validaCctPlanMateria(escuela);
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            /*  ValidacctPlan=con.validaCctPlanMateria(escuela);
            
           if(ValidacctPlan.size()>0){
              
@@ -976,12 +842,11 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
               
                 RegPlanEstudioCct();
           }
-                 */
-             
-          con.eliminarCompetenciaCct(competencia);  
-          ValidaMateriaCompetencia.clear();
-             ValidaMateriaCompetencia=con.validaMateriaComp(materia);
-               competencia.setAUXCOMPETENCIA("");
+             */
+            con.eliminarCompetenciaCct(competencia);
+            ValidaMateriaCompetencia.clear();
+            ValidaMateriaCompetencia = con.validaMateriaComp(materia);
+            competencia.setAUXCOMPETENCIA("");
 
             return "SUCCESS";
 
@@ -990,10 +855,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-      
+
     public String agregarActividad() {
 
         //validando session***********************************************************************
@@ -1011,21 +875,12 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           bnactividad=true;
-           
-           ListaActividadCct=con.actividadCct(competencia);
-           
-           
-           
-            
-              
-          
-            
-            
-       
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            bnactividad = true;
+
+            ListaActividadCct = con.actividadCct(competencia);
 
             return "SUCCESS";
 
@@ -1034,11 +889,10 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
-     public String guardaActividad() {
+
+    public String guardaActividad() {
 
         //validando session***********************************************************************
         if (session.get("cveUsuario") != null) {
@@ -1055,16 +909,13 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-            
-              con.guardaActividad(competencia, actividad);
-              actividad.setACTIVIDAD("");
-            
-                 ListaActividadCct=con.actividadCct(competencia);
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            con.guardaActividad(competencia, actividad);
+            actividad.setACTIVIDAD("");
+
+            ListaActividadCct = con.actividadCct(competencia);
 
             return "SUCCESS";
 
@@ -1073,11 +924,10 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
-     public String actualizaActividad() {
+
+    public String actualizaActividad() {
 
         //validando session***********************************************************************
         if (session.get("cveUsuario") != null) {
@@ -1094,20 +944,16 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-            
-           ConsultasBusiness con = new ConsultasBusiness();
-            
-            
-            
-             con.actualizaActividad(actividad);
-             
-             actividad.setAUXACTIVIDAD("");
-             actividad.setACTIVIDAD("");
-             
-             
-            ListaActividadCct=con.actividadCct(competencia);
-             
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            con.actualizaActividad(actividad);
+
+            actividad.setAUXACTIVIDAD("");
+            actividad.setACTIVIDAD("");
+
+            ListaActividadCct = con.actividadCct(competencia);
+
             return "SUCCESS";
 
         } catch (Exception e) {
@@ -1115,11 +961,10 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
-      public String eliminaActividad() {
+
+    public String eliminaActividad() {
 
         //validando session***********************************************************************
         if (session.get("cveUsuario") != null) {
@@ -1136,16 +981,10 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-            
-             
-          
-            
-            
-         /*  ValidacctPlan=con.validaCctPlanMateria(escuela);
+
+            ConsultasBusiness con = new ConsultasBusiness();
+
+            /*  ValidacctPlan=con.validaCctPlanMateria(escuela);
            
           if(ValidacctPlan.size()>0){
              
@@ -1159,12 +998,11 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
               
                 RegPlanEstudioCct();
           }
-                 */
-             
-          con.eliminaActividad(actividad);  
-          ListaActividadCct.clear();
-             ListaActividadCct=con.actividadCct(competencia);
-               actividad.setAUXACTIVIDAD("");
+             */
+            con.eliminaActividad(actividad);
+            ListaActividadCct.clear();
+            ListaActividadCct = con.actividadCct(competencia);
+            actividad.setAUXACTIVIDAD("");
 
             return "SUCCESS";
 
@@ -1173,11 +1011,10 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
-       public String DescargaManual() {
+
+    public String DescargaManual() {
 
         //validando session***********************************************************************
         if (session.get("cveUsuario") != null) {
@@ -1194,16 +1031,8 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         }
 
         try {
-            
-             ConsultasBusiness con = new ConsultasBusiness();
-            
-           
-            
-             
-          
-            
-            
-       
+
+            ConsultasBusiness con = new ConsultasBusiness();
 
             return "SUCCESS";
 
@@ -1212,12 +1041,9 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
             TipoException = e.getMessage();
             return "ERROR";
         }
-        
-        
+
     }
-    
-     
-    
+
     public boolean isBncompetencia() {
         return bncompetencia;
     }
@@ -1386,7 +1212,7 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
     public void setValidacctPlan(List<cctPlanBean> ValidacctPlan) {
         this.ValidacctPlan = ValidacctPlan;
     }
-   
+
     public cctPlanBean getCctplan() {
         return cctplan;
     }
@@ -1410,8 +1236,6 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
     public void setListaPlanMateria(List<materiaBean> ListaPlanMateria) {
         this.ListaPlanMateria = ListaPlanMateria;
     }
-
-   
 
     public materiaBean getMateria() {
         return materia;
@@ -1493,8 +1317,20 @@ public class Catalogos_Action extends ActionSupport implements SessionAware {
         this.ListaProgramasRegistro = ListaProgramasRegistro;
     }
 
-   
-    
-    
-    
+    public String getNombreEsc() {
+        return nombreEsc;
+    }
+
+    public void setNombreEsc(String nombreEsc) {
+        this.nombreEsc = nombreEsc;
+    }
+
+    public String getNombrePrograma() {
+        return nombrePrograma;
+    }
+
+    public void setNombrePrograma(String nombrePrograma) {
+        this.nombrePrograma = nombrePrograma;
+    }
+
 }

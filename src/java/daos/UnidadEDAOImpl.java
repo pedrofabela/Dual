@@ -7,6 +7,7 @@ package daos;
 
 import beans.UnidadesEconomicasBean;
 import java.util.ArrayList;
+import utilidades.Constantes;
 import utilidades.ObjPrepareStatement;
 
 /**
@@ -80,5 +81,14 @@ public class UnidadEDAOImpl extends OracleDAOFactory{
 
         String Condicion = "where id_suc=" + ue.getID_ESC();
        return queryUpdate("TBL_SUCURSALES", arregloCampos, Condicion);
+    }
+          
+          //consulta de nombre de escuela
+        public String ConsultaNombreCct(String idcct) throws Exception {
+        String query = "SELECT nombre_escuela FROM cat_cct WHERE ID_ESCUELA=" + idcct ;
+        Constantes.enviaMensajeConsola("Consulta NOMBRE ESCUELA----->" + query);
+        String valor = null;
+        valor = queryStringUnCampo(query);
+        return valor;
     }
 }
