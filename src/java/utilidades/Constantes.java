@@ -37,7 +37,8 @@ public class Constantes implements Serializable {
       
 		public static final boolean esDesarrollo = true;		
 		public static final String rutaProyectos =   "http://aplicaciones.edugem.gob.mx/";
-		public static final String rutareportesjasper = "/apachetomcat/reportes/";		                                                  
+		//public static final String rutareportesjasper = "/home/pedro/Documentos/REPORTESDUAL/";	
+                public static final String rutareportesjasper = "/apachetomcat/dualemsys/REPORTESDUAL/";	
 		public static final String rutaArch = "/apachetomcat/webapps/programas/permanecerestudiando/";  				
 		public static final String rutaEstilos = "http://aplicaciones.edugem.gob.mx/estilosUDAI/";		                                        
 		public static final String rutaImages = "/apachetomcat/reportes/imagenes/";
