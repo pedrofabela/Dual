@@ -217,10 +217,13 @@ public class PlanFDAOImpl {
         arregloCampos.add(temporal);
          temporal = new ObjPrepareStatement("ID_RES_UE", "STRING", programa.getID_RESUE());
         arregloCampos.add(temporal);
-        temporal = new ObjPrepareStatement("ID_RES_ACAD", "STRING", programa.getID_RESACAD());
+        temporal = new ObjPrepareStatement("ID_RES_ACAD", "STRING", "");
         arregloCampos.add(temporal);
          temporal = new ObjPrepareStatement("ESTATUS_PF", "STRING", "1");
         arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_RES_PROGEDU", "STRING", programa.getID_RES_PROGEDU());
+        arregloCampos.add(temporal);
+        
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
@@ -346,7 +349,7 @@ public class PlanFDAOImpl {
         return list;
     }
         public List consultaAlumPlanHit(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela) throws Exception {
-       String query ="SELECT * FROM(SELECT ID_HIST_ALUM, ID_ALUMNO, ID_ESCUELA, ID_PLAN, ID_CCT_PLAN, CURP, NOMBRE||' '||APELLIDOP||' '||APELLIDOM AS NOMBRE, ID_UE, MATRICULA, GRADO, STATUS_PROCESO  FROM VISTA_META_ALUMNO WHERE STATUS_PROCESO>=5 AND STATUS_UE=1) WHERE ID_HIST_ALUM='"+alumno.getAUXIDHISTALUM()+"' ORDER BY GRADO, NOMBRE ASC";
+       String query ="SELECT * FROM(SELECT ID_HIST_ALUM, ID_ALUMNO, ID_ESCUELA, ID_PLAN, ID_CCT_PLAN, CURP, NOMBRE||' '||APELLIDOP||' '||APELLIDOM AS NOMBRE, ID_UE, MATRICULA, GRADO, STATUS_PROCESO  FROM VISTA_META_ALUMNO WHERE STATUS_PROCESO>=4 AND STATUS_UE=1) WHERE ID_HIST_ALUM='"+alumno.getAUXIDHISTALUM()+"' ORDER BY GRADO, NOMBRE ASC";
         
         Constantes.enviaMensajeConsola("Consulta cct----->" + query);
         List list = null;

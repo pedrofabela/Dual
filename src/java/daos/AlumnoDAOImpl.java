@@ -505,6 +505,8 @@ public class AlumnoDAOImpl {
 //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
         temporal = new ObjPrepareStatement("STATUS_PROCESO", "STRING", al.getSTATUS_PROCESO());
         arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("AUX_RES_ACAD", "STRING", al.getAUX_RES_ACAD());
+        arregloCampos.add(temporal);
 
         String Condicion = "where ID_HIST_ALUM='" + al.getID_HISTORICO() + "'";
 
@@ -558,13 +560,13 @@ public class AlumnoDAOImpl {
     }
 
     public List ConsultaAceptados(AlumnoBean al) throws Exception {
-        String query = " SELECT * FROM (SELECT sa.id_hist_alum, CA.id_alumno,CA.curp, CA.nombre || ' ' || CA.apellidop || ' ' || CA.apellidom as nombre_completo,CA.fec_nac,CA.matricula,ca.cve_pro_edu, "
+        String query = " SELECT * FROM (SELECT SA.AUX_RES_ACAD, SA.ID_IE_UE, SA.ID_CCT_PLAN, sa.id_hist_alum, CA.id_alumno,CA.curp, CA.nombre || ' ' || CA.apellidop || ' ' || CA.apellidom as nombre_completo,CA.fec_nac,CA.matricula,ca.cve_pro_edu, "
                 + "(select p.nom_carrera from tbl_cct_plan tc INNER JOIN cat_plan p on tc.id_plan=p.id_plan WHERE tc.id_cct_plan=CA.cve_pro_edu) as nom_pro_edu ,"
                 + "(SELECT catalogo.descripcion FROM catalogo where id_catalogo=CA.grado) as grado, "
                 + "ca.no_seguro,ca.domicilio,ca.colonia,ca.localidad,ca.cp,ca.cve_mun,TO_CHAR(ca.fecha_inicio_dual) as fecha_inicio_dual,ca.tipo_alumno,ca.curp_padre,ca.nom_padre,ca.apellidop_padre,ca.apellidom_padre,ca.tel_padre,ca.email_padre,ca.domicilio_padre,ca.colonia_padre, "
                 + "ca.localidad_padre,ca.cp_padre,ca.cve_mun_padre,ca.mismo_domicilio, sa.status_proceso "
                 + "FROM cat_alumno  CA INNER JOIN tbl_hist_alum SA ON ca.id_alumno=sa.id_alumno WHERE CA.cve_pro_edu IN (SELECT cp.id_cct_plan FROM tbl_plan_responsable pr INNER JOIN tbl_cct_plan cp on cp.id_plan=pr.id_plan where  pr.id_persona='" + al.getID_PERSONA() + "'AND cp.id_escuela='" + al.getID_ESCUELA() + "' and pr.perfil='" + al.getPERFIL() + "') "
-                + "ORDER BY  sa.id_hist_alum,ca.cve_pro_edu) where STATUS_PROCESO=4 OR STATUS_PROCESO=5 ";
+                + "ORDER BY  sa.id_hist_alum,ca.cve_pro_edu) where STATUS_PROCESO=4 OR STATUS_PROCESO=5 OR STATUS_PROCESO=6";
         Constantes.enviaMensajeConsola("ConsultaAceptados----->" + query);
         List lista = null;
         lista = oraDaoFac.queryForList(query, new AceptadosMapper());

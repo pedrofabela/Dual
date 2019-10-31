@@ -137,7 +137,24 @@
             <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
             <result name="input">Registrar_Estudiante_Dual.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
-        </action>  
+        </action> 
+           <action name="consultaPlanEstudiante3" class="action.EstudianteDual_Action" method="consultaPlanEstudiante3">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+         <action name="guardaPlanFormEst2" class="action.EstudianteDual_Action" method="guardaPlanFormEst2">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        
+        
+         
+          
+            
         <action name="ConsultaCPE" class="action.EstudianteDual_Action" method="ConsultaCP">
             <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
             <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>

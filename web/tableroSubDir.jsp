@@ -686,6 +686,11 @@
                                                                       </div></a>-->
 
                                                             </div>
+                                                                      <div style="width: 100%; height: 25px; background: #a2a3b8; border-radius: 0px 0px 5px 5px; color:white; padding: 0px 0px 0px 10px; font-size: 9px; box-shadow: 2px 2px 5px #333; line-height: 10px; padding: 5px 0px 0px 10px; ">
+
+                                                                        Estudiantes que han hecho ED durante el ciclo escolar
+
+                                                                    </div>
 
                                                         </div>    
 
@@ -713,6 +718,12 @@
                                                                      </div></a> -->
 
                                                             </div>
+                                                                <div style="width: 100%; height: 25px; background: #28a745; border-radius: 0px 0px 5px 5px; color:white; padding: 0px 0px 0px 10px; font-size: 9px; box-shadow: 2px 2px 5px #333; line-height: 10px; padding: 5px 0px 0px 10px;">
+
+                                                                        Estudiantes de ED vigentes en el ciclo escolar
+
+                                                                    </div>       
+                                                                    
 
                                                         </div>  
 
@@ -738,6 +749,14 @@
                                                                   </div>
                                                               </a> -->
                                                             </div>
+                                                                    
+                                                                <div style="width: 100%; height: 25px; background: #dc3545; border-radius: 0px 0px 5px 5px; color:white; padding: 0px 0px 0px 10px; font-size: 9px; box-shadow: 2px 2px 5px #333; line-height: 10px; padding: 5px 0px 0px 10px; ">
+
+                                                                       Estudiantes que hicieron ED en el ciclo escolar y causaron baja
+
+                                                                    </div>           
+                                                                    
+                                                                    
 
                                                         </div>  
 
@@ -766,6 +785,12 @@
 
 
                                                             </div>
+                                                                    
+                                                                     <div style="width: 100%; height: 25px; background: #1464a5; border-radius: 0px 0px 5px 5px; color:white; padding: 0px 0px 0px 10px; font-size: 9px; box-shadow: 2px 2px 5px #333; line-height: 10px; padding: 5px 0px 0px 10px; ">
+
+                                                                       Estudiantes que hicieron ED en el ciclo escolar y egresaron
+
+                                                                    </div>   
 
 
                                                         </div>     
@@ -831,7 +856,16 @@
 
                                                             <div style="width:100%; text-align: center; background: #343a40; color: white; height: 35px; margin-top: 20px; border-radius: 8px 8px 0px 0px;  padding: 5px; ">Estudiantes por género</div>
 
-                                                            <div id="chart_div_gen" style="margin-bottom: 10px; height: 240px;"></div>
+                                                            <div id="chart_div_gen" style=" height: 240px;"></div>
+                                                            
+                                                              <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white;  font-size: 10px; padding: 0px 0px 0px 10px;">
+                                                                
+                                                                Estudiantes del ciclo escolar por género
+                                                                
+                                                            </div>
+                                                            
+                                                            
+                                                            
 
                                                         </div>    
 
@@ -842,9 +876,15 @@
                                                             <div class="col-sm-auto  " style="background:  #edecec; margin-left: 00px;">
 
 
-                                                                <div id="chart_div2" style="margin: auto; width: 100%; height: 240px; margin-bottom: 10px;" ></div>
+                                                                <div id="chart_div2" style="margin: auto; width: 100%; height: 240px; " ></div>
 
                                                             </div> 
+                                                            
+                                                            <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white; font-size: 10px; padding: 0px 0px 0px 10px;">
+                                                                
+                                                                Estudiantes por subsistema educativo y estatus
+                                                                
+                                                            </div>
 
                                                         </div>  
                                                         
@@ -921,9 +961,9 @@
 
                                                             </div> 
                                                             
-                                                             <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white; padding: 0px 0px 0px 10px; font-size: 10px;">
+                                                            <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white;  font-size: 10px; line-height: 10px; padding: 5px 0px 0px 10px; ">
                                                                 
-                                                                Nota: Descripción de la gráfica
+                                                                Unidades Económicas ordenadas  de mayor a menor número  estudiantes activos y egresados
                                                                 
                                                             </div>
 
@@ -1004,10 +1044,9 @@
                                                                
 
                                                             </div> 
-                                                            <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white; padding: 0px 0px 0px 10px; font-size: 10px;">
+                                                             <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white;  font-size: 10px; line-height: 10px; padding: 5px 0px 0px 10px;">
                                                                 
-                                                                Nota: Descripción de la gráfica
-                                                                
+                                                                Sectores Productivos con mayor estudiantes activos y egresados
                                                             </div>
                                                             
 
@@ -1083,9 +1122,9 @@
 
                                                             </div> 
                                                             
-                                                              <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white; padding: 0px 0px 0px 10px; font-size: 10px;">
+                                                              <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white;  font-size: 10px; padding: 0px 0px 0px 5px;">
                                                                 
-                                                                Nota: Descripción de la gráfica
+                                                              Municipios con mayor número de Estudiantes en el ciclo escolar, según su residencia
                                                                 
                                                             </div>
 
@@ -1164,9 +1203,9 @@
                                                                 </div>
 
                                                             </div> 
-                                                              <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white; padding: 0px 0px 0px 10px; font-size: 10px;">
+                                                               <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white;  font-size: 10px; padding: 0px 0px 0px 5px;">
                                                                 
-                                                                Nota: Descripción de la gráfica
+                                                               Programas Educativos con mayor número de Estudiantes en el ciclo escolar
                                                                 
                                                             </div>
 
@@ -1206,7 +1245,7 @@
                                                                     
                                                                     <a href="#popup11" style="text-decoration: none; color: white;" > <div style="width: 100%; height: 30px;  background: rgba(0, 0, 0, 0.05); padding: 3px;  border-top: 0.5px solid #666; font-size: 12px; text-align: left;">    
 
-                                                                        Detalle de Estudiantes       
+                                                                           
 
                                                                     </div>
                                                                 </a>
@@ -1235,7 +1274,7 @@
                                                                 </div> 
                                                                 <a href="#popup11" style="text-decoration: none; color: #333333;" > <div style="width: 100%; height: 30px;  background: rgba(0, 0, 0, 0.05); padding: 3px;  border-top: 0.5px solid #666; font-size: 12px; text-align: left;">    
 
-                                                                        Detalle de Estudiantes       
+                                                                         
 
                                                                     </div>
                                                                 </a>
@@ -1341,7 +1380,7 @@
                                                             
                                                              <div style="width: 100%; height: 25px; background: #343a40; border-radius: 0px 0px 5px 5px; color:white; padding: 0px 0px 0px 10px; font-size: 10px;">
                                                                 
-                                                                Nota: Descripción de la gráfica
+                                                                Este ciclo escolar se encuentra en proceso por lo que las cifras tienden a incrementarse
                                                                 
                                                             </div>    
 

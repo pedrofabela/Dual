@@ -181,7 +181,22 @@ public class AceptadosMapper implements Mapper{
         } else {
             dat.setSTATUS_PROCESO(rs.getString("status_proceso"));
         }  
-            
+          if (rs.getString("AUX_RES_ACAD") != null) {
+            dat.setAUX_RES_ACAD(rs.getString("AUX_RES_ACAD").trim());
+        } else {
+            dat.setAUX_RES_ACAD(rs.getString("AUX_RES_ACAD"));
+        }  
+             if (rs.getString("ID_IE_UE") != null) {
+            dat.setID_IE_UE(rs.getString("ID_IE_UE").trim());
+        } else {
+            dat.setID_IE_UE(rs.getString("ID_IE_UE"));
+        }  
+            if (rs.getString("ID_CCT_PLAN") != null) {
+            dat.setID_CCT_PLAN(rs.getString("ID_CCT_PLAN").trim());
+        } else {
+            dat.setID_CCT_PLAN(rs.getString("ID_CCT_PLAN"));
+        }     
+             
         return dat;
     }
     

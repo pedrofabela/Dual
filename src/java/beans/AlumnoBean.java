@@ -86,6 +86,28 @@ private String ID_HIST_ALUM;
 private String ID_PLAN;
 private String I_UE;
 private String AUXIDHISTALUM;
+private String AUX_RES_ACAD;
+
+private String ID_IE_UE;
+
+    public String getID_IE_UE() {
+        return ID_IE_UE;
+    }
+
+    public void setID_IE_UE(String ID_IE_UE) {
+        this.ID_IE_UE = ID_IE_UE;
+    }
+
+
+
+    public String getAUX_RES_ACAD() {
+        return AUX_RES_ACAD;
+    }
+
+    public void setAUX_RES_ACAD(String AUX_RES_ACAD) {
+        this.AUX_RES_ACAD = AUX_RES_ACAD;
+    }
+
 
     public String getAUXIDHISTALUM() {
         return AUXIDHISTALUM;
