@@ -77,6 +77,30 @@ public class programaEsBean {
  private String DESCRIPCION;
 private String FECHA_REG_PLAN;
 private String FECHA_TERMINO_PLAN;
+private String HORAS_SEMANA;
+private String EVIDENCIAS;
+
+
+
+    public String getEVIDENCIAS() {
+        return EVIDENCIAS;
+    }
+
+    public void setEVIDENCIAS(String EVIDENCIAS) {
+        this.EVIDENCIAS = EVIDENCIAS;
+    }
+
+    
+
+    public String getHORAS_SEMANA() {
+        return HORAS_SEMANA;
+    }
+
+    public void setHORAS_SEMANA(String HORAS_SEMANA) {
+        this.HORAS_SEMANA = HORAS_SEMANA;
+    }
+
+
 
     public String getFECHA_TERMINO_PLAN() {
         return FECHA_TERMINO_PLAN;

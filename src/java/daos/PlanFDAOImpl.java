@@ -182,6 +182,10 @@ public class PlanFDAOImpl {
         arregloCampos.add(temporal);
          temporal = new ObjPrepareStatement("ID_IE_UE", "STRING", escuela.getID_IE_UE());
         arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("HORAS_SEMANA", "STRING", programa.getHORAS_SEMANA());
+        arregloCampos.add(temporal);
+        
+        
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
@@ -262,6 +266,8 @@ public class PlanFDAOImpl {
          temporal = new ObjPrepareStatement("PLAN_ROTACION", "STRING", programa.getPLAN_ROTACION());
         arregloCampos.add(temporal);
          temporal = new ObjPrepareStatement("DES_ACTIVIDAD", "STRING", programa.getDES_ACTIVIDAD());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("EVIDENCIAS", "STRING", programa.getEVIDENCIAS());
         arregloCampos.add(temporal);
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos

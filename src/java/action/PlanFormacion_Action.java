@@ -802,7 +802,7 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
             boolean sumaEscala = false;
             int auxActividades = 0;
 
-            if (escuela.getAUXIDCCTPLAN().length() > 0 && programa.getNOM_PLAN_FORM().length() > 0 && programa.getDESCRIPCION_FORM().length() > 0 && programa.getPERIODO().length() > 0 && programa.getNO_ESTUDIANTES().length() > 0 && programa.getNO_MENTORES_UE().length() > 0 && programa.getNO_MENTORES_ACAD().length() > 0 && escuela.getID_IE_UE().length() > 0) {
+            if (escuela.getAUXIDCCTPLAN().length() > 0 && programa.getNOM_PLAN_FORM().length() > 0 && programa.getDESCRIPCION_FORM().length() > 0 && programa.getPERIODO().length() > 0 && programa.getNO_ESTUDIANTES().length() > 0 && programa.getNO_MENTORES_UE().length() > 0 && programa.getNO_MENTORES_ACAD().length() > 0 && escuela.getID_IE_UE().length() > 0 && programa.getHORAS_SEMANA().length()>0) {
 
                 sec1 = true;
 
@@ -839,6 +839,10 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
                     addFieldError("ERRORNOMENACAD", "Debes registrar un número");
 
                 }
+                if (programa.getHORAS_SEMANA().length() == 0) {
+                    addFieldError("HORASSEMANA", "Debes registrar el número de horas a la semana");
+
+                }
 
                 if (escuela.getID_IE_UE().length() == 0) {
                     addFieldError("ERROREUE", "Debes elegir una Unidad Económica");
@@ -855,6 +859,8 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
             boolean escala = false;
             boolean desact = false;
             boolean planrot = false;
+            boolean horas_sem=false;
+            boolean  evidencias=false;   
 
             int errores = 0;
             int correctos = 0;
@@ -881,6 +887,9 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
                     if (obj1.getDES_ACTIVIDAD().length() > 0) {
                         desact = true;
                     }
+                     if (obj1.getEVIDENCIAS().length() > 0) {
+                        evidencias = true;
+                    }
 
                     // validación de campos de la lista     
                     if (programa.getID_NIVEL().equals("1")) {
@@ -889,7 +898,7 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
                             planrot = true;
                         }
 
-                        if (horas && escala && lugar && desact && planrot) {
+                        if (horas && escala && lugar && desact && planrot && evidencias) {
 
                             int valorAux = 0;
 
@@ -935,7 +944,7 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
 
                     if (programa.getID_NIVEL().equals("2")) {
 
-                        if (horas && escala && lugar && desact) {
+                        if (horas && escala && lugar && desact && evidencias) {
 
                             int valorAux = 0;
 
@@ -1052,6 +1061,8 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
                     programa.setESCALA_PLAN(obj3.getESCALA_PLAN());
                     programa.setDES_ACTIVIDAD(obj3.getDES_ACTIVIDAD());
                     programa.setPLAN_ROTACION(obj3.getPLAN_ROTACION());
+                    programa.setEVIDENCIAS(obj3.getEVIDENCIAS());
+                    
                     if (obj3.getVALIDAR().equals("true")) {
 
                         con2.GuardaPlanFormaActividades(conecta, objPreConexion, escuela, objRenapo, claveContruida, programa);

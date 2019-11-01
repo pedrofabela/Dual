@@ -51,7 +51,11 @@
 }
 
      
-     
+ function telquita9() {
+  var x = document.getElementById("quitamen9").style="display:none;";
+  
+}
+    
      
      
      
@@ -87,7 +91,25 @@
      document.getElementById('NO_MENTORES_ACAD2').value="";
      
   }
-  
+  function validarSiNumero4(numero){
+    if (/^\-?[1-9]\d{0,2}$/.test(numero) ){
+     
+     if(parseInt(numero)>40 || parseInt(numero)==0){
+         
+         alert("el númeor de horas debe ser mayor a 0 y menor o igual a 40");
+         document.getElementById('HORAS_SEMANA').value="";
+     }
+     
+    
+ }
+ else{
+      document.getElementById('HORAS_SEMANA').value="";
+     
+ }
+ 
+ 
+ 
+  }
   
 </script>
     
@@ -546,22 +568,28 @@
                                                                         </div>
 
                                                                         
-                                                                        <div class="col-lg-4" style="margin-top: 20px;">
+                                                                        <div class="col-lg-3" style="margin-top: 20px;">
                                                                             <label   for="RAZON">Número de Estudiantes:</label>
                                                                         <s:textfield  cssClass="form-control" name="programa.NO_ESTUDIANTES" id="NO_ESTUDIANTES2" onkeyup="validarSiNumero(this.value); telquita5(); "    ></s:textfield> 
                                                                         <s:fielderror  fieldName="ERRORNOEST" cssClass="col-lg-12 alert alert-danger" id="quitamen5"></s:fielderror>
                                                                         </div>
                                                              
-                                                                        <div class="col-lg-4" style="margin-top: 20px;">
+                                                                        <div class="col-lg-3" style="margin-top: 20px;">
                                                                             <label   for="RAZON">Número de Mentores de UE:</label>
                                                                         <s:textfield  cssClass="form-control" name="programa.NO_MENTORES_UE" id="NO_MENTORES_UE2" onkeyup="validarSiNumero2(this.value); telquita6(); "  ></s:textfield> 
                                                                         <s:fielderror  fieldName="ERRORNOMENUE" cssClass="col-lg-12 alert alert-danger" id="quitamen6"></s:fielderror>
                                                                         </div>
                                                                       
-                                                                        <div class="col-lg-4" style="margin-top: 20px;">
+                                                                        <div class="col-lg-3" style="margin-top: 20px;">
                                                                             <label   for="RAZON">Número de Mentores Académcios:</label>
                                                                         <s:textfield  cssClass="form-control" name="programa.NO_MENTORES_ACAD" id="NO_MENTORES_ACAD2" onkeyup="validarSiNumero3(this.value); telquita7(); "  ></s:textfield> 
                                                                         <s:fielderror  fieldName="ERRORNOMENACAD" cssClass="col-lg-12 alert alert-danger" id="quitamen7"></s:fielderror>
+                                                                        </div>
+                                                                        
+                                                                          <div class="col-lg-3" style="margin-top: 20px;">
+                                                                            <label   for="RAZON">Horas a la semana</label>
+                                                                        <s:textfield  cssClass="form-control" name="programa.HORAS_SEMANA" id="HORAS_SEMANA" onkeyup="validarSiNumero4(this.value); telquita9(); "  ></s:textfield> 
+                                                                        <s:fielderror  fieldName="HORASSEMANA" cssClass="col-lg-12 alert alert-danger" id="quitamen9"></s:fielderror>
                                                                         </div>
 
 
@@ -603,6 +631,7 @@
                                                                                             <th style="width: 10%;" >Plan de Rotación</th>
                                                                                             </s:if>
                                                                                                 <th style="width: 15%;" >Descripcion de Actividad </th>
+                                                                                                 <th style="width: 15%;" >Evidencias </th>
                                                                                             </tr>
                                                                                         </thead>
 
@@ -631,13 +660,14 @@
                                                                                                             <th align="center" style="align-content: center;"> <s:textfield cssClass="form-check-sign"   name="ListaProgramasRegistro[%{#stat.index}].PLAN_ROTACION"    id="PLAN_ROTACION" >  </s:textfield>    </th> 
                                                                                                             </s:if>
                                                                                                             <th align="center" style="align-content: center;"> <s:textarea cssClass="form-check-sign"   name="ListaProgramasRegistro[%{#stat.index}].DES_ACTIVIDAD"    id="DES_ACTIVIDAD" >  </s:textarea>    </th>  
-                                                                                                        </s:if>
-                                                                                                    
+                                                                                                      
+                                                                                                         <th align="center" style="align-content: center;"> <s:textfield cssClass="form-check-sign"   name="ListaProgramasRegistro[%{#stat.index}].EVIDENCIAS"    id="EVIDENCIAS" >  </s:textfield>    </th> 
+
 
 
                                                                                                 </tr>
 
-
+                                                                                </s:if>
 
 
 
@@ -646,11 +676,11 @@
                                                                                                 <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NUMERO_PERIODO" id="NUMERO_PERIODO"></s:hidden>
                                                                                                 <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].COMPETENCIA" id="COMPETENCIA"></s:hidden>
                                                                                                 <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ACTIVIDAD" id="ACTIVIDAD"></s:hidden>
-                                                                                                
                                                                                                 <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_MATERIA" id="ID_MATERIA"></s:hidden>
                                                                                                 <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_COMPETENCIA" id="ID_COMPETENCIA"></s:hidden>
                                                                                                 <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_ACTIVIDAD" id="ID_ACTIVIDAD"></s:hidden>
-                                                                                             <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NO_PASSA" id="NO_PASA"></s:hidden>
+                                                                                                <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NO_PASSA" id="NO_PASA"></s:hidden>
+                                                                               
 
                                                                                                 
                                                                                                 
@@ -659,18 +689,18 @@
                                                                                             
                                                                                             
                                                                                             
-                                                                                              <s:iterator value="ListaEscala" id="ListaEscala" status="stat">         
-                                                                                                   <s:hidden  name = "ListaEscala[%{#stat.index}].ID_ESCALA" id="ID_ESCALA"></s:hidden>
-                                                                                                <s:hidden  name = "ListaEscala[%{#stat.index}].ESCALA" id="ESCALA"></s:hidden>
-                                                                                              </s:iterator>
-                                                                                                   <s:iterator value="ListaLugar" id="ListaLugar" status="stat">         
-                                                                                                   <s:hidden  name = "ListaLugar[%{#stat.index}].ID_LUGAR" id="ID_LUGAR"></s:hidden>
-                                                                                                <s:hidden  name = "ListaLugar[%{#stat.index}].LUGAR" id="LUGAR"></s:hidden>
-                                                                                              </s:iterator> 
-                                                                                              <s:iterator value="ListaHora" id="ListaHora" status="stat">         
-                                                                                                   <s:hidden  name = "ListaHora[%{#stat.index}].ID_HORA" id="ID_HORA"></s:hidden>
-                                                                                                <s:hidden  name = "ListaHora[%{#stat.index}].HORA" id="HORA"></s:hidden>
-                                                                                              </s:iterator>
+                                                                                        <s:iterator value="ListaEscala" id="ListaEscala" status="stat">         
+                                                                                            <s:hidden  name = "ListaEscala[%{#stat.index}].ID_ESCALA" id="ID_ESCALA"></s:hidden>
+                                                                                            <s:hidden  name = "ListaEscala[%{#stat.index}].ESCALA" id="ESCALA"></s:hidden>
+                                                                                        </s:iterator>
+                                                                                        <s:iterator value="ListaLugar" id="ListaLugar" status="stat">         
+                                                                                            <s:hidden  name = "ListaLugar[%{#stat.index}].ID_LUGAR" id="ID_LUGAR"></s:hidden>
+                                                                                            <s:hidden  name = "ListaLugar[%{#stat.index}].LUGAR" id="LUGAR"></s:hidden>
+                                                                                        </s:iterator> 
+                                                                                        <s:iterator value="ListaHora" id="ListaHora" status="stat">         
+                                                                                            <s:hidden  name = "ListaHora[%{#stat.index}].ID_HORA" id="ID_HORA"></s:hidden>
+                                                                                            <s:hidden  name = "ListaHora[%{#stat.index}].HORA" id="HORA"></s:hidden>
+                                                                                        </s:iterator>
                                                                                             
                                                                                             
                                                                                             
