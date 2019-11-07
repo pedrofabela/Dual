@@ -79,7 +79,15 @@ private String FECHA_REG_PLAN;
 private String FECHA_TERMINO_PLAN;
 private String HORAS_SEMANA;
 private String EVIDENCIAS;
+private String INCLUIDA;
 
+    public String getINCLUIDA() {
+        return INCLUIDA;
+    }
+
+    public void setINCLUIDA(String INCLUIDA) {
+        this.INCLUIDA = INCLUIDA;
+    }
 
 
     public String getEVIDENCIAS() {

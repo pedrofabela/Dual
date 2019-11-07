@@ -1758,8 +1758,15 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                 
                
                     System.out.println("sali de la vaidacion de plan de formación "); 
-                  
-                  
+                    
+                    Constantes.enviaMensajeConsola(""+banResUE);
+                    Constantes.enviaMensajeConsola(""+banMentorUE);
+                   Constantes.enviaMensajeConsola(""+banMetorAcad);
+                   Constantes.enviaMensajeConsola(""+planForm);
+                     Constantes.enviaMensajeConsola(""+fechaInicio);
+                      Constantes.enviaMensajeConsola(""+fechaTermino);
+                   
+                   
                   
                    if (banResUE && banMentorUE  && banMetorAcad && planForm && fechaInicio && fechaTermino) {
                        

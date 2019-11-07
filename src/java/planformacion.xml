@@ -19,6 +19,38 @@
             <result name="input">Elabora_Plan.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
         </action>
+         <action name="EditarPlanForma" class="action.PlanFormacion_Action" method="FormPlan">
+            <result name="SUCCESS">Edita_Plan.jsp</result>			              
+            <result name="ERROR">Edita_Plan.jsp</result>
+            <result name="input">Edita_Plan.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+         <action name="planConsultaEdita" class="action.PlanFormacion_Action" method="planConsultaEdita">
+            <result name="SUCCESS">Edita_Plan.jsp</result>			              
+            <result name="ERROR">Edita_Plan.jsp</result>
+            <result name="input">Edita_Plan.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+          <action name="planConsultaEditaSelecciona" class="action.PlanFormacion_Action" method="planConsultaEditaSelecciona">
+            <result name="SUCCESS">Edita_Plan.jsp</result>			              
+            <result name="ERROR">Edita_Plan.jsp</result>
+            <result name="input">Edita_Plan.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        <action name="EditarPlanFormaConsulta" class="action.PlanFormacion_Action" method="EditarPlanFormaConsulta">
+            <result name="SUCCESS">Edita_Plan.jsp</result>			              
+            <result name="ERROR">Edita_Plan.jsp</result>
+            <result name="input">Edita_Plan.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+           <action name="actualizaPlanForm" class="action.PlanFormacion_Action" method="actualizaPlanForm">
+            <result name="SUCCESS">Edita_Plan.jsp</result>			              
+            <result name="ERROR">Edita_Plan.jsp</result>
+            <result name="input">Edita_Plan.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
          <action name="AgregarPF" class="action.PlanFormacion_Action" method="FormPlan">
             <result name="SUCCESS">Elabora_Plan_Alu.jsp</result>			              
             <result name="ERROR">Elabora_Plan_Alu.jsp</result>

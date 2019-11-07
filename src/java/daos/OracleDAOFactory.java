@@ -759,6 +759,56 @@ public class OracleDAOFactory implements DAOFactory {
 		return modifico;
 		
 	}
+        public boolean queryDeleteCondicion(Connection c, PreparedStatement p,String Tabla, ArrayList<ObjPrepareStatement> arregloCampos, String where) throws Exception {
+		Constantes.enviaMensajeConsola("------ENTRA A  queryDelete---------------");
+		boolean modifico = false;
+		StringBuffer query=new StringBuffer();
+		String unionCampos = " ";
+		
+		query.append("DELETE FROM ");
+		query.append(Tabla);
+		
+		
+		
+		for(ObjPrepareStatement obj: arregloCampos){
+			
+				query.append(unionCampos);
+				
+				
+			
+		}
+                
+                if(where!=null && where.length()!=0){
+			query.append(where);
+		}
+		
+		Constantes.enviaMensajeConsola("queryCompleto, DELETE--->"+query.toString());
+		
+		p= c.prepareStatement(query.toString());
+		int registroInsertado = -1;
+		try{
+			
+			registroInsertado = p.executeUpdate();
+			Constantes.enviaMensajeConsola("-------EJECUTO DELETE ---------------");
+		}finally{
+			if(this.pstmt!=null){
+				this.pstmt.close();
+				this.pstmt=null;
+			}
+			if(this.conn!=null){
+				this.conn.close();
+				this.conn=null;
+			}
+				
+		}
+		if(registroInsertado==1){
+			modifico=true;
+		}
+		
+		
+		return modifico;
+		
+	}
 	
 	private int asignarTiposPSTMT(ArrayList<ObjPrepareStatement> arregloCampos, int posInicial) throws SQLException, ParseException{
 		int posicion = posInicial;

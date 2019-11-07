@@ -236,6 +236,8 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
 
             ListaPE.clear();
             ListaPeriodo.clear();
+            ListaUE.clear();
+            ListaPlanUE.clear();
 
             ListaPE = con2.ConsultaPE(pf);
 
@@ -328,6 +330,181 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
 
     }
     
+     public String planConsultaEdita() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            PlanFDAOImpl con2 = new PlanFDAOImpl();
+
+            ListaPeriodo = con2.periodo(escuela);
+
+            String cctconsulta = escuela.getAUXIDCCTPLAN();
+
+            String[] palabras = cctconsulta.split("-");
+            String part1 = palabras[0]; //Clave del Plan CCT
+            String part2 = palabras[1];
+
+            escuela.setAUXIDCCTPLAN2(part1);
+            escuela.setPERIODO_INICIO(part2);
+
+            ListaUE = con2.listaUE(escuela, usuariocons);
+
+           
+
+           
+
+            String nivel = "";
+
+            nivel = "";
+            nivel = con2.nivel(escuela, usuariocons);
+
+            programa.setID_NIVEL(nivel);
+
+            
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+     public String planConsultaEditaSelecciona() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            PlanFDAOImpl con2 = new PlanFDAOImpl();
+            
+              String cctconsulta = escuela.getAUXIDCCTPLAN();
+
+            String[] palabras = cctconsulta.split("-");
+            String part1 = palabras[0]; //Clave del Plan CCT
+            String part2 = palabras[1];
+
+            escuela.setAUXIDCCTPLAN2(part1);
+            escuela.setPERIODO_INICIO(part2);
+
+             ListaPlanUE=con2.listaPlanUEEdita(alumno, usuariocons, escuela);
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+            
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+     
+      public String EditarPlanFormaConsulta() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            PlanFDAOImpl con2 = new PlanFDAOImpl();
+            
+              String cctconsulta = escuela.getAUXIDCCTPLAN();
+
+            String[] palabras = cctconsulta.split("-");
+            String part1 = palabras[0]; //Clave del Plan CCT
+            String part2 = palabras[1];
+
+            escuela.setAUXIDCCTPLAN2(part1);
+            escuela.setPERIODO_INICIO(part2);
+            
+                 ListaPeriodo = con2.periodo(escuela);
+            
+              ListaProgramasRegistroDatos=con2.programasPlanFormDatos(alumno, escuela,  usuariocons, programa );
+            
+            Constantes.enviaMensajeConsola("sali de registro datos");
+            
+            for (int i = 0; i < ListaProgramasRegistroDatos.size(); i++) {
+                
+                programa.setNOMBREPLAN_FORM(ListaProgramasRegistroDatos.get(i).getNOMBREPLAN_FORM());
+                  programa.setNO_ESTUDIANTES(ListaProgramasRegistroDatos.get(i).getNO_ESTUDIANTES());
+                  programa.setNO_MENTORES_UE(ListaProgramasRegistroDatos.get(i).getNO_MENTORES_UE());
+                   programa.setNO_MENTORES_ACAD(ListaProgramasRegistroDatos.get(i).getNO_MENTORES_ACAD());
+                    programa.setPERIODO(ListaProgramasRegistroDatos.get(i).getDURACION());
+                     programa.setDESCRIPCION_FORM(ListaProgramasRegistroDatos.get(i).getDESCRIPCION());
+                  programa.setHORAS_SEMANA(ListaProgramasRegistroDatos.get(i).getHORAS_SEMANA());
+              
+                
+                
+            }
+            
+              ListaEscala = con2.listaEscala(escuela, usuariocons);
+            ListaLugar = con2.listaLugar(escuela, usuariocons);
+            ListaHora = con2.listaHora(escuela, usuariocons);
+            
+              ListaProgramasRegistro=con2.programasEscuelaConsulta(alumno, escuela,  usuariocons, programa );
+        
+
+            
+            
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
     
      public String ConsultaPlanAlumUE() {
 
@@ -1087,6 +1264,382 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
         }
 
     }
+    
+     public String actualizaPlanForm() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            PlanFDAOImpl con2 = new PlanFDAOImpl();
+
+            String cctconsulta = escuela.getAUXIDCCTPLAN();
+
+            String[] palabras = cctconsulta.split("-");
+            String part1 = palabras[0]; //Clave del Plan CCT
+            String part2 = palabras[1];
+
+            escuela.setAUXIDCCTPLAN2(part1);
+            escuela.setPERIODO_INICIO(part2);
+
+            boolean sec1 = false;
+            boolean sec2 = false;
+            boolean valDat = false;
+            boolean sumaEscala = false;
+            int auxActividades = 0;
+             Constantes.enviaMensajeConsola("VOY A VALIDAR ENTRADA");
+
+            if (escuela.getAUXIDCCTPLAN().length() > 0 && programa.getNOMBREPLAN_FORM().length() > 0 && programa.getDESCRIPCION_FORM().length() > 0 && programa.getPERIODO().length() > 0 && programa.getNO_ESTUDIANTES().length() > 0 && programa.getNO_MENTORES_UE().length() > 0 && programa.getNO_MENTORES_ACAD().length() > 0 && escuela.getID_IE_UE().length() > 0 && programa.getHORAS_SEMANA().length()>0) {
+
+                sec1 = true;
+                Constantes.enviaMensajeConsola("VALIDE LOS CAMPOS REQUERIDOS");
+
+            } else {
+
+                sec1 = false;
+                
+                Constantes.enviaMensajeConsola("entre a estado de error");
+
+                if (escuela.getAUXIDCCTPLAN2().length() == 0) {
+                    addFieldError("ERRORCCTPLA", "Debes elegir un Programa");
+                }
+
+                if (programa.getNOMBREPLAN_FORM().length() == 0) {
+                    addFieldError("ERRORNOMPLAN", "Registrar nombre de Plan");
+
+                }
+                if (programa.getDESCRIPCION_FORM().length() == 0) {
+                    addFieldError("ERRORDESPLAN", "Debes registrar una descripción");
+
+                }
+                if (programa.getPERIODO().length() == 0) {
+                    addFieldError("ERRORPERPLAN", "Debes registrar una duración");
+
+                }
+
+                if (programa.getNO_ESTUDIANTES().length() == 0) {
+                    addFieldError("ERRORNOEST", "Debes registrar un número");
+
+                }
+                if (programa.getNO_MENTORES_UE().length() == 0) {
+                    addFieldError("ERRORNOMENUE", "Debes registrar un número");
+
+                }
+                if (programa.getNO_MENTORES_ACAD().length() == 0) {
+                    addFieldError("ERRORNOMENACAD", "Debes registrar un número");
+
+                }
+                if (programa.getHORAS_SEMANA().length() == 0) {
+                    addFieldError("HORASSEMANA", "Debes registrar el número de horas a la semana");
+
+                }
+
+                if (escuela.getID_IE_UE().length() == 0) {
+                    addFieldError("ERROREUE", "Debes elegir una Unidad Económica");
+
+                }
+
+            }
+
+            Iterator LP = ListaProgramasRegistro.iterator();
+
+            programaEsBean obj1;
+            boolean horas = false;
+            boolean lugar = false;
+            boolean escala = false;
+            boolean desact = false;
+            boolean planrot = false;
+            boolean horas_sem=false;
+            boolean  evidencias=false;   
+
+            int errores = 0;
+            int correctos = 0;
+            int escalaValida = 0;
+            int errorEscala = 0;
+            int validosEscala = 0;
+
+            while (LP.hasNext()) {
+                obj1 = (programaEsBean) LP.next();
+
+                if (obj1.getVALIDAR().equals("true") && obj1.getVALIDAR() != null) {
+                    
+                    Constantes.enviaMensajeConsola("ENTRE A VALIDAR LAS ACTIVIDADES");
+                    auxActividades = auxActividades + 1;
+
+                    if (obj1.getID_HORA().length() > 0) {
+                        horas = true;
+                    }
+
+                    if (obj1.getID_LUGAR().length() > 0) {
+                        lugar = true;
+                    }
+                    if (obj1.getID_ESCALA().length() > 0) {
+                        escala = true;
+                    }
+                    if (obj1.getDES_ACTIVIDAD().length() > 0) {
+                        desact = true;
+                    }
+                     if (obj1.getEVIDENCIAS().length() > 0) {
+                        evidencias = true;
+                    }
+
+                    // validación de campos de la lista     
+                    if (programa.getID_NIVEL().equals("1")) {
+
+                        if (obj1.getPLAN_ROTACION().length() > 0) {
+                            planrot = true;
+                            
+                            
+                        }
+                        
+                        Constantes.enviaMensajeConsola("HORA"+horas);
+                          Constantes.enviaMensajeConsola("ESCALA"+escala);
+                          Constantes.enviaMensajeConsola("LUGAR"+lugar);
+                          Constantes.enviaMensajeConsola("DESCRIPCION"+desact);
+                          Constantes.enviaMensajeConsola("PLAN"+planrot);
+                          Constantes.enviaMensajeConsola("EVIDENCIAS"+evidencias);
+
+                        if (horas && escala && lugar && desact && planrot && evidencias) {
+                            
+                            obj1.setNO_PASA("");
+
+                            int valorAux = 0;
+
+                            valorAux = Integer.parseInt(obj1.getID_ESCALA());
+
+                            int sumacompetecnia = 0;
+                            int competencia_consulta = 0;
+                            
+                            Constantes.enviaMensajeConsola("entre a validar el ");
+                          
+
+                            for (int i = 0; i < ListaProgramasRegistro.size(); i++) {
+
+                                if (obj1.getID_COMPETENCIA().equals(ListaProgramasRegistro.get(i).getID_COMPETENCIA()) && obj1.getVALIDAR().equals("true") && obj1.getVALIDAR() != null) {
+
+                                    if (ListaProgramasRegistro.get(i).getID_ESCALA().length() > 0) {
+                                        competencia_consulta = competencia_consulta + Integer.parseInt(ListaProgramasRegistro.get(i).getID_ESCALA());
+                                    }
+                                  
+                                }
+                               
+
+                            }
+                            
+                             
+                                
+                                    if(competencia_consulta!=100){
+                                           errorEscala=errorEscala+1;
+                                    }
+
+
+                            System.out.println("errorEscala:"+errorEscala);
+                          
+
+                            correctos = correctos + 1;
+
+                        } else {
+                            obj1.setNO_PASA(obj1.getID_ACTIVIDAD());
+
+                            errores = errores + 1;
+
+                        }
+
+                    }
+
+                    if (programa.getID_NIVEL().equals("2")) {
+
+                        if (horas && escala && lugar && desact && evidencias) {
+                             obj1.setNO_PASA("");
+                            int valorAux = 0;
+
+                            valorAux = Integer.parseInt(obj1.getID_ESCALA());
+
+                            int sumacompetecnia = 0;
+                            int competencia_consulta = 0;
+                           
+
+                            for (int i = 0; i < ListaProgramasRegistro.size(); i++) {
+
+                                if (obj1.getID_COMPETENCIA().equals(ListaProgramasRegistro.get(i).getID_COMPETENCIA()) && obj1.getVALIDAR().equals("true") && obj1.getVALIDAR() != null) {
+
+                                    competencia_consulta = competencia_consulta + Integer.parseInt(ListaProgramasRegistro.get(i).getID_ESCALA());
+                                   
+                                }
+                            }
+                            
+                            System.out.println("competencia_consulta:"+competencia_consulta);
+                                
+                                    if(competencia_consulta!=100){
+                                           errorEscala=errorEscala+1;
+                                    }
+
+
+                            System.out.println("errorEscala:"+errorEscala);
+                          
+                          
+
+                          
+
+                            correctos = correctos + 1;
+
+                        } else {
+                            obj1.setNO_PASA(obj1.getID_ACTIVIDAD());
+
+                            errores = errores + 1;
+
+                        }
+
+                    }
+
+                    horas = false;
+                    lugar = false;
+                    escala = false;
+                    desact = false;
+                    planrot = false;
+                    evidencias=false;
+                    
+                    
+
+                }
+                
+                
+                
+
+            }
+
+            if (errores > 0) {
+
+                addFieldError("ERRORFORM", "Debes capturar todos los campos de las actividades seleccionadas");
+
+            }
+
+            if (errores == 0 && correctos > 0) {
+
+                valDat = true;
+
+            }
+            else{
+                 valDat = false;
+            }
+
+
+            if (errorEscala > 0) {
+                sumaEscala = false;
+                if (valDat) {
+                    addFieldError("ERRORTOTALESCALA", "Las Actividades de una o más competencias no suman 100%");
+                }
+            } else {
+
+                sumaEscala = true;
+            }
+
+         
+            
+            if (auxActividades >= 1) {
+
+                sec2 = true;
+                System.out.println("Sección 2 aprobada");
+            } else {
+
+                addFieldError("ERRORACTPLAN", "Debes elegir almenos una Actividad");
+                sec2 = false;
+            }
+            
+          
+
+            if (sec1 && sec2 && valDat && sumaEscala) {
+
+                String claveContruida = "";
+
+                claveContruida = construyeClave(escuela.getAUXIDCCTPLAN2());
+
+                conecta = con2.crearConexion();
+                //statement
+                objConexion = con2.crearStatement(conecta);
+
+                con2.actualizaPlanForm(conecta, objPreConexion, escuela, objRenapo, claveContruida, programa);
+
+                Iterator LPR = ListaProgramasRegistro.iterator();
+                programaEsBean obj3;
+                while (LPR.hasNext()) {
+                    obj3 = (programaEsBean) LPR.next();
+                    programa.setID_MATERIA(obj3.getID_MATERIA());
+                    programa.setID_COMPETENCIA(obj3.getID_COMPETENCIA());
+                    programa.setID_ACTIVIDAD(obj3.getID_ACTIVIDAD());
+                    programa.setID_PLAN(obj3.getID_PLAN());
+                    programa.setID_LUGAR(obj3.getID_LUGAR());
+                    programa.setID_ESCALA(obj3.getID_ESCALA());
+                    programa.setDES_ACTIVIDAD(obj3.getDES_ACTIVIDAD());
+                    programa.setPLAN_ROTACION(obj3.getPLAN_ROTACION());
+                    programa.setEVIDENCIAS(obj3.getEVIDENCIAS());
+                    programa.setID_HORA(obj3.getID_HORA());
+                     programa.setID_ACT_EVALUA(obj3.getID_ACT_EVALUA());
+                    if (obj3.getVALIDAR().equals("true") && obj3.getINCLUIDA().length()>0) {
+
+                        con2.ActualizaPlanFormaActividades(conecta, objPreConexion, escuela, objRenapo, claveContruida, programa);
+                    }
+                    
+                     if (obj3.getVALIDAR().equals("true") && obj3.getINCLUIDA().length()==0) {
+
+                        con2.GuardaPlanFormaActividadesFaltantes(conecta, objPreConexion, escuela, objRenapo, claveContruida, programa);
+                    }
+                     
+                       if (obj3.getVALIDAR().equals("false") && obj3.getINCLUIDA().length()>0) {
+                           
+                           System.out.println("Competencia a borrar"+ obj3.getID_COMPETENCIA());
+                           
+                           
+                                 con2.EliminaActividad(conecta, objPreConexion, programa);
+                        
+                           
+                           
+                           
+                           
+                           
+                           
+
+                      
+                    }
+
+                }
+
+                cierraConexiones();
+
+                addFieldError("SEGUARDO", "El Plan de Formación se atualizo de forma correcta");
+
+                FormPlan();
+
+            }
+            
+            
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+    
+    
+    
+    
+    
 
     public String construyeClave(String cctplan) throws Exception {
 

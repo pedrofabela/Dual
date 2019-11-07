@@ -71,7 +71,11 @@ public class consultaPlanFormDatosMapper implements Mapper {
             dat.setNO_MENTORES_ACAD(rs.getString("NO_MENTORES_ACAD"));
         }    
                
-               
+              if  (rs.getString("HORAS_SEMANA") != null) {
+            dat.setHORAS_SEMANA(rs.getString("HORAS_SEMANA").trim());
+        } else {
+            dat.setHORAS_SEMANA(rs.getString("HORAS_SEMANA"));
+        }       
             
                     
                    

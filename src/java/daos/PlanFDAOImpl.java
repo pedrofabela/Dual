@@ -43,6 +43,7 @@ import mappers.consultaPlanFormMapper;
 import mappers.consultaUEMapper;
 import mappers.descargaProgramasMapper;
 import mappers.descargaProgramasMapper2;
+import mappers.descargaProgramasMapper3;
 import mappers.escalaMapper;
 import mappers.horaMapper;
 import mappers.listaPlanUEMapper;
@@ -100,6 +101,18 @@ public class PlanFDAOImpl {
         return list;
     }
     
+    public List programasEscuelaConsulta(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
+        
+       String query = "SELECT ACT.NOM_CARRERA, ACT.CVE_PLAN_EST, ACT.ENFASIS, ACT.VERSION, ACT.NOMBRE_MATERIA, ACT.NUMERO_PERIODO, ACT.COMPETENCIA, ACT.ACTIVIDAD, ACT.ID_CCT_PLAN, ACT.ID_MATERIA, ACT.ID_COMPETENCIA, ACT.ID_ACTIVIDAD, CASE WHEN (LENGTH(ACTPLAN.DES_ACTIVIDAD)>0) THEN ACTPLAN.DES_ACTIVIDAD   ELSE ACT.ACTIVIDAD END AS DES_ACTIVIDAD,  CASE WHEN LENGTH(ACTPLAN.ID_ACTIVIDAD)>0 THEN 'true' ELSE '' END AS VALIDAR,  ACT.NO_PASA, ACTPLAN.ID_ACTIVIDAD AS INCLUIDA, ACTPLAN.ID_LUGAR,  ACTPLAN.ID_HORA, ACTPLAN.ID_ESCALA,  ACTPLAN.PLAN_ROTACION,    ACTPLAN.FECHA_REG,   ACTPLAN.ID_ACT_EVALUA,  ACTPLAN.EVIDENCIAS FROM (SELECT  NOM_CARRERA, CVE_PLAN_EST,ENFASIS, VERSION, NOMBRE_MATERIA, NUMERO_PERIODO, COMPETENCIA, ACTIVIDAD, ID_CCT_PLAN, ID_MATERIA, ID_COMPETENCIA, ID_ACTIVIDAD, 'DES_ACTIVIDAD' AS DES_ACTIVIDAD, 'VALIDAR' AS VALIDAR, '' AS NO_PASA FROM VISTA_REGISTRO_PROG WHERE ID_CCT_PLAN='"+escuela.getAUXIDCCTPLAN2()+"' AND ACTIVIDAD IS NOT NULL AND NUMERO_PERIODO>='"+escuela.getPERIODO_INICIO()+"' ORDER BY TO_NUMBER(NUMERO_PERIODO), ID_COMPETENCIA, ID_ACTIVIDAD ASC)ACT LEFT OUTER JOIN (SELECT ID_PLAN_FORMA,ID_ACTIVIDAD, ID_LUGAR,  ID_HORA, ID_ESCALA,  PLAN_ROTACION,    FECHA_REG,   ID_ACT_EVALUA,  EVIDENCIAS, DES_ACTIVIDAD FROM TBL_PLANFORM_ACT WHERE ID_PLAN_FORMA='"+programa.getID_PLAN_FORMA()+"')ACTPLAN ON ACT.ID_ACTIVIDAD=ACTPLAN.ID_ACTIVIDAD";
+       
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new descargaProgramasMapper3());
+        return list;
+    }
+    
+    
+    
     public List programasPlanForm(AlumnoBean alumno, escuelaBean escuela, usuarioBean usuario, programaEsBean programa) throws Exception {
         String query = "SELECT ID_PLAN_FORMA, NUMERO_PERIODO, ID_MATERIA, ID_COMPETENCIA, ID_ESCALA, ID_LUGAR, PLAN_ROTACION, DES_ACTIVIDAD, FECHA_REG, ID_ACTIVIDAD, ID_ACT_EVALUA, NOMBRE_MATERIA, COMPETENCIA, ACTIVIDAD, HORA, LUGAR, ID_HORA FROM (\n" +
 "\n" +
@@ -121,16 +134,10 @@ public class PlanFDAOImpl {
     }
     
     
+    
+    
     public List programasPlanFormDatos(AlumnoBean alumno, escuelaBean escuela, usuarioBean usuario, programaEsBean programa) throws Exception {
-        String query = " SELECT ID_PLAN_FORMA,\n" +
-"  NOMBREPLAN_FORM,\n" +
-"  DESCRIPCION,\n" +
-"  DURACION,\n" +
-"  NO_ESTUDIANTES,\n" +
-"  NO_MENTORES_UE,\n" +
-"  NO_MENTORES_ACAD\n" +
-"  \n" +
-"FROM TBL_PLAN_FORM WHERE ID_PLAN_FORMA='"+programa.getID_PLAN_FORMA()+"' ";
+        String query = " SELECT ID_PLAN_FORMA,  NOMBREPLAN_FORM,  DESCRIPCION,  DURACION,  NO_ESTUDIANTES,  NO_MENTORES_UE,  NO_MENTORES_ACAD, HORAS_SEMANA FROM TBL_PLAN_FORM WHERE ID_PLAN_FORMA='"+programa.getID_PLAN_FORMA()+"' ";
         Constantes.enviaMensajeConsola("Consulta cct----->" + query);
         List list = null;
         list = oraDaoFac.queryForList(query, new consultaPlanFormDatosMapper());
@@ -192,7 +199,44 @@ public class PlanFDAOImpl {
         return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_PLAN_FORM", arregloCampos);
     }
      
-     
+    public boolean actualizaPlanForm(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, String claveConstruida, programaEsBean programa) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+       
+         temporal = new ObjPrepareStatement("ID_CCT_PLAN", "STRING", escuela.getAUXIDCCTPLAN2());
+        arregloCampos.add(temporal);
+           temporal = new ObjPrepareStatement("NOMBREPLAN_FORM", "STRING", programa.getNOMBREPLAN_FORM());
+        arregloCampos.add(temporal);
+         
+         temporal = new ObjPrepareStatement("DURACION", "STRING", programa.getPERIODO());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("DESCRIPCION", "STRING", programa.getDESCRIPCION_FORM());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("NO_ESTUDIANTES", "STRING", programa.getNO_ESTUDIANTES());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NO_MENTORES_UE", "STRING", programa.getNO_MENTORES_UE());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("NO_MENTORES_ACAD", "STRING", programa.getNO_MENTORES_ACAD());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_IE_UE", "STRING", escuela.getID_IE_UE());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("HORAS_SEMANA", "STRING", programa.getHORAS_SEMANA());
+        arregloCampos.add(temporal);
+        
+         String Condicion = "where ID_PLAN_FORMA='" + programa.getID_PLAN_FORMA() + "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdateTransaccion(conn, stat,"TBL_PLAN_FORM", arregloCampos,Condicion);
+    }
+      
      
      
      
@@ -273,6 +317,79 @@ public class PlanFDAOImpl {
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_PLANFORM_ACT", arregloCampos);
+    }
+      
+       public boolean GuardaPlanFormaActividadesFaltantes(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, String claveConstruida, programaEsBean programa) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_PLAN_FORMA", "STRING", programa.getID_PLAN_FORMA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_MATERIA", "STRING", programa.getID_MATERIA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_COMPETENCIA", "STRING", programa.getID_COMPETENCIA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_ACTIVIDAD", "STRING", programa.getID_ACTIVIDAD());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_ESCALA", "STRING", programa.getID_ESCALA());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("ID_HORA", "STRING", programa.getID_HORA());
+        arregloCampos.add(temporal);
+       temporal = new ObjPrepareStatement("ID_LUGAR", "STRING", programa.getID_LUGAR());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("PLAN_ROTACION", "STRING", programa.getPLAN_ROTACION());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("DES_ACTIVIDAD", "STRING", programa.getDES_ACTIVIDAD());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("EVIDENCIAS", "STRING", programa.getEVIDENCIAS());
+        arregloCampos.add(temporal);
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_PLANFORM_ACT", arregloCampos);
+    }
+      
+      public boolean ActualizaPlanFormaActividades(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, String claveConstruida, programaEsBean programa) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+      
+         temporal = new ObjPrepareStatement("ID_MATERIA", "STRING", programa.getID_MATERIA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_COMPETENCIA", "STRING", programa.getID_COMPETENCIA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_ACTIVIDAD", "STRING", programa.getID_ACTIVIDAD());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_ESCALA", "STRING", programa.getID_ESCALA());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("ID_HORA", "STRING", programa.getID_HORA());
+        arregloCampos.add(temporal);
+       temporal = new ObjPrepareStatement("ID_LUGAR", "STRING", programa.getID_LUGAR());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("PLAN_ROTACION", "STRING", programa.getPLAN_ROTACION());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("DES_ACTIVIDAD", "STRING", programa.getDES_ACTIVIDAD());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("EVIDENCIAS", "STRING", programa.getEVIDENCIAS());
+        arregloCampos.add(temporal);
+        
+        String Condicion = "where ID_PLAN_FORMA='" + programa.getID_PLAN_FORMA() + "' AND ID_ACT_EVALUA='" + programa.getID_ACT_EVALUA() + "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdateTransaccion(conn, stat,"TBL_PLANFORM_ACT", arregloCampos,Condicion);
     }
       
         public boolean GuardaPlanFormaActividadesAlu(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, programaEsBean programa, AlumnoBean alumno) throws Exception {
@@ -408,7 +525,14 @@ public class PlanFDAOImpl {
         return list;
     }      
              
-             
+       public List listaPlanUEEdita(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela) throws Exception {
+       String query =" SELECT ID_PLAN_FORMA, NOMBREPLAN_FORM, DURACION FROM (SELECT TBL_CCT_PLAN.ID_PLAN,  TBL_INS_UE.ID_ESCUELA,  TBL_INS_UE.ID_UE,  TBL_INS_UE.STATUS_GENERAL,  TBL_PLAN_FORM.ID_PLAN_FORMA,  TBL_PLAN_FORM.NOMBREPLAN_FORM,  TBL_PLAN_FORM.DURACION,  TBL_PLAN_FORM.ID_CCT_PLAN,  TBL_PLAN_FORM.ESTATUS,  TBL_PLAN_FORM.ID_IE_UE,  TBL_PLAN_FORM.DESCRIPCION FROM TBL_PLAN_FORM INNER JOIN TBL_CCT_PLAN ON TBL_PLAN_FORM.ID_CCT_PLAN = TBL_CCT_PLAN.ID_CCT_PLAN INNER JOIN TBL_INS_UE ON TBL_PLAN_FORM.ID_IE_UE = TBL_INS_UE.ID_IE_UE)WHERE ID_CCT_PLAN='"+escuela.getAUXIDCCTPLAN2()+"'  AND ID_IE_UE='"+escuela.getID_IE_UE()+"' AND STATUS_GENERAL=1 ORDER BY ID_PLAN_FORMA ASC";
+        
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new listaPlanUEMapper());
+        return list;
+    }             
              
     public List listaEscala(escuelaBean escuela, usuarioBean usuario) throws Exception {
        String query ="SELECT ID_ESCALA, ESCALA FROM CAT_ESCALA ORDER BY ID_ESCALA ASC";
@@ -700,6 +824,24 @@ public class PlanFDAOImpl {
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryDelete("TBL_HIST_ALUM", arregloCampos);
+    }
+     public boolean EliminaActividad(Connection conn, PreparedStatement stat, programaEsBean programa) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del delete ELIMINAR ALUMNO...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_ACT_EVALUA", "STRING", programa.getID_ACT_EVALUA());
+        arregloCampos.add(temporal);
+         String Condicion = "where ID_PLAN_FORMA='" + programa.getID_PLAN_FORMA()+ "' AND ID_COMPETENCIA='" + programa.getID_COMPETENCIA()+"' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryDeleteCondicion(conn, stat,"TBL_PLANFORM_ACT", arregloCampos,Condicion);
     }
 
     public List ConsultaInteresadosPE(AlumnoBean al) throws Exception {
