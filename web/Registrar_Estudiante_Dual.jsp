@@ -605,10 +605,10 @@ function consulta3(accion) {
                                                                                         <td><s:property value="NOM_PRO_EDU"/></td> 
                                                                                         <td><s:property value="GRADO"/></td>
                                                                                         <s:if test="STATUS_PROCESO==4">
-                                                                                            <td class="text-warning text-center font-weight-bold"><i class="material-icons">sentiment_satisfied</i>Aceptado</td>
+                                                                                            <td class="text-warning text-center font-weight-bold"><div style="width: 100; text-align: center;"><i class="material-icons">sentiment_satisfied</i><div style="width: 100; text-align: center;">Aceptado por U. Económica</div></td>
                                                                                         </s:if>
                                                                                         <s:if test="STATUS_PROCESO>=5">
-                                                                                            <td class="text-success text-center font-weight-bold"><i class=" material-icons">sentiment_very_satisfied</i>Alumno DUAL </td>
+                                                                                                <td class="text-success text-center font-weight-bold"><div style="width: 100; text-align: center;"><i class=" material-icons">sentiment_very_satisfied</i></div><div style="width: 100; text-align: center;">Estudiante DUAL</div> </td>
                                                                                         </s:if>
 
                                                                                         <td class="text-center"><s:if test="STATUS_PROCESO==4">
@@ -616,8 +616,12 @@ function consulta3(accion) {
                                                                                                 </a>
                                                                                             </s:if>
                                                                                             <s:if test="STATUS_PROCESO==6">
-                                                                                                <a href="Javascript:ActEstatus('ActualizaStatusA','<s:property value="ID_HISTORICO"/>')" ><i class="material-icons">check_box</i>
+                                                                                                
+                                                                                                  <a href="Javascript:RegistraDual('MuestraFormActualiza','<s:property value="ID_ALUMNO"/>','<s:property value="ID_HISTORICO"/>','<s:property value="FEC_NAC"/>','<s:property value="AUX_RES_ACAD"/>', '<s:property value="ID_IE_UE"/>', '<s:property value="ID_CCT_PLAN"/>', '<s:property value="FECHA_INICIO_DUAL"/>' )" ><i class="material-icons text-success">cached</i>
                                                                                                 </a>
+                                                                                                
+                                                                                                
+                                                                                               
                                                                                             </s:if>
                                                                                         </td>
 
@@ -1170,12 +1174,18 @@ function consulta3(accion) {
                                                                         </div>
                                                                                       
 
-
+                                                                           <s:if test="banregistro">
                                                                                        <div class="form-group col-md-12 text-center" >
                                                                             <a href="Javascript:consulta('guardaPlanFormEst2')"  class="btn btn-round btn-primary">Guardar</a>
                                                                         </div>
-
-                                                                        
+                                                                            </s:if>
+                                                                                      
+                                                                          <s:if test="banactualiza">
+                                                                                       <div class="form-group col-md-12 text-center" >
+                                                                            <a href="Javascript:consulta('actualizaPlanFormEst2')"  class="btn btn-round btn-primary">Actualizar</a>
+                                                                        </div>
+                                                                            </s:if>
+                                                                                      
                                                                             
                                                                          
 
@@ -1208,6 +1218,49 @@ function consulta3(accion) {
                                                                     <!-- end content-->
                                                                 </div>
                                                             </s:if>
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
                                                             
                                                             
                                                                 <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success"></s:fielderror>
@@ -1251,6 +1304,8 @@ function consulta3(accion) {
                                             <s:textfield name="al.ID_IE_UE" id="UE" cssStyle="display:none;" ></s:textfield> 
                                             <s:textfield name="al.ID_CCT_PLAN" id="CCTPLAN" cssStyle="display:none;" ></s:textfield> 
                                             <s:hidden name="bnprog" value="%{bnprog}"></s:hidden>
+                                             <s:hidden name="banregistro" value="%{banregistro}"></s:hidden>
+                                              <s:hidden name="banactualiza" value="%{banactualiza}"></s:hidden>
                                             <s:textfield name="banListaAlu" value="%{banListaAlu}" cssStyle="display:none;" ></s:textfield>
                                             <s:textfield name="banCampAlumno" value="%{banCampAlumno}" cssStyle="display:none;" ></s:textfield>
                                             <s:textfield name="alumno.AUXIDHISTALUM" id="alumnoAux" cssStyle="display:none;"></s:textfield>

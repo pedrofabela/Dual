@@ -79,6 +79,8 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
     private List<ColoniasBean> ListaColonia = new ArrayList<ColoniasBean>();
     private List<ColoniasBean> ListaColoniaP = new ArrayList<ColoniasBean>();
      public List<programaEsBean> ListaProgramasRegistro = new ArrayList<programaEsBean>();
+     
+      public List<programaEsBean> ListaPlanAlumno = new ArrayList<programaEsBean>();
     
      public List<AlumnoBean> ListaEstudiantes = new ArrayList<AlumnoBean>();
       public List<responsablesBean> ListaResUE = new ArrayList<responsablesBean>();
@@ -106,6 +108,13 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
      boolean mensajeSnAct = false;
      boolean banListaAlu = false;
      boolean banCampAlumno = false;
+    boolean banregistro=false;
+     boolean banactualiza=false;
+     
+     
+     
+     
+     
 
     private String TipoError;
     private String TipoException;
@@ -1020,7 +1029,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
 
             AlumnoDAOImpl con = new AlumnoDAOImpl();
             
-            
+          
             ListaAceptados.clear();
             
             al.setAUX_RES_ACAD("");
@@ -1032,6 +1041,20 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                alumno.setAUXIDHISTALUM("");
                    ListaEstudiantes.clear();
                    al.setFECHA_INICIO_DUAL("");
+                   ListaPlanAlumno.clear();
+                   ListaProgramasRegistro.clear();
+                   ListaPlanAlumno.clear();
+                   ListaProgramasRegistroDatos.clear();
+                   ListaUE.clear();
+                   ListaPlanUE.clear();
+                   ListaResAcad.clear();
+                   ListaResMentorUE.clear();
+                   ListaMentorAcad.clear();
+                   ListaResUE.clear();
+         
+                   
+                   
+                   
                                            
                     banListaAlu=false;
               banCampAlumno=false;     
@@ -1284,6 +1307,271 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
             
             ListaPlanUE=con2.listaPlanUE(alumno, usuariocons, escuela, perfil);
             
+            
+            
+            banregistro=true;
+            banactualiza=false;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+    
+    public String MuestraFormActualiza() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            AlumnoDAOImpl con = new AlumnoDAOImpl();
+
+            Iterator LIP = ListaAceptados.iterator();
+            AlumnoBean objg;
+
+            Constantes.enviaMensajeConsola("id alumno: " + al.getID_ALUMNO());
+
+            while (LIP.hasNext()) {
+                objg = (AlumnoBean) LIP.next();
+
+                if (al.getID_ALUMNO().equals(objg.getID_ALUMNO())) {
+
+                    al.setNOMBRE_COMPLETO(objg.getNOMBRE_COMPLETO());
+                    al.setMATRICULA(objg.getMATRICULA());
+                    al.setNO_SEGURO(objg.getNO_SEGURO());
+                    al.setDOMICILIO(objg.getDOMICILIO());
+                    al.setCOLONIA(objg.getCOLONIA());
+                    al.setLOCALIDAD(objg.getLOCALIDAD());
+                    al.setCP(objg.getCP());
+                    al.setCVE_MUN(objg.getCVE_MUN());
+                    al.setFECHA_INICIO_DUAL(objg.getFECHA_INICIO_DUAL());
+                    al.setCURP_PADRE(objg.getCURP_PADRE());
+                    al.setNOM_PADRE(objg.getNOM_PADRE());
+                    al.setAPELLIDOP_PADRE(objg.getAPELLIDOP_PADRE());
+                    al.setAPELLIDOM_PADRE(objg.getAPELLIDOM_PADRE());
+                    al.setTEL_PADRE(objg.getTEL_PADRE());
+                    al.setEMAIL_PADRE(objg.getEMAIL_PADRE());
+                    al.setDOMICILIO_PADRE(objg.getDOMICILIO_PADRE());
+                    al.setCOLONIA_PADRE(objg.getCOLONIA_PADRE());
+                    al.setLOCALIDAD_PADRE(objg.getLOCALIDAD_PADRE());
+                    al.setCP_PADRE(objg.getCP_PADRE());
+                    al.setCVE_MUN_PADRE(objg.getCVE_MUN_PADRE());
+                    al.setMISMO_DOMICILIO(objg.getMISMO_DOMICILIO());
+                    al.setSTATUS_ALUMNO(objg.getSTATUS_ALUMNO());
+
+                }
+
+            }
+
+            ListaColonia = con.ConsultaColonia(al.getCP());
+
+            if (ListaColonia.size() > 0) {
+
+                Iterator LC = ListaColonia.iterator();
+                ColoniasBean objg2;
+
+                while (LC.hasNext()) {
+                    objg2 = (ColoniasBean) LC.next();
+
+                    al.setCVE_MUN(objg2.getID_MUNICIPIO());
+                    al.setMUNICIPIO(objg2.getMUNICIPIO());
+
+                }
+
+            }
+            
+             ListaColoniaP = con.ConsultaColonia(al.getCP_PADRE());
+
+            if (ListaColoniaP.size() > 0) {
+
+                Iterator LC = ListaColoniaP.iterator();
+                ColoniasBean objg3;
+
+                while (LC.hasNext()) {
+                    objg3 = (ColoniasBean) LC.next();
+
+                    al.setCVE_MUN_PADRE(objg3.getID_MUNICIPIO());
+                    al.setMUNICIPIO_PADRE(objg3.getMUNICIPIO());
+
+                }
+            }
+
+            String valor = con.consultaHistoricoAlumno(al);
+
+            if (valor.isEmpty()) {
+
+                al.setTIPO_ALUMNO("NUEVO INGRESO");
+
+            } else {
+                Constantes.enviaMensajeConsola("entro a reingreso");
+                al.setTIPO_ALUMNO("REINGRESO");
+            }
+
+            String Cadena = al.getFEC_NAC();
+            String sSubCadena = Cadena.substring(6, 10);
+            System.out.println(sSubCadena);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            Date fechaActual = new Date();
+
+            String fechaSistema = dateFormat.format(fechaActual);
+
+            String Cadena2 = fechaSistema;
+            String sSubCadena2 = Cadena2.substring(6, 10);
+            System.out.println(sSubCadena2);
+
+            Constantes.enviaMensajeConsola("fecha Sistema " + fechaSistema);
+
+            int anioE = 0, anioA = 0, edad = 0;
+
+            anioE = Integer.valueOf(sSubCadena);
+
+            anioA = Integer.valueOf(sSubCadena2);
+
+            edad = anioA - anioE;
+
+            al.setEDAD(String.valueOf(edad));
+
+            Constantes.enviaMensajeConsola("edad: " + edad);
+
+            if (edad < 18) {
+                banFormPad = true;
+
+                if (al.getCURP_PADRE().length() > 0) {
+                    banMuestraCurpP = true;
+                } else {
+                    banMuestraCurpP = false;
+                }
+
+            } else {
+                banFormPad = false;
+            }
+
+            banMuestraFormDUAL = true;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+               PlanFDAOImpl con2 = new PlanFDAOImpl();
+               
+               
+              alumno.setAUXIDHISTALUM(al.getID_HISTORICO());
+              
+               
+            
+            
+            
+               banListaAlu=false;
+              banCampAlumno=true;
+              System.out.println("action.PlanFormacion_Action.eligeAlumno()");
+              
+              System.out.println("el valor a consultar es "+alumno.getAUXIDHISTALUM());
+              
+          ListaEstudiantes=con2.consultaAlumPlanHit(alumno, usuariocons, escuela);
+          
+            for (int i = 0; i < ListaEstudiantes.size(); i++) {
+                
+                alumno.setCURP(ListaEstudiantes.get(i).getCURP());
+                 alumno.setNOMBRE(ListaEstudiantes.get(i).getNOMBRE());
+                alumno.setMATRICULA(ListaEstudiantes.get(i).getMATRICULA());
+                 alumno.setID_UE(ListaEstudiantes.get(i).getID_UE());
+                 alumno.setID_PLAN(ListaEstudiantes.get(i).getID_PLAN());
+                
+            }
+            
+            
+            
+            ListaUE=con2.consultaUE(alumno, usuariocons, escuela);
+            
+            System.out.println("unidad"+ListaUE.size());
+            for (int j = 0; j < ListaUE.size(); j++) {
+                unidad.setRFC(ListaUE.get(j).getRFC());
+                 unidad.setRAZON_SOCIAL(ListaUE.get(j).getRAZON_SOCIAL());
+            }
+            
+            int perfil=0;
+            
+        
+              programa.setID_RESUE(al.getAUX_RES_ACAD()); 
+              programa.setID_RES_PROGEDU(usuariocons.getID_PERSONA());
+            
+            
+            
+            perfil=26;
+            ListaResUE=con2.listaResUE(alumno, usuariocons, escuela, perfil);
+            
+            
+            
+             perfil=28;
+            ListaResMentorUE=con2.listaResUE(alumno, usuariocons, escuela, perfil);
+            
+            
+            
+            ListaResAcad=con2.listaResAcad(alumno, usuariocons, escuela, perfil);
+            
+            
+            
+            
+            ListaMentorAcad=con2.listaMentorAcad(alumno, usuariocons, escuela, perfil);
+            
+            
+            
+            
+            ListaPlanUE=con2.listaPlanUE(alumno, usuariocons, escuela, perfil);
+            
+            
+            
+            banregistro=false;
+            banactualiza=true;
+            
+            
+            ListaPlanAlumno=con2.consultaPlanAlumno(alumno, usuariocons, escuela);
+            
+         
+            for (int w = 0; w < ListaPlanAlumno.size(); w++) {
+                
+                programa.setID_MENTORUE(ListaPlanAlumno.get(w).getID_MENTOR_UE());
+                 programa.setID_MENTORACAD(ListaPlanAlumno.get(w).getID_MENTOR_ACAD());
+                programa.setFECHA_REG_PLAN(ListaPlanAlumno.get(w).getFECHA_INICIOPF());
+                 programa.setFECHA_TERMINO_PLAN(ListaPlanAlumno.get(w).getFECHA_TERMINOPF());
+                 programa.setID_PLAN_FORMA(ListaPlanAlumno.get(w).getID_PLAN_FORM());
+                
+                
+            }
+            
+            consultaPlanEstudiante3();
             
             
             
@@ -1919,6 +2207,350 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
         }
 
     }         
+       
+       public String actualizaPlanFormEst2() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            PlanFDAOImpl con2 = new PlanFDAOImpl();
+              AlumnoDAOImpl con = new AlumnoDAOImpl();
+           
+             boolean banResUE=false;
+             boolean banMentorUE=false;
+             boolean banResAcad=false;
+             boolean banMetorAcad=false;
+             boolean planForm=false;
+             boolean fechaInicio=false;
+             boolean fechaTermino=false;
+             String fecha;
+                  boolean res=false;
+                     boolean res2=false;
+                     
+                     
+                
+                     
+                     
+                     
+                     
+                          
+             if(programa.getID_RESUE().length()>0){
+                 banResUE=true;
+                 
+             }
+             else{
+                 
+                 banResUE=false;
+                   addFieldError("ERRORRESUE", "Favor de seleccionar a un Responsble");
+             }
+             
+             
+            
+               if(programa.getID_MENTORUE().length()>0){
+                 banMentorUE=true;
+                 
+             }
+             else{
+                 
+                 banMentorUE=false;
+                   addFieldError("ERRORMENTORUE", "Favor de seleccionar a un Mentor");
+             }
+               
+            
+            
+              
+                if(programa.getID_MENTORACAD().length()>0){
+                 banMetorAcad=true;
+                 
+             }
+             else{
+                 
+                 banMetorAcad=false;
+                   addFieldError("ERRORMENTORACAD", "Favor de seleccionar a un Mentor");
+             }
+                
+                 
+              res=validarFecha(programa.getFECHA_REG_PLAN());
+            
+              if(res==true){
+                
+                  
+                  
+                  
+                  fechaInicio=true;
+                 
+             }
+             else{
+                 
+                 fechaInicio=false;
+                   addFieldError("ERRORFECHAINICIO", "Favor de seleccionar una fecha valida");
+             }
+              
+                if(programa.getID_PLAN_FORMA().length()>0){
+                 
+                    
+                    planForm=true;
+                 
+             }
+             else{
+                 
+                 planForm=false;
+                   addFieldError("ERRORPLANFORM", "Favor de seleccionar un plan de Formación");
+             }
+                   res2=validarFecha(programa.getFECHA_TERMINO_PLAN());
+                
+                  if(res2==true){
+                 
+                    
+                    fechaTermino=true;
+                 
+             }
+             else{
+                 
+                 fechaTermino=false;
+                   addFieldError("ERRORFECHATERMINO", "Favor de seleccionar una fecha valida");
+             }
+                
+               
+                  
+                    
+                    Constantes.enviaMensajeConsola(""+banResUE);
+                    Constantes.enviaMensajeConsola(""+banMentorUE);
+                   Constantes.enviaMensajeConsola(""+banMetorAcad);
+                   Constantes.enviaMensajeConsola(""+planForm);
+                     Constantes.enviaMensajeConsola(""+fechaInicio);
+                      Constantes.enviaMensajeConsola(""+fechaTermino);
+                   
+                   
+                  
+                   if (banResUE && banMentorUE  && banMetorAcad && planForm && fechaInicio && fechaTermino) {
+                       
+                       
+                       if(al.getFECHA_INICIO_DUAL().length()>0){
+                           
+                           Constantes.enviaMensajeConsola("la fecha a actualizar es:" +al.getFECHA_INICIO_DUAL());
+                       }
+                       else{
+                           
+                          al.setFECHA_INICIO_DUAL(programa.getFECHA_REG_PLAN());
+                           
+                       }
+                       
+                       
+                       
+                        if (Integer.parseInt(al.getEDAD()) < 18) {
+
+                if (al.getMISMO_DOMICILIO().equals("true")) {
+
+                    al.setDOMICILIO_PADRE("");
+                    al.setLOCALIDAD_PADRE("");
+                    al.setCP_PADRE("");
+                    al.setCOLONIA_PADRE("");
+                    al.setCVE_MUN_PADRE("");
+
+                    con.ActualizaDatosDUAL(al);
+
+                } else {
+                    con.ActualizaDatosDUAL(al);
+                }
+
+            } else {
+
+                al.setCURP_PADRE("");
+                al.setNOM_PADRE("");
+                al.setAPELLIDOP_PADRE("");
+                al.setAPELLIDOM_PADRE("");
+                al.setTEL_PADRE("");
+                al.setEMAIL_PADRE("");
+                al.setMISMO_DOMICILIO("");
+                al.setDOMICILIO_PADRE("");
+                al.setLOCALIDAD_PADRE("");
+                al.setCP_PADRE("");
+                al.setCOLONIA_PADRE("");
+                al.setCVE_MUN_PADRE("");
+
+                con.ActualizaDatosDUAL(al);
+
+            }
+
+         
+                       
+                       
+                       
+                     
+                       
+                       
+                       
+                       
+                       
+                       
+                       
+                       
+                       
+
+                conecta = con2.crearConexion();
+                //statement
+                objConexion = con2.crearStatement(conecta);
+                
+                
+                        con2.actualizaPlanFormEst(conecta, objPreConexion, escuela, objRenapo, programa, alumno);
+                       
+                       
+                        
+          
+            
+             String PlanGuardado="";
+         
+            for (int w = 0; w < ListaPlanAlumno.size(); w++) {
+                
+               
+             PlanGuardado= ListaPlanAlumno.get(w).getID_PLAN_FORM();
+                
+                
+            }  
+                        
+                if(PlanGuardado.equals(programa.getID_PLAN_FORMA())){
+                    
+                    
+                    
+                    System.out.println("plan registrado"+PlanGuardado +"nuevo programa"+programa.getID_PLAN_FORMA());
+                    
+                    
+                }     
+                else{
+                    
+                    
+                 con2.borrarPlanFormEstAct(conecta,  objPreConexion, escuela, objRenapo, programa, alumno);
+                    
+                    
+                    
+                    System.out.println("lista registro"+ListaProgramasRegistro.size());
+                    
+                    Iterator LPR = ListaProgramasRegistro.iterator();
+                programaEsBean obj3;
+                while (LPR.hasNext()) {
+                    obj3 = (programaEsBean) LPR.next();
+                  
+                    programa.setID_MATERIA(obj3.getID_MATERIA());
+                    programa.setID_COMPETENCIA(obj3.getID_COMPETENCIA());
+                    programa.setID_ACTIVIDAD(obj3.getID_ACTIVIDAD());
+                    programa.setHORAS_PLAN(obj3.getID_HORA());
+                    programa.setLUGAR_PLAN(obj3.getID_LUGAR());
+                    programa.setESCALA_PLAN(obj3.getID_ESCALA());
+                    programa.setDES_ACTIVIDAD(obj3.getDES_ACTIVIDAD());
+                    programa.setPLAN_ROTACION(obj3.getPLAN_ROTACION());
+                    programa.setID_HIST_ALU(obj3.getID_HIST_ALU());
+                    
+                      
+                      
+                      
+                      
+                      System.out.println("Materia:"+ programa.getID_MATERIA() );
+                      
+                            System.out.println("competencia:"+ programa.getID_COMPETENCIA());
+                                  System.out.println("actividad"+ programa.getID_ACTIVIDAD());
+                                        System.out.println("horas"+ programa.getHORAS_PLAN());
+                                              System.out.println("lugar"+ programa.getLUGAR_PLAN());    
+                                              System.out.println("escala"+ programa.getESCALA_PLAN());
+                                                    System.out.println("actividad"+ programa.getDES_ACTIVIDAD() );
+                                                          System.out.println("plan de rotación"+ programa.getPLAN_ROTACION());
+                                                                 System.out.println(""+ programa.getID_PLAN_FORMA());
+                                                                 System.out.println(""+ alumno.getAUXIDHISTALUM());
+                                              
+                                              
+                      
+                      
+                      
+                      
+                   
+                        con2.GuardaPlanFormaActividadesAluAct(conecta, objPreConexion, escuela, objRenapo,  programa, alumno);
+                   
+
+                } 
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                        
+                       
+                       
+               
+
+             
+
+            
+
+               
+                
+              
+                cierraConexiones();
+
+                addFieldError("SEGUARDO", "El Plan de Formación se guardo con éxito");
+                
+            ListaProgramasRegistro.clear();
+            ListaEstudiantes.size();
+                                                                                banCampAlumno=false;
+                                                                                banCampAlumno=false;
+
+                 ConsultaAlumnosAceptados();
+
+            } 
+                  
+                  
+                  
+                  
+                
+              
+                
+                
+              
+             
+              
+            
+        //  Constantes.enviaMensajeConsola("sali de la consulta de programa educativo con:"+ListaProgramasRegistro.size());
+            
+            
+           
+          return "SUCCESS";
+
+        } catch (Exception sqle) {
+
+            TipoException = sqle.getMessage();
+            
+            System.out.println("action.PlanFormacion_Action.guardaPlanFormEst()"+TipoException
+            );
+            return "ERROR";
+        }
+
+    }          
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
 
     public String ActualizaStatusA() {
 
@@ -2427,6 +3059,30 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
 
     public void setObjRenapo(renapoBean objRenapo) {
         this.objRenapo = objRenapo;
+    }
+
+    public boolean isBanregistro() {
+        return banregistro;
+    }
+
+    public void setBanregistro(boolean banregistro) {
+        this.banregistro = banregistro;
+    }
+
+    public boolean isBanactualiza() {
+        return banactualiza;
+    }
+
+    public void setBanactualiza(boolean banactualiza) {
+        this.banactualiza = banactualiza;
+    }
+
+    public List<programaEsBean> getListaPlanAlumno() {
+        return ListaPlanAlumno;
+    }
+
+    public void setListaPlanAlumno(List<programaEsBean> ListaPlanAlumno) {
+        this.ListaPlanAlumno = ListaPlanAlumno;
     }
     
     

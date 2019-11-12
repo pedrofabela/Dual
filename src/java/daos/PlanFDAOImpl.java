@@ -38,6 +38,7 @@ import mappers.UEIEMapper;
 import mappers.UEMapper;
 import mappers.ValidadosMapper;
 import mappers.consultaAluRegMapper;
+import mappers.consultaPlanAluHist;
 import mappers.consultaPlanFormDatosMapper;
 import mappers.consultaPlanFormMapper;
 import mappers.consultaUEMapper;
@@ -279,9 +280,61 @@ public class PlanFDAOImpl {
     }
      
      
+        public boolean actualizaPlanFormEst(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, programaEsBean programa, AlumnoBean alumno) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_HIST_ALU", "STRING", alumno.getAUXIDHISTALUM());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_PLAN_FORM", "STRING", programa.getID_PLAN_FORMA());
+        arregloCampos.add(temporal);
+           temporal = new ObjPrepareStatement("FECHA_INICIOPF", "STRING", programa.getFECHA_REG_PLAN());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("FECHA_TERMINOPF", "STRING", programa.getFECHA_TERMINO_PLAN());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_MENTOR_UE", "STRING", programa.getID_MENTORUE());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_MENTOR_ACAD", "STRING", programa.getID_MENTORACAD());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_RES_UE", "STRING", programa.getID_RESUE());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_RES_ACAD", "STRING", "");
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ESTATUS_PF", "STRING", "1");
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_RES_PROGEDU", "STRING", programa.getID_RES_PROGEDU());
+        arregloCampos.add(temporal);
+          String Condicion = "where ID_HIST_ALU='" + alumno.getAUXIDHISTALUM() + "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdateTransaccion(conn, stat,"TBL_HISTALU_PF", arregloCampos, Condicion );
+    }
      
-     
-     
+      public boolean borrarPlanFormEstAct(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, programaEsBean programa, AlumnoBean alumno) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_HIST_ALU", "STRING", alumno.getAUXIDHISTALUM());
+        arregloCampos.add(temporal);
+        
+        
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryDelete("TBL_PLANFORM_ACT_ALU", arregloCampos );
+    }
      
       public boolean GuardaPlanFormaActividades(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, String claveConstruida, programaEsBean programa) throws Exception {
 
@@ -432,6 +485,42 @@ public class PlanFDAOImpl {
         return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_PLANFORM_ACT_ALU", arregloCampos);
     }
       
+           public boolean GuardaPlanFormaActividadesAluAct(Connection conn, PreparedStatement stat,escuelaBean escuela, renapoBean renapo, programaEsBean programa, AlumnoBean alumno) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_PLAN_FORMA", "STRING", programa.getID_PLAN_FORMA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_MATERIA", "STRING", programa.getID_MATERIA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_COMPETENCIA", "STRING", programa.getID_COMPETENCIA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_ACTIVIDAD", "STRING", programa.getID_ACTIVIDAD());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_ESCALA", "STRING", programa.getID_ESCALA());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("ID_HORA", "STRING", programa.getHORAS_PLAN());
+        arregloCampos.add(temporal);
+       temporal = new ObjPrepareStatement("ID_LUGAR", "STRING", programa.getLUGAR_PLAN());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("PLAN_ROTACION", "STRING", programa.getPLAN_ROTACION());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("DES_ACTIVIDAD", "STRING", programa.getDES_ACTIVIDAD());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_HIST_ALU", "STRING", alumno.getAUXIDHISTALUM());
+        arregloCampos.add(temporal);
+        
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_PLANFORM_ACT_ALU", arregloCampos);
+    }
       
       
       
@@ -477,6 +566,13 @@ public class PlanFDAOImpl {
         Constantes.enviaMensajeConsola("Consulta cct----->" + query);
         List list = null;
         list = oraDaoFac.queryForList(query, new consultaAluRegMapper());
+        return list;
+    }
+         public List consultaPlanAlumno(AlumnoBean alumno, usuarioBean usuario, escuelaBean escuela) throws Exception {
+       String query ="SELECT  ID_HIST_ALU,  ID_PLAN_FORM,  TO_CHAR(FECHA_INICIOPF,'dd/mm/yyyy') AS FECHA_INICIOPF , TO_CHAR( FECHA_TERMINOPF, 'dd/mm/yyyy') as FECHA_TERMINOPF,  ID_MENTOR_UE,  ID_MENTOR_ACAD,  ID_RES_UE,  ID_RES_ACAD,  ESTATUS_PF,  ID_RES_PROGEDU FROM TBL_HISTALU_PF  WHERE ID_HIST_ALU='"+alumno.getAUXIDHISTALUM()+"'";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new consultaPlanAluHist());
         return list;
     }
         

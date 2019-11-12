@@ -81,6 +81,99 @@ private String HORAS_SEMANA;
 private String EVIDENCIAS;
 private String INCLUIDA;
 
+private String ID_HIST_ALU;
+private String ID_PLAN_FORM; 
+private String FECHA_INICIOPF; 
+private String FECHA_TERMINOPF; 
+private String ID_MENTOR_UE; 
+private String ID_MENTOR_ACAD; 
+private String ID_RES_UE; 
+private String ID_RES_ACAD;  
+private String ESTATUS_PF;  
+
+    public String getID_HIST_ALU() {
+        return ID_HIST_ALU;
+    }
+
+    public void setID_HIST_ALU(String ID_HIST_ALU) {
+        this.ID_HIST_ALU = ID_HIST_ALU;
+    }
+
+    public String getID_PLAN_FORM() {
+        return ID_PLAN_FORM;
+    }
+
+    public void setID_PLAN_FORM(String ID_PLAN_FORM) {
+        this.ID_PLAN_FORM = ID_PLAN_FORM;
+    }
+
+    public String getFECHA_INICIOPF() {
+        return FECHA_INICIOPF;
+    }
+
+    public void setFECHA_INICIOPF(String FECHA_INICIOPF) {
+        this.FECHA_INICIOPF = FECHA_INICIOPF;
+    }
+
+    public String getFECHA_TERMINOPF() {
+        return FECHA_TERMINOPF;
+    }
+
+    public void setFECHA_TERMINOPF(String FECHA_TERMINOPF) {
+        this.FECHA_TERMINOPF = FECHA_TERMINOPF;
+    }
+
+    public String getID_MENTOR_UE() {
+        return ID_MENTOR_UE;
+    }
+
+    public void setID_MENTOR_UE(String ID_MENTOR_UE) {
+        this.ID_MENTOR_UE = ID_MENTOR_UE;
+    }
+
+    public String getID_MENTOR_ACAD() {
+        return ID_MENTOR_ACAD;
+    }
+
+    public void setID_MENTOR_ACAD(String ID_MENTOR_ACAD) {
+        this.ID_MENTOR_ACAD = ID_MENTOR_ACAD;
+    }
+
+    public String getID_RES_UE() {
+        return ID_RES_UE;
+    }
+
+    public void setID_RES_UE(String ID_RES_UE) {
+        this.ID_RES_UE = ID_RES_UE;
+    }
+
+    public String getID_RES_ACAD() {
+        return ID_RES_ACAD;
+    }
+
+    public void setID_RES_ACAD(String ID_RES_ACAD) {
+        this.ID_RES_ACAD = ID_RES_ACAD;
+    }
+
+    public String getESTATUS_PF() {
+        return ESTATUS_PF;
+    }
+
+    public void setESTATUS_PF(String ESTATUS_PF) {
+        this.ESTATUS_PF = ESTATUS_PF;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public String getINCLUIDA() {
         return INCLUIDA;
     }
@@ -627,5 +720,9 @@ private String INCLUIDA;
     public void setENFASIS(String ENFASIS) {
         this.ENFASIS = ENFASIS;
     }
+    
+    
+    
+    
 
 }
