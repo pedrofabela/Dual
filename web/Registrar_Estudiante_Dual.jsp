@@ -6,7 +6,25 @@
 
 <script type="text/javascript">
     
-    
+    function validarfecha() {
+       document.getElementById('FECHAINICIODUAL').style.boxShadow = "";
+        var fecha_inicio_dual = document.getElementById('FECHAINICIODUAL').value;
+        
+        alert(fecha_inicio_dual);
+        
+       var TuFecha = new Date( '01/01/2018');
+       var numero=20;
+       var dias = parseInt(numero);
+        
+         TuFecha.setDate(TuFecha.getDate() + dias);
+         alert(TuFecha.getDate());
+         
+      
+        
+       document.getElementById("resultado").innerHTML = TuFecha.getDate();
+        
+    }
+
    
      
     function telquita() {
@@ -949,7 +967,7 @@ function consulta3(accion) {
                                                                         </div>
                                                                           <div class="col-lg-6" style="margin-top: 20px;">
                                                                                     <label for="exampleEmail" class="bmd-label-floating">Inicio Plan de Formación:</label>
-                                                                         <s:textfield  cssClass="form-control datepicker" name="programa.FECHA_REG_PLAN" id="FECHAINICIODUAL" onchange="telquita5()" ></s:textfield>
+                                                                          <s:textfield  cssClass="form-control datepicker" name="programa.FECHA_REG_PLAN" id="FECHAINICIODUAL" onblur="validarfecha();" ></s:textfield>
                                                                                 <s:fielderror  fieldName="ERRORFECHAINICIO" cssClass="col-lg-12 alert alert-danger" id="quitamen5"></s:fielderror>
 
                                                                                 
@@ -959,6 +977,8 @@ function consulta3(accion) {
                                                                                 
                                                                                 
                                                                                 <s:fielderror fieldName="ErrorFechaNoPermitida" cssClass="alert alert-danger"/>
+                                                                                
+                                                                                <p>Resultado: <span id="resultado"></span></p>
                                                                             </div> 
                                                                             
                                                                             
