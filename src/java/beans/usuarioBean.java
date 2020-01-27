@@ -27,10 +27,20 @@ public class usuarioBean implements Serializable {
     private String FECHA_TERMINO;
     private String CICLO;
     private String ID_ESCUELA;
-     private String NOMBRE_COMPLETO;
-      private String TELCASA_PERSONA;
-       private String TELCEL_PERSONA;
-        private String CORREO_PERSONA;
+    private String NOMBRE_COMPLETO;
+    private String TELCASA_PERSONA;
+    private String TELCEL_PERSONA;
+    private String CORREO_PERSONA;
+    private String ID_ESTUDIANTE;
+
+    public String getID_ESTUDIANTE() {
+        return ID_ESTUDIANTE;
+    }
+
+    public void setID_ESTUDIANTE(String ID_ESTUDIANTE) {
+        this.ID_ESTUDIANTE = ID_ESTUDIANTE;
+    }
+          
 
     public String getCORREO_PERSONA() {
         return CORREO_PERSONA;

@@ -576,6 +576,61 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryInsert("TBL_USUARIOS", arregloCampos);
     }
+     public boolean guardaUserAlu(renapoBean renapo, usuarioBean usuario) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("NAMEUSUARIO", "STRING", usuario.getNAMEUSUARIO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("FILTRO", "STRING", usuario.getFILTRO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("USUARIO", "STRING", usuario.getUSUARIO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("PERFIL", "STRING", renapo.getPERFIL());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NAMEPERFIL", "STRING", usuario.getNAMEPERFIL_VARIABLE());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_PERSONA", "STRING", "100000");
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("USUARIO_LOGIN", "STRING", renapo.getUSUARIO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("PASSWORD", "STRING", renapo.getPASSWORD());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ESTATUS", "STRING", usuario.getESTATUS_VARIABLE());
+        arregloCampos.add(temporal);
+
+        temporal = new ObjPrepareStatement("ID_ESCUELA", "STRING", renapo.getAUXESCUELA());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("ID_ESTUDIANTE", "STRING", renapo.getID_ESTUDIANTE());
+        arregloCampos.add(temporal);
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsert("TBL_USUARIOS", arregloCampos);
+    }
+     
+      public String consultaIdEst(renapoBean renapo, usuarioBean usuario) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+     String query = "SELECT  ID_ESTUDIANTE FROM TBL_USUARIOS WHERE ID_ESTUDIANTE='"+renapo.getID_ESTUDIANTE()+"'";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        String list = null;
+        list = queryStringUnCampo(query);
+        return list;
+    }
+      public List consultaCorreo(renapoBean renapo, usuarioBean usuario) throws Exception {
+ String query = "SELECT   EMAIL_INS,  EMAIL_PER FROM CAT_ALUMNO WHERE ID_ALUMNO='"+renapo.getID_ESTUDIANTE()+"'";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = queryForList(query, new mappers.conCorreoMapper());
+        return list;
+    }
 
     public boolean guardaUserResUE(renapoBean renapo, usuarioBean usuario, UnidadesEconomicasBean ue) throws Exception {
 

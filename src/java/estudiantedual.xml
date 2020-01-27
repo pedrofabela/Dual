@@ -198,12 +198,59 @@
             <result name="input">Registrar_Estudiante_Dual.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
         </action>   
+          <action name="validaFechaInicoDual" class="action.EstudianteDual_Action" method="validaFechaInicoDual">
+            <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
+            <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
+            <result name="input">Registrar_Estudiante_Dual.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        
         <action name="ActualizaStatusA" class="action.EstudianteDual_Action" method="ActualizaStatusA">
             <result name="SUCCESS">Registrar_Estudiante_Dual.jsp</result>			              
             <result name="ERROR">Registrar_Estudiante_Dual.jsp</result>
             <result name="input">Registrar_Estudiante_Dual.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
-        </action>                            
+        </action>      
+         <action name="RepActAlu" class="action.EstudianteDual_Action" method="RepActAlu">
+            <result name="SUCCESS">Reporte_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Reporte_Plan_Alu.jsp</result>
+            <result name="input">Reporte_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+         <action name="eligePlanFormAlu" class="action.EstudianteDual_Action" method="eligePlanFormAlu">
+            <result name="SUCCESS">Reporte_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Reporte_Plan_Alu.jsp</result>
+            <result name="input">Reporte_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        <action name="eligePlanAsigMateria" class="action.EstudianteDual_Action" method="eligePlanAsigMateria">
+            <result name="SUCCESS">Reporte_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Reporte_Plan_Alu.jsp</result>
+            <result name="input">Reporte_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>   
+         <action name="eligePlanAsigMateriaCom" class="action.EstudianteDual_Action" method="eligePlanAsigMateriaCom">
+            <result name="SUCCESS">Reporte_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Reporte_Plan_Alu.jsp</result>
+            <result name="input">Reporte_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>   
+        
+        <action name="guardaReporteEst" class="action.EstudianteDual_Action" method="guardaReporteEst">
+            <result name="SUCCESS">Reporte_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Reporte_Plan_Alu.jsp</result>
+            <result name="input">Reporte_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        
+          <action name="actualizaReporteEst" class="action.EstudianteDual_Action" method="actualizaReporteEst">
+            <result name="SUCCESS">Reporte_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Reporte_Plan_Alu.jsp</result>
+            <result name="input">Reporte_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>                      
+                                                                          
     </package>
 	
 </struts>

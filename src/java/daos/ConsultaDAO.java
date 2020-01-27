@@ -104,6 +104,9 @@ public interface ConsultaDAO {
     public boolean actualizaResPeInst(renapoBean renapo, escuelaBean escuela) throws Exception;
 
     public boolean guardaUserResPeIe(renapoBean renapo, usuarioBean usuario) throws Exception;
+      public boolean guardaUserAlu(renapoBean renapo, usuarioBean usuario) throws Exception;
+        public String consultaIdEst(renapoBean renapo, usuarioBean usuario) throws Exception;
+       public List consultaCorreo(renapoBean renapo, usuarioBean usuario) throws Exception;
 
     public boolean guardaUserResUE(renapoBean renapo, usuarioBean usuario, UnidadesEconomicasBean ue) throws Exception;
 

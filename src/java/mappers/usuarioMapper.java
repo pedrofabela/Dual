@@ -24,6 +24,7 @@ public class usuarioMapper implements Mapper {
                    usr.setID_USUARIO(rs.getString("ID_USUARIO"));
                     usr.setID_IE_UE(rs.getString("ID_IE_UE"));
                      usr.setID_ESCUELA(rs.getString("ID_ESCUELA"));
+                      usr.setID_ESTUDIANTE(rs.getString("ID_ESTUDIANTE"));
 		return usr;
 	}
 	

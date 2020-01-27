@@ -50,7 +50,11 @@ import mappers.horaMapper;
 import mappers.listaPlanUEMapper;
 import mappers.lugarMapper;
 import mappers.periodoMapper;
+import mappers.plaMateriaAlumnoMapper;
+import mappers.planAsigMatPlanMapper;
 import mappers.planCttResMapper;
+import mappers.planFormAluMapper;
+import mappers.reporteComActMapper;
 import mappers.responsablePerfilMapper;
 import mappers.sectordosMapper;
 import mappers.ueIeactivasMapper;
@@ -112,8 +116,180 @@ public class PlanFDAOImpl {
         return list;
     }
     
+     public List planFormAlu(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
+        
+       String query = " SELECT ID_HIST_ALUM, ID_ALUMNO, ID_IE_UE, STATUS_GENERAL, FECHA_INICIO_PF, FECHA_BAJA, FECHA_EGRESO, ID_CICLO, TO_CHAR(FECHA_INICIOPF, 'DD/MM/YYYY' ) AS FECHA_INICIOPF, TO_CHAR(FECHA_TERMINOPF,'DD/MM/YYYY') AS FECHA_TERMINOPF, ESTATUS_PF, NOMBREPLAN_FORM, DESCRIPCION, DURACION, HORAS_SEMANA, TOTAL_REPORTES, REPORTES_HECHOS, REPORTES_FALTANTES,POR_REG_ALUMNO FROM (\n" +
+"\n" +
+"\n" +
+"\n" +
+"\n" +
+"SELECT TBL_HIST_ALUM.ID_HIST_ALUM,\n" +
+"  TBL_HIST_ALUM.ID_ALUMNO,\n" +
+"  TBL_HIST_ALUM.ID_IE_UE,\n" +
+"  TBL_HIST_ALUM.STATUS_GENERAL,\n" +
+"  TBL_HIST_ALUM.FECHA_REGISTRO,\n" +
+"  TBL_HIST_ALUM.ID_ESCUELA,\n" +
+"  TBL_HIST_ALUM.STATUS_PROCESO,\n" +
+"  TBL_HIST_ALUM.ID_CCT_PLAN,\n" +
+"  TBL_HIST_ALUM.FECHA_INICIO_PF,\n" +
+"  TBL_HIST_ALUM.FECHA_BAJA,\n" +
+"  TBL_HIST_ALUM.FECHA_EGRESO,\n" +
+"  TBL_HIST_ALUM.ID_CICLO,\n" +
+"  TBL_HIST_ALUM.FECHA_INC_PADRON,\n" +
+"  TBL_HIST_ALUM.RES_EVA,\n" +
+"  TBL_HIST_ALUM.AUX_RES_ACAD,\n" +
+"  TBL_HISTALU_PF.ID_HISTALU_PF,\n" +
+"  TBL_HISTALU_PF.ID_PLAN_FORM,\n" +
+"  TBL_HISTALU_PF.FECHA_INICIOPF,\n" +
+"  TBL_HISTALU_PF.FECHA_TERMINOPF,\n" +
+"  TBL_HISTALU_PF.ID_MENTOR_UE,\n" +
+"  TBL_HISTALU_PF.ID_MENTOR_ACAD,\n" +
+"  TBL_HISTALU_PF.ID_RES_UE,\n" +
+"  TBL_HISTALU_PF.ID_RES_ACAD,\n" +
+"  TBL_HISTALU_PF.ESTATUS_PF,\n" +
+"  TBL_HISTALU_PF.ID_RES_PROGEDU,\n" +
+"  TBL_PLAN_FORM.NOMBREPLAN_FORM,\n" +
+"  TBL_PLAN_FORM.DESCRIPCION,\n" +
+"  TBL_PLAN_FORM.DURACION,\n" +
+"  TBL_PLAN_FORM.FECHA_REG,\n" +
+"  TBL_PLAN_FORM.ID_CCT_PLAN AS ID_CCT_PLAN1,\n" +
+"  TBL_PLAN_FORM.ESTATUS,\n" +
+"  TBL_PLAN_FORM.ID_PER_VALIDA,\n" +
+"  TBL_PLAN_FORM.FECHA_VALIDA,\n" +
+"  TBL_PLAN_FORM.NO_ESTUDIANTES,\n" +
+"  TBL_PLAN_FORM.NO_MENTORES_UE,\n" +
+"  TBL_PLAN_FORM.NO_MENTORES_ACAD,\n" +
+"  TBL_PLAN_FORM.ID_IE_UE AS ID_IE_UE1,\n" +
+"  TBL_PLAN_FORM.HORAS_SEMANA, \n" +
+"  AVANCE.TOTAL_REPORTES,\n" +
+"  AVANCE.REPORTES_HECHOS,\n" +
+"  AVANCE.REPORTES_FALTANTES,\n" +
+"  AVANCE.POR_REG_ALUMNO\n" +
+"FROM TBL_HIST_ALUM\n" +
+"INNER JOIN TBL_HISTALU_PF\n" +
+"ON TBL_HIST_ALUM.ID_HIST_ALUM = TBL_HISTALU_PF.ID_HIST_ALU\n" +
+"INNER JOIN TBL_PLAN_FORM\n" +
+"ON TBL_HISTALU_PF.ID_PLAN_FORM = TBL_PLAN_FORM.ID_PLAN_FORMA\n" +
+"INNER JOIN (SELECT TOTAL.ID_HIST_ALU, TOTAL.TOTAL_REPORTES, NVL(HECHOS.TOTAL_REPOR_HECHOS,'0') AS REPORTES_HECHOS, (TO_NUMBER(TOTAL.TOTAL_REPORTES)-TO_NUMBER(NVL(HECHOS.TOTAL_REPOR_HECHOS,'0'))) AS REPORTES_FALTANTES, TRUNC( (TO_NUMBER(NVL(HECHOS.TOTAL_REPOR_HECHOS,'0')) * 100 )/TO_NUMBER(TOTAL.TOTAL_REPORTES), 1) AS POR_REG_ALUMNO FROM (SELECT DISTINCT(ID_HIST_ALU), COUNT(ID_HIST_ALU) AS TOTAL_REPORTES  FROM(SELECT DISTINCT(ID_COMPETENCIA), COUNT(ID_COMPETENCIA) AS NO_COMPETENCIAS, ID_HIST_ALU FROM TBL_PLANFORM_ACT_ALU GROUP BY ID_COMPETENCIA, ID_HIST_ALU) GROUP BY ID_HIST_ALU )TOTAL LEFT OUTER JOIN (SELECT DISTINCT(ID_HIST_ALU), COUNT(ID_HIST_ALU) AS TOTAL_REPOR_HECHOS FROM TBL_REGALUMCOMP GROUP BY ID_HIST_ALU)HECHOS ON TOTAL.ID_HIST_ALU=HECHOS.ID_HIST_ALU) AVANCE\n" +
+"ON TBL_HIST_ALUM.ID_HIST_ALUM=AVANCE.ID_HIST_ALU\n" +
+"WHERE TBL_HIST_ALUM.ID_ALUMNO  = '"+usuariocons.getID_ESTUDIANTE()+"' AND STATUS_GENERAL='1' ORDER BY STATUS_GENERAL, ESTATUS_PF, FECHA_INICIOPF DESC)";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new planFormAluMapper());
+        return list;
+    }
+     public List planFormAluMateria(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
+        
+       String query =" SELECT DISTINCT(ID_MATERIA), NOMBRE_MATERIA FROM(\n" +
+"  \n" +
+"  SELECT TBL_PLANFORM_ACT_ALU.ID_PLAN_FORMA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_MATERIA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_COMPETENCIA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_HIST_ALU,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_ACT_ALU,\n" +
+"  TBL_PLAN_MATERIA.NOMBRE_MATERIA,\n" +
+"  TBL_PLAN_MATERIA.CVE_MATERIA,\n" +
+"  TBL_PLAN_MATERIA.ID_CCT_PLAN,\n" +
+"  TBL_PLAN_MATERIA.NUMERO_PERIODO,\n" +
+"  TBL_MATERIA_COMPETENCIA.COMPETENCIA\n" +
+"FROM TBL_PLANFORM_ACT_ALU\n" +
+"INNER JOIN TBL_PLAN_MATERIA\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_MATERIA = TBL_PLAN_MATERIA.ID_MATERIA\n" +
+"INNER JOIN TBL_MATERIA_COMPETENCIA\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_COMPETENCIA = TBL_MATERIA_COMPETENCIA.ID_COMPETENCIA\n" +
+"WHERE TBL_PLANFORM_ACT_ALU.ID_HIST_ALU = '"+alumno.getAUXIDHISTALUM()+"'\n" +
+"ORDER BY TBL_PLAN_MATERIA.NOMBRE_MATERIA,\n" +
+"  TBL_PLAN_MATERIA.NUMERO_PERIODO) ORDER BY ID_MATERIA, NOMBRE_MATERIA ASC";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new plaMateriaAlumnoMapper());
+        return list;
+    }
+       public List planFormAluMateriaCom(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
+        
+       String query ="SELECT COMP.*, NVL(REGISTRA.ID_REGALUMCOMP, '0') AS ID_REGALUMCOMP, REGISTRA.MARCO_TEORICO, REGISTRA.DES_ACT, REGISTRA.RUTA_EVIDENCIAS, REGISTRA.FECHA_REG, NVL(REGISTRA. EDITA,'0')AS EDITA FROM(\n" +
+"\n" +
+"\n" +
+"SELECT DISTINCT(ID_COMPETENCIA), COMPETENCIA, ID_HIST_ALU FROM(\n" +
+"  \n" +
+"  SELECT TBL_PLANFORM_ACT_ALU.ID_PLAN_FORMA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_MATERIA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_COMPETENCIA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_HIST_ALU,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_ACT_ALU,\n" +
+"  TBL_PLAN_MATERIA.NOMBRE_MATERIA,\n" +
+"  TBL_PLAN_MATERIA.CVE_MATERIA,\n" +
+"  TBL_PLAN_MATERIA.ID_CCT_PLAN,\n" +
+"  TBL_PLAN_MATERIA.NUMERO_PERIODO,\n" +
+"  TBL_MATERIA_COMPETENCIA.COMPETENCIA\n" +
+"FROM TBL_PLANFORM_ACT_ALU\n" +
+"INNER JOIN TBL_PLAN_MATERIA\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_MATERIA = TBL_PLAN_MATERIA.ID_MATERIA\n" +
+"INNER JOIN TBL_MATERIA_COMPETENCIA\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_COMPETENCIA = TBL_MATERIA_COMPETENCIA.ID_COMPETENCIA\n" +
+"\n" +
+"WHERE TBL_PLANFORM_ACT_ALU.ID_HIST_ALU = '"+alumno.getAUXIDHISTALUM()+"' AND TBL_PLANFORM_ACT_ALU.ID_MATERIA='"+programa.getAUX_IDMATERIA()+"'\n" +
+"ORDER BY TBL_PLAN_MATERIA.NOMBRE_MATERIA,\n" +
+"  TBL_PLAN_MATERIA.NUMERO_PERIODO) ORDER BY ID_COMPETENCIA, COMPETENCIA, ID_HIST_ALU ASC)COMP LEFT OUTER JOIN(SELECT ID_REGALUMCOMP, ID_COMPETENCIA, ID_HIST_ALU, MARCO_TEORICO, DES_ACT, RUTA_EVIDENCIAS, FECHA_REG, EDITA FROM TBL_REGALUMCOMP)REGISTRA ON COMP.ID_HIST_ALU=REGISTRA.ID_HIST_ALU AND COMP.ID_COMPETENCIA=REGISTRA.ID_COMPETENCIA \n" +
+" ";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new planAsigMatPlanMapper());
+        return list;
+    }
     
-    
+        public List planFormAluMateriaComAct(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
+        
+       String query ="SELECT TBL_PLANFORM_ACT_ALU.ID_PLAN_FORMA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_MATERIA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_COMPETENCIA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_HIST_ALU,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_ACT_ALU,\n" +
+"  TBL_PLAN_MATERIA.NOMBRE_MATERIA,\n" +
+"  TBL_PLAN_MATERIA.CVE_MATERIA,\n" +
+"  TBL_PLAN_MATERIA.ID_CCT_PLAN,\n" +
+"  TBL_PLAN_MATERIA.NUMERO_PERIODO,\n" +
+"  TBL_MATERIA_COMPETENCIA.COMPETENCIA,\n" +
+"  TBL_COMPETENCIA_ACTIVIDAD.ACTIVIDAD,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_ESCALA,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_LUGAR,\n" +
+"  TBL_PLANFORM_ACT_ALU.ID_HORA,\n" +
+"  TBL_PLANFORM_ACT_ALU.PLAN_ROTACION,\n" +
+"  TBL_PLANFORM_ACT_ALU.DES_ACTIVIDAD,\n" +
+"  TBL_PLANFORM_ACT_ALU.FECHA_REG,\n" +
+"  CAT_LUGARES.LUGAR,\n" +
+"  CAT_HORAS.HORA,\n" +
+"  CAT_ESCALA.ESCALA,\n" +
+"  TBL_COMPETENCIA_ACTIVIDAD.ID_ACTIVIDAD,\n" +
+"  TBL_PLANFORM_ACT.EVIDENCIAS\n" +
+"FROM TBL_PLANFORM_ACT_ALU\n" +
+"INNER JOIN TBL_PLAN_MATERIA\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_MATERIA = TBL_PLAN_MATERIA.ID_MATERIA\n" +
+"INNER JOIN TBL_MATERIA_COMPETENCIA\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_COMPETENCIA = TBL_MATERIA_COMPETENCIA.ID_COMPETENCIA\n" +
+"INNER JOIN TBL_COMPETENCIA_ACTIVIDAD\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_ACTIVIDAD = TBL_COMPETENCIA_ACTIVIDAD.ID_ACTIVIDAD\n" +
+"INNER JOIN CAT_LUGARES\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_LUGAR = CAT_LUGARES.ID_LUGAR\n" +
+"INNER JOIN CAT_HORAS\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_HORA = CAT_HORAS.ID_HORA\n" +
+"INNER JOIN CAT_ESCALA\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_ESCALA = CAT_ESCALA.ID_ESCALA\n" +
+"INNER JOIN TBL_PLANFORM_ACT\n" +
+"ON TBL_PLANFORM_ACT_ALU.ID_ACTIVIDAD    = TBL_PLANFORM_ACT.ID_ACTIVIDAD\n"+
+               
+"WHERE TBL_PLANFORM_ACT_ALU.ID_MATERIA   = '"+programa.getAUX_IDMATERIA()+"'\n" +
+"AND TBL_PLANFORM_ACT_ALU.ID_COMPETENCIA = '"+programa.getAUX_IDCOMPETENCIA()+"'\n" +
+"AND TBL_PLANFORM_ACT_ALU.ID_HIST_ALU    = '"+alumno.getAUXIDHISTALUM()+"'\n" +
+"ORDER BY TBL_PLAN_MATERIA.NOMBRE_MATERIA,\n" +
+"  TBL_PLAN_MATERIA.NUMERO_PERIODO";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new reporteComActMapper());
+        return list;
+    }
+        
+        
     public List programasPlanForm(AlumnoBean alumno, escuelaBean escuela, usuarioBean usuario, programaEsBean programa) throws Exception {
         String query = "SELECT ID_PLAN_FORMA, NUMERO_PERIODO, ID_MATERIA, ID_COMPETENCIA, ID_ESCALA, ID_LUGAR, PLAN_ROTACION, DES_ACTIVIDAD, FECHA_REG, ID_ACTIVIDAD, ID_ACT_EVALUA, NOMBRE_MATERIA, COMPETENCIA, ACTIVIDAD, HORA, LUGAR, ID_HORA FROM (\n" +
 "\n" +
@@ -791,6 +967,59 @@ public class PlanFDAOImpl {
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryInsert("BINNACLE_CHANGE_STUDENTS", arregloCampos);
+    }
+    
+    public boolean guardaRegAluComp(AlumnoBean alumno, programaEsBean programa) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_COMPETENCIA", "STRING", programa.getAUX_IDCOMPETENCIA());
+        arregloCampos.add(temporal);
+          temporal = new ObjPrepareStatement("ID_HIST_ALU", "STRING", alumno.getAUXIDHISTALUM());
+        arregloCampos.add(temporal);
+           temporal = new ObjPrepareStatement("DES_ACT", "STRING", programa.getDES_ACT());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("MARCO_TEORICO", "STRING", programa.getMARCO_TEORICO());
+        arregloCampos.add(temporal);
+      temporal = new ObjPrepareStatement("RUTA_EVIDENCIAS", "STRING", programa.getRUTA_EVIDENCIAS());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("EDITA", "STRING", "1");
+        arregloCampos.add(temporal);
+        
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsert("TBL_REGALUMCOMP", arregloCampos);
+    }
+     public boolean actualizaRegAluComp(AlumnoBean alumno, programaEsBean programa) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+      
+           temporal = new ObjPrepareStatement("DES_ACT", "STRING", programa.getDES_ACT());
+        arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("MARCO_TEORICO", "STRING", programa.getMARCO_TEORICO());
+        arregloCampos.add(temporal);
+       temporal = new ObjPrepareStatement("EDITA", "STRING", "1");
+        arregloCampos.add(temporal);
+       
+        String Condicion = "WHERE ID_COMPETENCIA='" + programa.getAUX_IDCOMPETENCIA() + "'  AND  ID_HIST_ALU='" + alumno.getAUXIDHISTALUM() + "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdate("TBL_REGALUMCOMP", arregloCampos, Condicion);
     }
 
     public boolean ActualizaInteresado(AlumnoBean ue) throws Exception {

@@ -90,6 +90,233 @@ private String ID_MENTOR_ACAD;
 private String ID_RES_UE; 
 private String ID_RES_ACAD;  
 private String ESTATUS_PF;  
+private String ID_HIST_ALUM;
+private String ID_ALUMNO;
+private String ID_IE_UE;
+private String STATUS_GENERAL;
+private String FECHA_INICIO_PF;
+private String FECHA_BAJA;
+private String FECHA_EGRESO;
+private String ID_CICLO;
+private String AUX_IDMATERIA;
+private String AUX_IDCOMPETENCIA;
+private String ID_ACT_ALU;
+private String CVE_MATERIA;
+private String ARCH_EVIDENCIAS;
+private String TOTAL_REPORTES;
+
+private String REPORTES_HECHOS;
+private String REPORTES_FALTANTES;
+private String POR_REG_ALUMNO;
+
+    private String ID_REGALUMCOMP;
+    private String MARCO_TEORICO;
+    private String DES_ACT;
+    private String RUTA_EVIDENCIAS;
+    private String EDITA;
+
+    
+    
+    public String getEDITA() {
+        return EDITA;
+    }
+
+    public void setEDITA(String EDITA) {
+        this.EDITA = EDITA;
+    }
+    
+    
+    
+    
+
+    public String getID_REGALUMCOMP() {
+        return ID_REGALUMCOMP;
+    }
+
+    public void setID_REGALUMCOMP(String ID_REGALUMCOMP) {
+        this.ID_REGALUMCOMP = ID_REGALUMCOMP;
+    }
+
+    public String getMARCO_TEORICO() {
+        return MARCO_TEORICO;
+    }
+
+    public void setMARCO_TEORICO(String MARCO_TEORICO) {
+        this.MARCO_TEORICO = MARCO_TEORICO;
+    }
+
+    public String getDES_ACT() {
+        return DES_ACT;
+    }
+
+    public void setDES_ACT(String DES_ACT) {
+        this.DES_ACT = DES_ACT;
+    }
+
+    public String getRUTA_EVIDENCIAS() {
+        return RUTA_EVIDENCIAS;
+    }
+
+    public void setRUTA_EVIDENCIAS(String RUTA_EVIDENCIAS) {
+        this.RUTA_EVIDENCIAS = RUTA_EVIDENCIAS;
+    }
+    
+    
+
+    public String getTOTAL_REPORTES() {
+        return TOTAL_REPORTES;
+    }
+
+    public void setTOTAL_REPORTES(String TOTAL_REPORTES) {
+        this.TOTAL_REPORTES = TOTAL_REPORTES;
+    }
+
+    public String getREPORTES_HECHOS() {
+        return REPORTES_HECHOS;
+    }
+
+    public void setREPORTES_HECHOS(String REPORTES_HECHOS) {
+        this.REPORTES_HECHOS = REPORTES_HECHOS;
+    }
+
+    public String getREPORTES_FALTANTES() {
+        return REPORTES_FALTANTES;
+    }
+
+    public void setREPORTES_FALTANTES(String REPORTES_FALTANTES) {
+        this.REPORTES_FALTANTES = REPORTES_FALTANTES;
+    }
+
+    public String getPOR_REG_ALUMNO() {
+        return POR_REG_ALUMNO;
+    }
+
+    public void setPOR_REG_ALUMNO(String POR_REG_ALUMNO) {
+        this.POR_REG_ALUMNO = POR_REG_ALUMNO;
+    }
+
+
+
+    public String getARCH_EVIDENCIAS() {
+        return ARCH_EVIDENCIAS;
+    }
+
+    public void setARCH_EVIDENCIAS(String ARCH_EVIDENCIAS) {
+        this.ARCH_EVIDENCIAS = ARCH_EVIDENCIAS;
+    }
+
+
+
+    public String getID_ACT_ALU() {
+        return ID_ACT_ALU;
+    }
+
+    public void setID_ACT_ALU(String ID_ACT_ALU) {
+        this.ID_ACT_ALU = ID_ACT_ALU;
+    }
+
+    public String getCVE_MATERIA() {
+        return CVE_MATERIA;
+    }
+
+    public void setCVE_MATERIA(String CVE_MATERIA) {
+        this.CVE_MATERIA = CVE_MATERIA;
+    }
+
+
+
+    public String getAUX_IDCOMPETENCIA() {
+        return AUX_IDCOMPETENCIA;
+    }
+
+    public void setAUX_IDCOMPETENCIA(String AUX_IDCOMPETENCIA) {
+        this.AUX_IDCOMPETENCIA = AUX_IDCOMPETENCIA;
+    }
+
+
+
+    public String getAUX_IDMATERIA() {
+        return AUX_IDMATERIA;
+    }
+
+    public void setAUX_IDMATERIA(String AUX_IDMATERIA) {
+        this.AUX_IDMATERIA = AUX_IDMATERIA;
+    }
+
+
+   
+
+
+    public String getID_ALUMNO() {
+        return ID_ALUMNO;
+    }
+
+    public void setID_ALUMNO(String ID_ALUMNO) {
+        this.ID_ALUMNO = ID_ALUMNO;
+    }
+
+    public String getID_IE_UE() {
+        return ID_IE_UE;
+    }
+
+    public void setID_IE_UE(String ID_IE_UE) {
+        this.ID_IE_UE = ID_IE_UE;
+    }
+
+    public String getSTATUS_GENERAL() {
+        return STATUS_GENERAL;
+    }
+
+    public void setSTATUS_GENERAL(String STATUS_GENERAL) {
+        this.STATUS_GENERAL = STATUS_GENERAL;
+    }
+
+    public String getFECHA_INICIO_PF() {
+        return FECHA_INICIO_PF;
+    }
+
+    public void setFECHA_INICIO_PF(String FECHA_INICIO_PF) {
+        this.FECHA_INICIO_PF = FECHA_INICIO_PF;
+    }
+
+    public String getFECHA_BAJA() {
+        return FECHA_BAJA;
+    }
+
+    public void setFECHA_BAJA(String FECHA_BAJA) {
+        this.FECHA_BAJA = FECHA_BAJA;
+    }
+
+    public String getFECHA_EGRESO() {
+        return FECHA_EGRESO;
+    }
+
+    public void setFECHA_EGRESO(String FECHA_EGRESO) {
+        this.FECHA_EGRESO = FECHA_EGRESO;
+    }
+
+    public String getID_CICLO() {
+        return ID_CICLO;
+    }
+
+    public void setID_CICLO(String ID_CICLO) {
+        this.ID_CICLO = ID_CICLO;
+    }
+
+
+
+
+
+    public String getID_HIST_ALUM() {
+        return ID_HIST_ALUM;
+    }
+
+    public void setID_HIST_ALUM(String ID_HIST_ALUM) {
+        this.ID_HIST_ALUM = ID_HIST_ALUM;
+    }
+
+
+
 
     public String getID_HIST_ALU() {
         return ID_HIST_ALU;

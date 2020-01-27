@@ -253,6 +253,16 @@ public class ConsultasBusiness {
       public boolean guardaUserResPeIe(renapoBean renapo, usuarioBean usuario) throws Exception {
         return this.con.guardaUserResPeIe(renapo, usuario);
     }  
+        public boolean guardaUserAlu(renapoBean renapo, usuarioBean usuario) throws Exception {
+        return this.con.guardaUserAlu(renapo, usuario);
+    }  
+      public String consultaIdEst(renapoBean renapo, usuarioBean usuario) throws Exception {
+        return this.con.consultaIdEst(renapo, usuario);
+    }     
+        
+         public List consultaCorreo(renapoBean renapo, usuarioBean usuario) throws Exception {
+        return this.con.consultaCorreo(renapo, usuario);
+    }  
       
       public boolean guardaUserResUE(renapoBean renapo, usuarioBean usuario, UnidadesEconomicasBean ue) throws Exception {
         return this.con.guardaUserResUE(renapo, usuario, ue);

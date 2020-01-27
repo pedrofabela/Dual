@@ -58,6 +58,19 @@ public class renapoBean implements Serializable {
        private String AUXPROGVINCULADO;
         private String AUXPERSONA;
          private String AUXPERFILUSUARIO;
+         private String ID_ESTUDIANTE;
+
+         
+         
+         
+         
+    public String getID_ESTUDIANTE() {
+        return ID_ESTUDIANTE;
+    }
+
+    public void setID_ESTUDIANTE(String ID_ESTUDIANTE) {
+        this.ID_ESTUDIANTE = ID_ESTUDIANTE;
+    }
          
          
 

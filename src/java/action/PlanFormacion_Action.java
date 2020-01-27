@@ -729,6 +729,7 @@ public class PlanFormacion_Action extends ActionSupport implements SessionAware 
         return true;
 
     }
+     
 
        
               
