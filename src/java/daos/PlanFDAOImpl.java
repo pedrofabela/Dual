@@ -53,9 +53,11 @@ import mappers.periodoMapper;
 import mappers.plaMateriaAlumnoMapper;
 import mappers.planAsigMatPlanMapper;
 import mappers.planCttResMapper;
+import mappers.planFormAluMUEMapper;
 import mappers.planFormAluMapper;
 import mappers.reporteComActMapper;
 import mappers.responsablePerfilMapper;
+import mappers.rubricaMapper;
 import mappers.sectordosMapper;
 import mappers.ueIeactivasMapper;
 import utilidades.Constantes;
@@ -178,6 +180,165 @@ public class PlanFDAOImpl {
         list = oraDaoFac.queryForList(query, new planFormAluMapper());
         return list;
     }
+     
+     
+     public List evaluaActEst(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
+        
+       String query = "SELECT PROG.ID_CCT_PLAN, PROG.CVE_PLAN, PROG.NOM_CARRERA, PROG.VERSION, PROG.ENFASIS, AVC.*,   MEN.ID_PLAN_FORM,      MEN.ID_MENTOR_UE,   MEN.ID_MENTOR_ACAD,  MEN.ID_RES_UE, ESTUD.NOMBRE_EST FROM (SELECT ESTU.ID_HIST_ALUM, PLANAUT.ID_CCT_PLAN, PLANAUT.CVE_PLAN, PLANAUT.NOM_CARRERA, PLANAUT.VERSION, PLANAUT.ENFASIS  FROM (\n" +
+"SELECT ID_HIST_ALUM,\n" +
+"  ID_ALUMNO,\n" +
+"  ID_IE_UE,\n" +
+"  STATUS_GENERAL,\n" +
+"  FECHA_REGISTRO,\n" +
+"  ID_ESCUELA,\n" +
+"  STATUS_PROCESO,\n" +
+"  ID_CCT_PLAN,\n" +
+"  FECHA_INICIO_PF,\n" +
+"  FECHA_BAJA,\n" +
+"  FECHA_EGRESO\n" +
+"FROM TBL_HIST_ALUM WHERE ID_IE_UE='"+usuariocons.getID_IE_UE()+"' AND STATUS_GENERAL='1' AND STATUS_PROCESO>=6  )ESTU INNER JOIN (SELECT PLANEST.*,  PRES.ESTATUS AS PROGVINCULADO, PRES.ID_RES_PROGEDU, PRES.PERFIL, PRES.ID_PERSONA   FROM (SELECT PLA.* FROM (SELECT TBL_CCT_PLAN.ID_PLAN, TBL_CCT_PLAN.ID_ESCUELA,  TBL_CCT_PLAN.ID_CCT_PLAN, PLA.CVE_PLAN, PLA.NOM_CARRERA,  TBL_CCT_PLAN.ESTATUS AS STATUS, PLA.FECHA_AUT_DUAL, PLA.ENFASIS, PLA.CVE_PLAN_EST, PLA.TIPO_PERIODO, PLA.NUMERO_PERIODO, PLA.VERSION FROM TBL_CCT_PLAN JOIN (SELECT * FROM CAT_PLAN)PLA ON TBL_CCT_PLAN.ID_PLAN=PLA.ID_PLAN WHERE TBL_CCT_PLAN.ID_ESCUELA='"+usuariocons.getID_ESCUELA()+"' AND PLA.STATUS>0 )PLA JOIN (SELECT * FROM TBL_PLAN_RESPONSABLE WHERE ID_PERSONA='"+usuariocons.getID_PERSONA()+"' AND PERFIL=28 AND ESTATUS=1 ) RESPON ON PLA.ID_PLAN=RESPON.ID_PLAN AND PLA.ID_ESCUELA=RESPON.ID_ESCUELA  )PLANEST LEFT OUTER JOIN(SELECT * FROM TBL_PLAN_RESPONSABLE WHERE PERFIL=28 AND ID_PERSONA='"+usuariocons.getID_PERSONA()+"'  )PRES ON PLANEST.ID_PLAN=PRES.ID_PLAN AND PLANEST.ID_ESCUELA=PRES.ID_ESCUELA\n" +
+") PLANAUT ON ESTU.ID_CCT_PLAN=PLANAUT.ID_CCT_PLAN ) PROG \n" +
+"INNER JOIN (\n" +
+"SELECT ID_HIST_ALUM, ID_ALUMNO, ID_IE_UE, STATUS_GENERAL, FECHA_INICIO_PF, FECHA_BAJA, FECHA_EGRESO, ID_CICLO, TO_CHAR(FECHA_INICIOPF, 'DD/MM/YYYY' ) AS FECHA_INICIOPF, TO_CHAR(FECHA_TERMINOPF,'DD/MM/YYYY') AS FECHA_TERMINOPF, ESTATUS_PF, NOMBREPLAN_FORM, DESCRIPCION, DURACION, HORAS_SEMANA, TOTAL_REPORTES, REPORTES_HECHOS, REPORTES_FALTANTES,POR_REG_ALUMNO, EVAL_MUE, EVAL_MA FROM (\n" +
+"SELECT TBL_HIST_ALUM.ID_HIST_ALUM,\n" +
+"  TBL_HIST_ALUM.ID_ALUMNO,\n" +
+"  TBL_HIST_ALUM.ID_IE_UE,\n" +
+"  TBL_HIST_ALUM.STATUS_GENERAL,\n" +
+"  TBL_HIST_ALUM.FECHA_REGISTRO,\n" +
+"  TBL_HIST_ALUM.ID_ESCUELA,\n" +
+"  TBL_HIST_ALUM.STATUS_PROCESO,\n" +
+"  TBL_HIST_ALUM.ID_CCT_PLAN,\n" +
+"  TBL_HIST_ALUM.FECHA_INICIO_PF,\n" +
+"  TBL_HIST_ALUM.FECHA_BAJA,\n" +
+"  TBL_HIST_ALUM.FECHA_EGRESO,\n" +
+"  TBL_HIST_ALUM.ID_CICLO,\n" +
+"  TBL_HIST_ALUM.FECHA_INC_PADRON,\n" +
+"  TBL_HIST_ALUM.RES_EVA,\n" +
+"  TBL_HIST_ALUM.AUX_RES_ACAD,\n" +
+"  TBL_HISTALU_PF.ID_HISTALU_PF,\n" +
+"  TBL_HISTALU_PF.ID_PLAN_FORM,\n" +
+"  TBL_HISTALU_PF.FECHA_INICIOPF,\n" +
+"  TBL_HISTALU_PF.FECHA_TERMINOPF,\n" +
+"  TBL_HISTALU_PF.ID_MENTOR_UE,\n" +
+"  TBL_HISTALU_PF.ID_MENTOR_ACAD,\n" +
+"  TBL_HISTALU_PF.ID_RES_UE,\n" +
+"  TBL_HISTALU_PF.ID_RES_ACAD,\n" +
+"  TBL_HISTALU_PF.ESTATUS_PF,\n" +
+"  TBL_HISTALU_PF.ID_RES_PROGEDU,\n" +
+"  TBL_PLAN_FORM.NOMBREPLAN_FORM,\n" +
+"  TBL_PLAN_FORM.DESCRIPCION,\n" +
+"  TBL_PLAN_FORM.DURACION,\n" +
+"  TBL_PLAN_FORM.FECHA_REG,\n" +
+"  TBL_PLAN_FORM.ID_CCT_PLAN AS ID_CCT_PLAN1,\n" +
+"  TBL_PLAN_FORM.ESTATUS,\n" +
+"  TBL_PLAN_FORM.ID_PER_VALIDA,\n" +
+"  TBL_PLAN_FORM.FECHA_VALIDA,\n" +
+"  TBL_PLAN_FORM.NO_ESTUDIANTES,\n" +
+"  TBL_PLAN_FORM.NO_MENTORES_UE,\n" +
+"  TBL_PLAN_FORM.NO_MENTORES_ACAD,\n" +
+"  TBL_PLAN_FORM.ID_IE_UE AS ID_IE_UE1,\n" +
+"  TBL_PLAN_FORM.HORAS_SEMANA, \n" +
+"  AVANCE.TOTAL_REPORTES,\n" +
+"  AVANCE.REPORTES_HECHOS,\n" +
+"  AVANCE.REPORTES_FALTANTES,\n" +
+"  AVANCE.POR_REG_ALUMNO,\n" +
+"  AVANCE.EVAL_MUE,\n" +
+"  AVANCE.EVAL_MA\n" +
+"\n" +
+"FROM TBL_HIST_ALUM\n" +
+"INNER JOIN TBL_HISTALU_PF\n" +
+"ON TBL_HIST_ALUM.ID_HIST_ALUM = TBL_HISTALU_PF.ID_HIST_ALU\n" +
+"INNER JOIN TBL_PLAN_FORM\n" +
+"ON TBL_HISTALU_PF.ID_PLAN_FORM = TBL_PLAN_FORM.ID_PLAN_FORMA\n" +
+"INNER JOIN (SELECT TOTAL.ID_HIST_ALU, TOTAL.TOTAL_REPORTES, NVL(HECHOS.TOTAL_REPOR_HECHOS,'0') AS REPORTES_HECHOS, NVL(EVALMUE.TOTAL_EVALMUE,'0') AS EVAL_MUE, NVL(EVALMA.TOTAL_EVALMA,'0') AS EVAL_MA, (TO_NUMBER(TOTAL.TOTAL_REPORTES)-TO_NUMBER(NVL(HECHOS.TOTAL_REPOR_HECHOS,'0'))) AS REPORTES_FALTANTES, TRUNC( (TO_NUMBER(NVL(HECHOS.TOTAL_REPOR_HECHOS,'0')) * 100 )/TO_NUMBER(TOTAL.TOTAL_REPORTES), 1) AS POR_REG_ALUMNO FROM (SELECT DISTINCT(ID_HIST_ALU), COUNT(ID_HIST_ALU) AS TOTAL_REPORTES  FROM(SELECT DISTINCT(ID_COMPETENCIA), COUNT(ID_COMPETENCIA) AS NO_COMPETENCIAS, ID_HIST_ALU FROM TBL_PLANFORM_ACT_ALU GROUP BY ID_COMPETENCIA, ID_HIST_ALU) GROUP BY ID_HIST_ALU )TOTAL LEFT OUTER JOIN (SELECT DISTINCT(ID_HIST_ALU), COUNT(ID_HIST_ALU) AS TOTAL_REPOR_HECHOS FROM TBL_REGALUMCOMP GROUP BY ID_HIST_ALU)HECHOS ON TOTAL.ID_HIST_ALU=HECHOS.ID_HIST_ALU LEFT OUTER JOIN (SELECT DISTINCT(ID_HIST_ALU), COUNT(EVAL_MUE) AS TOTAL_EVALMUE FROM TBL_REGALUMCOMP GROUP BY ID_HIST_ALU)EVALMUE ON TOTAL.ID_HIST_ALU=EVALMUE.ID_HIST_ALU  LEFT OUTER JOIN (SELECT DISTINCT(ID_HIST_ALU), COUNT(EVAL_MA) AS TOTAL_EVALMA FROM TBL_REGALUMCOMP GROUP BY ID_HIST_ALU)EVALMA ON TOTAL.ID_HIST_ALU=EVALMA.ID_HIST_ALU\n" +
+")AVANCE\n" +
+"ON TBL_HIST_ALUM.ID_HIST_ALUM=AVANCE.ID_HIST_ALU ORDER BY STATUS_GENERAL, ESTATUS_PF, FECHA_INICIOPF DESC) \n" +
+") AVC  ON PROG.ID_HIST_ALUM=AVC.ID_HIST_ALUM INNER JOIN (SELECT ID_HIST_ALU, ID_PLAN_FORM, FECHA_INICIOPF,FECHA_TERMINOPF, ID_MENTOR_UE, ID_MENTOR_ACAD, ID_RES_UE   FROM TBL_HISTALU_PF)MEN ON PROG.ID_HIST_ALUM= MEN.ID_HIST_ALU INNER JOIN (SELECT ID_ALUMNO, NOMBRE||' '||APELLIDOP||' '||APELLIDOM AS NOMBRE_EST FROM CAT_ALUMNO)ESTUD ON ESTUD.ID_ALUMNO=AVC.ID_ALUMNO WHERE MEN.ID_MENTOR_UE='"+usuariocons.getID_PERSONA()+"'    ORDER BY PROG.NOM_CARRERA ASC ";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new planFormAluMUEMapper());
+        return list;
+    }  
+      public List evaluaActEst2(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
+        
+       String query = "  SELECT PROG.ID_CCT_PLAN, PROG.CVE_PLAN, PROG.NOM_CARRERA, PROG.VERSION, PROG.ENFASIS, AVC.*,   MEN.ID_PLAN_FORM,      MEN.ID_MENTOR_UE,   MEN.ID_MENTOR_ACAD,  MEN.ID_RES_UE, ESTUD.NOMBRE_EST FROM (SELECT ESTU.ID_HIST_ALUM, PLANAUT.ID_CCT_PLAN, PLANAUT.CVE_PLAN, PLANAUT.NOM_CARRERA, PLANAUT.VERSION, PLANAUT.ENFASIS  FROM (\n" +
+"SELECT ID_HIST_ALUM,\n" +
+"  ID_ALUMNO,\n" +
+"  ID_IE_UE,\n" +
+"  STATUS_GENERAL,\n" +
+"  FECHA_REGISTRO,\n" +
+"  ID_ESCUELA,\n" +
+"  STATUS_PROCESO,\n" +
+"  ID_CCT_PLAN,\n" +
+"  FECHA_INICIO_PF,\n" +
+"  FECHA_BAJA,\n" +
+"  FECHA_EGRESO\n" +
+"FROM TBL_HIST_ALUM WHERE  STATUS_GENERAL='1' AND STATUS_PROCESO>=6  )ESTU INNER JOIN (SELECT PLANEST.*,  PRES.ESTATUS AS PROGVINCULADO, PRES.ID_RES_PROGEDU, PRES.PERFIL, PRES.ID_PERSONA   FROM (SELECT PLA.* FROM (SELECT TBL_CCT_PLAN.ID_PLAN, TBL_CCT_PLAN.ID_ESCUELA,  TBL_CCT_PLAN.ID_CCT_PLAN, PLA.CVE_PLAN, PLA.NOM_CARRERA,  TBL_CCT_PLAN.ESTATUS AS STATUS, PLA.FECHA_AUT_DUAL, PLA.ENFASIS, PLA.CVE_PLAN_EST, PLA.TIPO_PERIODO, PLA.NUMERO_PERIODO, PLA.VERSION FROM TBL_CCT_PLAN JOIN (SELECT * FROM CAT_PLAN)PLA ON TBL_CCT_PLAN.ID_PLAN=PLA.ID_PLAN WHERE TBL_CCT_PLAN.ID_ESCUELA='"+usuariocons.getID_ESCUELA()+"' AND PLA.STATUS>0 )PLA JOIN (SELECT * FROM TBL_PLAN_RESPONSABLE WHERE ID_PERSONA='"+usuariocons.getID_PERSONA()+"' AND PERFIL=27 AND ESTATUS=1 ) RESPON ON PLA.ID_PLAN=RESPON.ID_PLAN AND PLA.ID_ESCUELA=RESPON.ID_ESCUELA  )PLANEST LEFT OUTER JOIN(SELECT * FROM TBL_PLAN_RESPONSABLE WHERE PERFIL=27 AND ID_PERSONA='"+usuariocons.getID_PERSONA()+"'  )PRES ON PLANEST.ID_PLAN=PRES.ID_PLAN AND PLANEST.ID_ESCUELA=PRES.ID_ESCUELA\n" +
+") PLANAUT ON ESTU.ID_CCT_PLAN=PLANAUT.ID_CCT_PLAN ) PROG \n" +
+"INNER JOIN (\n" +
+"SELECT ID_HIST_ALUM, ID_ALUMNO, ID_IE_UE, STATUS_GENERAL, FECHA_INICIO_PF, FECHA_BAJA, FECHA_EGRESO, ID_CICLO, TO_CHAR(FECHA_INICIOPF, 'DD/MM/YYYY' ) AS FECHA_INICIOPF, TO_CHAR(FECHA_TERMINOPF,'DD/MM/YYYY') AS FECHA_TERMINOPF, ESTATUS_PF, NOMBREPLAN_FORM, DESCRIPCION, DURACION, HORAS_SEMANA, TOTAL_REPORTES, REPORTES_HECHOS, REPORTES_FALTANTES,POR_REG_ALUMNO, EVAL_MUE, EVAL_MA FROM (\n" +
+"SELECT TBL_HIST_ALUM.ID_HIST_ALUM,\n" +
+"  TBL_HIST_ALUM.ID_ALUMNO,\n" +
+"  TBL_HIST_ALUM.ID_IE_UE,\n" +
+"  TBL_HIST_ALUM.STATUS_GENERAL,\n" +
+"  TBL_HIST_ALUM.FECHA_REGISTRO,\n" +
+"  TBL_HIST_ALUM.ID_ESCUELA,\n" +
+"  TBL_HIST_ALUM.STATUS_PROCESO,\n" +
+"  TBL_HIST_ALUM.ID_CCT_PLAN,\n" +
+"  TBL_HIST_ALUM.FECHA_INICIO_PF,\n" +
+"  TBL_HIST_ALUM.FECHA_BAJA,\n" +
+"  TBL_HIST_ALUM.FECHA_EGRESO,\n" +
+"  TBL_HIST_ALUM.ID_CICLO,\n" +
+"  TBL_HIST_ALUM.FECHA_INC_PADRON,\n" +
+"  TBL_HIST_ALUM.RES_EVA,\n" +
+"  TBL_HIST_ALUM.AUX_RES_ACAD,\n" +
+"  TBL_HISTALU_PF.ID_HISTALU_PF,\n" +
+"  TBL_HISTALU_PF.ID_PLAN_FORM,\n" +
+"  TBL_HISTALU_PF.FECHA_INICIOPF,\n" +
+"  TBL_HISTALU_PF.FECHA_TERMINOPF,\n" +
+"  TBL_HISTALU_PF.ID_MENTOR_UE,\n" +
+"  TBL_HISTALU_PF.ID_MENTOR_ACAD,\n" +
+"  TBL_HISTALU_PF.ID_RES_UE,\n" +
+"  TBL_HISTALU_PF.ID_RES_ACAD,\n" +
+"  TBL_HISTALU_PF.ESTATUS_PF,\n" +
+"  TBL_HISTALU_PF.ID_RES_PROGEDU,\n" +
+"  TBL_PLAN_FORM.NOMBREPLAN_FORM,\n" +
+"  TBL_PLAN_FORM.DESCRIPCION,\n" +
+"  TBL_PLAN_FORM.DURACION,\n" +
+"  TBL_PLAN_FORM.FECHA_REG,\n" +
+"  TBL_PLAN_FORM.ID_CCT_PLAN AS ID_CCT_PLAN1,\n" +
+"  TBL_PLAN_FORM.ESTATUS,\n" +
+"  TBL_PLAN_FORM.ID_PER_VALIDA,\n" +
+"  TBL_PLAN_FORM.FECHA_VALIDA,\n" +
+"  TBL_PLAN_FORM.NO_ESTUDIANTES,\n" +
+"  TBL_PLAN_FORM.NO_MENTORES_UE,\n" +
+"  TBL_PLAN_FORM.NO_MENTORES_ACAD,\n" +
+"  TBL_PLAN_FORM.ID_IE_UE AS ID_IE_UE1,\n" +
+"  TBL_PLAN_FORM.HORAS_SEMANA, \n" +
+"  AVANCE.TOTAL_REPORTES,\n" +
+"  AVANCE.REPORTES_HECHOS,\n" +
+"  AVANCE.REPORTES_FALTANTES,\n" +
+"  AVANCE.POR_REG_ALUMNO,\n" +
+"  AVANCE.EVAL_MUE,\n" +
+"  AVANCE.EVAL_MA\n" +
+"\n" +
+"FROM TBL_HIST_ALUM\n" +
+"INNER JOIN TBL_HISTALU_PF\n" +
+"ON TBL_HIST_ALUM.ID_HIST_ALUM = TBL_HISTALU_PF.ID_HIST_ALU\n" +
+"INNER JOIN TBL_PLAN_FORM\n" +
+"ON TBL_HISTALU_PF.ID_PLAN_FORM = TBL_PLAN_FORM.ID_PLAN_FORMA\n" +
+"INNER JOIN (SELECT TOTAL.ID_HIST_ALU, TOTAL.TOTAL_REPORTES, NVL(HECHOS.TOTAL_REPOR_HECHOS,'0') AS REPORTES_HECHOS, NVL(EVALMUE.TOTAL_EVALMUE,'0') AS EVAL_MUE, NVL(EVALMA.TOTAL_EVALMA,'0') AS EVAL_MA, (TO_NUMBER(TOTAL.TOTAL_REPORTES)-TO_NUMBER(NVL(HECHOS.TOTAL_REPOR_HECHOS,'0'))) AS REPORTES_FALTANTES, TRUNC( (TO_NUMBER(NVL(HECHOS.TOTAL_REPOR_HECHOS,'0')) * 100 )/TO_NUMBER(TOTAL.TOTAL_REPORTES), 1) AS POR_REG_ALUMNO FROM (SELECT DISTINCT(ID_HIST_ALU), COUNT(ID_HIST_ALU) AS TOTAL_REPORTES  FROM(SELECT DISTINCT(ID_COMPETENCIA), COUNT(ID_COMPETENCIA) AS NO_COMPETENCIAS, ID_HIST_ALU FROM TBL_PLANFORM_ACT_ALU GROUP BY ID_COMPETENCIA, ID_HIST_ALU) GROUP BY ID_HIST_ALU )TOTAL LEFT OUTER JOIN (SELECT DISTINCT(ID_HIST_ALU), COUNT(ID_HIST_ALU) AS TOTAL_REPOR_HECHOS FROM TBL_REGALUMCOMP GROUP BY ID_HIST_ALU)HECHOS ON TOTAL.ID_HIST_ALU=HECHOS.ID_HIST_ALU LEFT OUTER JOIN (SELECT DISTINCT(ID_HIST_ALU), COUNT(EVAL_MUE) AS TOTAL_EVALMUE FROM TBL_REGALUMCOMP GROUP BY ID_HIST_ALU)EVALMUE ON TOTAL.ID_HIST_ALU=EVALMUE.ID_HIST_ALU  LEFT OUTER JOIN (SELECT DISTINCT(ID_HIST_ALU), COUNT(EVAL_MA) AS TOTAL_EVALMA FROM TBL_REGALUMCOMP GROUP BY ID_HIST_ALU)EVALMA ON TOTAL.ID_HIST_ALU=EVALMA.ID_HIST_ALU\n" +
+")AVANCE\n" +
+"ON TBL_HIST_ALUM.ID_HIST_ALUM=AVANCE.ID_HIST_ALU ORDER BY STATUS_GENERAL, ESTATUS_PF, FECHA_INICIOPF DESC) \n" +
+") AVC  ON PROG.ID_HIST_ALUM=AVC.ID_HIST_ALUM INNER JOIN (SELECT ID_HIST_ALU, ID_PLAN_FORM, FECHA_INICIOPF,FECHA_TERMINOPF, ID_MENTOR_UE, ID_MENTOR_ACAD, ID_RES_UE   FROM TBL_HISTALU_PF)MEN ON PROG.ID_HIST_ALUM= MEN.ID_HIST_ALU INNER JOIN (SELECT ID_ALUMNO, NOMBRE||' '||APELLIDOP||' '||APELLIDOM AS NOMBRE_EST FROM CAT_ALUMNO)ESTUD ON ESTUD.ID_ALUMNO=AVC.ID_ALUMNO WHERE MEN.ID_MENTOR_ACAD='"+usuariocons.getID_PERSONA()+"'    ORDER BY PROG.NOM_CARRERA ASC    ";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new planFormAluMUEMapper());
+        return list;
+    }  
+     
+     
+     
      public List planFormAluMateria(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
         
        String query =" SELECT DISTINCT(ID_MATERIA), NOMBRE_MATERIA FROM(\n" +
@@ -207,7 +368,7 @@ public class PlanFDAOImpl {
     }
        public List planFormAluMateriaCom(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
         
-       String query ="SELECT COMP.*, NVL(REGISTRA.ID_REGALUMCOMP, '0') AS ID_REGALUMCOMP, REGISTRA.MARCO_TEORICO, REGISTRA.DES_ACT, REGISTRA.RUTA_EVIDENCIAS, REGISTRA.FECHA_REG, NVL(REGISTRA. EDITA,'0')AS EDITA FROM(\n" +
+       String query ="SELECT COMP.*, NVL(REGISTRA.ID_REGALUMCOMP, '0') AS ID_REGALUMCOMP, REGISTRA.MARCO_TEORICO, REGISTRA.DES_ACT, REGISTRA.RUTA_EVIDENCIAS, REGISTRA.FECHA_REG, NVL(REGISTRA. EDITA,'0')AS EDITA, REGISTRA.EVAL_MUE, REGISTRA.EVAL_MA FROM(\n" +
 "\n" +
 "\n" +
 "SELECT DISTINCT(ID_COMPETENCIA), COMPETENCIA, ID_HIST_ALU FROM(\n" +
@@ -230,7 +391,7 @@ public class PlanFDAOImpl {
 "\n" +
 "WHERE TBL_PLANFORM_ACT_ALU.ID_HIST_ALU = '"+alumno.getAUXIDHISTALUM()+"' AND TBL_PLANFORM_ACT_ALU.ID_MATERIA='"+programa.getAUX_IDMATERIA()+"'\n" +
 "ORDER BY TBL_PLAN_MATERIA.NOMBRE_MATERIA,\n" +
-"  TBL_PLAN_MATERIA.NUMERO_PERIODO) ORDER BY ID_COMPETENCIA, COMPETENCIA, ID_HIST_ALU ASC)COMP LEFT OUTER JOIN(SELECT ID_REGALUMCOMP, ID_COMPETENCIA, ID_HIST_ALU, MARCO_TEORICO, DES_ACT, RUTA_EVIDENCIAS, FECHA_REG, EDITA FROM TBL_REGALUMCOMP)REGISTRA ON COMP.ID_HIST_ALU=REGISTRA.ID_HIST_ALU AND COMP.ID_COMPETENCIA=REGISTRA.ID_COMPETENCIA \n" +
+"  TBL_PLAN_MATERIA.NUMERO_PERIODO) ORDER BY ID_COMPETENCIA, COMPETENCIA, ID_HIST_ALU ASC)COMP LEFT OUTER JOIN(SELECT ID_REGALUMCOMP, ID_COMPETENCIA, ID_HIST_ALU, MARCO_TEORICO, DES_ACT, RUTA_EVIDENCIAS, FECHA_REG, EDITA, EVAL_MUE, EVAL_MA FROM TBL_REGALUMCOMP)REGISTRA ON COMP.ID_HIST_ALU=REGISTRA.ID_HIST_ALU AND COMP.ID_COMPETENCIA=REGISTRA.ID_COMPETENCIA \n" +
 " ";
         Constantes.enviaMensajeConsola("Consulta cct----->" + query);
         List list = null;
@@ -288,7 +449,15 @@ public class PlanFDAOImpl {
         list = oraDaoFac.queryForList(query, new reporteComActMapper());
         return list;
     }
+   public List rubrica(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
         
+       String query ="SELECT ID_RUBRICA, DESC_RUBRICA FROM CAT_RUBRICA ";
+        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new rubricaMapper());
+        return list;
+    }
+             
         
     public List programasPlanForm(AlumnoBean alumno, escuelaBean escuela, usuarioBean usuario, programaEsBean programa) throws Exception {
         String query = "SELECT ID_PLAN_FORMA, NUMERO_PERIODO, ID_MATERIA, ID_COMPETENCIA, ID_ESCALA, ID_LUGAR, PLAN_ROTACION, DES_ACTIVIDAD, FECHA_REG, ID_ACTIVIDAD, ID_ACT_EVALUA, NOMBRE_MATERIA, COMPETENCIA, ACTIVIDAD, HORA, LUGAR, ID_HORA FROM (\n" +
@@ -1084,6 +1253,92 @@ public class PlanFDAOImpl {
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
         return oraDaoFac.queryUpdate("TBL_HIST_ALUM", arregloCampos, Condicion);
+    }
+    
+     public boolean registraEvaluacionMUE(Connection conn, PreparedStatement stat, programaEsBean programa, AlumnoBean alumno) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("EVAL_MUE", "STRING", programa.getID_RUBRICA());
+        arregloCampos.add(temporal);
+       
+        
+
+        String Condicion = "where ID_HIST_ALU='" + alumno.getAUXIDHISTALUM()+ "' AND ID_ACTIVIDAD='" + programa.getID_ACTIVIDAD()+ "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdateTransaccion(conn, stat,"TBL_PLANFORM_ACT_ALU", arregloCampos, Condicion);
+    }
+     
+      public boolean registraEvaluacionMA(Connection conn, PreparedStatement stat, programaEsBean programa, AlumnoBean alumno) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("EVAL_MA", "STRING", programa.getID_RUBRICA());
+        arregloCampos.add(temporal);
+       
+        
+
+        String Condicion = "where ID_HIST_ALU='" + alumno.getAUXIDHISTALUM()+ "' AND ID_ACTIVIDAD='" + programa.getID_ACTIVIDAD()+ "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdateTransaccion(conn, stat,"TBL_PLANFORM_ACT_ALU", arregloCampos, Condicion);
+    }
+     public boolean registraEvaluacioncComMUE(Connection conn, PreparedStatement stat, programaEsBean programa, AlumnoBean alumno, String fechaHoy) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("EVAL_MUE", "STRING", fechaHoy);
+        arregloCampos.add(temporal);
+       
+        
+
+        String Condicion = "where ID_HIST_ALU='" + alumno.getAUXIDHISTALUM()+ "' AND ID_COMPETENCIA='" + programa.getAUX_IDCOMPETENCIA()+ "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdateTransaccion(conn, stat,"TBL_REGALUMCOMP", arregloCampos, Condicion);
+    }
+      public boolean registraEvaluacioncComMA(Connection conn, PreparedStatement stat, programaEsBean programa, AlumnoBean alumno, String fechaHoy) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("EVAL_MA", "STRING", fechaHoy);
+        arregloCampos.add(temporal);
+       
+        
+
+        String Condicion = "where ID_HIST_ALU='" + alumno.getAUXIDHISTALUM()+ "' AND ID_COMPETENCIA='" + programa.getAUX_IDCOMPETENCIA()+ "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdateTransaccion(conn, stat,"TBL_REGALUMCOMP", arregloCampos, Condicion);
     }
 
     public String ConsultaID_ALUMNO(String curp) throws Exception {

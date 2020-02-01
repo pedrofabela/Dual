@@ -249,7 +249,73 @@
             <result name="ERROR">Reporte_Plan_Alu.jsp</result>
             <result name="input">Reporte_Plan_Alu.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
-        </action>                      
+        </action>    
+        
+        <action name="EvaluaActEst" class="action.EstudianteDual_Action" method="EvaluaActEst">
+            <result name="SUCCESS">Evalua_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu.jsp</result>
+            <result name="input">Evalua_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+           <action name="EvalEstMA" class="action.EstudianteDual_Action" method="EvalEstMA">
+            <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="input">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+         <action name="eligePlanFormMA" class="action.EstudianteDual_Action" method="eligePlanFormMA">
+            <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="input">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+          <action name="eligePlanAsigMateriaMA" class="action.EstudianteDual_Action" method="eligePlanAsigMateriaMA">
+            <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="input">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+           <action name="eligePlanAsigMateriaComMA" class="action.EstudianteDual_Action" method="eligePlanAsigMateriaComMA">
+            <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="input">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+          <action name="guardaEvalEst2" class="action.EstudianteDual_Action" method="guardaEvalEst2">
+            <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="input">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        
+          <action name="eligePlanFormMUE" class="action.EstudianteDual_Action" method="eligePlanFormMUE">
+            <result name="SUCCESS">Evalua_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu.jsp</result>
+            <result name="input">Evalua_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+          <action name="eligePlanAsigMateriaMUE" class="action.EstudianteDual_Action" method="eligePlanAsigMateriaMUE">
+            <result name="SUCCESS">Evalua_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu.jsp</result>
+            <result name="input">Evalua_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+         <action name="eligePlanAsigMateriaComMUE" class="action.EstudianteDual_Action" method="eligePlanAsigMateriaComMUE">
+            <result name="SUCCESS">Evalua_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu.jsp</result>
+            <result name="input">Evalua_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+         <action name="guardaEvalEst" class="action.EstudianteDual_Action" method="guardaEvalEst">
+            <result name="SUCCESS">Evalua_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu.jsp</result>
+            <result name="input">Evalua_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+                                                    
                                                                           
     </package>
 	

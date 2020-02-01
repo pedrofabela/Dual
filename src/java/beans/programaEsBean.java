@@ -60,54 +60,54 @@ public class programaEsBean {
     private String LUGAR;
     private String ID_HORA;
     private String HORA;
-     private String PLAN_ROTACION;
+    private String PLAN_ROTACION;
     private String NO_PASA;
-    
- private String ID_RESUE;
- private String ID_MENTORUE;
- private String ID_RESACAD;
- private String ID_MENTORACAD;
- 
- private String ID_PLAN_FORMA;
- private String NOMBREPLAN_FORM;
- private String DURACION;
- private String FECHA_REG;
- 
- private String ID_ACT_EVALUA;
- private String DESCRIPCION;
-private String FECHA_REG_PLAN;
-private String FECHA_TERMINO_PLAN;
-private String HORAS_SEMANA;
-private String EVIDENCIAS;
-private String INCLUIDA;
 
-private String ID_HIST_ALU;
-private String ID_PLAN_FORM; 
-private String FECHA_INICIOPF; 
-private String FECHA_TERMINOPF; 
-private String ID_MENTOR_UE; 
-private String ID_MENTOR_ACAD; 
-private String ID_RES_UE; 
-private String ID_RES_ACAD;  
-private String ESTATUS_PF;  
-private String ID_HIST_ALUM;
-private String ID_ALUMNO;
-private String ID_IE_UE;
-private String STATUS_GENERAL;
-private String FECHA_INICIO_PF;
-private String FECHA_BAJA;
-private String FECHA_EGRESO;
-private String ID_CICLO;
-private String AUX_IDMATERIA;
-private String AUX_IDCOMPETENCIA;
-private String ID_ACT_ALU;
-private String CVE_MATERIA;
-private String ARCH_EVIDENCIAS;
-private String TOTAL_REPORTES;
+    private String ID_RESUE;
+    private String ID_MENTORUE;
+    private String ID_RESACAD;
+    private String ID_MENTORACAD;
 
-private String REPORTES_HECHOS;
-private String REPORTES_FALTANTES;
-private String POR_REG_ALUMNO;
+    private String ID_PLAN_FORMA;
+    private String NOMBREPLAN_FORM;
+    private String DURACION;
+    private String FECHA_REG;
+
+    private String ID_ACT_EVALUA;
+    private String DESCRIPCION;
+    private String FECHA_REG_PLAN;
+    private String FECHA_TERMINO_PLAN;
+    private String HORAS_SEMANA;
+    private String EVIDENCIAS;
+    private String INCLUIDA;
+
+    private String ID_HIST_ALU;
+    private String ID_PLAN_FORM;
+    private String FECHA_INICIOPF;
+    private String FECHA_TERMINOPF;
+    private String ID_MENTOR_UE;
+    private String ID_MENTOR_ACAD;
+    private String ID_RES_UE;
+    private String ID_RES_ACAD;
+    private String ESTATUS_PF;
+    private String ID_HIST_ALUM;
+    private String ID_ALUMNO;
+    private String ID_IE_UE;
+    private String STATUS_GENERAL;
+    private String FECHA_INICIO_PF;
+    private String FECHA_BAJA;
+    private String FECHA_EGRESO;
+    private String ID_CICLO;
+    private String AUX_IDMATERIA;
+    private String AUX_IDCOMPETENCIA;
+    private String ID_ACT_ALU;
+    private String CVE_MATERIA;
+    private String ARCH_EVIDENCIAS;
+    private String TOTAL_REPORTES;
+
+    private String REPORTES_HECHOS;
+    private String REPORTES_FALTANTES;
+    private String POR_REG_ALUMNO;
 
     private String ID_REGALUMCOMP;
     private String MARCO_TEORICO;
@@ -115,8 +115,56 @@ private String POR_REG_ALUMNO;
     private String RUTA_EVIDENCIAS;
     private String EDITA;
 
+    private String EVAL_MUE;
+    private String EVAL_MA;
+
+    private String ID_RUBRICA;
+    private String DESC_RUBRICA;
+    
+    private String NOMBRE_EST;
+
+    public String getNOMBRE_EST() {
+        return NOMBRE_EST;
+    }
+
+    public void setNOMBRE_EST(String NOMBRE_EST) {
+        this.NOMBRE_EST = NOMBRE_EST;
+    }
     
     
+
+    public String getID_RUBRICA() {
+        return ID_RUBRICA;
+    }
+
+    public void setID_RUBRICA(String ID_RUBRICA) {
+        this.ID_RUBRICA = ID_RUBRICA;
+    }
+
+    public String getDESC_RUBRICA() {
+        return DESC_RUBRICA;
+    }
+
+    public void setDESC_RUBRICA(String DESC_RUBRICA) {
+        this.DESC_RUBRICA = DESC_RUBRICA;
+    }
+
+    public String getEVAL_MUE() {
+        return EVAL_MUE;
+    }
+
+    public void setEVAL_MUE(String EVAL_MUE) {
+        this.EVAL_MUE = EVAL_MUE;
+    }
+
+    public String getEVAL_MA() {
+        return EVAL_MA;
+    }
+
+    public void setEVAL_MA(String EVAL_MA) {
+        this.EVAL_MA = EVAL_MA;
+    }
+
     public String getEDITA() {
         return EDITA;
     }
@@ -124,10 +172,6 @@ private String POR_REG_ALUMNO;
     public void setEDITA(String EDITA) {
         this.EDITA = EDITA;
     }
-    
-    
-    
-    
 
     public String getID_REGALUMCOMP() {
         return ID_REGALUMCOMP;
@@ -160,8 +204,6 @@ private String POR_REG_ALUMNO;
     public void setRUTA_EVIDENCIAS(String RUTA_EVIDENCIAS) {
         this.RUTA_EVIDENCIAS = RUTA_EVIDENCIAS;
     }
-    
-    
 
     public String getTOTAL_REPORTES() {
         return TOTAL_REPORTES;
@@ -195,8 +237,6 @@ private String POR_REG_ALUMNO;
         this.POR_REG_ALUMNO = POR_REG_ALUMNO;
     }
 
-
-
     public String getARCH_EVIDENCIAS() {
         return ARCH_EVIDENCIAS;
     }
@@ -204,8 +244,6 @@ private String POR_REG_ALUMNO;
     public void setARCH_EVIDENCIAS(String ARCH_EVIDENCIAS) {
         this.ARCH_EVIDENCIAS = ARCH_EVIDENCIAS;
     }
-
-
 
     public String getID_ACT_ALU() {
         return ID_ACT_ALU;
@@ -223,8 +261,6 @@ private String POR_REG_ALUMNO;
         this.CVE_MATERIA = CVE_MATERIA;
     }
 
-
-
     public String getAUX_IDCOMPETENCIA() {
         return AUX_IDCOMPETENCIA;
     }
@@ -233,8 +269,6 @@ private String POR_REG_ALUMNO;
         this.AUX_IDCOMPETENCIA = AUX_IDCOMPETENCIA;
     }
 
-
-
     public String getAUX_IDMATERIA() {
         return AUX_IDMATERIA;
     }
@@ -242,10 +276,6 @@ private String POR_REG_ALUMNO;
     public void setAUX_IDMATERIA(String AUX_IDMATERIA) {
         this.AUX_IDMATERIA = AUX_IDMATERIA;
     }
-
-
-   
-
 
     public String getID_ALUMNO() {
         return ID_ALUMNO;
@@ -303,10 +333,6 @@ private String POR_REG_ALUMNO;
         this.ID_CICLO = ID_CICLO;
     }
 
-
-
-
-
     public String getID_HIST_ALUM() {
         return ID_HIST_ALUM;
     }
@@ -314,9 +340,6 @@ private String POR_REG_ALUMNO;
     public void setID_HIST_ALUM(String ID_HIST_ALUM) {
         this.ID_HIST_ALUM = ID_HIST_ALUM;
     }
-
-
-
 
     public String getID_HIST_ALU() {
         return ID_HIST_ALU;
@@ -390,17 +413,6 @@ private String POR_REG_ALUMNO;
         this.ESTATUS_PF = ESTATUS_PF;
     }
 
-
-
-
-
-
-
-
-
-
-
-
     public String getINCLUIDA() {
         return INCLUIDA;
     }
@@ -408,7 +420,6 @@ private String POR_REG_ALUMNO;
     public void setINCLUIDA(String INCLUIDA) {
         this.INCLUIDA = INCLUIDA;
     }
-
 
     public String getEVIDENCIAS() {
         return EVIDENCIAS;
@@ -418,8 +429,6 @@ private String POR_REG_ALUMNO;
         this.EVIDENCIAS = EVIDENCIAS;
     }
 
-    
-
     public String getHORAS_SEMANA() {
         return HORAS_SEMANA;
     }
@@ -427,8 +436,6 @@ private String POR_REG_ALUMNO;
     public void setHORAS_SEMANA(String HORAS_SEMANA) {
         this.HORAS_SEMANA = HORAS_SEMANA;
     }
-
-
 
     public String getFECHA_TERMINO_PLAN() {
         return FECHA_TERMINO_PLAN;
@@ -438,9 +445,6 @@ private String POR_REG_ALUMNO;
         this.FECHA_TERMINO_PLAN = FECHA_TERMINO_PLAN;
     }
 
-
-
-
     public String getFECHA_REG_PLAN() {
         return FECHA_REG_PLAN;
     }
@@ -448,11 +452,7 @@ private String POR_REG_ALUMNO;
     public void setFECHA_REG_PLAN(String FECHA_REG_PLAN) {
         this.FECHA_REG_PLAN = FECHA_REG_PLAN;
     }
- 
- 
- 
- 
- 
+
     public String getDESCRIPCION() {
         return DESCRIPCION;
     }
@@ -460,7 +460,7 @@ private String POR_REG_ALUMNO;
     public void setDESCRIPCION(String DESCRIPCION) {
         this.DESCRIPCION = DESCRIPCION;
     }
- 
+
     public String getID_ACT_EVALUA() {
         return ID_ACT_EVALUA;
     }
@@ -468,9 +468,6 @@ private String POR_REG_ALUMNO;
     public void setID_ACT_EVALUA(String ID_ACT_EVALUA) {
         this.ID_ACT_EVALUA = ID_ACT_EVALUA;
     }
- 
- 
- 
 
     public String getFECHA_REG() {
         return FECHA_REG;
@@ -479,8 +476,6 @@ private String POR_REG_ALUMNO;
     public void setFECHA_REG(String FECHA_REG) {
         this.FECHA_REG = FECHA_REG;
     }
- 
-
 
     public String getID_PLAN_FORMA() {
         return ID_PLAN_FORMA;
@@ -505,8 +500,6 @@ private String POR_REG_ALUMNO;
     public void setDURACION(String DURACION) {
         this.DURACION = DURACION;
     }
- 
- 
 
     public String getID_RESACAD() {
         return ID_RESACAD;
@@ -523,7 +516,6 @@ private String POR_REG_ALUMNO;
     public void setID_MENTORACAD(String ID_MENTORACAD) {
         this.ID_MENTORACAD = ID_MENTORACAD;
     }
- 
 
     public String getID_RESUE() {
         return ID_RESUE;
@@ -540,9 +532,6 @@ private String POR_REG_ALUMNO;
     public void setID_MENTORUE(String ID_MENTORUE) {
         this.ID_MENTORUE = ID_MENTORUE;
     }
- 
- 
- 
 
     public String getNO_PASA() {
         return NO_PASA;
@@ -551,8 +540,6 @@ private String POR_REG_ALUMNO;
     public void setNO_PASA(String NO_PASA) {
         this.NO_PASA = NO_PASA;
     }
-    
-    
 
     public String getPLAN_ROTACION() {
         return PLAN_ROTACION;
@@ -561,7 +548,7 @@ private String POR_REG_ALUMNO;
     public void setPLAN_ROTACION(String PLAN_ROTACION) {
         this.PLAN_ROTACION = PLAN_ROTACION;
     }
-          
+
     public String getID_ESCALA() {
         return ID_ESCALA;
     }
@@ -947,9 +934,5 @@ private String POR_REG_ALUMNO;
     public void setENFASIS(String ENFASIS) {
         this.ENFASIS = ENFASIS;
     }
-    
-    
-    
-    
 
 }

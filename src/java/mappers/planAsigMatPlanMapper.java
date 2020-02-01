@@ -64,6 +64,17 @@ public class planAsigMatPlanMapper implements Mapper{
         } else {
             dat.setEDITA(rs.getString("EDITA"));
         }     
+             
+            if (rs.getString("EVAL_MUE") != null) {
+            dat.setEVAL_MUE(rs.getString("EVAL_MUE").trim());
+        } else {
+            dat.setEVAL_MUE(rs.getString("EVAL_MUE"));
+        }  
+             if (rs.getString("EVAL_MA") != null) {
+            dat.setEVAL_MA(rs.getString("EVAL_MA").trim());
+        } else {
+            dat.setEVAL_MA(rs.getString("EVAL_MA"));
+        }         
           
         return dat;
     }
