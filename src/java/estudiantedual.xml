@@ -218,6 +218,22 @@
             <result name="input">Reporte_Plan_Alu.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
         </action>  
+        
+          <action name="VerPlanFormEst" class="action.EstudianteDual_Action" method="RepActAlu">
+            <result name="SUCCESS">Ver_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Ver_Plan_Alu.jsp</result>
+            <result name="input">Ver_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+         <action name="DespliegaPlanAlu" class="action.EstudianteDual_Action" method="DespliegaPlanAlu">
+            <result name="SUCCESS">Ver_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Ver_Plan_Alu.jsp</result>
+            <result name="input">Ver_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        
          <action name="eligePlanFormAlu" class="action.EstudianteDual_Action" method="eligePlanFormAlu">
             <result name="SUCCESS">Reporte_Plan_Alu.jsp</result>			              
             <result name="ERROR">Reporte_Plan_Alu.jsp</result>
@@ -284,6 +300,13 @@
         </action>  
         
           <action name="guardaEvalEst2" class="action.EstudianteDual_Action" method="guardaEvalEst2">
+            <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="input">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+         <action name="HabilitaEditRegEst" class="action.EstudianteDual_Action" method="HabilitaEditRegEst">
             <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
             <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>
             <result name="input">Evalua_Plan_Alu_Ma.jsp</result>

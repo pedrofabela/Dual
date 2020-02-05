@@ -120,7 +120,7 @@ public class PlanFDAOImpl {
     
      public List planFormAlu(AlumnoBean alumno, escuelaBean escuela,  usuarioBean usuariocons, programaEsBean programa) throws Exception {
         
-       String query = " SELECT ID_HIST_ALUM, ID_ALUMNO, ID_IE_UE, STATUS_GENERAL, FECHA_INICIO_PF, FECHA_BAJA, FECHA_EGRESO, ID_CICLO, TO_CHAR(FECHA_INICIOPF, 'DD/MM/YYYY' ) AS FECHA_INICIOPF, TO_CHAR(FECHA_TERMINOPF,'DD/MM/YYYY') AS FECHA_TERMINOPF, ESTATUS_PF, NOMBREPLAN_FORM, DESCRIPCION, DURACION, HORAS_SEMANA, TOTAL_REPORTES, REPORTES_HECHOS, REPORTES_FALTANTES,POR_REG_ALUMNO FROM (\n" +
+       String query = " SELECT ID_HIST_ALUM, ID_ALUMNO, ID_IE_UE, STATUS_GENERAL, FECHA_INICIO_PF, FECHA_BAJA, FECHA_EGRESO, ID_CICLO, TO_CHAR(FECHA_INICIOPF, 'DD/MM/YYYY' ) AS FECHA_INICIOPF, TO_CHAR(FECHA_TERMINOPF,'DD/MM/YYYY') AS FECHA_TERMINOPF, ESTATUS_PF, NOMBREPLAN_FORM, DESCRIPCION, DURACION, HORAS_SEMANA, TOTAL_REPORTES, REPORTES_HECHOS, REPORTES_FALTANTES,POR_REG_ALUMNO, ID_PLAN_FORM FROM (\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -1183,6 +1183,27 @@ public class PlanFDAOImpl {
         arregloCampos.add(temporal);
        temporal = new ObjPrepareStatement("EDITA", "STRING", "1");
         arregloCampos.add(temporal);
+       
+        String Condicion = "WHERE ID_COMPETENCIA='" + programa.getAUX_IDCOMPETENCIA() + "'  AND  ID_HIST_ALU='" + alumno.getAUXIDHISTALUM() + "' ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryUpdate("TBL_REGALUMCOMP", arregloCampos, Condicion);
+    }
+     public boolean actualizaEditaReporteEst(AlumnoBean alumno, programaEsBean programa) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+      
+           temporal = new ObjPrepareStatement("EDITA", "STRING", programa.getEDITA());
+        arregloCampos.add(temporal);
+        
        
         String Condicion = "WHERE ID_COMPETENCIA='" + programa.getAUX_IDCOMPETENCIA() + "'  AND  ID_HIST_ALU='" + alumno.getAUXIDHISTALUM() + "' ";
 

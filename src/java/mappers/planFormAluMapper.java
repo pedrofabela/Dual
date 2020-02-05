@@ -161,6 +161,13 @@ public class planFormAluMapper implements Mapper{
             dat.setPOR_REG_ALUMNO(rs.getString("POR_REG_ALUMNO"));
             
             
+        }      
+                if  (rs.getString("ID_PLAN_FORM") != null) {
+            dat.setID_PLAN_FORM(rs.getString("ID_PLAN_FORM").trim());
+        } else {
+            dat.setID_PLAN_FORM(rs.getString("ID_PLAN_FORM"));
+            
+            
         }        
           
         return dat;

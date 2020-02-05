@@ -2604,7 +2604,8 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
              banActualiza=false;
              banGuarda=false;
              banVisualiza=false;
-             
+             programa.setID_PLAN_FORMA("");
+             ListaProgramasRegistro.clear();
           
             
             ListaPlanFormAlu=con2.planFormAlu(alumno, escuela, usuariocons, programa);
@@ -3053,7 +3054,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
              ListaPlanAluMateriaCom.clear();
              ListaPlanAluMateriaComAct.clear();
              programa.setAUX_IDCOMPETENCIA("");
-             programa.setEDITA("");
+           
              
              
            
@@ -3078,6 +3079,56 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
         }
 
     }
+      
+      public String HabilitaEditRegEst() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            AlumnoDAOImpl con = new AlumnoDAOImpl();
+             PlanFDAOImpl con2 = new PlanFDAOImpl();
+             
+             
+             
+           
+                  
+         con2.actualizaEditaReporteEst(alumno, programa);
+         programa.setEDITA("");
+         
+         
+         eligePlanAsigMateriaMA();
+         
+         
+         
+         
+         
+          
+            Constantes.enviaMensajeConsola("EL TAÑO TOTAL DE LA LISTA ES DE "+ListaPlanAluMateriaCom.size());
+           
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+      
      public void validate2() {
 
         try {
@@ -3691,6 +3742,47 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
         }
 
     }
+       
+        public String DespliegaPlanAlu() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            AlumnoDAOImpl con = new AlumnoDAOImpl();
+             PlanFDAOImpl con2 = new PlanFDAOImpl();
+             
+           
+             
+            
+      consultaPlanEstudiante3();
+       
+          
+          
+           
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+
       
       public String fecha(){
     String fechaHoy;

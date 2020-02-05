@@ -696,10 +696,11 @@ function elige(accion, id_hist_alum) {
                                                                                                             <td><s:property value="ID_COMPETENCIA"/></td>
                                                                                                             <td><s:property value="COMPETENCIA"/></td>
                                                                                                             <td><s:if test="ID_REGALUMCOMP==0">Sin reporte</s:if><s:else>Registrado</s:else></td>
-                                                                                                            <td>  <s:if test="programa.AUX_IDCOMPETENCIA.length()==0 && EVAL_MUE==null"><a href="Javascript:elige3('eligePlanAsigMateriaComMUE','<s:property value="ID_COMPETENCIA"/>')" ><i class="material-icons">check_box_outline_blank</i></a></s:if>
+                                                                                                            <td>  <s:if test="programa.AUX_IDCOMPETENCIA.length()==0 && EVAL_MUE==null && MARCO_TEORICO!=null"><a href="Javascript:elige3('eligePlanAsigMateriaComMUE','<s:property value="ID_COMPETENCIA"/>')" ><i class="material-icons">check_box_outline_blank</i></a></s:if>
                                                                                                             
                                                                                                                 <s:if test="programa.AUX_IDCOMPETENCIA.length()>0"><a href="Javascript:elige2('eligePlanAsigMateriaMUE')" ><i class="material-icons">check_box</i></a></s:if>
                                                                                                                 <s:if test="EVAL_MUE.length()>0"><i class="material-icons" style="color:green;">done</i></s:if>
+                                                                                                                <s:if test="programa.AUX_IDCOMPETENCIA.length()==0 && EVAL_MUE==null && MARCO_TEORICO==null"><div style="color:red;"> Sin reporte del Estudiante </div></s:if>
                                                                                                                 
                                                                                                             </td>
 
@@ -741,7 +742,7 @@ function elige(accion, id_hist_alum) {
 
 
 
-                                                                                <s:if test="ListaPlanAluMateriaComAct.size()>0">   
+                                                                                    <s:if test="ListaPlanAluMateriaComAct.size()>0 && programa.MARCO_TEORICO.length()>0" >   
 
 
 
@@ -904,7 +905,20 @@ function elige(accion, id_hist_alum) {
                                                                                         </div>
 
                                                                                 </s:if> 
+                                                                                    
+                                                                                    
+                                                                                    <s:if test="ListaPlanAluMateriaComAct.size()>0 && programa.MARCO_TEORICO.length()==0">  
+                                                                                    
+                                                                                        <div class="alert alert-danger" > No hay reporte de estudiante registrado para esta competencia
+                                                                                                                                            </div>
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    </s:if>
 
+                                                                                    
+                                                                                    
+                                                                                    
                                                                           
 
 
