@@ -521,7 +521,7 @@ function elige(accion, id_hist_alum) {
                                                                     <div style="height: 50px; width: 100%; background: #302f2f; color: white; text-align: center; line-height: 0.5; padding: 10px 0px 0px 0px;"> <p></p> <p> <s:property value="usuariocons.NAMEUSUARIO"></s:property></p></div>
                                                                 </div>
                                                                 <div style="width: 90%; margin: auto;  color:#302f2f; text-align: center; margin-top: 20px;" >
-                                                                    <h3> Registro de Reporte del Estudiante</h3>
+                                                                    <h3> Registro de Evaluación</h3>
                                                                 </div>                                                                                                                                   
                                                                 <div class="card-body">  
 
@@ -672,6 +672,186 @@ function elige(accion, id_hist_alum) {
 
 
                                                                                 </s:if>
+                                                                                    
+                                                                                      <s:if test="banRegAluNiveMS">
+
+
+                                                                                <div class="col-lg-12" style="margin-top: 20px; margin-bottom: 20px;">
+                                                                                    <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Semanas del plan de Formación </label>
+                                                                                    <s:set var="count" value="1"/>
+                                                                                    <s:select  data-style="select-with-transition"   name="programa.ID_SEMANA" id="ID_SEMANA" list="ListaSemanas"  listKey="ID_SEMANA"  listValue="'SEMANA DEL '+INICIO_SEMANA+' AL '+FIN_SEMANA+' : '+ESTATUS_REG" headerKey="" headerValue="Seleccionar Semana"  cssClass="selectpicker col-lg-12" onchange="Javascript:elige2('eligeSemanaMue')"  />
+
+
+                                                                                    <s:iterator value="ListaSemanas" id="ListaSemanas" status="stat">  
+                                                                                        <s:hidden  name = "ListaSemanas[%{#stat.index}].ID_SEMANA" id="ID_SEMANA"></s:hidden>
+                                                                                        <s:hidden  name = "ListaSemanas[%{#stat.index}].INICIO_SEMANA" id="INICIO_SEMANA"></s:hidden>
+                                                                                        <s:hidden  name = "ListaSemanas[%{#stat.index}].FIN_SEMANA" id="FIN_SEMANA"></s:hidden>
+                                                                                        <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_REG" id="ESTATUS_REG"></s:hidden>
+
+                                                                                    </s:iterator>
+
+
+
+
+                                                                                      <s:fielderror  fieldName="NOEVALMUE" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
+
+
+
+                                                                                </s:if>
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                             
+
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                           <s:if test="banVisualiza">
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        <div>
+                                                                                           
+                                                                                        
+
+                                                                                               
+                                                                                                    <s:iterator value="ListaRegistroEstMs" id="ListaRegistroEstMs" status="stat"> 
+                                                                                                        
+                                                                                                        
+                                                                                                        <div style="width: 100%; text-align: center; margin-top: 30px; background: gray; color: white;">Reporte No. <s:property value="#stat.count" /></div>
+                                                                                                       
+                                                                                                        <div style="border: purple 2px solid; padding: 10px 10px 10px 10px; margin-top: 8px; border-radius: 0px 0px 10px 10px">    
+                                                                                                                
+                                                                                                                
+                                                                                                            <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                <label for="exampleEmail" class="bmd-label-floating" >Fecha de Trabajo </label>
+                                                                                                                <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaRegistroEstMs[%{#stat.index}].ID_FECHA"   id="ID_FECHA" list="ListaFechas"  listKey="ID_FECHA"  listValue="FECHA" cssClass="selectpicker col-lg-12" headerValue="ELEGIR Fecha DE LA ACTIVIDAD" headerKey=""  disabled="true" >  </s:select> 
+                                                                                                                </div>
+
+                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Nombre Actividad </label>
+                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].NOMBRE_ACTIVIDAD"    id="NOMBRE_ACTIVIDAD" disabled="true" >  </s:textfield> 
+
+                                                                                                            </div>
+                                                                                                                  <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Objetivo </label>
+                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].OBJETIVO"    id="OBJETIVO" disabled="true" >  </s:textfield> 
+
+                                                                                                            </div>
+                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Marco Teórico </label>
+                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].MARCO_TEORICO"    id="MARCO_TEORICO" disabled="true" >  </s:textfield> 
+
+                                                                                                            </div>
+                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Desarrollo y Procedimiento  </label>
+                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].DESARROLLO"    id="DESARROLLO" disabled="true" >  </s:textfield> 
+
+                                                                                                            </div>
+                                                                                                                 <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Equipo y Herramientas  </label>
+                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].EQUIPO"    id="EQUIPO" disabled="true" >  </s:textfield> 
+
+                                                                                                            </div>
+                                                                                                                
+                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Medidas de Seguridad Físicas y de Entorno  </label>
+                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].MEDIDAS_SEGURIDAD"    id="MEDIDAS_SEGURIDAD" disabled="true" >  </s:textfield> 
+
+                                                                                                            </div>
+                                                                                                                
+                                                                                                                 <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Normas de Calidad  </label>
+                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].NORMAS_CALIDAD"    id="NORMAS_CALIDAD" disabled="true" >  </s:textfield> 
+
+                                                                                                            </div>
+                                                                                                                
+                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Actividasdes de autoestudio  </label>
+                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].AUTOESTUDIO"    id="AUTOESTUDIO" disabled="true" >  </s:textfield> 
+
+                                                                                                            </div>
+                                                                                                                
+                                                                                                                 <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Observaciones</label>
+                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].OBSERVACIONES"    id="OBSERVACIONES"  disabled="true">  </s:textfield> 
+
+                                                                                                            </div>
+                                                                                                                
+                                                                                                                
+                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" ><a href="<s:property value="RUTA_EVIDENCIA"/>">Evidencia Fotográfica</a>  </label>
+                                                                                                               
+                                                                                                            </div>
+                                                                                                                
+                                                                                                                 <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                                <label for="exampleEmail" class="bmd-label-floating" >Fecha de Trabajo </label>
+                                                                                                               <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaPlanAluMateriaComAct[%{#stat.index}].ID_RUBRICA"   id="ID_RUBRICA" list="ListaRubrica"  listKey="ID_RUBRICA"  listValue="DESC_RUBRICA" cssClass="selectpicker col-lg-12" headerValue="Elegir de Desempeño" headerKey="" >  </s:select> 
+                                                                                                                </div>
+                                                                                                            
+                                                                                                            
+                                                                                                            
+                                                                                                            
+                                                                                                                <s:if test="ERROR_PLANMS.length()>0">
+                                                                                                            
+                                                                                                             
+                                                                                                                   
+                                                                                                                    <div class="col-lg-12 alert alert-danger"> <s:property value="ERROR_PLANMS"></s:property> </div>
+                                                                                                             
+                                                                                                            
+                                                                                                            
+                                                                                                            </s:if>
+                                                                                                            
+                                                                                                            
+                                                                                                                
+                                                                                                        </div>  
+
+
+                                                                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].ERROR_PLANMS" id="ERROR_PLANMS"></s:hidden>
+                                                                                                        
+                                                                                                     
+
+
+
+                                                                                                        
+                                                                                                        
+                                                                                       
+
+                                                                                                       
+                                                                                                    </s:iterator>  
+                                                                                                        
+                                                                                                        
+                                                                                                      
+                                                                                                        
+                                                                                                        
+                                                                                                        
+                                                                                                        
+                                                                                                        
+                                                                                                        
+
+                                                                                                    </div>
+                                                                                            
+                                                                                                                                                    
+                                                                                            
+                                                                                        
+                                                                                        
+                                                                                        </s:if>
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
+                                                                                        
 
 
 
@@ -997,7 +1177,26 @@ function elige(accion, id_hist_alum) {
                                               
                                               <s:textfield name="alumno.AUXIDHISTALUM" id="AUXIDHISTALUM" cssStyle="display:none;"></s:textfield>
                                               
-                                         
+                                              <s:textfield name="programa.FECHA_INICIOPF" id="FECHA_INICIOPF"   ></s:textfield>
+                                                 <s:textfield name="programa.FECHA_TERMINOPF" id="FECHA_TERMINOPF"   ></s:textfield>
+                                             
+                                               <s:textfield name="programa.AUX_INICIOSEMANA" id="AUX_INICIOSEMANA"  ></s:textfield>
+                                             <s:textfield name="programa.AUX_FINSEMANA" id="AUX_FINSEMANA"  ></s:textfield>
+                                             
+                                             
+                                             
+
+                                             <s:iterator value="ListaFechas" id="ListaFechas" status="stat">
+
+                                                 <s:hidden  name = "ListaFechas[%{#stat.index}].ID_FECHA" id="ID_FECHA"></s:hidden>
+                                                 <s:hidden  name = "ListaFechas[%{#stat.index}].FECHA" id="FECHA"></s:hidden>
+
+
+                                             </s:iterator>   
+                                             
+                                               <s:hidden name="banRegAluNiveS" value="%{banRegAluNiveS}"></s:hidden>
+                                             <s:hidden name="banRegAluNiveMS" value="%{banRegAluNiveMS}"></s:hidden>
+
                                                
 
                                             </div>

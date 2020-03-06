@@ -246,6 +246,22 @@
             <result name="input">Reporte_Plan_Alu.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
         </action>   
+        
+        
+          <action name="eligeSemana" class="action.EstudianteDual_Action" method="eligeSemana">
+            <result name="SUCCESS">Reporte_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Reporte_Plan_Alu.jsp</result>
+            <result name="input">Reporte_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+         <action name="eligeSemanaMue" class="action.EstudianteDual_Action" method="eligeSemanaMue">
+            <result name="SUCCESS">Evalua_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu.jsp</result>
+            <result name="input">Evalua_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        
          <action name="eligePlanAsigMateriaCom" class="action.EstudianteDual_Action" method="eligePlanAsigMateriaCom">
             <result name="SUCCESS">Reporte_Plan_Alu.jsp</result>			              
             <result name="ERROR">Reporte_Plan_Alu.jsp</result>

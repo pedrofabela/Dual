@@ -5,6 +5,8 @@
  */
 package beans;
 
+import java.io.File;
+
 /**
  *
  * @author pedro
@@ -120,8 +122,273 @@ public class programaEsBean {
 
     private String ID_RUBRICA;
     private String DESC_RUBRICA;
-    
+
     private String NOMBRE_EST;
+    private String ID_SEMANA;
+    private String INICIO_SEMANA;
+    private String FIN_SEMANA;
+    private String ESTATUS_REG;
+    private String AUX_INICIOSEMANA;
+    private String AUX_FINSEMANA;
+
+    private String ID_FECHA;
+    private String FECHA;
+    private String CANTIDAD;
+
+    private String ARCHIVO;
+    private String archiFileName;
+    private File archi;
+
+    private String NOMBRE_ACTIVIDAD;
+    private String OBJETIVO;
+
+    private String DESARROLLO;
+    private String EQUIPO;
+    private String MEDIDAS_SEGURIDAD;
+    private String NORMAS_CALIDAD;
+    private String ERROR_PLANMS;
+    private String AUTOESTUDIO;
+    private String OBSERVACIONES;
+    private String ID_EVAL_DIA;
+    private String FECHA_REPORTE;
+    private String ID_DIA;
+    private String RUTA_EVIDENCIA;
+    private String FECHA_EVAL_MA;
+    private String AUTO_ESTUDIO;
+    private String OBSERVACION;
+    private String FECHA_EVAL_MUE;
+
+    public String getID_EVAL_DIA() {
+        return ID_EVAL_DIA;
+    }
+
+    public void setID_EVAL_DIA(String ID_EVAL_DIA) {
+        this.ID_EVAL_DIA = ID_EVAL_DIA;
+    }
+
+    public String getFECHA_REPORTE() {
+        return FECHA_REPORTE;
+    }
+
+    public void setFECHA_REPORTE(String FECHA_REPORTE) {
+        this.FECHA_REPORTE = FECHA_REPORTE;
+    }
+
+    public String getID_DIA() {
+        return ID_DIA;
+    }
+
+    public void setID_DIA(String ID_DIA) {
+        this.ID_DIA = ID_DIA;
+    }
+
+    public String getRUTA_EVIDENCIA() {
+        return RUTA_EVIDENCIA;
+    }
+
+    public void setRUTA_EVIDENCIA(String RUTA_EVIDENCIA) {
+        this.RUTA_EVIDENCIA = RUTA_EVIDENCIA;
+    }
+
+    public String getFECHA_EVAL_MA() {
+        return FECHA_EVAL_MA;
+    }
+
+    public void setFECHA_EVAL_MA(String FECHA_EVAL_MA) {
+        this.FECHA_EVAL_MA = FECHA_EVAL_MA;
+    }
+
+    public String getAUTO_ESTUDIO() {
+        return AUTO_ESTUDIO;
+    }
+
+    public void setAUTO_ESTUDIO(String AUTO_ESTUDIO) {
+        this.AUTO_ESTUDIO = AUTO_ESTUDIO;
+    }
+
+    public String getOBSERVACION() {
+        return OBSERVACION;
+    }
+
+    public void setOBSERVACION(String OBSERVACION) {
+        this.OBSERVACION = OBSERVACION;
+    }
+
+    public String getFECHA_EVAL_MUE() {
+        return FECHA_EVAL_MUE;
+    }
+
+    public void setFECHA_EVAL_MUE(String FECHA_EVAL_MUE) {
+        this.FECHA_EVAL_MUE = FECHA_EVAL_MUE;
+    }
+
+    public String getAUTOESTUDIO() {
+        return AUTOESTUDIO;
+    }
+
+    public void setAUTOESTUDIO(String AUTOESTUDIO) {
+        this.AUTOESTUDIO = AUTOESTUDIO;
+    }
+
+    public String getOBSERVACIONES() {
+        return OBSERVACIONES;
+    }
+
+    public void setOBSERVACIONES(String OBSERVACIONES) {
+        this.OBSERVACIONES = OBSERVACIONES;
+    }
+
+    public String getERROR_PLANMS() {
+        return ERROR_PLANMS;
+    }
+
+    public void setERROR_PLANMS(String ERROR_PLANMS) {
+        this.ERROR_PLANMS = ERROR_PLANMS;
+    }
+
+    public String getNOMBRE_ACTIVIDAD() {
+        return NOMBRE_ACTIVIDAD;
+    }
+
+    public void setNOMBRE_ACTIVIDAD(String NOMBRE_ACTIVIDAD) {
+        this.NOMBRE_ACTIVIDAD = NOMBRE_ACTIVIDAD;
+    }
+
+    public String getOBJETIVO() {
+        return OBJETIVO;
+    }
+
+    public void setOBJETIVO(String OBJETIVO) {
+        this.OBJETIVO = OBJETIVO;
+    }
+
+    public String getDESARROLLO() {
+        return DESARROLLO;
+    }
+
+    public void setDESARROLLO(String DESARROLLO) {
+        this.DESARROLLO = DESARROLLO;
+    }
+
+    public String getEQUIPO() {
+        return EQUIPO;
+    }
+
+    public void setEQUIPO(String EQUIPO) {
+        this.EQUIPO = EQUIPO;
+    }
+
+    public String getMEDIDAS_SEGURIDAD() {
+        return MEDIDAS_SEGURIDAD;
+    }
+
+    public void setMEDIDAS_SEGURIDAD(String MEDIDAS_SEGURIDAD) {
+        this.MEDIDAS_SEGURIDAD = MEDIDAS_SEGURIDAD;
+    }
+
+    public String getNORMAS_CALIDAD() {
+        return NORMAS_CALIDAD;
+    }
+
+    public void setNORMAS_CALIDAD(String NORMAS_CALIDAD) {
+        this.NORMAS_CALIDAD = NORMAS_CALIDAD;
+    }
+
+    public String getARCHIVO() {
+        return ARCHIVO;
+    }
+
+    public void setARCHIVO(String ARCHIVO) {
+        this.ARCHIVO = ARCHIVO;
+    }
+
+    public String getArchiFileName() {
+        return archiFileName;
+    }
+
+    public void setArchiFileName(String archiFileName) {
+        this.archiFileName = archiFileName;
+    }
+
+    public File getArchi() {
+        return archi;
+    }
+
+    public void setArchi(File archi) {
+        this.archi = archi;
+    }
+
+    public String getCANTIDAD() {
+        return CANTIDAD;
+    }
+
+    public void setCANTIDAD(String CANTIDAD) {
+        this.CANTIDAD = CANTIDAD;
+    }
+
+    public String getID_FECHA() {
+        return ID_FECHA;
+    }
+
+    public void setID_FECHA(String ID_FECHA) {
+        this.ID_FECHA = ID_FECHA;
+    }
+
+    public String getFECHA() {
+        return FECHA;
+    }
+
+    public void setFECHA(String FECHA) {
+        this.FECHA = FECHA;
+    }
+
+    public String getAUX_INICIOSEMANA() {
+        return AUX_INICIOSEMANA;
+    }
+
+    public void setAUX_INICIOSEMANA(String AUX_INICIOSEMANA) {
+        this.AUX_INICIOSEMANA = AUX_INICIOSEMANA;
+    }
+
+    public String getAUX_FINSEMANA() {
+        return AUX_FINSEMANA;
+    }
+
+    public void setAUX_FINSEMANA(String AUX_FINSEMANA) {
+        this.AUX_FINSEMANA = AUX_FINSEMANA;
+    }
+
+    public String getESTATUS_REG() {
+        return ESTATUS_REG;
+    }
+
+    public void setESTATUS_REG(String ESTATUS_REG) {
+        this.ESTATUS_REG = ESTATUS_REG;
+    }
+
+    public String getID_SEMANA() {
+        return ID_SEMANA;
+    }
+
+    public void setID_SEMANA(String ID_SEMANA) {
+        this.ID_SEMANA = ID_SEMANA;
+    }
+
+    public String getINICIO_SEMANA() {
+        return INICIO_SEMANA;
+    }
+
+    public void setINICIO_SEMANA(String INICIO_SEMANA) {
+        this.INICIO_SEMANA = INICIO_SEMANA;
+    }
+
+    public String getFIN_SEMANA() {
+        return FIN_SEMANA;
+    }
+
+    public void setFIN_SEMANA(String FIN_SEMANA) {
+        this.FIN_SEMANA = FIN_SEMANA;
+    }
 
     public String getNOMBRE_EST() {
         return NOMBRE_EST;
@@ -130,8 +397,6 @@ public class programaEsBean {
     public void setNOMBRE_EST(String NOMBRE_EST) {
         this.NOMBRE_EST = NOMBRE_EST;
     }
-    
-    
 
     public String getID_RUBRICA() {
         return ID_RUBRICA;

@@ -5,12 +5,10 @@
  */
 package action;
 
-import static action.PlanFormacion_Action.validarFecha;
-import static action.PrincipalAction.getExtension;
+
 import beans.AlumnoBean;
 import beans.CatalogoBean;
 import beans.ColoniasBean;
-import beans.SectorSubsectorBean;
 import beans.UnidadesEconomicasBean;
 import beans.escuelaBean;
 import beans.moduloAuxBean;
@@ -19,7 +17,6 @@ import beans.programaEsBean;
 import beans.renapoBean;
 import beans.responsablesBean;
 import beans.usuarioBean;
-import business.ConsultasBusiness;
 import com.opensymphony.xwork2.ActionSupport;
 
 import daos.UnidadesEconomicasDAOImpl;
@@ -34,16 +31,18 @@ import business.ConsultasBusiness;
 import daos.AlumnoDAOImpl;
 import daos.PlanFDAOImpl;
 import java.io.File;
-import java.net.PasswordAuthentication;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -57,6 +56,9 @@ import mx.gob.edomex.dgsei.ws.ConsultaRenapoPorCurp;
 import mx.gob.edomex.dgsei.ws.ConsultaDatosRenapo;
 import mx.gob.edomex.dgsei.ws.PersonasDTO;
 import org.apache.commons.io.FileUtils;
+import static org.apache.commons.io.FilenameUtils.getExtension;
+import org.apache.tomcat.dbcp.pool2.PoolUtils;
+import static utilidades.Constantes.rutaArchivosRemota;
 
 /**
  *
@@ -97,10 +99,14 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
     private List<ColoniasBean> ListaColoniaP = new ArrayList<ColoniasBean>();
     public List<programaEsBean> ListaProgramasRegistro = new ArrayList<programaEsBean>();
     public List<programaEsBean> ListaPlanFormAlu = new ArrayList<programaEsBean>();
-     public List<programaEsBean> ListaPlanAluMateria= new ArrayList<programaEsBean>();
-      public List<programaEsBean> ListaPlanAluMateriaCom= new ArrayList<programaEsBean>();
-       public List<programaEsBean> ListaPlanAluMateriaComAct= new ArrayList<programaEsBean>();
-         public List<programaEsBean> ListaRubrica= new ArrayList<programaEsBean>();
+    public List<programaEsBean> ListaPlanAluMateria = new ArrayList<programaEsBean>();
+    public List<programaEsBean> ListaPlanAluMateriaCom = new ArrayList<programaEsBean>();
+    public List<programaEsBean> ListaPlanAluMateriaComAct = new ArrayList<programaEsBean>();
+    public List<programaEsBean> ListaRubrica = new ArrayList<programaEsBean>();
+    public List<programaEsBean> ListaSemanas = new ArrayList<programaEsBean>();
+    public List<programaEsBean> ListaFechas = new ArrayList<programaEsBean>();
+    public List<programaEsBean> ListaRegistroEstMs = new ArrayList<programaEsBean>();
+    
 
     public List<programaEsBean> ListaPlanAlumno = new ArrayList<programaEsBean>();
 
@@ -2259,6 +2265,26 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
         }
 
     }
+    
+       public static boolean validarFecha(String fecha) {
+
+        try {
+
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+
+            formatoFecha.setLenient(false);
+
+            formatoFecha.parse(fecha);
+
+        } catch (ParseException e) {
+
+            return false;
+
+        }
+
+        return true;
+
+    }
 
     public String conspassword() throws NoSuchAlgorithmException {
 
@@ -2606,9 +2632,30 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
              banVisualiza=false;
              programa.setID_PLAN_FORMA("");
              ListaProgramasRegistro.clear();
+             
+             
+             String nivel = "";
+            nivel = con2.nivel(escuela, usuariocons);
+            
+            if(nivel.equals("1")){
+                 ListaPlanFormAlu=con2.planFormAluMs(alumno, escuela, usuariocons, programa);
+              
+                
+                
+            }
+            if(nivel.equals("2")){
+                
+              ListaPlanFormAlu=con2.planFormAlu(alumno, escuela, usuariocons, programa);
+                
+            }
+             
+             
+             
+             
+             
           
             
-            ListaPlanFormAlu=con2.planFormAlu(alumno, escuela, usuariocons, programa);
+          
 
             return "SUCCESS";
 
@@ -2691,10 +2738,31 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
              banActualiza=false;
              banGuarda=false;
              banVisualiza=false;
+             programa.setFECHA_INICIOPF("");
+             programa.setFECHA_INICIO_PF("");
+             programa.setFECHA_TERMINOPF("");
+             programa.setFECHA_TERMINO_PLAN("");
+               programa.setAUX_INICIOSEMANA("");
+                              programa.setAUX_FINSEMANA("");
+             
+                String nivel = "";
+            nivel = con2.nivel(escuela, usuariocons);
+            
+            if(nivel.equals("1")){
+               ListaPlanFormAlu=con2.evaluaActEstMS(alumno, escuela, usuariocons, programa);
+              
+                
+                
+            }
+            if(nivel.equals("2")){
+                
+             
+                  ListaPlanFormAlu=con2.evaluaActEst(alumno, escuela, usuariocons, programa);
+            }
              
           
             
-            ListaPlanFormAlu=con2.evaluaActEst(alumno, escuela, usuariocons, programa);
+          
 
             return "SUCCESS";
 
@@ -2788,6 +2856,27 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
             
             if(nivel.equals("1")){
                  banRegAluNiveMS=true;
+                 
+              
+                 
+                  Iterator LPFA= ListaPlanFormAlu.iterator();
+               programaEsBean obj;
+                while (LPFA.hasNext()) {
+                    obj = (programaEsBean) LPFA.next();
+                    if(obj.getID_HIST_ALUM().equals(alumno.getAUXIDHISTALUM())){
+                        programa.setFECHA_INICIOPF(obj.getFECHA_INICIOPF());
+                        programa.setFECHA_TERMINOPF(obj.getFECHA_TERMINOPF());
+                    }
+                    
+                    
+                }
+                
+                   ListaSemanas=con2.listaSemanas(alumno, escuela, usuariocons, programa);
+                   
+              
+                         
+                 
+                 
                 
             }
             if(nivel.equals("2")){
@@ -2849,6 +2938,30 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
             
             if(nivel.equals("1")){
                  banRegAluNiveMS=true;
+                 
+                   Iterator LPFA= ListaPlanFormAlu.iterator();
+               programaEsBean obj;
+                while (LPFA.hasNext()) {
+                    obj = (programaEsBean) LPFA.next();
+                    if(obj.getID_HIST_ALUM().equals(alumno.getAUXIDHISTALUM())){
+                        programa.setFECHA_INICIOPF(obj.getFECHA_INICIOPF());
+                        programa.setFECHA_TERMINOPF(obj.getFECHA_TERMINOPF());
+                    }
+                    
+                    
+                }
+                
+                   ListaSemanas=con2.listaSemanas(alumno, escuela, usuariocons, programa);
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
                 
             }
             if(nivel.equals("2")){
@@ -2970,6 +3083,238 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
          
           
             Constantes.enviaMensajeConsola("EL TAÑO TOTAL DE LA LISTA ES DE "+ListaPlanAluMateriaCom.size());
+           
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+    
+    
+     public String eligeSemana() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            AlumnoDAOImpl con = new AlumnoDAOImpl();
+             PlanFDAOImpl con2 = new PlanFDAOImpl();
+           
+             
+               
+                ListaRegistroEstMs= con2.listaRegistroEstMs(alumno, escuela, usuariocons, programa);
+             
+                     
+                     
+             Iterator ES= ListaSemanas.iterator();
+               programaEsBean obj;
+                while (ES.hasNext()) {
+                    obj = (programaEsBean) ES.next();
+                    if(obj.getID_SEMANA().equals(programa.getID_SEMANA())){
+                        programa.setAUX_INICIOSEMANA(obj.getINICIO_SEMANA());
+                        programa.setAUX_FINSEMANA(obj.getFIN_SEMANA());
+                        programa.setESTATUS_REG(obj.getESTATUS_REG());
+                       
+                    }
+                    
+                    
+                    
+                }
+                 ListaFechas=con2.fechas(alumno, escuela, usuariocons, programa);
+                System.out.println("Estatus Reg"+programa.getESTATUS_REG());
+             
+                 if(programa.getESTATUS_REG().equals("NO REGISTRADO")){
+                    
+                    banGuarda=true;
+                    banActualiza=false;
+                    banVisualiza=false;
+                    
+                    
+                 
+                    
+                    
+                    
+                    
+                }
+                 if(programa.getESTATUS_REG().equals("REGISTRADO")){
+                     
+                      banGuarda=false;
+                    banActualiza=false;
+                        banVisualiza=true;
+                        
+                       
+                        
+                         ListaRegistroEstMs=con2.listaReporteMsEst(alumno, escuela, usuariocons, programa);  
+                         
+                         Iterator LREMS=ListaRegistroEstMs.iterator();
+                         programaEsBean obj3;
+                         
+                         while (LREMS.hasNext()) {
+                        obj3= (programaEsBean) LREMS.next();
+                        
+                        
+                        
+                        obj3.setID_FECHA(obj3.getID_DIA());
+                        obj3.setAUTOESTUDIO(obj3.getAUTO_ESTUDIO());
+                        obj3.setOBSERVACIONES(obj3.getOBSERVACION());
+                        obj3.setRUTA_EVIDENCIA(rutaArchivosRemota+obj3.getRUTA_EVIDENCIA());
+                        
+                        
+                    
+                        
+                        
+                        
+                         
+                     }
+                        
+                        
+                        
+                        
+                 }
+                
+                
+                
+               
+                
+                 
+                
+                
+           
+       
+           
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+     
+     public String eligeSemanaMue() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            AlumnoDAOImpl con = new AlumnoDAOImpl();
+             PlanFDAOImpl con2 = new PlanFDAOImpl();
+           
+             
+               
+                ListaRegistroEstMs= con2.listaRegistroEstMs(alumno, escuela, usuariocons, programa);
+             
+                     
+                     
+             Iterator ES= ListaSemanas.iterator();
+               programaEsBean obj;
+                while (ES.hasNext()) {
+                    obj = (programaEsBean) ES.next();
+                    if(obj.getID_SEMANA().equals(programa.getID_SEMANA())){
+                        programa.setAUX_INICIOSEMANA(obj.getINICIO_SEMANA());
+                        programa.setAUX_FINSEMANA(obj.getFIN_SEMANA());
+                        programa.setESTATUS_REG(obj.getESTATUS_REG());
+                       
+                    }
+                    
+                    
+                    
+                }
+                 ListaFechas=con2.fechas(alumno, escuela, usuariocons, programa);
+                System.out.println("Estatus Reg"+programa.getESTATUS_REG());
+             
+                 if(programa.getESTATUS_REG().equals("NO REGISTRADO")){
+                    
+                    banGuarda=false;
+                    banActualiza=false;
+                    banVisualiza=false;
+                    
+                    
+                    
+                      addFieldError("NOEVALMUE", "***No se puede evaluar el reporte porque el alumno aún no lo registra***");
+                    
+                 
+                    
+                    
+                    
+                    
+                }
+                 if(programa.getESTATUS_REG().equals("REGISTRADO")){
+                     
+                      banGuarda=false;
+                    banActualiza=false;
+                        banVisualiza=true;
+                        
+                        
+                          ListaRubrica=con2.rubrica(alumno, escuela, usuariocons, programa);    
+                         ListaRegistroEstMs=con2.listaReporteMsEst(alumno, escuela, usuariocons, programa);  
+                         
+                         Iterator LREMS=ListaRegistroEstMs.iterator();
+                         programaEsBean obj3;
+                         
+                         while (LREMS.hasNext()) {
+                        obj3= (programaEsBean) LREMS.next();
+                        
+                        
+                        
+                        obj3.setID_FECHA(obj3.getID_DIA());
+                        obj3.setAUTOESTUDIO(obj3.getAUTO_ESTUDIO());
+                        obj3.setOBSERVACIONES(obj3.getOBSERVACION());
+                        obj3.setRUTA_EVIDENCIA(rutaArchivosRemota+obj3.getRUTA_EVIDENCIA());
+                        
+                        
+                    
+                        
+                        
+                        
+                         
+                     }
+                        
+                        
+                        
+                        
+                 }
+                
+                
+                
+               
+                
+                 
+                
+                
+           
+       
            
 
             return "SUCCESS";
@@ -3146,6 +3491,40 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
 
                 //if (archiFileName.length() > 2097152 ) 
                 if (5000000 <= FileUtils.sizeOf(archi)) {
+
+                    Constantes.enviaMensajeConsola("--EL ARCHIVO ES MAYOR .... " + archiFileName.toLowerCase());
+                    addFieldError("archierror", "*** No se permiten archivos mayores a 5MB ***");
+
+                    banT = true;
+
+                }
+
+            }
+        } catch (Exception e) {
+            TipoError = "SESSION";
+            TipoException = e.getMessage();
+
+        }
+
+    }
+     
+      public void validate3(String archiFileName) {
+
+        try {
+//agregando la validacion de tipo de archivo...
+            if (archiFileName.toLowerCase() != null) {
+                Constantes.enviaMensajeConsola("--EL ARCHIVO ES .... " + archiFileName.toLowerCase());
+
+                if (!archiFileName.toLowerCase().contains(".pdf")) {
+
+                    addFieldError("archierror", "*** La extensión del archivo no es aceptada debe ser (pdf)***");
+                    Constantes.enviaMensajeConsola("--EL ARCHIVO ES DIFERENTE DE PDF .... " + archiFileName.toLowerCase());
+                    banT = true;
+
+                }
+
+                //if (archiFileName.length() > 2097152 ) 
+                if (2000000 <= FileUtils.sizeOf(archi)) {
 
                     Constantes.enviaMensajeConsola("--EL ARCHIVO ES MAYOR .... " + archiFileName.toLowerCase());
                     addFieldError("archierror", "*** No se permiten archivos mayores a 5MB ***");
@@ -3428,8 +3807,13 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
              boolean banValidaMarco=false;
              boolean banValidaDesc=false;
              
-           
+             String nivel = "";
+            nivel = con2.nivel(escuela, usuariocons);
+             
+           if(nivel.equals("2")){
       // ListaPlanAluMateriaComAct=con2.planFormAluMateriaComAct(alumno, escuela, usuariocons, programa);
+      
+      
       
        Constantes.enviaMensajeConsola("--EL ARCHIVO DE RESPONSABLES ES .... " + archiFileName);
        
@@ -3525,6 +3909,315 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
        
           
            Constantes.enviaMensajeConsola("EL TAÑO TOTAL DE LA LISTA ES DE "+ListaPlanAluMateriaComAct.size());
+           
+           
+           }
+           
+         
+           
+           if(nivel.equals("1")){
+               
+               
+           
+              
+              Iterator LREM =ListaRegistroEstMs.iterator();
+              programaEsBean obj;
+              
+               int Fecha = 0;
+               int Nombre = 0;
+               int objetivo = 0;
+               int Marco = 0;
+               int Desarrollo = 0;
+               int Equipo = 0;
+               int Medidas = 0;
+               int Normas = 0;
+               int Archi = 0;
+               int errorDatos=0;
+               int contadorreporte=0;
+               
+               
+               
+               
+               List<String> listaSinDuplicados=null;
+           
+               String mensajeError = "";
+               
+              
+              
+            listaSinDuplicados = ListaRegistroEstMs.stream().map(item->item.getID_FECHA()).distinct().collect(Collectors.toList());
+
+              if(listaSinDuplicados.size()==5){
+                  
+                  Constantes.enviaMensajeConsola("fechas validas");
+                  
+              }
+              
+              else{
+                  
+                     
+                    Constantes.enviaMensajeConsola("No se puede guardar favor de validar información, fechas de registro duplicadas ");
+                  
+                  errorDatos+=1;
+                      
+               addFieldError("ERRORFECHAS", "Fecha o fechas no validas, favor de verificar");  
+                     
+                     
+               
+              }
+              
+              
+              
+              
+               while (LREM.hasNext()) {
+                 obj = (programaEsBean) LREM.next();
+                 
+                 contadorreporte+=1;
+                 
+               
+                 mensajeError="";
+                 
+                 if(obj.getID_FECHA().length()==0){
+                     Fecha+=1; 
+                     mensajeError+="***** Favor de elegir una fecha "+'\n';
+                     errorDatos+=1;
+                 }
+                
+                 
+                  if(obj.getNOMBRE_ACTIVIDAD().length()==0){
+                     Nombre+=1;
+                     mensajeError+="***** Registrar nombre de la Actividad "+'\n';
+                     errorDatos+=1;
+                 }
+                  
+                  
+                     if(obj.getOBJETIVO().length()==0){
+                     objetivo+=1;
+                     mensajeError+="***** Registrar objetivo"+'\n';
+                     errorDatos+=1;
+                 }
+                     
+                      if(obj.getMARCO_TEORICO().length()==0){
+                     Marco+=1; 
+                     mensajeError+="***** Registrar Marco Teórico"+'\n';
+                     errorDatos+=1;
+                 }
+                     
+                    
+                      if(obj.getDESARROLLO().length()==0){
+                     Desarrollo+=1; 
+                     mensajeError+="***** Registrar desarrollo y procedimiento"+'\n';
+                     errorDatos+=1;
+                 }
+                 
+                       if(obj.getEQUIPO().length()==0){
+                     Equipo+=1;
+                     mensajeError+="***** Registrar equipo y Herramientas"+'\n';
+                     errorDatos+=1;
+                 }
+                  
+                       
+                         
+                       
+                        if(obj.getMEDIDAS_SEGURIDAD().length()==0){
+                     Medidas+=1;
+                     mensajeError+="***** Registrar medidas de seguridad físicas y entorno"+'\n';
+                     errorDatos+=1;
+                 }
+                        
+                  
+                          if(obj.getNORMAS_CALIDAD().length()==0){
+                     Normas+=1; 
+                     mensajeError+="***** Registrar normas de calidad"+'\n';
+                     errorDatos+=1;
+                 }
+                          
+                        if(obj.getAUTOESTUDIO().length()==0){
+                  
+                     mensajeError+="***** Registrar actividades de autoestudio"+'\n';
+                     errorDatos+=1;
+                 }    
+                        
+                         if(obj.getOBSERVACIONES().length()==0){
+                  
+                     mensajeError+="***** Registrar observaciones"+'\n';
+                     errorDatos+=1;
+                 }    
+                          
+                          
+                          
+                          
+                          
+                       Constantes.enviaMensajeConsola("ARCHIVO FILENAME:"+  obj.getArchiFileName());
+                          
+                   if (obj.getArchiFileName() != null) {
+                       Constantes.enviaMensajeConsola("entro a validar");
+
+                       validate3(obj.getArchiFileName());
+                       Constantes.enviaMensajeConsola("Valor de la bandera: " + banT);
+                       if (banT == false) {
+
+                           String Extension = "";
+
+                           Extension = getExtension(obj.getArchiFileName());
+
+                           //System.out.println("esta es la extension del archivo: "+Extension);
+                           obj.setArchiFileName(programa.getID_SEMANA() +"_"+obj.getID_FECHA()+"_"+alumno.getAUXIDHISTALUM()+ "." + Extension);
+                          
+
+                           programa.setARCH_EVIDENCIAS(obj.getArchiFileName());
+
+                           Constantes.enviaMensajeConsola("archivo: " + programa.getARCH_EVIDENCIAS());
+                           ruta = Constantes.rutaArch +"reportesEstMS/"+ obj.getArchiFileName();
+
+                           Constantes.enviaMensajeConsola(ruta);
+                           File newarch = new File(ruta);
+
+                           FileUtils.copyFile(obj.getArchi(), newarch);
+
+                           programa.setRUTA_EVIDENCIAS(obj.getArchiFileName());
+
+                           banValidaArch = true;
+                       } else {
+                           
+                            errorDatos+=1;
+                           banValidaArch = false;
+                           
+                            addFieldError("ERRORFECHAS", "Formato o tamaño de archivo  no valido en el reporte "+contadorreporte);  
+
+                       }
+                   } else {
+                       Constantes.enviaMensajeConsola("entre al else");
+                       
+                       errorDatos+=1;
+                        addFieldError("ERRORFECHAS", "Favor de seleccionar un archivo en el reporte número: "+contadorreporte);  
+                       banValidaArch = true;
+
+                   }
+
+                        
+                        
+                
+                             
+                          
+                   Constantes.enviaMensajeConsola("Cantidad de Fechas Registradas;" + Fecha);
+                   Constantes.enviaMensajeConsola("Cantidad de Nombre Registradas;" + Nombre);
+                   Constantes.enviaMensajeConsola("Cantidad de Marco Registradas;" + Marco);
+                   Constantes.enviaMensajeConsola("Cantidad de Desarrollo Registradas;" + Desarrollo);
+                   Constantes.enviaMensajeConsola("Cantidad de Equipo Registradas;" + Equipo);
+                   Constantes.enviaMensajeConsola("Cantidad de Medidas Registradas;" + Medidas);
+                   Constantes.enviaMensajeConsola("Cantidad de Normas Registradas;" + Normas);
+                   Constantes.enviaMensajeConsola("Cantidad de Archivos Registradas;" + Archi);
+
+                  
+                  
+                  
+             
+                  
+                  
+                  if( errorDatos==0 ){
+                      
+                      
+                      System.out.println("Registro correcto");
+                      
+                      
+                      
+                  }
+                  else{
+                        System.out.println("No se guardo la información");                             
+                      
+                      obj.setERROR_PLANMS(mensajeError);
+                      
+                  
+                      
+                  }
+                  
+                
+                
+                          
+                          
+
+                   
+               }
+               
+             
+               
+               
+              
+                 if(errorDatos==0 ){
+                      
+                      
+                  Constantes.enviaMensajeConsola("Voy a guardar el registro semanal");
+                  
+                  
+                    Iterator LREM2 =ListaRegistroEstMs.iterator();
+              programaEsBean obj2;
+              
+              
+                //abriendo la conexion.....
+            conecta = con.crearConexion();
+            //statement
+            objConexion = con.crearStatement(conecta);
+            //ListaSecciones=(ArrayList<Bean_Secciones>) superior.ConsSecciones(CveCuestionario);
+              
+              
+              
+              
+                     while (LREM2.hasNext()) {
+                        obj2 = (programaEsBean) LREM2.next();
+                        
+                        programa.setID_FECHA(obj2.getID_FECHA());
+                        programa.setRUTA_EVIDENCIAS(obj2.getArchiFileName());
+                        programa.setNOMBRE_ACTIVIDAD(obj2.getNOMBRE_ACTIVIDAD());
+                        programa.setOBJETIVO(obj2.getOBJETIVO());
+                        programa.setMARCO_TEORICO(obj2.getOBJETIVO());
+                        programa.setDESARROLLO(obj2.getDESARROLLO());
+                        programa.setEQUIPO(obj2.getEQUIPO());
+                        programa.setMEDIDAS_SEGURIDAD(obj2.getMEDIDAS_SEGURIDAD());
+                        programa.setNORMAS_CALIDAD(obj2.getNORMAS_CALIDAD());
+                        programa.setAUTOESTUDIO(obj2.getAUTOESTUDIO());
+                         programa.setOBSERVACIONES(obj2.getOBSERVACIONES());
+                        
+                        
+                        
+                        
+                        
+                        con2.guardaReporteEstMs(conecta, objPreConexion, programa, alumno); 
+                         
+                     }
+                  
+                  
+                  
+                  
+                  
+                   cierraConexiones();
+                  
+                  RepActAlu();
+                  
+                  addFieldError("GUARDADOEXT", "Se guardo el reporte semanal con éxito ");  
+                  
+                 programa.setFECHA_INICIOPF("");
+                          programa.setFECHA_TERMINOPF("");
+                          programa.setAUX_INICIOSEMANA("");
+                                  programa.setAUX_FINSEMANA("");
+                      
+                      
+                      
+                  }
+                 else{
+                     
+                    Constantes.enviaMensajeConsola("No se puede guardar favor de validar información");
+                     
+                     
+                 }
+               
+               
+               
+               
+             
+               
+           }
+           
+           
            
 
             return "SUCCESS";
@@ -4558,6 +5251,30 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
 
     public void setListaRubrica(List<programaEsBean> ListaRubrica) {
         this.ListaRubrica = ListaRubrica;
+    }
+
+    public List<programaEsBean> getListaSemanas() {
+        return ListaSemanas;
+    }
+
+    public void setListaSemanas(List<programaEsBean> ListaSemanas) {
+        this.ListaSemanas = ListaSemanas;
+    }
+
+    public List<programaEsBean> getListaFechas() {
+        return ListaFechas;
+    }
+
+    public void setListaFechas(List<programaEsBean> ListaFechas) {
+        this.ListaFechas = ListaFechas;
+    }
+
+    public List<programaEsBean> getListaRegistroEstMs() {
+        return ListaRegistroEstMs;
+    }
+
+    public void setListaRegistroEstMs(List<programaEsBean> ListaRegistroEstMs) {
+        this.ListaRegistroEstMs = ListaRegistroEstMs;
     }
     
     
