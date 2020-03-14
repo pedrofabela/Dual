@@ -157,6 +157,27 @@ public class programaEsBean {
     private String AUTO_ESTUDIO;
     private String OBSERVACION;
     private String FECHA_EVAL_MUE;
+    private String ESTATUS_EVAL_MUE;
+    private String ESTATUS_EVAL_MA ;
+         
+    public String getESTATUS_EVAL_MUE() {
+        return ESTATUS_EVAL_MUE;
+    }
+
+    public void setESTATUS_EVAL_MUE(String ESTATUS_EVAL_MUE) {
+        this.ESTATUS_EVAL_MUE = ESTATUS_EVAL_MUE;
+    }
+
+    public String getESTATUS_EVAL_MA() {
+        return ESTATUS_EVAL_MA;
+    }
+
+    public void setESTATUS_EVAL_MA(String ESTATUS_EVAL_MA) {
+        this.ESTATUS_EVAL_MA = ESTATUS_EVAL_MA;
+    }
+      
+      
+      
 
     public String getID_EVAL_DIA() {
         return ID_EVAL_DIA;

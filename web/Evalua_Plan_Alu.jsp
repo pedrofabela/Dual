@@ -4,101 +4,92 @@
 
 
 
- <script>
-     
+<script>
+
     function telquita() {
-  var x = document.getElementById("quitamen").style="display:none;";
-  
-}
- function telquita1() {
-  var x = document.getElementById("quitamen1").style="display:none;";
-  
-}
+        var x = document.getElementById("quitamen").style = "display:none;";
 
- function telquita2() {
-  var x = document.getElementById("quitamen2").style="display:none;";
-  
-}
+    }
+    function telquita1() {
+        var x = document.getElementById("quitamen1").style = "display:none;";
 
- function telquita3() {
-  var x = document.getElementById("quitamen3").style="display:none;";
-  
-}
+    }
 
- function telquita4() {
-  var x = document.getElementById("quitamen4").style="display:none;";
-  
-}
+    function telquita2() {
+        var x = document.getElementById("quitamen2").style = "display:none;";
 
- function telquita5() {
-  var x = document.getElementById("quitamen5").style="display:none;";
-  
-}
+    }
 
- function telquita6() {
-  var x = document.getElementById("quitamen6").style="display:none;";
-  
-}
+    function telquita3() {
+        var x = document.getElementById("quitamen3").style = "display:none;";
 
- function telquita7() {
-  var x = document.getElementById("quitamen7").style="display:none;";
-  
-}
+    }
 
- function telquita8() {
-  var x = document.getElementById("quitamen8").style="display:none;";
-  
-}
+    function telquita4() {
+        var x = document.getElementById("quitamen4").style = "display:none;";
 
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-  function validarSiNumero(numero){
-    if (!/^\-?[1-9]\d{0,2}$/.test(numero))
-     
-    
-     
-     document.getElementById('NO_ESTUDIANTES2').value="";
-     
-  }
-  
-  function validarSiNumero2(numero){
-    if (!/^\-?[1-9]\d{0,2}$/.test(numero))
-     
-    
-     
-     document.getElementById('NO_MENTORES_UE2').value="";
-     
-  }
-  
-  function validarSiNumero3(numero){
-    if (!/^\-?[1-9]\d{0,2}$/.test(numero))
-     
-    
-     
-     document.getElementById('NO_MENTORES_ACAD2').value="";
-     
-  }
-  
-  
+    }
+
+    function telquita5() {
+        var x = document.getElementById("quitamen5").style = "display:none;";
+
+    }
+
+    function telquita6() {
+        var x = document.getElementById("quitamen6").style = "display:none;";
+
+    }
+
+    function telquita7() {
+        var x = document.getElementById("quitamen7").style = "display:none;";
+
+    }
+
+    function telquita8() {
+        var x = document.getElementById("quitamen8").style = "display:none;";
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    function validarSiNumero(numero) {
+        if (!/^\-?[1-9]\d{0,2}$/.test(numero))
+            document.getElementById('NO_ESTUDIANTES2').value = "";
+
+    }
+
+    function validarSiNumero2(numero) {
+        if (!/^\-?[1-9]\d{0,2}$/.test(numero))
+            document.getElementById('NO_MENTORES_UE2').value = "";
+
+    }
+
+    function validarSiNumero3(numero) {
+        if (!/^\-?[1-9]\d{0,2}$/.test(numero))
+            document.getElementById('NO_MENTORES_ACAD2').value = "";
+
+    }
+
+
 </script>
-    
-     
+
+
 
 <script type="text/javascript">
-    
-    
-   
-    
-    
+
+
+
+
+
 
     function validarFormulario() {
 
@@ -276,39 +267,39 @@
         document.formularioPrincipal.action = accion;
         document.formularioPrincipal.submit();
     }
-    
-     function consulta3(accion) {
+
+    function consulta3(accion) {
 
         document.formularioPrincipal.action = accion;
         document.formularioPrincipal.submit();
     }
 
-function elige(accion, id_hist_alum) {
-    
-     document.formularioPrincipal.AUXIDHISTALUM.value = id_hist_alum;
-    
-   
+    function elige(accion, id_hist_alum) {
+
+        document.formularioPrincipal.AUXIDHISTALUM.value = id_hist_alum;
+
+
 
         document.formularioPrincipal.action = accion;
         document.formularioPrincipal.submit();
     }
     function elige2(accion) {
-    
+
 
         document.formularioPrincipal.action = accion;
         document.formularioPrincipal.submit();
     }
     function elige3(accion, id_com) {
-    
-     document.formularioPrincipal.AUX_IDCOMPETENCIA.value = id_com;
-    
-   
+
+        document.formularioPrincipal.AUX_IDCOMPETENCIA.value = id_com;
+
+
 
         document.formularioPrincipal.action = accion;
         document.formularioPrincipal.submit();
     }
-    
-    
+
+
 
     function validarInput(input) {
         var curp = input.value.toUpperCase(),
@@ -528,124 +519,124 @@ function elige(accion, id_hist_alum) {
                                                                     <div class="row" >
                                                                         <div class="col-lg-12">
                                                                             <label for="exampleEmail" class="bmd-label-floating">Evaluación del Estudiante  </label>
-                                                                       
-                                                                           
-                                                                        
-                                                                        
-                                                                        
+
+
+
+
+
                                                                         </div>
-                                                                        
-                                                                    
-                                                                        
-                                                                       
-                                                                <div style="width: 90%; margin: auto;  color:#302f2f; text-align: center; margin-top: 20px;" >
-                                                                   
-                                                                </div>      
-                                                                        
-                                                                    
-                                                                <div class="card-body">                                                          
-                                                                    <div class="material-datatables">                                                                                                                                                              
-                                                                        <div style="height: 150px; overflow-y: scroll;">
-                                                                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                                                                                <thead style="background: #302f2f; color:white; text-align: center;">
-                                                                                    <tr>
-                                                                                        
-                                                                                        <th>Programa Educativo</th>
-                                                                                        <th>Estudiante</th>
-                                                                                        <th>Plan de Formación</th>
-                                                                                        <th>Duración</th>
-                                                                                        <th>Horas/Semana</th>
-                                                                                        <th>Total de Reportes</th> 
-                                                                                        <th>Registrados Estudiante</th>
-                                                                                        <th>Evaluaciones Mentor UE</th>
-                                                                                        <th>Evaluaciones Mentor Académico</th>
-                                                                                        <th>Estatus</th>
-                                                                                        <th>Seleccionar</th>
-                                                                                    </tr>
-                                                                                </thead>
-
-                                                                                <tbody>
-                                                                                <s:iterator value="ListaPlanFormAlu" id="ListaPlanFormAlu" status="stat"> 
-                                                                                 
-                                                                                    <tr style="text-align: center;">
-                                                                                        <td><s:property value="NOM_CARRERA"></s:property></td>
-                                                                                        
-                                                                                        <td><s:property value="NOMBRE_EST"/></td>
-                                                                                        <td><s:property value="NOMBREPLAN_FORM"/></td>
-                                                                                        <td><s:property value="FECHA_INICIOPF"/> - <s:property value="FECHA_TERMINOPF"/></td>
-
-                                                                                        <td><s:property value="HORAS_SEMANA"/></td>
-
-                                                                                        <th><div style="width: 23px; border-radius: 50%;  margin: auto; background: purple; height: 23px; text-align: center; color: white; padding: 4pox 0px 0px 0px;"><s:property value="TOTAL_REPORTES"/></div></th> 
-                                                                                        <th><div style="width: 23px; border-radius: 50%;  margin: auto; background: green; height: 23px; text-align: center; color: white; padding: 4pox 0px 0px 0px;"><s:property value="REPORTES_HECHOS"/></div></th>
-                                                                                        <th><div style="width: 23px; border-radius: 50%;  margin: auto; background: blue; height: 23px; text-align: center; color: white; padding: 4pox 0px 0px 0px;"><s:property value="EVAL_MUE"/></div></th>
-                                                                                        <th><div style="width: 23px; border-radius: 50%;  margin: auto; background: orangered; height: 23px; text-align: center; color: white; padding: 4pox 0px 0px 0px;"><s:property value="EVAL_MA"/></div></th>
-
-
-
-                                                                                        <td  > <s:if test="ESTATUS_PF==1">   Activo </s:if><s:else>Concluido</s:else> </td>
-
-
-
-                                                                                            <td align="center">
-
-
-                                                                                            <s:if test="ID_HIST_ALUM==alumno.AUXIDHISTALUM"><a href="Javascript:SeleccionMenu('EvaluaActEst')" ><i class="material-icons">check_box</i></a></s:if> <s:else>   <a href="Javascript:elige('eligePlanFormMUE','<s:property value="ID_HIST_ALUM"/>')" ><i class="material-icons">check_box_outline_blank</i></a></s:else>
 
 
 
 
+                                                                        <div style="width: 90%; margin: auto;  color:#302f2f; text-align: center; margin-top: 20px;" >
 
-                                                                                    </tr>
-                                                                                            
-
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_CCT_PLAN" id="ID_CCT_PLAN"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].CVE_PLAN" id="CVE_PLAN"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].NOM_CARRERA" id="NOM_CARRERA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].VERSION" id="VERSION"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ENFASIS" id="ENFASIS"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_HIST_ALUM" id="ID_HIST_ALUM"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_ALUMNO" id="ID_ALUMNO"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_IE_UE" id="ID_IE_UE"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].STATUS_GENERAL" id="STATUS_GENERAL"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_INICIO_PF" id="FECHA_INICIO_PF"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_BAJA" id="FECHA_BAJA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_EGRESO" id="FECHA_EGRESO"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_CICLO" id="ID_CICLO"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_INICIOPF" id="FECHA_INICIOPF"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_TERMINOPF" id="FECHA_TERMINOPF"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ESTATUS_PF" id="ESTATUS_PF"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].NOMBREPLA_FORM" id="NOMBREPLA_FORM"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].DESCRIPCION" id="DESCRIPCION"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].DURACION" id="DURACION"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].HORAS_SEMANA" id="HORAS_SEMANA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].TOTAL_REPORTES" id="TOTAL_REPORTES"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].REPORTES_HECHOS" id="REPORTES_HECHOS"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].REPORTES_FALTANTES" id="REPORTES_FALTANTES"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].POR_REG_ALUMNO" id="POR_REG_ALUMNO"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].EVAL_MUE" id="EVAL_MUE"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].EVAL_MA" id="EVAL_MA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_PLAN_FORM" id="ID_PLAN_FORM"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_MENTOR_UE" id="ID_MENTOR_UE"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_MENTOR_ACAD" id="ID_MENTOR_ACAD"></s:hidden>
-                                                                                        <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_RES_UE" id="ID_RES_UE"></s:hidden>
-                                                                                           <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].NOMBRE_EST" id="NOMBRE_EST"></s:hidden>
-                                                                                   
+                                                                        </div>      
 
 
-                                                                                   
-                                                                                </s:iterator>  
+                                                                        <div class="card-body">                                                          
+                                                                            <div class="material-datatables">                                                                                                                                                              
+                                                                                <div style="height: 150px; overflow-y: scroll;">
+                                                                                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                                                                        <thead style="background: #302f2f; color:white; text-align: center;">
+                                                                                            <tr>
+
+                                                                                                <th>Programa Educativo</th>
+                                                                                                <th>Estudiante</th>
+                                                                                                <th>Plan de Formación</th>
+                                                                                                <th>Duración</th>
+                                                                                                <th>Horas/Semana</th>
+                                                                                                <th>Total de Reportes</th> 
+                                                                                                <th>Registrados Estudiante</th>
+                                                                                                <th>Evaluaciones Mentor UE</th>
+                                                                                                <th>Evaluaciones Mentor Académico</th>
+                                                                                                <th>Estatus</th>
+                                                                                                <th>Seleccionar</th>
+                                                                                            </tr>
+                                                                                        </thead>
+
+                                                                                        <tbody>
+                                                                                        <s:iterator value="ListaPlanFormAlu" id="ListaPlanFormAlu" status="stat"> 
+
+                                                                                            <tr style="text-align: center;">
+                                                                                                <td><s:property value="NOM_CARRERA"></s:property></td>
+
+                                                                                                    <td><s:property value="NOMBRE_EST"/></td>
+                                                                                                <td><s:property value="NOMBREPLAN_FORM"/></td>
+                                                                                                <td><s:property value="FECHA_INICIOPF"/> - <s:property value="FECHA_TERMINOPF"/></td>
+
+                                                                                                <td><s:property value="HORAS_SEMANA"/></td>
+
+                                                                                                <th><div style="width: 23px; border-radius: 50%;  margin: auto; background: purple; height: 23px; text-align: center; color: white; padding: 4pox 0px 0px 0px;"><s:property value="TOTAL_REPORTES"/></div></th> 
+                                                                                                <th><div style="width: 23px; border-radius: 50%;  margin: auto; background: green; height: 23px; text-align: center; color: white; padding: 4pox 0px 0px 0px;"><s:property value="REPORTES_HECHOS"/></div></th>
+                                                                                                <th><div style="width: 23px; border-radius: 50%;  margin: auto; background: blue; height: 23px; text-align: center; color: white; padding: 4pox 0px 0px 0px;"><s:property value="EVAL_MUE"/></div></th>
+                                                                                                <th><div style="width: 23px; border-radius: 50%;  margin: auto; background: orangered; height: 23px; text-align: center; color: white; padding: 4pox 0px 0px 0px;"><s:property value="EVAL_MA"/></div></th>
 
 
 
-                                                                            </tbody>
-                                                                        </table>                                              
-                                                                    </div> 
-                                                                </div>
-                                                            </div>
-                                                                        
-                                                                        
-                                                                  
+                                                                                                <td  > <s:if test="ESTATUS_PF==1">   Activo </s:if><s:else>Concluido</s:else> </td>
+
+
+
+                                                                                                    <td align="center">
+
+
+                                                                                                    <s:if test="ID_HIST_ALUM==alumno.AUXIDHISTALUM"><a href="Javascript:SeleccionMenu('EvaluaActEst')" ><i class="material-icons">check_box</i></a></s:if> <s:else>   <a href="Javascript:elige('eligePlanFormMUE','<s:property value="ID_HIST_ALUM"/>')" ><i class="material-icons">check_box_outline_blank</i></a></s:else>
+
+
+
+
+
+                                                                                                </tr>
+
+
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_CCT_PLAN" id="ID_CCT_PLAN"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].CVE_PLAN" id="CVE_PLAN"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].NOM_CARRERA" id="NOM_CARRERA"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].VERSION" id="VERSION"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ENFASIS" id="ENFASIS"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_HIST_ALUM" id="ID_HIST_ALUM"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_ALUMNO" id="ID_ALUMNO"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_IE_UE" id="ID_IE_UE"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].STATUS_GENERAL" id="STATUS_GENERAL"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_INICIO_PF" id="FECHA_INICIO_PF"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_BAJA" id="FECHA_BAJA"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_EGRESO" id="FECHA_EGRESO"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_CICLO" id="ID_CICLO"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_INICIOPF" id="FECHA_INICIOPF"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].FECHA_TERMINOPF" id="FECHA_TERMINOPF"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ESTATUS_PF" id="ESTATUS_PF"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].NOMBREPLA_FORM" id="NOMBREPLA_FORM"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].DESCRIPCION" id="DESCRIPCION"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].DURACION" id="DURACION"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].HORAS_SEMANA" id="HORAS_SEMANA"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].TOTAL_REPORTES" id="TOTAL_REPORTES"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].REPORTES_HECHOS" id="REPORTES_HECHOS"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].REPORTES_FALTANTES" id="REPORTES_FALTANTES"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].POR_REG_ALUMNO" id="POR_REG_ALUMNO"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].EVAL_MUE" id="EVAL_MUE"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].EVAL_MA" id="EVAL_MA"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_PLAN_FORM" id="ID_PLAN_FORM"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_MENTOR_UE" id="ID_MENTOR_UE"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_MENTOR_ACAD" id="ID_MENTOR_ACAD"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].ID_RES_UE" id="ID_RES_UE"></s:hidden>
+                                                                                            <s:hidden  name = "ListaPlanFormAlu[%{#stat.index}].NOMBRE_EST" id="NOMBRE_EST"></s:hidden>
+
+
+
+
+                                                                                        </s:iterator>  
+
+
+
+                                                                                    </tbody>
+                                                                                </table>                                              
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+
+
+
                                                                     <s:if test="alumno.AUXIDHISTALUM.length()>0">
 
                                                                         <div style="width: 98%; height: auto; padding: 5px; border: 3px solid purple; border-radius: 20px; margin:auto;">        
@@ -672,246 +663,255 @@ function elige(accion, id_hist_alum) {
 
 
                                                                                 </s:if>
-                                                                                    
-                                                                                      <s:if test="banRegAluNiveMS">
+
+                                                                                <s:if test="banRegAluNiveMS">
 
 
-                                                                                <div class="col-lg-12" style="margin-top: 20px; margin-bottom: 20px;">
-                                                                                    <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Semanas del plan de Formación </label>
-                                                                                    <s:set var="count" value="1"/>
-                                                                                    <s:select  data-style="select-with-transition"   name="programa.ID_SEMANA" id="ID_SEMANA" list="ListaSemanas"  listKey="ID_SEMANA"  listValue="'SEMANA DEL '+INICIO_SEMANA+' AL '+FIN_SEMANA+' : '+ESTATUS_REG" headerKey="" headerValue="Seleccionar Semana"  cssClass="selectpicker col-lg-12" onchange="Javascript:elige2('eligeSemanaMue')"  />
+                                                                                    <div class="col-lg-12" style="margin-top: 20px; margin-bottom: 20px;">
+                                                                                        <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Semanas del plan de Formación </label>
+                                                                                        <s:set var="count" value="1"/>
+                                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_SEMANA" id="ID_SEMANA" list="ListaSemanas"  listKey="ID_SEMANA"  listValue="'SEMANA DEL '+INICIO_SEMANA+' AL '+FIN_SEMANA+' : | ALUMNO: '+ESTATUS_REG+' |  EVALUACION MUE: '+ESTATUS_EVAL_MUE+' |  EVALUACION MA: '+ESTATUS_EVAL_MUE+' | '" headerKey="" headerValue="Seleccionar Semana"  cssClass="selectpicker col-lg-12" onchange="Javascript:elige2('eligeSemanaMue')"  />
 
 
-                                                                                    <s:iterator value="ListaSemanas" id="ListaSemanas" status="stat">  
-                                                                                        <s:hidden  name = "ListaSemanas[%{#stat.index}].ID_SEMANA" id="ID_SEMANA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaSemanas[%{#stat.index}].INICIO_SEMANA" id="INICIO_SEMANA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaSemanas[%{#stat.index}].FIN_SEMANA" id="FIN_SEMANA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_REG" id="ESTATUS_REG"></s:hidden>
+                                                                                        <s:iterator value="ListaSemanas" id="ListaSemanas" status="stat">  
+                                                                                            <s:hidden  name = "ListaSemanas[%{#stat.index}].ID_SEMANA" id="ID_SEMANA"></s:hidden>
+                                                                                            <s:hidden  name = "ListaSemanas[%{#stat.index}].INICIO_SEMANA" id="INICIO_SEMANA"></s:hidden>
+                                                                                            <s:hidden  name = "ListaSemanas[%{#stat.index}].FIN_SEMANA" id="FIN_SEMANA"></s:hidden>
+                                                                                            <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_REG" id="ESTATUS_REG"></s:hidden>
+                                                                                              <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_EVAL_MUE" id="ESTATUS_EVAL_MUE"></s:hidden>
+                                                                                          <s:hidden name = "ListaSemanas[%{#stat.index}].ESTATUS_EVAL_MA" id="ESTATUS_EVAL_MA"></s:hidden>
 
-                                                                                    </s:iterator>
-
-
-
-
-                                                                                      <s:fielderror  fieldName="NOEVALMUE" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
+                                                                                        </s:iterator>
 
 
 
-                                                                                </s:if>
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                             
 
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                           <s:if test="banVisualiza">
-                                                                                        
-                                                                                        
-                                                                                        
+                                                                                        <s:fielderror  fieldName="NOEVALMUE" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
+
+
+
+                                                                                    </s:if>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                    <s:if test="banVisualiza">
+
+
+
                                                                                         <div>
-                                                                                           
-                                                                                        
-
-                                                                                               
-                                                                                                    <s:iterator value="ListaRegistroEstMs" id="ListaRegistroEstMs" status="stat"> 
-                                                                                                        
-                                                                                                        
-                                                                                                        <div style="width: 100%; text-align: center; margin-top: 30px; background: gray; color: white;">Reporte No. <s:property value="#stat.count" /></div>
-                                                                                                       
-                                                                                                        <div style="border: purple 2px solid; padding: 10px 10px 10px 10px; margin-top: 8px; border-radius: 0px 0px 10px 10px">    
-                                                                                                                
-                                                                                                                
-                                                                                                            <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                <label for="exampleEmail" class="bmd-label-floating" >Fecha de Trabajo </label>
-                                                                                                                <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaRegistroEstMs[%{#stat.index}].ID_FECHA"   id="ID_FECHA" list="ListaFechas"  listKey="ID_FECHA"  listValue="FECHA" cssClass="selectpicker col-lg-12" headerValue="ELEGIR Fecha DE LA ACTIVIDAD" headerKey=""  disabled="true" >  </s:select> 
-                                                                                                                </div>
-
-                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Nombre Actividad </label>
-                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].NOMBRE_ACTIVIDAD"    id="NOMBRE_ACTIVIDAD" disabled="true" >  </s:textfield> 
-
-                                                                                                            </div>
-                                                                                                                  <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Objetivo </label>
-                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].OBJETIVO"    id="OBJETIVO" disabled="true" >  </s:textfield> 
-
-                                                                                                            </div>
-                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Marco Teórico </label>
-                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].MARCO_TEORICO"    id="MARCO_TEORICO" disabled="true" >  </s:textfield> 
-
-                                                                                                            </div>
-                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Desarrollo y Procedimiento  </label>
-                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].DESARROLLO"    id="DESARROLLO" disabled="true" >  </s:textfield> 
-
-                                                                                                            </div>
-                                                                                                                 <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Equipo y Herramientas  </label>
-                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].EQUIPO"    id="EQUIPO" disabled="true" >  </s:textfield> 
-
-                                                                                                            </div>
-                                                                                                                
-                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Medidas de Seguridad Físicas y de Entorno  </label>
-                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].MEDIDAS_SEGURIDAD"    id="MEDIDAS_SEGURIDAD" disabled="true" >  </s:textfield> 
-
-                                                                                                            </div>
-                                                                                                                
-                                                                                                                 <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Normas de Calidad  </label>
-                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].NORMAS_CALIDAD"    id="NORMAS_CALIDAD" disabled="true" >  </s:textfield> 
-
-                                                                                                            </div>
-                                                                                                                
-                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Actividasdes de autoestudio  </label>
-                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].AUTOESTUDIO"    id="AUTOESTUDIO" disabled="true" >  </s:textfield> 
-
-                                                                                                            </div>
-                                                                                                                
-                                                                                                                 <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" >Observaciones</label>
-                                                                                                                <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].OBSERVACIONES"    id="OBSERVACIONES"  disabled="true">  </s:textfield> 
-
-                                                                                                            </div>
-                                                                                                                
-                                                                                                                
-                                                                                                                <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                    <label for="exampleEmail" class="bmd-label-floating" ><a href="<s:property value="RUTA_EVIDENCIA"/>">Evidencia Fotográfica</a>  </label>
-                                                                                                               
-                                                                                                            </div>
-                                                                                                                
-                                                                                                                 <div class="col-md-12" style="margin-top: 15px;" >
-                                                                                                                <label for="exampleEmail" class="bmd-label-floating" >Fecha de Trabajo </label>
-                                                                                                               <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaPlanAluMateriaComAct[%{#stat.index}].ID_RUBRICA"   id="ID_RUBRICA" list="ListaRubrica"  listKey="ID_RUBRICA"  listValue="DESC_RUBRICA" cssClass="selectpicker col-lg-12" headerValue="Elegir de Desempeño" headerKey="" >  </s:select> 
-                                                                                                                </div>
-                                                                                                            
-                                                                                                            
-                                                                                                            
-                                                                                                            
-                                                                                                                <s:if test="ERROR_PLANMS.length()>0">
-                                                                                                            
-                                                                                                             
-                                                                                                                   
-                                                                                                                    <div class="col-lg-12 alert alert-danger"> <s:property value="ERROR_PLANMS"></s:property> </div>
-                                                                                                             
-                                                                                                            
-                                                                                                            
-                                                                                                            </s:if>
-                                                                                                            
-                                                                                                            
-                                                                                                                
-                                                                                                        </div>  
-
-
-                                                                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].ERROR_PLANMS" id="ERROR_PLANMS"></s:hidden>
-                                                                                                        
-                                                                                                     
 
 
 
-                                                                                                        
-                                                                                                        
-                                                                                       
 
-                                                                                                       
-                                                                                                    </s:iterator>  
-                                                                                                        
-                                                                                                        
-                                                                                                      
-                                                                                                        
-                                                                                                        
-                                                                                                        
-                                                                                                        
-                                                                                                        
-                                                                                                        
+                                                                                            <s:iterator value="ListaRegistroEstMs" id="ListaRegistroEstMs" status="stat"> 
+
+
+                                                                                                <div style="width: 100%; text-align: center; margin-top: 30px; background: gray; color: white;">Reporte No. <s:property value="#stat.count" /></div>
+
+                                                                                                <div style="border: purple 2px solid; padding: 10px 10px 10px 10px; margin-top: 8px; border-radius: 0px 0px 10px 10px">    
+
+
+                                                                                                    <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                        <label for="exampleEmail" class="bmd-label-floating" >Fecha de Trabajo </label>
+                                                                                                        <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaRegistroEstMs[%{#stat.index}].ID_FECHA"   id="ID_FECHA" list="ListaFechas"  listKey="ID_FECHA"  listValue="FECHA" cssClass="selectpicker col-lg-12" headerValue="ELEGIR Fecha DE LA ACTIVIDAD" headerKey=""  disabled="true" >  </s:select> 
+                                                                                                        </div>
+
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" >Nombre Actividad </label>
+                                                                                                        <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].NOMBRE_ACTIVIDAD"    id="NOMBRE_ACTIVIDAD" disabled="true" >  </s:textfield> 
+
+                                                                                                        </div>
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" >Objetivo </label>
+                                                                                                        <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].OBJETIVO"    id="OBJETIVO" disabled="true" >  </s:textfield> 
+
+                                                                                                        </div>
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" >Marco Teórico </label>
+                                                                                                        <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].MARCO_TEORICO"    id="MARCO_TEORICO" disabled="true" >  </s:textfield> 
+
+                                                                                                        </div>
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" >Desarrollo y Procedimiento  </label>
+                                                                                                        <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].DESARROLLO"    id="DESARROLLO" disabled="true" >  </s:textfield> 
+
+                                                                                                        </div>
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" >Equipo y Herramientas  </label>
+                                                                                                        <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].EQUIPO"    id="EQUIPO" disabled="true" >  </s:textfield> 
+
+                                                                                                        </div>
+
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" >Medidas de Seguridad Físicas y de Entorno  </label>
+                                                                                                        <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].MEDIDAS_SEGURIDAD"    id="MEDIDAS_SEGURIDAD" disabled="true" >  </s:textfield> 
+
+                                                                                                        </div>
+
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" >Normas de Calidad  </label>
+                                                                                                        <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].NORMAS_CALIDAD"    id="NORMAS_CALIDAD" disabled="true" >  </s:textfield> 
+
+                                                                                                        </div>
+
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" >Actividasdes de autoestudio  </label>
+                                                                                                        <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].AUTOESTUDIO"    id="AUTOESTUDIO" disabled="true" >  </s:textfield> 
+
+                                                                                                        </div>
+
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" >Observaciones</label>
+                                                                                                        <s:textfield cssClass="form-check-sign" cssStyle="width:100%;"   name="ListaRegistroEstMs[%{#stat.index}].OBSERVACIONES"    id="OBSERVACIONES"  disabled="true">  </s:textfield> 
+
+                                                                                                        </div>
+
+
+                                                                                                        <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                            <label for="exampleEmail" class="bmd-label-floating" ><a href="<s:property value="RUTA_EVIDENCIA"/>">Evidencia Fotográfica</a>  </label>
 
                                                                                                     </div>
-                                                                                            
-                                                                                                                                                    
-                                                                                            
-                                                                                        
-                                                                                        
-                                                                                        </s:if>
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                        
+
+                                                                                                    <div class="col-md-12" style="margin-top: 15px;" >
+                                                                                                        <label for="exampleEmail" class="bmd-label-floating" >Fecha de Trabajo </label>
+                                                                                                        <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaRegistroEstMs[%{#stat.index}].ID_RUBRICA"   id="ID_RUBRICA" list="ListaRubrica"  listKey="ID_RUBRICA"  listValue="DESC_RUBRICA" cssClass="selectpicker col-lg-12" headerValue="Elegir de Desempeño" headerKey="" >  </s:select> 
+                                                                                                        </div>
 
 
 
-                                                                                <s:if test="ListaPlanAluMateriaCom.size()>0"> 
-                                                                                    <div class="material-datatables" style="margin-top: 20px;">    
-                                                                                        <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Competencias del Plan de Formación </label>
-                                                                                        <div style="height: 150px; overflow-y: scroll;">
-                                                                                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                                                                                                <thead style="background: #302f2f; color:white; text-align: center;">
-                                                                                                    <tr>
-                                                                                                        <th>NP</th>
-                                                                                                        <th>Competencia</th>
-                                                                                                        <th>Estatus</th>
-                                                                                                        <th>Seleccionar</th>
-                                                                                                    </tr>
-                                                                                                </thead>
 
-                                                                                                <tbody>
-                                                                                                    <s:iterator value="ListaPlanAluMateriaCom" id="ListaPlanAluMateriaCom" status="stat"> 
-
-                                                                                                        <tr style="text-align: center;">
-                                                                                                            <td><s:property value="ID_COMPETENCIA"/></td>
-                                                                                                            <td><s:property value="COMPETENCIA"/></td>
-                                                                                                            <td><s:if test="ID_REGALUMCOMP==0">Sin reporte</s:if><s:else>Registrado</s:else></td>
-                                                                                                            <td>  <s:if test="programa.AUX_IDCOMPETENCIA.length()==0 && EVAL_MUE==null && MARCO_TEORICO!=null"><a href="Javascript:elige3('eligePlanAsigMateriaComMUE','<s:property value="ID_COMPETENCIA"/>')" ><i class="material-icons">check_box_outline_blank</i></a></s:if>
-                                                                                                            
-                                                                                                                <s:if test="programa.AUX_IDCOMPETENCIA.length()>0"><a href="Javascript:elige2('eligePlanAsigMateriaMUE')" ><i class="material-icons">check_box</i></a></s:if>
-                                                                                                                <s:if test="EVAL_MUE.length()>0"><i class="material-icons" style="color:green;">done</i></s:if>
-                                                                                                                <s:if test="programa.AUX_IDCOMPETENCIA.length()==0 && EVAL_MUE==null && MARCO_TEORICO==null"><div style="color:red;"> Sin reporte del Estudiante </div></s:if>
-                                                                                                                
-                                                                                                            </td>
+                                                                                                    <s:if test="ERROR_PLANMS.length()>0">
 
 
 
+                                                                                                        <div class="col-lg-12 alert alert-danger"> <s:property value="ERROR_PLANMS"></s:property> </div>
+
+
+
+                                                                                                    </s:if>
+
+
+
+                                                                                                </div>  
+
+
+                                                                                                <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].ERROR_PLANMS" id="ERROR_PLANMS"></s:hidden>
+
+
+
+
+
+
+
+
+
+
+                                                                                            </s:iterator>  
+
+
+
+
+
+
+
+
+
+
+                                                                                        </div>
+
+
+
+
+
+                                                                                    </s:if>
+
+                                                                                    <s:if test="banGuardaEvalMUE">           
+                                                                                        <div class="form-group col-md-12 text-center" >
+                                                                                            <a href="Javascript:consulta('guardaEvalMUE')"  class="btn btn-round btn-primary">Guardar</a>
+                                                                                        </div>
+                                                                                    </s:if>
+
+
+
+
+
+
+
+
+
+
+                                                                                    <s:if test="ListaPlanAluMateriaCom.size()>0"> 
+                                                                                        <div class="material-datatables" style="margin-top: 20px;">    
+                                                                                            <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Competencias del Plan de Formación </label>
+                                                                                            <div style="height: 150px; overflow-y: scroll;">
+                                                                                                <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                                                                                    <thead style="background: #302f2f; color:white; text-align: center;">
+                                                                                                        <tr>
+                                                                                                            <th>NP</th>
+                                                                                                            <th>Competencia</th>
+                                                                                                            <th>Estatus</th>
+                                                                                                            <th>Seleccionar</th>
                                                                                                         </tr>
+                                                                                                    </thead>
+
+                                                                                                    <tbody>
+                                                                                                        <s:iterator value="ListaPlanAluMateriaCom" id="ListaPlanAluMateriaCom" status="stat"> 
+
+                                                                                                            <tr style="text-align: center;">
+                                                                                                                <td><s:property value="ID_COMPETENCIA"/></td>
+                                                                                                                <td><s:property value="COMPETENCIA"/></td>
+                                                                                                                <td><s:if test="ID_REGALUMCOMP==0">Sin reporte</s:if><s:else>Registrado</s:else></td>
+                                                                                                                <td>  <s:if test="programa.AUX_IDCOMPETENCIA.length()==0 && EVAL_MUE==null && MARCO_TEORICO!=null"><a href="Javascript:elige3('eligePlanAsigMateriaComMUE','<s:property value="ID_COMPETENCIA"/>')" ><i class="material-icons">check_box_outline_blank</i></a></s:if>
+
+                                                                                                                    <s:if test="programa.AUX_IDCOMPETENCIA.length()>0"><a href="Javascript:elige2('eligePlanAsigMateriaMUE')" ><i class="material-icons">check_box</i></a></s:if>
+                                                                                                                    <s:if test="EVAL_MUE.length()>0"><i class="material-icons" style="color:green;">done</i></s:if>
+                                                                                                                    <s:if test="programa.AUX_IDCOMPETENCIA.length()==0 && EVAL_MUE==null && MARCO_TEORICO==null"><div style="color:red;"> Sin reporte del Estudiante </div></s:if>
+
+                                                                                                                    </td>
 
 
-                                                                                                        <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].ID_COMPETENCIA" id="ID_COMPETENCIA"></s:hidden>
-                                                                                                        <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].COMPETENCIA" id="COMPETENCIA"></s:hidden>
-                                                                                                        <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].ID_HIST_ALU" id="ID_HIST_ALU"></s:hidden>
-                                                                                                        <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].ID_REGALUMCOMP" id="ID_REGALUMCOMP"></s:hidden>
-                                                                                                        <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].MARCO_TEORICO" id="MARCO_TEORICO"></s:hidden>
-                                                                                                        <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].DES_ACT" id="DES_ACT"></s:hidden>
-                                                                                                         <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].RUTA_EVIDENCIAS" id="RUTA_EVIDENCIAS"></s:hidden>
-                                                                                                        <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].FECHA_REG" id="FECHA_REG"></s:hidden>
-                                                                                                          <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].EDITA" id="EDITA"></s:hidden>
-                                                                                                         <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].EVAL_MUE" id="EVAL_MUE"></s:hidden>
-                                                                                                         <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].EVAL_MA" id="EVAL_MA"></s:hidden>
 
-                                                                                                    </s:iterator>  
+                                                                                                                </tr>
 
 
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].ID_COMPETENCIA" id="ID_COMPETENCIA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].COMPETENCIA" id="COMPETENCIA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].ID_HIST_ALU" id="ID_HIST_ALU"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].ID_REGALUMCOMP" id="ID_REGALUMCOMP"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].MARCO_TEORICO" id="MARCO_TEORICO"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].DES_ACT" id="DES_ACT"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].RUTA_EVIDENCIAS" id="RUTA_EVIDENCIAS"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].FECHA_REG" id="FECHA_REG"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].EDITA" id="EDITA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].EVAL_MUE" id="EVAL_MUE"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaPlanAluMateriaCom[%{#stat.index}].EVAL_MA" id="EVAL_MA"></s:hidden>
 
-                                                                                                </tbody>
-                                                                                            </table>                                              
-                                                                                        </div> 
-                                                                                    </div>
+                                                                                                        </s:iterator>  
 
 
-                                                                                </s:if>  
+
+                                                                                                    </tbody>
+                                                                                                </table>                                              
+                                                                                            </div> 
+                                                                                        </div>
+
+
+                                                                                    </s:if>  
 
 
 
@@ -926,17 +926,17 @@ function elige(accion, id_hist_alum) {
 
 
 
-                                                                                  
+
 
 
                                                                                         <div class="col-md-12">
 
 
                                                                                             <div id="dvData">  
-                                                                                                
-                                                                                                 <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Marco teórico o antecedentes</label>
 
-                                                                                                  <s:if test="banVisualiza" >
+                                                                                                <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Marco teórico o antecedentes</label>
+
+                                                                                                <s:if test="banVisualiza" >
 
                                                                                                     <s:textarea name="programa.MARCO_TEORICO" id="MARCO_TEORICO" cssStyle="width:100%; margin-top: 10px; margin-bootom:10px;" rows="5" readonly="true" ></s:textarea>
                                                                                                     <s:fielderror fieldName="ERRORMARCO" cssClass="alert alert-danger"/>
@@ -945,21 +945,21 @@ function elige(accion, id_hist_alum) {
                                                                                                     <s:fielderror fieldName="ERRORDESC" cssClass="alert alert-danger"/>
                                                                                                     <a  target="black" href="<s:property  value="programa.RUTA_EVIDENCIAS"/> ">Archivo registrado:<s:property  value="programa.RUTA_EVIDENCIAS"/></a>
                                                                                                     <s:fielderror fieldName="archierror" cssClass="alert alert-danger"/>
-                                                                                                    
-                                                                                          
-                                                                                               
+
+
+
 
                                                                                                 </s:if>
 
                                                                                                 <div  style="width: 100%; margin-top: 20px; ">
-                                                                                             <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Actividades de la Competencia Seleccionada</label>
+                                                                                                    <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Actividades de la Competencia Seleccionada</label>
 
 
                                                                                                     <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                                                                                         <thead style="background: #302f2f; color:white;">
                                                                                                             <tr style="text-align: center;">
 
-                                                                                                               
+
                                                                                                                 <th style="width: 15%;" >Actividades</th>
 
                                                                                                                 <th style="width: 10%;" >Horas</th>
@@ -968,138 +968,135 @@ function elige(accion, id_hist_alum) {
                                                                                                                 <th style="width: 10%;" >Evidencias</th>
                                                                                                                 <th style="width: 15%;" >Descripcion de Actividad </th>
                                                                                                                 <th style="width: 15%;" >Nivel de Desempeño </th>
-                                                                                                           
-                                                                                                        </tr>
-                                                                                                    </thead>
-                                                                                                        
-                                                                                                  
-                                                                                                        
-                                                                                                       
 
-                                                                                                    <tbody>
-                                                                                                        
-                                                                                                
-                                                                                                        
-                                                                                                        
-                                                                                                        <s:iterator value="ListaPlanAluMateriaComAct" id="ListaPlanAluMateriaComAct" status="stat">                                                                                                                                      
+                                                                                                            </tr>
+                                                                                                        </thead>
 
 
 
 
 
-                                                                                                            <tr style="color: #666666;    <s:if test="ID_ACTIVIDAD==NO_PASA && NO_PASA!=null">background: #ffcccc ; </s:if>"  >
+                                                                                                        <tbody>
 
 
 
 
-                                                                                                                <th ><s:property value="ACTIVIDAD" /></th>  
-
-                                                                                                                <th  align="center" style="text-align: center;" > <s:property value="HORA"></s:property> Hrs.  </th>  
-                                                                                                                <th align="center" style="text-align: center;" > <s:property value="LUGAR"></s:property> </th>  
-                                                                                                                <th align="center"style="text-align: center;"  > <s:property value="ID_ESCALA"></s:property>% </th>                                                                                                          
-                                                                                                                 <th align="center"style="text-align: center;"  > <s:property value="EVIDENCIAS"></s:property> </th>                                                                                                          
-                                                                                 
-                                                                                                                <th> <s:property value="DES_ACTIVIDAD"></s:property> </th>                                                                                                          
-                                                                                                                 <th> <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaPlanAluMateriaComAct[%{#stat.index}].ID_RUBRICA"   id="ID_RUBRICA" list="ListaRubrica"  listKey="ID_RUBRICA"  listValue="DESC_RUBRICA" cssClass="selectpicker col-lg-12" headerValue="Elegir de Desempeño" headerKey="" >  </s:select> </th>
-                                                                                                                 
-
-                                                                                                                </tr>
+                                                                                                            <s:iterator value="ListaPlanAluMateriaComAct" id="ListaPlanAluMateriaComAct" status="stat">                                                                                                                                      
 
 
 
 
 
-
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].NOMBRE_MATERIA" id="NOMBRE_MATERIA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].NUMERO_PERIODO" id="NUMERO_PERIODO"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].COMPETENCIA" id="COMPETENCIA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ACTIVIDAD" id="ACTIVIDAD"></s:hidden>
-
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_MATERIA" id="ID_MATERIA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_COMPETENCIA" id="ID_COMPETENCIA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_ACTIVIDAD" id="ID_ACTIVIDAD"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].NO_PASSA" id="NO_PASA"></s:hidden>
-
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].HORA" id="HORA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].LUGAR" id="LUGAR"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].DES_ACTIVIDAD" id="DES_ACTIVIDAD"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].PLAN_ROTACION" id="PLAN_ROTACION"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_ESCALA" id="ID_ESCALA"></s:hidden>
-
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_HORA" id="ID_HORA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_LUGAR" id="ID_LUGAR"></s:hidden>
-
-                                                                                                            <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_ACT_ALU" id="ID_ACT_ALU"></s:hidden>
-
-
-
-                                                                                                        </s:iterator>  
-
-
-                                                                                                     <s:iterator value="ListaRubrica" id="ListaRubrica" status="stat">         
-                                                                                            <s:hidden  name = "ListaRubrica[%{#stat.index}].ID_RUBRICA" id="ID_RUBRICA"></s:hidden>
-                                                                                            <s:hidden  name = "ListaRubrica[%{#stat.index}].DESC_RUBRICA" id="DESC_RUBRICA"></s:hidden>
-                                                                                        </s:iterator>
+                                                                                                                <tr style="color: #666666;    <s:if test="ID_ACTIVIDAD==NO_PASA && NO_PASA!=null">background: #ffcccc ; </s:if>"  >
 
 
 
 
-                                                                                                    
+                                                                                                                        <th ><s:property value="ACTIVIDAD" /></th>  
+
+                                                                                                                    <th  align="center" style="text-align: center;" > <s:property value="HORA"></s:property> Hrs.  </th>  
+                                                                                                                    <th align="center" style="text-align: center;" > <s:property value="LUGAR"></s:property> </th>  
+                                                                                                                    <th align="center"style="text-align: center;"  > <s:property value="ID_ESCALA"></s:property>% </th>                                                                                                          
+                                                                                                                    <th align="center"style="text-align: center;"  > <s:property value="EVIDENCIAS"></s:property> </th>                                                                                                          
+
+                                                                                                                        <th> <s:property value="DES_ACTIVIDAD"></s:property> </th>                                                                                                          
+                                                                                                                    <th> <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaPlanAluMateriaComAct[%{#stat.index}].ID_RUBRICA"   id="ID_RUBRICA" list="ListaRubrica"  listKey="ID_RUBRICA"  listValue="DESC_RUBRICA" cssClass="selectpicker col-lg-12" headerValue="Elegir de Desempeño" headerKey="" >  </s:select> </th>
+
+
+                                                                                                                    </tr>
 
 
 
-                                                                                                    </tbody>
-                                                                                                </table>
-                                                                                             
-                                                                                             
-                                                                                                                
-                                                                                            <div class="form-group col-md-12 text-center" >
-                                                                                                <a href="Javascript:consulta('guardaEvalEst')"  class="btn btn-round btn-primary">Guardar</a>
-                                                                                            </div>
-
-                                                                                                <s:fielderror  fieldName="ERROREVA" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
 
 
-                                                                                 
 
-                                                                                                
-                                                                                                  
-                                                                                                
-                                                                                                  
-                                                                                                
-                                                                                                
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].NOMBRE_MATERIA" id="NOMBRE_MATERIA"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].NUMERO_PERIODO" id="NUMERO_PERIODO"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].COMPETENCIA" id="COMPETENCIA"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ACTIVIDAD" id="ACTIVIDAD"></s:hidden>
+
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_MATERIA" id="ID_MATERIA"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_COMPETENCIA" id="ID_COMPETENCIA"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_ACTIVIDAD" id="ID_ACTIVIDAD"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].NO_PASSA" id="NO_PASA"></s:hidden>
+
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].HORA" id="HORA"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].LUGAR" id="LUGAR"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].DES_ACTIVIDAD" id="DES_ACTIVIDAD"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].PLAN_ROTACION" id="PLAN_ROTACION"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_ESCALA" id="ID_ESCALA"></s:hidden>
+
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_HORA" id="ID_HORA"></s:hidden>
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_LUGAR" id="ID_LUGAR"></s:hidden>
+
+                                                                                                                <s:hidden  name = "ListaPlanAluMateriaComAct[%{#stat.index}].ID_ACT_ALU" id="ID_ACT_ALU"></s:hidden>
+
+
+
+                                                                                                            </s:iterator>  
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                        </tbody>
+                                                                                                    </table>
+
+
+
+                                                                                                    <div class="form-group col-md-12 text-center" >
+                                                                                                        <a href="Javascript:consulta('guardaEvalEst')"  class="btn btn-round btn-primary">Guardar</a>
+                                                                                                    </div>
+
+                                                                                                    <s:fielderror  fieldName="ERROREVA" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
+
+
+
+
+
+
+
+
+
+
+                                                                                                    </div>
+
+
+
+
+
+
+
                                                                                                 </div>
 
 
 
 
 
-
-
                                                                                             </div>
-                                                                                               
+
+                                                                                    </s:if> 
 
 
+                                                                                    <s:if test="ListaPlanAluMateriaComAct.size()>0 && programa.MARCO_TEORICO.length()==0">  
 
-
+                                                                                        <div class="alert alert-danger" > No hay reporte de estudiante registrado para esta competencia
                                                                                         </div>
 
-                                                                                </s:if> 
-                                                                                    
-                                                                                    
-                                                                                    <s:if test="ListaPlanAluMateriaComAct.size()>0 && programa.MARCO_TEORICO.length()==0">  
-                                                                                    
-                                                                                        <div class="alert alert-danger" > No hay reporte de estudiante registrado para esta competencia
-                                                                                                                                            </div>
-                                                                                    
-                                                                                    
-                                                                                    
+
+
                                                                                     </s:if>
 
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                          
+
+
+
+
 
 
                                                                                 </div>
@@ -1113,96 +1110,102 @@ function elige(accion, id_hist_alum) {
 
                                                                             </div>
 
-                                                                    </s:if>                
-                                                                              
-                                                                        
-                                                         <s:fielderror fieldName="GUARDADOEXT" cssClass="col-lg-12 alert alert-success"/>
-                                                  <s:fielderror  fieldName="EVALGUARDADA" cssClass="col-lg-12 alert alert-success"></s:fielderror>
+                                                                        </s:if>                
 
 
-                                                                        
+                                                                        <s:fielderror fieldName="GUARDADOEXT" cssClass="col-lg-12 alert alert-success"/>
+                                                                        <s:fielderror  fieldName="EVALGUARDADA" cssClass="col-lg-12 alert alert-success"></s:fielderror>
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  
+                                                            </div>                                  
+
+
+
+
+
+
+
+
+
+
+
                                                         </div>
                                                     </div>
-                                                </div>  
-                                             </div>                                  
-                                                                              
-                                                                              
-                                                                              
-                                                                              
-                                                                              
-                                                                              
-                                                                              
-                                                                              
-                                                                              
-                                                                              
-                                                                              
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <footer class="footer">
-                                    <div class="container-fluid">
-                                        <nav class="float-left">
-                                            <ul>
+                                            <footer class="footer">
+                                                <div class="container-fluid">
+                                                    <nav class="float-left">
+                                                        <ul>
 
-                                                <!-- <li>
-                                                 <a href="https://www.creative-tim.com/license">
-                                                    Licenses
-                                                </a>
-                                                </li> -->
-                                            </ul>
-                                        </nav>
-                                        <div class="copyright float-center">
-                                            <i class="material-icons"></i> Gobierno del Estado de México.
+                                                            <!-- <li>
+                                                             <a href="https://www.creative-tim.com/license">
+                                                                Licenses
+                                                            </a>
+                                                            </li> -->
+                                                        </ul>
+                                                    </nav>
+                                                    <div class="copyright float-center">
+                                                        <i class="material-icons"></i> Gobierno del Estado de México.
 
 
-                                            <s:textfield name="pf.ID_ESCUELA" id="pf.ID_ESCUELA" cssStyle="display:none;" ></s:textfield>
-                                            <s:textfield name="pf.ID_CICLO" id="al.ID_CICLO" cssStyle="display:none;" ></s:textfield>
-                                             <s:textfield name="al.ID_CICLO" id="al.ID_CICLO" cssStyle="display:none;" ></s:textfield>
-                                              <s:textfield name="programa.AUX_IDCOMPETENCIA" id="AUX_IDCOMPETENCIA" cssStyle="display:none;"  ></s:textfield>
-                                             
-                                             
-                                             
+                                                    <s:textfield name="pf.ID_ESCUELA" id="pf.ID_ESCUELA" cssStyle="display:none;" ></s:textfield>
+                                                    <s:textfield name="pf.ID_CICLO" id="al.ID_CICLO" cssStyle="display:none;" ></s:textfield>
+                                                    <s:textfield name="al.ID_CICLO" id="al.ID_CICLO" cssStyle="display:none;" ></s:textfield>
+                                                    <s:textfield name="programa.AUX_IDCOMPETENCIA" id="AUX_IDCOMPETENCIA" cssStyle="display:none;"  ></s:textfield>
+                                                    <s:hidden name="banRegAluNiveS" value="%{banRegAluNiveS}"></s:hidden>
+                                                    <s:hidden name="programa.ID_NIVEL" value="%{programa.ID_NIVEL}"></s:hidden>
+                                                    <s:textfield name="banListaAlu" value="%{banListaAlu}" cssStyle="display:none;"></s:textfield>
+                                                    <s:hidden name="banGuarda" value="%{banGuarda}" cssStyle="display:none;"></s:hidden>
+                                                    <s:hidden name="banGuardaEvalMUE" value="%{banGuardaEvalMUE}" cssStyle="display:none;"></s:hidden>
+                                                    <s:hidden name="banActualiza" value="%{banActualiza}" cssStyle="display:none;" ></s:hidden>
+                                                    <s:hidden name="banVisualiza" value="%{banVisualiza}" ></s:hidden>
+                                                    <s:textfield name="banCampAlumno" value="%{banCampAlumno}" cssStyle="display:none;" ></s:textfield>
+                                                    <s:textfield name="alumno.AUXIDHISTALUM" id="AUXIDHISTALUM" cssStyle="display:none;"></s:textfield>
+                                                    <s:textfield name="programa.FECHA_INICIOPF" id="FECHA_INICIOPF"   ></s:textfield>
+                                                    <s:textfield name="programa.FECHA_TERMINOPF" id="FECHA_TERMINOPF"   ></s:textfield>
+                                                    <s:textfield name="programa.AUX_INICIOSEMANA" id="AUX_INICIOSEMANA"  ></s:textfield>
+                                                    <s:textfield name="programa.AUX_FINSEMANA" id="AUX_FINSEMANA"  ></s:textfield>
+                                                    <s:hidden name="banRegAluNiveS" value="%{banRegAluNiveS}"></s:hidden>
+                                                    <s:hidden name="banRegAluNiveMS" value="%{banRegAluNiveMS}"></s:hidden>
+                                                    <s:iterator value="ListaFechas" id="ListaFechas" status="stat">
+                                                        <s:hidden  name = "ListaFechas[%{#stat.index}].ID_FECHA" id="ID_FECHA"></s:hidden>
+                                                        <s:hidden  name = "ListaFechas[%{#stat.index}].FECHA" id="FECHA"></s:hidden>
+                                                    </s:iterator>  
+                                                    <s:iterator value="ListaRegistroEstMs" id="ListaRegistroEstMs" status="stat">
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].ID_FECHA" id="ID_FECHA"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].NOMBRE_ACTIVIDAD" id="NOMBRE_ACTIVIDAD"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].OBJETIVO" id="OBJETIVO"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].MARCO_TEORICO" id="MARCO_TEORICO"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].DESARROLLO" id="DESARROLLO"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].EQUIPO" id="EQUIPO"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].MEDIDAS_SEGURIDAD" id="MEDIDAS_SEGURIDAD"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].NORMAS_CALIDAD" id="NORMAS_CALIDAD"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].AUTOESTUDIO" id="AUTOESTUDIO"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].OBSERVACIONES" id="OBSERVACIONES"></s:hidden>
+                                                        <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].RUTA_EVIDENCIA" id="RUTA_EVIDENCIA"></s:hidden>
+                                                    </s:iterator>  
+                                                    <s:iterator value="ListaRubrica" id="ListaRubrica" status="stat">         
+                                                        <s:hidden  name = "ListaRubrica[%{#stat.index}].ID_RUBRICA" id="ID_RUBRICA"></s:hidden>
+                                                        <s:hidden  name = "ListaRubrica[%{#stat.index}].DESC_RUBRICA" id="DESC_RUBRICA"></s:hidden>
+                                                    </s:iterator>
 
-                                            <s:hidden name="banRegAluNiveS" value="%{banRegAluNiveS}"></s:hidden>
-                                             <s:hidden name="programa.ID_NIVEL" value="%{programa.ID_NIVEL}"></s:hidden>
-                                             
-                                             
-                                              <s:textfield name="banListaAlu" value="%{banListaAlu}" cssStyle="display:none;"></s:textfield>
-                                                <s:hidden name="banGuarda" value="%{banGuarda}" cssStyle="display:none;"></s:hidden>
-                                                  <s:hidden name="banActualiza" value="%{banActualiza}" cssStyle="display:none;" ></s:hidden>
-                                                <s:hidden name="banVisualiza" value="%{banVisualiza}" ></s:hidden>
-                                              
-                                              <s:textfield name="banCampAlumno" value="%{banCampAlumno}" cssStyle="display:none;" ></s:textfield>
-                                              
-                                              <s:textfield name="alumno.AUXIDHISTALUM" id="AUXIDHISTALUM" cssStyle="display:none;"></s:textfield>
-                                              
-                                              <s:textfield name="programa.FECHA_INICIOPF" id="FECHA_INICIOPF"   ></s:textfield>
-                                                 <s:textfield name="programa.FECHA_TERMINOPF" id="FECHA_TERMINOPF"   ></s:textfield>
-                                             
-                                               <s:textfield name="programa.AUX_INICIOSEMANA" id="AUX_INICIOSEMANA"  ></s:textfield>
-                                             <s:textfield name="programa.AUX_FINSEMANA" id="AUX_FINSEMANA"  ></s:textfield>
-                                             
-                                             
-                                             
-
-                                             <s:iterator value="ListaFechas" id="ListaFechas" status="stat">
-
-                                                 <s:hidden  name = "ListaFechas[%{#stat.index}].ID_FECHA" id="ID_FECHA"></s:hidden>
-                                                 <s:hidden  name = "ListaFechas[%{#stat.index}].FECHA" id="FECHA"></s:hidden>
 
 
-                                             </s:iterator>   
-                                             
-                                               <s:hidden name="banRegAluNiveS" value="%{banRegAluNiveS}"></s:hidden>
-                                             <s:hidden name="banRegAluNiveMS" value="%{banRegAluNiveMS}"></s:hidden>
 
-                                               
 
+
+
+
+
+                                                </div>
                                             </div>
-                                        </div>
-                                    </footer>
-                                </div>        
+                                        </footer>
+                                    </div>        
                                 </div>
 
 
@@ -1433,13 +1436,13 @@ function elige(accion, id_hist_alum) {
 
                                     });
                                 </script>
-                                
-                              
 
 
 
 
-                            </body>
+
+
+                        </body>
 
 
 

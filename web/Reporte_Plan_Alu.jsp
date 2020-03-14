@@ -661,7 +661,7 @@ function elige(accion, id_hist_alum) {
                                                                                 <div class="col-lg-12" style="margin-top: 20px; margin-bottom: 20px;">
                                                                                     <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Semanas del plan de Formación </label>
                                                                                     <s:set var="count" value="1"/>
-                                                                                    <s:select  data-style="select-with-transition"   name="programa.ID_SEMANA" id="ID_SEMANA" list="ListaSemanas"  listKey="ID_SEMANA"  listValue="'SEMANA DEL '+INICIO_SEMANA+' AL '+FIN_SEMANA+' : '+ESTATUS_REG" headerKey="" headerValue="Seleccionar Semana"  cssClass="selectpicker col-lg-12" onchange="Javascript:elige2('eligeSemana')"  />
+                                                                                    <s:select  data-style="select-with-transition"   name="programa.ID_SEMANA" id="ID_SEMANA" list="ListaSemanas"  listKey="ID_SEMANA"  listValue="'SEMANA DEL '+INICIO_SEMANA+' AL '+FIN_SEMANA+' : | ALUMNO: '+ESTATUS_REG+' |  EVALUACION MUE: '+ESTATUS_EVAL_MUE+' |  EVALUACION MA: '+ESTATUS_EVAL_MUE+' | '" headerKey="" headerValue="Seleccionar Semana"  cssClass="selectpicker col-lg-12" onchange="Javascript:elige2('eligeSemana')"  />
 
 
                                                                                     <s:iterator value="ListaSemanas" id="ListaSemanas" status="stat">  
@@ -669,7 +669,9 @@ function elige(accion, id_hist_alum) {
                                                                                         <s:hidden  name = "ListaSemanas[%{#stat.index}].INICIO_SEMANA" id="INICIO_SEMANA"></s:hidden>
                                                                                         <s:hidden  name = "ListaSemanas[%{#stat.index}].FIN_SEMANA" id="FIN_SEMANA"></s:hidden>
                                                                                         <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_REG" id="ESTATUS_REG"></s:hidden>
-
+                                                                                         <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_REG" id="ESTATUS_REG"></s:hidden>
+                                                                                          <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_EVAL_MUE" id="ESTATUS_EVAL_MUE"></s:hidden>
+                                                                                          <s:hidden name = "ListaSemanas[%{#stat.index}].ESTATUS_EVAL_MA" id="ESTATUS_EVAL_MA"></s:hidden>
                                                                                     </s:iterator>
 
 

@@ -260,6 +260,23 @@
             <result name="input">Evalua_Plan_Alu.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
         </action>  
+         <action name="eligeSemanaMa" class="action.EstudianteDual_Action" method="eligeSemanaMa">
+            <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="input">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
+        
+        
+         <action name="guardaEvalMA" class="action.EstudianteDual_Action" method="guardaEvalMA">
+            <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="input">Evalua_Plan_Alu_Ma.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action> 
+        
+        
+        
         
         
          <action name="eligePlanAsigMateriaCom" class="action.EstudianteDual_Action" method="eligePlanAsigMateriaCom">
@@ -289,7 +306,12 @@
             <result name="input">Evalua_Plan_Alu.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
         </action>  
-        
+         <action name="guardaEvalMUE" class="action.EstudianteDual_Action" method="guardaEvalMUE">
+            <result name="SUCCESS">Evalua_Plan_Alu.jsp</result>			              
+            <result name="ERROR">Evalua_Plan_Alu.jsp</result>
+            <result name="input">Evalua_Plan_Alu.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>  
            <action name="EvalEstMA" class="action.EstudianteDual_Action" method="EvalEstMA">
             <result name="SUCCESS">Evalua_Plan_Alu_Ma.jsp</result>			              
             <result name="ERROR">Evalua_Plan_Alu_Ma.jsp</result>

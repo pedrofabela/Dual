@@ -145,6 +145,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
      boolean banActualiza=false;
      boolean banGuarda=false;
       boolean banVisualiza=false;
+      boolean banGuardaEvalMUE=false;
      
      
     private boolean banT = false;
@@ -2804,9 +2805,26 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
              banGuarda=false;
              banVisualiza=false;
              
+             
+             
+                String nivel = "";
+            nivel = con2.nivel(escuela, usuariocons);
+            
+            if(nivel.equals("1")){
+               ListaPlanFormAlu=con2.evaluaActEstMSMA(alumno, escuela, usuariocons, programa);
+              
+                
+                
+            }
+            if(nivel.equals("2")){
+                
+             
+                 ListaPlanFormAlu=con2.evaluaActEst2MA(alumno, escuela, usuariocons, programa);
+            }
+             
           
             
-            ListaPlanFormAlu=con2.evaluaActEst2(alumno, escuela, usuariocons, programa);
+           
 
             return "SUCCESS";
 
@@ -2985,6 +3003,10 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
         }
 
     }
+     
+     
+     
+     
       public String eligePlanFormMA() {
 
         //validando session***********************************************************************
@@ -3022,6 +3044,30 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
             
             if(nivel.equals("1")){
                  banRegAluNiveMS=true;
+                 
+                   Iterator LPFA= ListaPlanFormAlu.iterator();
+               programaEsBean obj;
+                while (LPFA.hasNext()) {
+                    obj = (programaEsBean) LPFA.next();
+                    if(obj.getID_HIST_ALUM().equals(alumno.getAUXIDHISTALUM())){
+                        programa.setFECHA_INICIOPF(obj.getFECHA_INICIOPF());
+                        programa.setFECHA_TERMINOPF(obj.getFECHA_TERMINOPF());
+                    }
+                    
+                    
+                }
+                
+                   ListaSemanas=con2.listaSemanas(alumno, escuela, usuariocons, programa);
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
                 
             }
             if(nivel.equals("2")){
@@ -3031,6 +3077,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                 
             }
             
+         
          
           
             
@@ -3259,6 +3306,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                     banGuarda=false;
                     banActualiza=false;
                     banVisualiza=false;
+                    banGuardaEvalMUE=false;
                     
                     
                     
@@ -3271,11 +3319,12 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                     
                 }
                  if(programa.getESTATUS_REG().equals("REGISTRADO")){
-                     
-                      banGuarda=false;
-                    banActualiza=false;
-                        banVisualiza=true;
-                        
+                 
+                     banGuarda = false;
+                     banActualiza = false;
+                     banVisualiza = true;
+                     banGuardaEvalMUE = true;
+
                         
                           ListaRubrica=con2.rubrica(alumno, escuela, usuariocons, programa);    
                          ListaRegistroEstMs=con2.listaReporteMsEst(alumno, escuela, usuariocons, programa);  
@@ -3292,6 +3341,129 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                         obj3.setAUTOESTUDIO(obj3.getAUTO_ESTUDIO());
                         obj3.setOBSERVACIONES(obj3.getOBSERVACION());
                         obj3.setRUTA_EVIDENCIA(rutaArchivosRemota+obj3.getRUTA_EVIDENCIA());
+                        
+                        
+                    
+                        
+                        
+                        
+                         
+                     }
+                        
+                        
+                        
+                        
+                 }
+                
+                
+                
+               
+                
+                 
+                
+                
+           
+       
+           
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+     
+     public String eligeSemanaMa() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            AlumnoDAOImpl con = new AlumnoDAOImpl();
+             PlanFDAOImpl con2 = new PlanFDAOImpl();
+           
+             
+               
+                ListaRegistroEstMs= con2.listaRegistroEstMs(alumno, escuela, usuariocons, programa);
+                 ListaProgramasRegistro = con2.programasPlanForm(alumno, escuela, usuariocons, programa);
+             
+                     
+                     
+             Iterator ES= ListaSemanas.iterator();
+               programaEsBean obj;
+                while (ES.hasNext()) {
+                    obj = (programaEsBean) ES.next();
+                    if(obj.getID_SEMANA().equals(programa.getID_SEMANA())){
+                        programa.setAUX_INICIOSEMANA(obj.getINICIO_SEMANA());
+                        programa.setAUX_FINSEMANA(obj.getFIN_SEMANA());
+                        programa.setESTATUS_REG(obj.getESTATUS_REG());
+                        programa.setESTATUS_EVAL_MUE(obj.getESTATUS_EVAL_MUE());
+                        programa.setESTATUS_EVAL_MA(obj.getESTATUS_EVAL_MA());
+                       
+                    }
+                    
+                    
+                    
+                }
+                 ListaFechas=con2.fechas(alumno, escuela, usuariocons, programa);
+                System.out.println("Estatus Reg"+programa.getESTATUS_REG());
+             
+                 if(programa.getESTATUS_EVAL_MUE().equals("NO REGISTRADO")){
+                    
+                    banGuarda=false;
+                    banActualiza=false;
+                    banVisualiza=false;
+                    banGuardaEvalMUE=false;
+                    
+                    
+                    
+                      addFieldError("NOEVALMUE", "***Reporte no evaluado por el Mentor de la Unidad Económica***");
+                    
+                 
+                    
+                    
+                    
+                    
+                }
+                 if(programa.getESTATUS_EVAL_MUE().equals("REGISTRADO")){
+                 
+                     banGuarda = false;
+                     banActualiza = false;
+                     banVisualiza = true;
+                     banGuardaEvalMUE = true;
+
+                        
+                          ListaRubrica=con2.rubrica(alumno, escuela, usuariocons, programa);    
+                         ListaRegistroEstMs=con2.listaReporteMsEst(alumno, escuela, usuariocons, programa);  
+                         
+                         Iterator LREMS=ListaRegistroEstMs.iterator();
+                         programaEsBean obj3;
+                         
+                         while (LREMS.hasNext()) {
+                        obj3= (programaEsBean) LREMS.next();
+                        
+                        
+                        
+                        obj3.setID_FECHA(obj3.getID_DIA());
+                        obj3.setAUTOESTUDIO(obj3.getAUTO_ESTUDIO());
+                        obj3.setOBSERVACIONES(obj3.getOBSERVACION());
+                        obj3.setRUTA_EVIDENCIA(rutaArchivosRemota+obj3.getRUTA_EVIDENCIA());
+                        obj3.setID_RUBRICA(obj3.getEVAL_MA());
                         
                         
                     
@@ -3781,8 +3953,328 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
         }
 
     }
+        
+        
+        
+        
+    public String guardaEvalMUE() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            AlumnoDAOImpl con = new AlumnoDAOImpl();
+             PlanFDAOImpl con2 = new PlanFDAOImpl();
+             
+             boolean banValidaArch=false;
+             boolean banValidaMarco=false;
+             boolean banValidaDesc=false;
+             int errores=0;
+             String mensajeError="";
+             
+           
+             Constantes.enviaMensajeConsola("entre a guardar");
+         
+        
+         Iterator LREM2 =ListaRegistroEstMs.iterator();
+              programaEsBean obj2;
+              
+              
+               Constantes.enviaMensajeConsola("Registros"+ListaRegistroEstMs.size());
+              
+              
+              
+                     while (LREM2.hasNext()) {
+                        obj2 = (programaEsBean) LREM2.next();
+                         Constantes.enviaMensajeConsola("Entre al while");
+                        
+                     if(obj2.getID_RUBRICA().length()>0){
+                         
+                          Constantes.enviaMensajeConsola("Correcto");
+                         
+                     }
+                     else
+                     {
+                         
+                          Constantes.enviaMensajeConsola("Incorrecto");
+                         errores+=1;
+                         mensajeError="Registrar evaluación"+'\n';
+                           obj2.setERROR_PLANMS(mensajeError);
+                         
+                     }
+                        
+                        
+                        
+                        
+                        
+                       
+                         
+                     }
+                     
+                     
+                     
+                     
+                        Constantes.enviaMensajeConsola("Errores:"+ errores);
+                     
+                     
+               if (errores == 0) {
+                   
+                        Constantes.enviaMensajeConsola("ENTRE A GUARDAR LA INFORMACIÓN ");
+                     
+         Iterator LREM3 =ListaRegistroEstMs.iterator();
+              programaEsBean obj3;
+              
+               String fechaHoy=fecha();
+
+                //abriendo la conexion.....
+                conecta = con.crearConexion();
+                //statement
+                objConexion = con.crearStatement(conecta);
+             
+
+                while (LREM3.hasNext()) {
+                    obj3 = (programaEsBean) LREM3.next();
+                    
+                    programa.setID_DIA(obj3.getID_FECHA());
+                    programa.setID_RUBRICA(obj3.getID_RUBRICA());
+                   
+                    
+
+                   con2.guardaEvalMUE(conecta, objPreConexion, programa, alumno, fechaHoy);
+
+
+                }
+
+               
+                cierraConexiones();
+                
+                  EvaluaActEst();
+                  
+                  addFieldError("GUARDADOEXT", "Se guardo la evaluación");  
+                  
+                 programa.setFECHA_INICIOPF("");
+                          programa.setFECHA_TERMINOPF("");
+                          programa.setAUX_INICIOSEMANA("");
+                                  programa.setAUX_FINSEMANA("");
+
+            }
+               
+               else{
+                   
+                   
+                   
+                   
+                   
+                   
+               }
+              
+
+                  
+                  
+                
+                  
+               
+                  
+                
+       
+           
+         
+           
+           
+           
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
     
-    public String guardaReporteEst() {
+     public String guardaEvalMA() {
+
+        //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+
+        try {
+
+            AlumnoDAOImpl con = new AlumnoDAOImpl();
+             PlanFDAOImpl con2 = new PlanFDAOImpl();
+             
+             boolean banValidaArch=false;
+             boolean banValidaMarco=false;
+             boolean banValidaDesc=false;
+             int errores=0;
+             String mensajeError="";
+             
+           
+             Constantes.enviaMensajeConsola("entre a guardar");
+         
+        
+         Iterator LREM2 =ListaRegistroEstMs.iterator();
+              programaEsBean obj2;
+              
+              
+               Constantes.enviaMensajeConsola("Registros"+ListaRegistroEstMs.size());
+              
+              
+              
+                     while (LREM2.hasNext()) {
+                        obj2 = (programaEsBean) LREM2.next();
+                         Constantes.enviaMensajeConsola("Entre al while");
+                        
+                     if(obj2.getID_RUBRICA().length()>0){
+                         
+                          Constantes.enviaMensajeConsola("Correcto");
+                           Constantes.enviaMensajeConsola("el valor del del reporte es "+ obj2.getID_ACT_EVALUA());
+                         
+                     }
+                     else
+                     {
+                         
+                          Constantes.enviaMensajeConsola("Incorrecto");
+                         errores+=1;
+                         mensajeError="Registrar evaluación"+'\n';
+                           obj2.setERROR_PLANMS(mensajeError);
+                         
+                     }
+                        
+                        
+                        
+                        
+                        
+                       
+                         
+                     }
+                     
+                     
+                     
+                     
+                        Constantes.enviaMensajeConsola("Errores:"+ errores);
+                     
+                     
+               if (errores == 0) {
+                   
+                        Constantes.enviaMensajeConsola("ENTRE A GUARDAR LA INFORMACIÓN ");
+                     
+         Iterator LREM3 =ListaRegistroEstMs.iterator();
+              programaEsBean obj3;
+              int j=0;
+               
+               String fechaHoy=fecha();
+
+                //abriendo la conexion.....
+                conecta = con.crearConexion();
+                //statement
+                objConexion = con.crearStatement(conecta);
+             
+                
+                
+                
+
+                while (LREM3.hasNext()) {
+                    
+                   
+                    
+                    obj3 = (programaEsBean) LREM3.next();
+                    
+                    programa.setID_DIA(obj3.getID_FECHA());
+                    programa.setID_RUBRICA(obj3.getID_RUBRICA());
+                    
+                   Constantes.enviaMensajeConsola("id act_"+obj3.getID_ACT_EVALUA());
+                   
+                    
+
+                   con2.guardaEvalMA(conecta, objPreConexion, programa, alumno, fechaHoy);
+
+
+                }
+
+               
+                cierraConexiones();
+                
+                  EvalEstMA();
+                  
+                  addFieldError("GUARDADOEXT", "Se guardo la evaluación");  
+                  
+                 programa.setFECHA_INICIOPF("");
+                          programa.setFECHA_TERMINOPF("");
+                          programa.setAUX_INICIOSEMANA("");
+                                  programa.setAUX_FINSEMANA("");
+
+            }
+               
+               else{
+                   
+                   
+                   
+                   
+                   
+                   
+               }
+              
+
+                  
+                  
+                
+                  
+               
+                  
+                
+       
+           
+         
+           
+           
+           
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    
+    
+     public String guardaReporteEst() {
 
         //validando session***********************************************************************
         if (session.get("cveUsuario") != null) {
@@ -4229,6 +4721,9 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
         }
 
     }
+    
+    
+    
       public String guardaEvalEst() {
 
         //validando session***********************************************************************
@@ -4332,6 +4827,13 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
         }
 
     }
+      
+      
+    
+      
+      
+      
+      
        public String guardaEvalEst2() {
 
         //validando session***********************************************************************
@@ -5275,6 +5777,14 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
 
     public void setListaRegistroEstMs(List<programaEsBean> ListaRegistroEstMs) {
         this.ListaRegistroEstMs = ListaRegistroEstMs;
+    }
+
+    public boolean isBanGuardaEvalMUE() {
+        return banGuardaEvalMUE;
+    }
+
+    public void setBanGuardaEvalMUE(boolean banGuardaEvalMUE) {
+        this.banGuardaEvalMUE = banGuardaEvalMUE;
     }
     
     

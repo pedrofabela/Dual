@@ -47,7 +47,17 @@ public class pfSemanasMapper implements Mapper{
             dat.setESTATUS_REG(rs.getString("ESTATUS_REG"));
         }    
           
-          
+            if  (rs.getString("ESTATUS_EVAL_MUE") != null) {
+            dat.setESTATUS_EVAL_MUE(rs.getString("ESTATUS_EVAL_MUE").trim());
+        } else {
+            dat.setESTATUS_EVAL_MUE(rs.getString("ESTATUS_EVAL_MUE"));
+        }    
+            
+              if  (rs.getString("ESTATUS_EVAL_MA") != null) {
+            dat.setESTATUS_EVAL_MA(rs.getString("ESTATUS_EVAL_MA").trim());
+        } else {
+            dat.setESTATUS_EVAL_MA(rs.getString("ESTATUS_EVAL_MA"));
+        }    
           
         return dat;
     }
