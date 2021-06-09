@@ -702,7 +702,7 @@ function elige(accion, id_hist_alum, id_plan_form) {
                                                                                     <div class="col-lg-12" style="margin-top: 20px; margin-bottom: 20px;">
                                                                                         <label for="exampleEmail" class="bmd-label-floating" style="color: purple;">Semanas del plan de Formación </label>
                                                                                         <s:set var="count" value="1"/>
-                                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_SEMANA" id="ID_SEMANA" list="ListaSemanas"  listKey="ID_SEMANA"  listValue="'SEMANA DEL '+INICIO_SEMANA+' AL '+FIN_SEMANA+' : | ALUMNO: '+ESTATUS_REG+' |  EVALUACION MUE: '+ESTATUS_EVAL_MUE+' |  EVALUACION MA: '+ESTATUS_EVAL_MUE+' | '" headerKey="" headerValue="Seleccionar Semana"  cssClass="selectpicker col-lg-12" onchange="Javascript:elige2('eligeSemanaMa')"  />
+                                                                                        <s:select  data-style="select-with-transition"   name="programa.ID_SEMANA" id="ID_SEMANA" list="ListaSemanas"  listKey="ID_SEMANA"  listValue="'SEMANA DEL '+INICIO_SEMANA+' AL '+FIN_SEMANA+' : | ALUMNO: '+ESTATUS_REG+' |  EVALUACION MUE: '+ESTATUS_EVAL_MUE+' |  EVALUACION MA: '+ESTATUS_EVAL_MA+' | '" headerKey="" headerValue="Seleccionar Semana"  cssClass="selectpicker col-lg-12" onchange="Javascript:elige2('eligeSemanaMa')"  />
 
 
                                                                                         <s:iterator value="ListaSemanas" id="ListaSemanas" status="stat">  
@@ -816,32 +816,14 @@ function elige(accion, id_hist_alum, id_plan_form) {
                                                                                                         
                                                                                                           <div class="col-md-12" style="margin-top: 15px;" >
                                                                                                         <label for="exampleEmail" class="bmd-label-floating" >Actividad </label>
-                                                                                                          <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaRegistroEstMs[%{#stat.index}].ID_ACT_EVALUA"   id="ID_ACT_EVALUA" list="ListaProgramasRegistro"  listKey="ID_ACT_EVALUA"  listValue="' | PERIODO:  '+NUMERO_PERIODO+ ' | ASIGNATURA:'+NOMBRE_MATERIA+' | PERIODO:COMPETENCIA: '+COMPETENCIA+' | ACTIVIDAD: '+ACTIVIDAD" cssClass="selectpicker col-lg-12" headerValue="Elegir de Desempeño" headerKey="" >  </s:select> 
+                                                                                                          <s:select data-style="select-with-transition" cssStyle="width:40px;" name="ListaRegistroEstMs[%{#stat.index}].ID_ACT_EVALUA"   id="ID_ACT_EVALUA" list="ListaProgramasRegistro"  listKey="ID_ACT_EVALUA"  listValue="' | PERIODO:  '+NUMERO_PERIODO+ ' | ASIGNATURA:'+NOMBRE_MATERIA+' | COMPETENCIA: '+COMPETENCIA+' | ACTIVIDAD: '+ACTIVIDAD" cssClass="selectpicker col-lg-12" headerValue="Elegir de Desempeño" headerKey="" >  </s:select> 
                                                                                                         </div>
                                                                                                         
                                                                                                         
                                                                                                         
 
                                                                                                         
-                                                                                                        <s:iterator value="ListaProgramasRegistro" id="ListaProgramasRegistro" status="stat">                                                                                                                                      
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NOMBRE_MATERIA" id="NOMBRE_MATERIA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NUMERO_PERIODO" id="NUMERO_PERIODO"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].COMPETENCIA" id="COMPETENCIA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ACTIVIDAD" id="ACTIVIDAD"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_MATERIA" id="ID_MATERIA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_COMPETENCIA" id="ID_COMPETENCIA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_ACTIVIDAD" id="ID_ACTIVIDAD"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NO_PASSA" id="NO_PASA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].HORA" id="HORA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].LUGAR" id="LUGAR"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].DES_ACTIVIDAD" id="DES_ACTIVIDAD"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].PLAN_ROTACION" id="PLAN_ROTACION"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_ESCALA" id="ID_ESCALA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_HORA" id="ID_HORA"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_LUGAR" id="ID_LUGAR"></s:hidden>
-                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_ACT_EVALUA" id="ID_ACT_EVALUA"></s:hidden>
-                                                                                                        </s:iterator>  
-
+                                                                                                    
 
 
 
@@ -891,7 +873,24 @@ function elige(accion, id_hist_alum, id_plan_form) {
 
 
 
-
+                                                                                                        <s:iterator value="ListaProgramasRegistro" id="ListaProgramasRegistro" status="stat">                                                                                                                                      
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NOMBRE_MATERIA" id="NOMBRE_MATERIA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NUMERO_PERIODO" id="NUMERO_PERIODO"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].COMPETENCIA" id="COMPETENCIA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ACTIVIDAD" id="ACTIVIDAD"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_MATERIA" id="ID_MATERIA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_COMPETENCIA" id="ID_COMPETENCIA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_ACTIVIDAD" id="ID_ACTIVIDAD"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].NO_PASSA" id="NO_PASA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].HORA" id="HORA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].LUGAR" id="LUGAR"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].DES_ACTIVIDAD" id="DES_ACTIVIDAD"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].PLAN_ROTACION" id="PLAN_ROTACION"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_ESCALA" id="ID_ESCALA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_HORA" id="ID_HORA"></s:hidden>
+                                                                                                            <s:hidden  name = "ListaProgramasRegistro[%{#stat.index}].ID_LUGAR" id="ID_LUGAR"></s:hidden>
+                                                                                                            
+                                                                                                        </s:iterator>  
 
 
 
@@ -1241,6 +1240,8 @@ function elige(accion, id_hist_alum, id_plan_form) {
                                                         <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].AUTOESTUDIO" id="AUTOESTUDIO"></s:hidden>
                                                         <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].OBSERVACIONES" id="OBSERVACIONES"></s:hidden>
                                                         <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].RUTA_EVIDENCIA" id="RUTA_EVIDENCIA"></s:hidden>
+                                                         <s:hidden  name = "ListaRegistroEstMs[%{#stat.index}].EVAL_MUE" id="EVAL_MUE"></s:hidden>
+                                                  
                                                     </s:iterator>  
                                                     <s:iterator value="ListaRubrica" id="ListaRubrica" status="stat">         
                                                         <s:hidden  name = "ListaRubrica[%{#stat.index}].ID_RUBRICA" id="ID_RUBRICA"></s:hidden>

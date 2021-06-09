@@ -159,6 +159,20 @@ public class programaEsBean {
     private String FECHA_EVAL_MUE;
     private String ESTATUS_EVAL_MUE;
     private String ESTATUS_EVAL_MA ;
+    private String TOTAL_RESPONSABLES;
+
+    
+    
+    public String getTOTAL_RESPONSABLES() {
+        return TOTAL_RESPONSABLES;
+    }
+
+    public void setTOTAL_RESPONSABLES(String TOTAL_RESPONSABLES) {
+        this.TOTAL_RESPONSABLES = TOTAL_RESPONSABLES;
+    }
+   
+  
+   
          
     public String getESTATUS_EVAL_MUE() {
         return ESTATUS_EVAL_MUE;

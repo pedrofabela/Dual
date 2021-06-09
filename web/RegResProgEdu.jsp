@@ -602,14 +602,15 @@ function celquita() {
                                                                                     <div style="height: 500px; overflow-y: scroll;">
 
 
-
+                                                                                        <div style="float:right; margin-right:40px;"><h4>Total: <s:property value="ListaResProgPEInst.size()"></s:property></h4></div>
                                                                                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                                                                             <thead style="background: #302f2f; color:white;">
                                                                                                 <tr>
                                                                                                     <th>Curp</th>
                                                                                                     <th>Nombre</th>
                                                                                                     <th>Usuario Sistema</th>
-                                                                                                      <th>Contraseña</th>                                                                                                  
+                                                                                                      <th>Contraseña</th> 
+                                                                                                       <th>Programas Asignados</th> 
                                                                                                     <th>Activar</th>
                                                                                                       <th>Actualizar</th>
                                                                                                 </tr>
@@ -622,6 +623,7 @@ function celquita() {
                                                                                                         <td><s:property value="NOMBRE_PERSONA"/></td>
                                                                                                          <td><s:property value="USUARIO_LOGIN"/></td>
                                                                                                            <td><s:property value="PASSWORD"/></td>
+                                                                                                             <td align="center"><div style="background: purple; border-radius: 50%; padding: 3px; color:white; text-align: center; max-width: 25px;"><s:property value="TOTAL_RESPONSABLES"/></div></td>
                                                                                                        
                                                                                                         <td><s:if test="ESTATUS==1">
                                                                                                                 <a href="Javascript:actEstatus('actualizarEstatusUsuario','<s:property value="ID_USUARIO"/>','<s:property value="ESTATUS"/>')" style="text-decoration: none; "><i class="material-icons">check_box</i>
@@ -641,10 +643,11 @@ function celquita() {
                                                                                                     <s:hidden  name = "ListaResProgPEInst[%{#stat.index}].PERFIL" id="PERFIL"></s:hidden>
                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].CURP_PERSONA" id="CURP_PERSONA"></s:hidden>
                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].NOMBRE_PERSONA" id="NOMBRE_PERSONA"></s:hidden>
-                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].USUARIO_LOGIN" id="USUARIO_LOGIN"></s:hidden>
-                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].PASSWORD" id="PASSWORD"></s:hidden>
-                                                                                                      <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].ESTATUS" id="ESTATUS"></s:hidden>
-                                                                                                       <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].ID_USUARIO" id="ID_USUARIO"></s:hidden>
+                                                                                                    <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].USUARIO_LOGIN" id="USUARIO_LOGIN"></s:hidden>
+                                                                                                    <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].PASSWORD" id="PASSWORD"></s:hidden>
+                                                                                                    <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].ESTATUS" id="ESTATUS"></s:hidden>
+                                                                                                    <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].ID_USUARIO" id="ID_USUARIO"></s:hidden>
+                                                                                                    <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].TOTAL_RESPONSABLES" id="TOTAL_RESPONSABLES"></s:hidden>
                                                                                                 </s:iterator>  
 
 

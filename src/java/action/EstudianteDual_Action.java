@@ -1375,7 +1375,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
 
             }
 
-            ListaColonia = con.ConsultaColonia(al.getCP());
+           ListaColonia = con.ConsultaColonia(al.getCP());
 
             if (ListaColonia.size() > 0) {
 
@@ -1392,7 +1392,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
 
             }
 
-            ListaColoniaP = con.ConsultaColonia(al.getCP_PADRE());
+           ListaColoniaP = con.ConsultaColonia(al.getCP_PADRE());
 
             if (ListaColoniaP.size() > 0) {
 
@@ -3188,6 +3188,8 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                 System.out.println("Estatus Reg"+programa.getESTATUS_REG());
              
                  if(programa.getESTATUS_REG().equals("NO REGISTRADO")){
+                     
+                     Constantes.enviaMensajeConsola("ENTRE A VALIDAR ESTE DATO");
                     
                     banGuarda=true;
                     banActualiza=false;
@@ -3201,6 +3203,9 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                     
                 }
                  if(programa.getESTATUS_REG().equals("REGISTRADO")){
+                     
+                     
+                       Constantes.enviaMensajeConsola("ENTRE A VALIDAR ESTE DATO");
                      
                       banGuarda=false;
                     banActualiza=false;
@@ -3464,6 +3469,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                         obj3.setOBSERVACIONES(obj3.getOBSERVACION());
                         obj3.setRUTA_EVIDENCIA(rutaArchivosRemota+obj3.getRUTA_EVIDENCIA());
                         obj3.setID_RUBRICA(obj3.getEVAL_MA());
+                        obj3.setID_ACT_EVALUA(obj3.getID_ACT_EVALUA());
                         
                         
                     
@@ -4148,7 +4154,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                         obj2 = (programaEsBean) LREM2.next();
                          Constantes.enviaMensajeConsola("Entre al while");
                         
-                     if(obj2.getID_RUBRICA().length()>0){
+                     if(obj2.getID_RUBRICA().length()>0 && obj2.getID_ACT_EVALUA().length()>0){
                          
                           Constantes.enviaMensajeConsola("Correcto");
                            Constantes.enviaMensajeConsola("el valor del del reporte es "+ obj2.getID_ACT_EVALUA());
@@ -4157,10 +4163,20 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                      else
                      {
                          
+                     
+                         
                           Constantes.enviaMensajeConsola("Incorrecto");
                          errores+=1;
-                         mensajeError="Registrar evaluación"+'\n';
+                         mensajeError="Registrar evaluación de desempeño y Actividad"+'\n';
                            obj2.setERROR_PLANMS(mensajeError);
+                        
+                         
+                        
+                         
+                         
+                         
+                         
+                         
                          
                      }
                         
@@ -4205,6 +4221,7 @@ public class EstudianteDual_Action extends ActionSupport implements SessionAware
                     
                     programa.setID_DIA(obj3.getID_FECHA());
                     programa.setID_RUBRICA(obj3.getID_RUBRICA());
+                     programa.setID_ACT_EVALUA(obj3.getID_ACT_EVALUA());
                     
                    Constantes.enviaMensajeConsola("id act_"+obj3.getID_ACT_EVALUA());
                    

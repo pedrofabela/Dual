@@ -1,4 +1,4 @@
-package utilidades;
+    package utilidades;
 
 import java.io.Serializable;
 
@@ -37,12 +37,13 @@ public class Constantes implements Serializable {
       
 		public static final boolean esDesarrollo = true;		
 		public static final String rutaProyectos =   "http://aplicaciones.edugem.gob.mx/";
-		//public static final String rutareportesjasper = "/home/pedro/Documentos/REPORTESDUAL/";	
-                public static final String rutareportesjasper = "/apachetomcat/dualemsys/REPORTESDUAL/";	
+		//public static final String rutareportesjasper = "/home/pedro/Escritorio/REPORTESDUAL/";	
+                public static final String rutareportesjasper = "/apachetomcat/reportes/dualemsys/";	
 		//public static final String rutaArch = "/apachetomcat/webapps/programas/permanecerestudiando/"; 
-                public static final String rutaArch = "/home/pedro/Documentos/";  	                
+              //  public static final String rutaArch = "/home/pedro/Documentos/";  	                
                 
-           //  public static final String rutaArch = "/apachetomcat/dualemsys/docuemntos/reportesEstMS/";  				
+               // public static final String rutaArch = "/apachetomcat/documentos/dualemsys/reportesEstMS/";  				
+                 public static final String rutaArch = "/home/pedro/archivos/";  				
 
 		public static final String rutaEstilos = "http://aplicaciones.edugem.gob.mx/estilosUDAI/";		                                        
 		public static final String rutaImages = "/apachetomcat/reportes/imagenes/";

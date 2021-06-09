@@ -669,7 +669,7 @@ function elige(accion, id_hist_alum) {
                                                                                         <s:hidden  name = "ListaSemanas[%{#stat.index}].INICIO_SEMANA" id="INICIO_SEMANA"></s:hidden>
                                                                                         <s:hidden  name = "ListaSemanas[%{#stat.index}].FIN_SEMANA" id="FIN_SEMANA"></s:hidden>
                                                                                         <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_REG" id="ESTATUS_REG"></s:hidden>
-                                                                                         <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_REG" id="ESTATUS_REG"></s:hidden>
+                                                                                     
                                                                                           <s:hidden  name = "ListaSemanas[%{#stat.index}].ESTATUS_EVAL_MUE" id="ESTATUS_EVAL_MUE"></s:hidden>
                                                                                           <s:hidden name = "ListaSemanas[%{#stat.index}].ESTATUS_EVAL_MA" id="ESTATUS_EVAL_MA"></s:hidden>
                                                                                     </s:iterator>

@@ -86,6 +86,13 @@ public class planCctMapper implements Mapper{
             dat.setVERSION(rs.getString("VERSION").trim());
         } else {
             dat.setVERSION(rs.getString("VERSION"));
+        }     
+           
+            
+           if  (rs.getString("TOTAL_RESPONSABLES") != null) {
+            dat.setTOTAL_RESPONSABLES(rs.getString("TOTAL_RESPONSABLES").trim());
+        } else {
+            dat.setTOTAL_RESPONSABLES(rs.getString("TOTAL_RESPONSABLES"));
         }         
         return dat;
     }

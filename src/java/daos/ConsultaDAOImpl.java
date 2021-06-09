@@ -22,6 +22,7 @@ import mappers.periodoMapper;
 import mappers.planCctMapper;
 import mappers.planCttResMapper;
 import mappers.programaCctMapper;
+import mappers.resProgEduCon2Mapper;
 import mappers.resProgEduConMapper;
 import mappers.resProgEstMapper;
 import mappers.subsistemaMapper;
@@ -142,10 +143,78 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
     }
 
     public List resProgEstInst(renapoBean renapo) throws Exception {
-        String query = " SELECT ID_RESPROG_INST,  RPE.ID_PERSONA,  RPE.ID_ESCUELA,   RPE.PERFIL, PERSONA.CURP_PERSONA, PERSONA.NOMBRE_PERSONA||' '|| PERSONA.APATERNO_PERSONA||' '|| PERSONA.AMATERNO_PERSONA AS NOMBRE_PERSONA, USU.USUARIO_LOGIN, USU.PASSWORD, USU.ESTATUS, USU.ID_USUARIO, RPE.PERFIL, RPE.ID_PERSONA FROM TBL_RESPE_INST RPE JOIN (SELECT ID_PERSONA, CURP_PERSONA,  NOMBRE_PERSONA,  APATERNO_PERSONA,  AMATERNO_PERSONA,  CORREO_PERSONA FROM CAT_PERSONA ) PERSONA ON RPE.ID_PERSONA=PERSONA.ID_PERSONA  JOIN (SELECT   PASSWORD,  PERFIL,    USUARIO_LOGIN,  ID_PERSONA,  ESTATUS, ID_USUARIO FROM TBL_USUARIOS WHERE PERFIL='" + renapo.getAUXPERFIL() + "' AND ID_ESCUELA='" + renapo.getAUXESCUELA() + "') USU ON USU.ID_PERSONA=RPE.ID_PERSONA WHERE RPE.ID_ESCUELA='" + renapo.getAUXESCUELA() + "' AND RPE.PERFIL='" + renapo.getAUXPERFIL() + "' ORDER BY ID_RESPROG_INST DESC ";
+        
+        
+        String query = " SELECT\n" +
+"    per.*,\n" +
+"    nvl(tot.total_responsable, '0') AS total_responsables\n" +
+"FROM\n" +
+"    (\n" +
+"        SELECT\n" +
+"            id_resprog_inst,\n" +
+"            rpe.id_persona,\n" +
+"            rpe.id_escuela,\n" +
+"            rpe.perfil,\n" +
+"            persona.curp_persona,\n" +
+"            persona.nombre_persona\n" +
+"            || ' '\n" +
+"            || persona.apaterno_persona\n" +
+"            || ' '\n" +
+"            || persona.amaterno_persona AS nombre_persona,\n" +
+"            usu.usuario_login,\n" +
+"            usu.password,\n" +
+"            usu.estatus\n" +
+"   -- usu.id_usuario,\n" +
+"   -- rpe.perfil,\n" +
+"   -- rpe.id_persona\n" +
+"        FROM\n" +
+"                 tbl_respe_inst rpe\n" +
+"            JOIN (\n" +
+"                SELECT\n" +
+"                    id_persona,\n" +
+"                    curp_persona,\n" +
+"                    nombre_persona,\n" +
+"                    apaterno_persona,\n" +
+"                    amaterno_persona,\n" +
+"                    correo_persona\n" +
+"                FROM\n" +
+"                    cat_persona\n" +
+"            )  persona ON rpe.id_persona = persona.id_persona\n" +
+"            JOIN (\n" +
+"                SELECT\n" +
+"                    password,\n" +
+"                    perfil,\n" +
+"                    usuario_login,\n" +
+"                    id_persona,\n" +
+"                    estatus,\n" +
+"                    id_usuario\n" +
+"                FROM\n" +
+"                    tbl_usuarios\n" +
+"                WHERE\n" +
+"                        perfil = '"+renapo.getAUXPERFIL()+"'\n" +
+"                    AND id_escuela = '"+renapo.getAUXESCUELA()+"'\n" +
+"            )  usu ON usu.id_persona = rpe.id_persona\n" +
+"        WHERE\n" +
+"                rpe.id_escuela = '"+renapo.getAUXESCUELA()+"'\n" +
+"            AND rpe.perfil = '"+renapo.getAUXPERFIL()+"'\n" +
+"        ORDER BY\n" +
+"            id_resprog_inst DESC\n" +
+"    )  per\n" +
+"    LEFT OUTER JOIN (\n" +
+"        SELECT\n" +
+"            id_persona,\n" +
+"            COUNT(id_persona) AS total_responsable\n" +
+"        FROM\n" +
+"            tbl_plan_responsable\n" +
+"        WHERE\n" +
+"                id_escuela = '"+renapo.getAUXESCUELA()+"'\n" +
+"            AND perfil = '"+renapo.getAUXPERFIL()+"'\n" +
+"        GROUP BY\n" +
+"            id_persona\n" +
+"    )  tot ON tot.id_persona = per.id_persona ";
         Constantes.enviaMensajeConsola("Consulta cct----->" + query);
         List list = null;
-        list = queryForList(query, new resProgEduConMapper());
+        list = queryForList(query, new resProgEduCon2Mapper());
         return list;
     }
 
@@ -174,8 +243,49 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaDAO {
     }
 
     public List programasEscuela(escuelaBean escuela) throws Exception {
-        String query = "SELECT TBL_CCT_PLAN.ID_PLAN, TBL_CCT_PLAN.ID_ESCUELA,  TBL_CCT_PLAN.ID_CCT_PLAN, PLA.CVE_PLAN, PLA.NOM_CARRERA,  TBL_CCT_PLAN.ESTATUS AS STATUS, PLA.FECHA_AUT_DUAL, PLA.ENFASIS, PLA.CVE_PLAN_EST, PLA.TIPO_PERIODO, PLA.NUMERO_PERIODO, PLA.VERSION FROM TBL_CCT_PLAN JOIN (SELECT * FROM CAT_PLAN)PLA ON TBL_CCT_PLAN.ID_PLAN=PLA.ID_PLAN WHERE TBL_CCT_PLAN.ID_ESCUELA='" + escuela.getID_ESCUELA() + "'AND PLA.STATUS=1   ";
-        Constantes.enviaMensajeConsola("Consulta cct----->" + query);
+        String query = "SELECT\n" +
+"    prog.*,\n" +
+"    nvl(tot.total_responsable, '0') AS total_responsables\n" +
+"FROM\n" +
+"    (\n" +
+"        SELECT\n" +
+"            tbl_cct_plan.id_plan,\n" +
+"            tbl_cct_plan.id_escuela,\n" +
+"            tbl_cct_plan.id_cct_plan,\n" +
+"            pla.cve_plan,\n" +
+"            pla.nom_carrera,\n" +
+"            tbl_cct_plan.estatus AS status,\n" +
+"            pla.fecha_aut_dual,\n" +
+"            pla.enfasis,\n" +
+"            pla.cve_plan_est,\n" +
+"            pla.tipo_periodo,\n" +
+"            pla.numero_periodo,\n" +
+"            pla.version\n" +
+"        FROM\n" +
+"                 tbl_cct_plan\n" +
+"            JOIN (\n" +
+"                SELECT\n" +
+"                    *\n" +
+"                FROM\n" +
+"                    cat_plan\n" +
+"            ) pla ON tbl_cct_plan.id_plan = pla.id_plan\n" +
+"        WHERE\n" +
+"                tbl_cct_plan.id_escuela = '"+escuela.getID_ESCUELA()+"'\n" +
+"            AND pla.status = 1\n" +
+"    )  prog\n" +
+"    LEFT OUTER JOIN (\n" +
+"        SELECT DISTINCT\n" +
+"            ( id_plan ),\n" +
+"            COUNT(id_plan) AS total_responsable\n" +
+"        FROM\n" +
+"            tbl_plan_responsable\n" +
+"        WHERE\n" +
+"                id_escuela = '"+escuela.getID_ESCUELA()+"'\n" +
+"            AND perfil = 25\n" +
+"        GROUP BY\n" +
+"            id_plan\n" +
+"    )  tot ON tot.id_plan = prog.id_plan";
+                Constantes.enviaMensajeConsola("Consulta cct----->" + query);
         List list = null;
         list = queryForList(query, new planCctMapper());
         return list;

@@ -145,7 +145,12 @@ public class reporteMsEstMapper implements Mapper{
             dat.setFECHA_EVAL_MUE(rs.getString("FECHA_EVAL_MUE").trim());
         } else {
             dat.setFECHA_EVAL_MUE(rs.getString("FECHA_EVAL_MUE"));
-        }           
+        }    
+            if (rs.getString("ID_ACT_EVALUA") != null) {
+            dat.setID_ACT_EVALUA(rs.getString("ID_ACT_EVALUA").trim());
+        } else {
+            dat.setID_ACT_EVALUA(rs.getString("ID_ACT_EVALUA"));
+        }       
             
         return dat;
     }

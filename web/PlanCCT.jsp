@@ -411,6 +411,7 @@
                                                                                                     <th>Clave Plan Estudios</th>
                                                                                                       <th>Versión</th>
                                                                                                     <th>Énfasis</th>
+                                                                                                    <th>Responsables registrados</th>
                                                                                                     <th>Activar</th>
                                                                                                       <th>Eliminar</th>
                                                                                                 </tr>
@@ -424,6 +425,7 @@
                                                                                                          <td><s:property value="CVE_PLAN_EST"/></td>
                                                                                                            <td><s:property value="VERSION"/></td>
                                                                                                         <td><s:property value="ENFASIS"/></td>
+                                                                                                        <td align="center"><div style="background: green; border-radius: 50%; padding: 3px; color:white; text-align: center; max-width: 25px;"><s:property value="TOTAL_RESPONSABLES"/></div></td>
                                                                                                         <td><s:if test="STATUS==1"><a href="Javascript:act('actualizarEstatusplaCct','<s:property value="ID_PLAN"/>','<s:property value="escuela.ID_ESCUELA"/>','1')" style="text-decoration: none; "><i class="material-icons">check_box</i></a></s:if><s:if test="STATUS==0"><a href="Javascript:act('actualizarEstatusplaCct','<s:property value="ID_PLAN"/>','<s:property value="escuela.ID_ESCUELA"/>','0')" ><i class="material-icons">check_box_outline_blank</i></a></s:if></td>
                                                                                                         <td><a href="Javascript:elimina('eliminarProgramaCct','<s:property value="ID_CCT_PLAN"/>')" style="text-decoration: none; "><i class="material-icons" style="color:red;">delete_forever</i></a></td>
                                                                                                     </tr>
@@ -435,6 +437,7 @@
                                                                                                     <s:hidden name =  "ListaProgramasEscuela[%{#stat.index}].ID_CCT_PLAN" id="ID_CCT_PLAN"></s:hidden>
                                                                                                     <s:hidden name =  "ListaProgramasEscuela[%{#stat.index}].ID_ESCUELA" id="ID_ESCUELA"></s:hidden>
                                                                                                      <s:hidden name =  "ListaProgramasEscuela[%{#stat.index}].ID_PLAN" id="ID_PLAN"></s:hidden>
+                                                                                                      <s:hidden name =  "ListaProgramasEscuela[%{#stat.index}].TOTAL_RESPONSABLES" id="TOTAL_RESPONSABLES"></s:hidden>
                                                                                                 </s:iterator>  
 
 

@@ -36,6 +36,19 @@ public class resProgEstBean  {
     public String ESTATUS;
     
      public String ID_USUARIO;
+     private String TOTAL_RESPONSABLES;
+
+    public String getTOTAL_RESPONSABLES() {
+        return TOTAL_RESPONSABLES;
+    }
+
+    public void setTOTAL_RESPONSABLES(String TOTAL_RESPONSABLES) {
+        this.TOTAL_RESPONSABLES = TOTAL_RESPONSABLES;
+    }
+
+     
+     
+    
      
      
      

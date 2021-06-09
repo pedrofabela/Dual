@@ -449,6 +449,7 @@
                                                                                                 <tr>
                                                                                                     <th>Curp</th>
                                                                                                     <th>Nombre</th>
+                                                                                                    <th align="center">Programas Asignados</th> 
 
                                                                                                     <th>Seleccionar</th>
 
@@ -460,6 +461,7 @@
                                                                                                     <tr <s:if test="ID_PLAN==escuela.AUXPLAN">style="color: purple;  "</s:if>>
                                                                                                         <td><s:property value="CURP_PERSONA"/></td>
                                                                                                         <td><s:property value="NOMBRE_PERSONA"/></td>
+                                                                                                            <td ><div style="background: purple; border-radius: 50%; padding: 3px; color:white; text-align: center; max-width: 25px;"><s:property value="TOTAL_RESPONSABLES"/></div></td>
 
 
                                                                                                         <td><s:if test="objRenapo.ID_PERSONA==ID_PERSONA"><a href="Javascript:actEstatus('conRPE','<s:property value="ID_PERSONA"/>')" style="text-decoration: none; "><i class="material-icons">check_box</i></a></s:if><s:if test="objRenapo.ID_PERSONA!=ID_PERSONA"><a href="Javascript:actEstatus('conRPE','<s:property value="ID_PERSONA"/>')" ><i class="material-icons">check_box_outline_blank</i></a></s:if></td>
@@ -475,6 +477,7 @@
                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].PASSWORD" id="PASSWORD"></s:hidden>
                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].ESTATUS" id="ESTATUS"></s:hidden>
                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].ID_USUARIO" id="ID_USUARIO"></s:hidden>
+                                                                                                      <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].TOTAL_RESPONSABLES" id="TOTAL_RESPONSABLES"></s:hidden>
                                                                                                 </s:iterator>  
 
 
@@ -520,8 +523,9 @@
                                                                                                 <tr>
                                                                                                     <th>Curp</th>
                                                                                                     <th>Nombre</th>
+                                                                                                    <th align="center">Programas Asignados</th> 
 
-                                                                                                    <th>Seleccionar</th>
+                                                                                                    <th align="center">Seleccionar</th>
 
                                                                                                 </tr>
                                                                                             </thead>
@@ -533,9 +537,10 @@
                                                                                                     <tr <s:if test="ID_PLAN==escuela.AUXPLAN">style="color: purple;  "</s:if>>
                                                                                                         <td><s:property value="CURP_PERSONA"/></td>
                                                                                                         <td><s:property value="NOMBRE_PERSONA"/></td>
+                                                                                                       <td ><div style="background: purple; border-radius: 50%; padding: 3px; color:white; text-align: center; max-width: 25px;"><s:property value="TOTAL_RESPONSABLES"/></div></td>
 
 
-                                                                                                        <td><s:if test="objRenapo.ID_PERSONA==ID_PERSONA"><a href="Javascript:actEstatus('conRPE','<s:property value="ID_PERSONA"/>')" style="text-decoration: none; "><i class="material-icons">check_box</i></a></s:if><s:if test="objRenapo.ID_PERSONA!=ID_PERSONA"><a href="Javascript:actEstatus('conRPE','<s:property value="ID_PERSONA"/>')" ><i class="material-icons">check_box_outline_blank</i></a></s:if></td>
+                                                                                                       <td align="center"><s:if test="objRenapo.ID_PERSONA==ID_PERSONA"><a href="Javascript:actEstatus('conRPE','<s:property value="ID_PERSONA"/>')" style="text-decoration: none; "><i class="material-icons">check_box</i></a></s:if><s:if test="objRenapo.ID_PERSONA!=ID_PERSONA"><a href="Javascript:actEstatus('conRPE','<s:property value="ID_PERSONA"/>')" ><i class="material-icons">check_box_outline_blank</i></a></s:if></td>
                                                                                                         </tr>
                                                                                                         </s:if>
                                                                                                     <s:hidden  name = "ListaResProgPEInst[%{#stat.index}].ID_RESPROG_INST" id="ID_RESPROG_INST"></s:hidden>
@@ -548,6 +553,8 @@
                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].PASSWORD" id="PASSWORD"></s:hidden>
                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].ESTATUS" id="ESTATUS"></s:hidden>
                                                                                                     <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].ID_USUARIO" id="ID_USUARIO"></s:hidden>
+                                                                                                   <s:hidden name =  "ListaResProgPEInst[%{#stat.index}].TOTAL_RESPONSABLES" id="TOTAL_RESPONSABLES"></s:hidden>
+
                                                                                                 </s:iterator>  
 
 
